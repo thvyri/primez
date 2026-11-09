@@ -1618,6 +1618,99 @@ canvas.dust.pre{background:#7d725f}
 .sv-box{max-width:640px}.sv-box .chp{display:flex;flex-wrap:wrap;gap:6px}.sv-box .chp span{padding:5px 10px;border:1px solid var(--line);font-size:12px;color:#d6cfd9}
 @media(prefers-reduced-motion:reduce){.sv{overflow-x:auto}.sv-t{animation:none}}
 .lg-c .top2{display:none!important}
+/* ================= VERSION TÉLÉPHONE v2 (compacte, façon appli) ================= */
+#app.hidden{display:none!important}
+.mav,.mobn{display:none}
+@media(max-width:760px){
+  html{-webkit-text-size-adjust:100%}
+  body{font-size:14px}
+  /* barre du haut : sous l'heure / la batterie, compacte */
+  .nav2{padding-top:env(safe-area-inset-top)}
+  .nav2in{height:56px!important;padding:0 12px!important;gap:6px!important}
+  .nav2 .brand{display:flex!important;align-items:center;gap:0}
+  .nav2 .brand .bp,.nav2 .brand .bz{display:none!important}
+  .nav2 .brand::before{content:"";width:34px;height:34px;border-radius:9px;background:url(logo.png) center/cover,#1d1a20;box-shadow:0 0 0 1px #ffffff1c}
+  .rt2{gap:6px!important}
+  #mute-btn,.rt2 button[onclick="logout()"]{display:none!important}
+  .rt2 .pill{padding:0 11px!important;height:34px;display:inline-flex!important;align-items:center;font:700 13px/1 ui-monospace,Menlo,Consolas,monospace!important;font-style:normal!important;border-radius:999px!important;background:#1c1a1f!important;border:1px solid #2e2a31!important}
+  #free-pill{display:inline-flex!important;position:relative;overflow:hidden}
+  #free-pill::after{content:"";position:absolute;left:10px;right:10px;bottom:5px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--ac) var(--fp,50%),#ffffff22 var(--fp,50%))}
+  .rt2 .ic.bell{width:34px;height:34px;padding:0!important;border-radius:50%!important;display:grid;place-items:center}
+  .mav{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;padding:0!important;border:2px solid #f5b800!important;background:#1c1a1f;overflow:hidden;font:800 14px/1 Outfit,Arial,sans-serif;color:#fff}
+  .mav img{width:100%;height:100%;object-fit:cover}
+  .page{padding:16px 14px 30px!important}.wrap{padding:0 14px!important}
+  /* barre du bas : 4 onglets + gros bouton « Ouvrir » au centre */
+  .mtab{grid-template-columns:repeat(5,1fr)!important;padding:4px 4px calc(4px + env(safe-area-inset-bottom))!important;overflow:visible}
+  .mtab button[data-t="missions"],.mtab button[data-t="profile"]{display:none!important}
+  .mtab button{font-size:10.5px!important}
+  .mtab .mobn{display:grid!important;justify-items:center;align-content:end;gap:3px;color:#fff!important;position:relative}
+  .mobn .mob-c{width:58px;height:58px;margin-top:-24px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#ff5a66,#e5202e 60%,#a3121d);box-shadow:0 0 0 5px #141116,0 8px 22px #e5202e66;transition:transform .15s}
+  .mobn:active .mob-c{transform:scale(.93)}
+  .mobn .mob-c svg{width:26px;height:26px}
+  .mobn b{position:absolute;top:-30px;left:calc(50% + 12px);min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#fff;color:#111;font:800 12px/22px Outfit,Arial,sans-serif;text-align:center;box-shadow:0 2px 6px #0008}
+  .mobn b:empty{display:none}
+  .mobn.on .mob-c{box-shadow:0 0 0 5px #141116,0 0 0 7px #e5202e88,0 8px 22px #e5202e66}
+  .content{padding-bottom:calc(84px + env(safe-area-inset-bottom))!important}
+  /* accueil : héro compact, cartes en éventail au-dessus */
+  .hero{display:flex!important;flex-direction:column;min-height:0!important;margin:12px 0 12px!important;padding:16px 18px 20px!important;border-radius:16px!important;gap:6px}
+  .hero .hr{order:-1;min-height:178px!important;margin:0 -10px}
+  .hero .hc{width:104px!important;border-radius:10px!important;border-width:2px!important}.hero .hc.f{width:128px!important}
+  .hero .hc span{font-size:11px;padding:20px 6px 7px}
+  .hero .htag{font-size:10px!important;letter-spacing:.22em}
+  .hero h1{font-size:34px!important;margin:6px 0 6px!important}
+  .hero p{font-size:13.5px!important;line-height:1.45;margin:0}
+  .hbtn{margin-top:14px!important;gap:8px!important;flex-wrap:nowrap}
+  .bigbtn{padding:12px 16px!important;font-size:14px!important;border-radius:999px!important;flex:1 1 0;min-width:0;text-align:center}
+  .hero .dots{margin-top:16px!important}.hero .dot{width:24px}
+  .ph-pk{width:120px!important}.ph-cd .tn{--s:.62!important}.hr.ph{min-height:200px!important}.pbar{margin:12px 0 2px!important}.pbar-h b{font-size:20px!important}.ph-have{display:none}
+  /* stats : petites tuiles carrées qui défilent */
+  .pills{display:grid!important;grid-auto-flow:column;grid-auto-columns:96px;gap:8px!important;overflow-x:auto;scrollbar-width:none;margin:0 -14px 4px!important;padding:2px 14px 6px}
+  .pills::-webkit-scrollbar{display:none}
+  .pl{display:grid!important;align-content:start;gap:4px;min-height:74px;padding:10px 10px!important;border-radius:12px!important;border:1px solid #2d2a30!important;border-top:2px solid var(--c)!important}
+  .pl>div{display:grid!important;gap:4px;white-space:normal!important}
+  .pl b{font-size:19px!important}.pl span{font-size:10.5px!important;line-height:1.25;color:#a7a1ab}
+  .ticker{margin:6px -14px!important;padding:8px 14px!important}.tklab small{display:none}
+  .gift{padding:10px 12px!important;gap:10px!important}.gift-pk{width:40px!important;flex-basis:40px!important}.gift-t b{font-size:16px!important}.gift-t small{font-size:11px}
+  .gift-b{width:100%;justify-content:stretch}.gift-b button{flex:1;padding:9px 6px!important;font-size:13px!important}
+  /* choix des boosters : bande qui défile, une carte = un booster */
+  .choose{display:block!important}
+  .sech,h2.disp{font-size:26px!important;line-height:1.05}
+  .packs{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px!important;padding:16px 14px 10px!important;margin:0 -14px;scrollbar-width:none}
+  .packs::-webkit-scrollbar{display:none}
+  .packs .pstage{display:none}
+  .pk{flex:0 0 46%;scroll-snap-align:center;min-width:0}
+  .pkn b{font-size:14px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.pkn span{font-size:11px!important}
+  .panel{padding:16px!important;border-radius:14px!important;margin-top:14px}
+  .panel h3.disp{font-size:24px!important}
+  .tiles{gap:8px!important}.tile{padding:10px 12px!important}.tile b{font-size:18px!important}
+  .rt{font-size:12px}
+  .rb{grid-template-columns:repeat(2,1fr)!important;gap:8px!important}
+  .sv-i{flex-basis:240px!important;min-height:140px;padding:14px 16px!important}
+  /* titres de page plus petits */
+  .page>h2.disp,.mz-head h2,#view-collection h2.disp{font-size:28px!important}
+  .ctabs,.chips{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none}
+  /* ouverture : sous l'heure et au-dessus de la barre */
+  #overlay{padding-top:env(safe-area-inset-top)!important}
+  .ovx{top:calc(10px + env(safe-area-inset-top))!important}
+  /* écran de connexion : sous l'heure */
+  #login{padding-top:calc(16px + env(safe-area-inset-top))!important}
+}
+/* feuille « Ouvrir » */
+.osh{position:fixed;inset:0;z-index:45;display:flex;align-items:flex-end;background:#0009;opacity:0;transition:opacity .2s}
+.osh.on{opacity:1}
+.osh-in{width:100%;max-height:86vh;overflow-y:auto;background:#151217;border-radius:20px 20px 0 0;border-top:1px solid #2e2a31;padding:16px 14px calc(96px + env(safe-area-inset-bottom));transform:translateY(30px);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.osh.on .osh-in{transform:none}
+.osh-h{display:flex;justify-content:space-between;align-items:center;margin:2px 4px 14px}.osh-h b{font:italic 900 24px/1 Outfit,Arial,sans-serif}
+.osh-x{width:36px;height:36px;border-radius:50%;background:#ffffff0d!important;border:1px solid #ffffff22!important;color:#fff;font-size:20px;padding:0!important}
+.osb{display:grid;gap:12px;padding:12px;border-radius:16px;background:#1c181f;border:1px solid #2e2a31;margin-bottom:10px}
+.osb.sel{border-color:var(--bc)}
+.osb-t{display:flex;gap:12px;align-items:center}
+.osb-pk{width:54px;flex:0 0 54px}.osb-pk .bpk{animation:none}
+.osb-t b{display:block;font:italic 900 20px/1.05 Outfit,Arial,sans-serif;text-transform:uppercase}
+.osb-t small{display:block;color:#a7a1ab;font-size:12px;margin-top:2px}.osb-t em{display:block;font-style:normal;font:600 12px ui-monospace,Menlo,Consolas,monospace;color:#4ade80;margin-top:4px}
+.osb-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}.osb-g div{padding:10px 12px;border-radius:12px;border:1px solid #2e2a31;background:#ffffff05}.osb-g b{display:block;font:800 17px/1 Outfit,Arial,sans-serif;color:var(--bc)}.osb-g span{font-size:11px;color:#a7a1ab}
+.osb-a{display:flex;gap:8px}.osb-a button{flex:1;padding:12px 8px!important;border-radius:999px!important;font-size:14px!important}
+.osb-pk,.gift-pk{overflow:hidden;border-radius:6px}
 </style>
 <script>
 (function(){ try{ const base=location.href.split("#")[0].split("?")[0].replace(/[^\/]*$/,"");
@@ -1647,11 +1740,11 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
   <div class="lg-r" id="lg-cards"></div>
 </div>
 
-<div id="app" class="hidden"><nav class="mtab" id="mtab"><button data-t="boosters" onclick="showTab('boosters')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="4" y="8" width="16" height="12"/><path d="M4 12h16M9 8V4h6v4"/></svg><span>Boosters</span></button><button data-t="collection" onclick="showTab('collection')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="7" width="12" height="14"/><path d="M8 3h13v14"/></svg><span>Collection</span></button><button data-t="games" onclick="showTab('games')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="8" width="18" height="10"/><path d="M8 11v4M6 13h4M16 12h.01M18 14h.01"/></svg><span>Jeux</span></button><button data-t="missions" onclick="showTab('missions')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M6 21V4M6 5h12l-2.5 4L18 13H6"/></svg><span>Missions</span><i class="mtb" id="mtab-mz"></i></button><button data-t="profile" onclick="showTab('profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>Profil</span></button><button data-t="more" onclick="mOpen()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>Plus</span><i class="mtb" id="mtab-more"></i></button></nav><div class="mback" onclick="mOpen(0)"></div>
+<div id="app" class="hidden"><nav class="mtab" id="mtab"><button data-t="boosters" onclick="showTab('boosters')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="4" y="8" width="16" height="12"/><path d="M4 12h16M9 8V4h6v4"/></svg><span>Boosters</span></button><button data-t="collection" onclick="showTab('collection')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="7" width="12" height="14"/><path d="M8 3h13v14"/></svg><span>Collection</span></button><button class="mobn" data-t="open" onclick="openSheet()"><i class="mob-c"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 9h14M12 13v5M9.5 15.5h5"/></svg></i><b id="mob-n"></b><span>Ouvrir</span></button><button data-t="games" onclick="showTab('games')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="8" width="18" height="10"/><path d="M8 11v4M6 13h4M16 12h.01M18 14h.01"/></svg><span>Jeux</span></button><button data-t="missions" onclick="showTab('missions')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M6 21V4M6 5h12l-2.5 4L18 13H6"/></svg><span>Missions</span><i class="mtb" id="mtab-mz"></i></button><button data-t="profile" onclick="showTab('profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>Profil</span></button><button data-t="more" onclick="mOpen()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>Plus</span><i class="mtb" id="mtab-more"></i></button></nav><div class="mback" onclick="mOpen(0)"></div>
   <header class="nav2"><div class="nav2in">
     <div class="brand"><span class="bp">PRIME</span><span class="bz">Z</span></div>
     <span class="grow"></span>
-    <div class="rt2"><div class="pill" id="free-pill"></div><div class="pill" id="balloons-pill"></div><button class="ghost ic bell" id="bell" onclick="toggleNotifs(event)" title="Notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M6 17v-6a6 6 0 0112 0v6l1.5 2h-15zM10 21h4"/></svg><span class="bn hidden" id="bell-n">0</span></button><button class="ghost ic" id="mute-btn" onclick="toggleMute()" title="Son">🔊</button><button class="ghost ic" onclick="logout()" title="Déconnexion">Quitter</button></div>
+    <div class="rt2"><div class="pill" id="free-pill"></div><div class="pill" id="balloons-pill"></div><button class="ghost ic bell" id="bell" onclick="toggleNotifs(event)" title="Notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M6 17v-6a6 6 0 0112 0v6l1.5 2h-15zM10 21h4"/></svg><span class="bn hidden" id="bell-n">0</span></button><button class="ghost ic" id="mute-btn" onclick="toggleMute()" title="Son">🔊</button><button class="ghost ic" onclick="logout()" title="Déconnexion">Quitter</button><button class="mav" id="mav" onclick="showTab('profile')" aria-label="Profil"></button></div>
   </div></header>
 <aside class="sb" id="sb">
     <div class="sbl">Jouer</div>
@@ -1905,6 +1998,12 @@ function refBox(){ if(isGuest) return `<div class="refx"><div class="refh"><span
     <div class="refl"><input readonly value="${esc(refLink())}" onclick="this.select()"><button class="go" onclick="refCopy()">Copier</button><button class="ghost" onclick="refShare()">Partager</button></div></div>
     <div class="refs"><div><b>${s.invited}</b><small>invités</small></div><div><b>${s.rewarded}</b><small>récompensés</small></div><div><b>${s.month}/30</b><small>ce mois-ci</small></div><div class="pr"><b>${s.to_promo??10}</b><small>avant PROMO</small></div></div>
     ${s.list&&s.list.length?`<div class="refli">${s.list.map(x=>`<div><span>${esc(x.username||"Joueur")}</span><em class="${x.rewarded?"ok":""}">${x.rewarded?"+5 boosters chacun":`${x.opened}/15 boosters ouverts`}</em></div>`).join("")}</div>`:""}</div>`; }
+/* invité qui clique « Sauvegarder avec Discord » alors que ce Discord a déjà un compte :
+   on ferme la session invitée et on le connecte directement à son vrai compte */
+(async function(){ const q=location.search+location.hash; if(!/identity_already_exists/.test(q)) return;
+  history.replaceState(null,"",location.pathname);
+  try{ await sb.auth.signOut(); }catch(e){}
+  sb.auth.signInWithOAuth({provider:"discord",options:{redirectTo:location.origin+location.pathname}}); })();
 sb.auth.onAuthStateChange((_e,s)=>{ if(s) start(); });
 setTimeout(()=>{ try{ lgCards(); refPreview(); }catch(e){ console.warn(e); } },0);
 sb.auth.getSession().then(({data})=>{ if(data.session) start(); });
@@ -1923,7 +2022,7 @@ async function start(){
   realAdmin=!!profile.is_admin; realGuest=isGuest; try{ viewMode=localStorage.getItem("pz_view")||"modo"; }catch(e){} applyView(true); adminSync();
   $("mute-btn").textContent=muted?"🔇":"🔊";
   render(); newSave(); setInterval(renderFree,1000); loadMessages(); loadFeed(); loadCollection(); refreshSocial(); setInterval(refreshSocial,60000); loadNotifs(); setInterval(loadNotifs,60000); refreshMissions(); setInterval(refreshMissions,120000);
-  refClaim().then(refLoad);
+  refClaim().then(refLoad); mavSet();
 }
 
 /* ---------- boosters gratuits ---------- */
@@ -1935,7 +2034,8 @@ function freeNow(){
 function renderFree(){
   if(!profile) return; const f=freeNow(); let t="";
   if(f.next){ const m=Math.ceil(f.next); t=`+1 dans ${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`; }
-  $("free-pill").textContent=`${f.n}/${cap()} gratuits`;
+  $("free-pill").textContent=innerWidth<=760?`${f.n}/${cap()}`:`${f.n}/${cap()} gratuits`; $("free-pill").style.setProperty("--fp",(f.n/cap()*100)+"%");
+  const mb=$("mob-n"); if(mb){ const gi=(refSt&&refSt.gifts)?Object.values(refSt.gifts).reduce((a,b)=>a+(+b||0),0):0; mb.textContent=f.n+gi>0?String(f.n+gi):""; }
   const pn=$("pf-n"), pt=$("pf-t"); if(pn) pn.textContent=`${f.n}/${cap()}`; if(pt) pt.textContent=f.n>=cap()?"boosters gratuits · stock plein":"boosters gratuits · "+t;
   document.querySelectorAll(".btn-free").forEach(b=>b.disabled=f.n<(+b.dataset.q||1)||busy);
 }
@@ -1991,9 +2091,10 @@ function promoBarAnim(){ const u=$("pbar-u"), t=$("pbar-n"); if(!u) return; cons
 /* admin : voir l'écran d'accueil sans se déconnecter */
 function lgPreview(){ lgCards(); $("login").classList.remove("hidden"); $("login").classList.add("preview"); if(!$("lg-x")){ const b=document.createElement("button"); b.id="lg-x"; b.className="vfxx"; b.textContent="Fermer l’aperçu ×"; b.onclick=()=>{ $("login").classList.add("hidden"); $("login").classList.remove("preview"); b.remove(); }; document.body.appendChild(b); } }
 let balShown=null;
+const balTxt=v=>innerWidth<=760?(v>=1e6?(v/1e6).toLocaleString("fr-FR",{maximumFractionDigits:v>=1e7?0:1})+" M":v>=1e4?(v/1e3).toLocaleString("fr-FR",{maximumFractionDigits:0})+" k":v.toLocaleString("fr-FR"))+" ⚽":`${v.toLocaleString("fr-FR")} ${CURRENCY}`;
 function animBalloons(n){ const e=$("balloons-pill"); if(!e) return; const from=balShown==null?n:balShown; balShown=n; cancelAnimationFrame(animBalloons.r);
-  if(from===n){ e.textContent=`${n.toLocaleString("fr-FR")} ${CURRENCY}`; return; } e.classList.remove("up","down"); void e.offsetWidth; e.classList.add(n>from?"up":"down");
-  const t0=performance.now(), d=700; const f=t=>{ const k=Math.min(1,(t-t0)/d), v=Math.round(from+(n-from)*(1-Math.pow(1-k,3))); e.textContent=`${v.toLocaleString("fr-FR")} ${CURRENCY}`; if(k<1) animBalloons.r=requestAnimationFrame(f); }; animBalloons.r=requestAnimationFrame(f); }
+  if(from===n){ e.textContent=balTxt(n); return; } e.classList.remove("up","down"); void e.offsetWidth; e.classList.add(n>from?"up":"down");
+  const t0=performance.now(), d=700; const f=t=>{ const k=Math.min(1,(t-t0)/d), v=Math.round(from+(n-from)*(1-Math.pow(1-k,3))); e.textContent=balTxt(v); if(k<1) animBalloons.r=requestAnimationFrame(f); }; animBalloons.r=requestAnimationFrame(f); }
 let NEWC=new Set(); try{ NEWC=new Set(JSON.parse(localStorage.getItem("pz_new")||"[]")); }catch(e){}
 function newSave(){ try{ localStorage.setItem("pz_new",JSON.stringify([...NEWC])); }catch(e){} const b=$("tab-collection"); if(b){ let i=b.querySelector(".nwb"); if(NEWC.size){ if(!i){ i=document.createElement("i"); i.className="nwb"; b.appendChild(i); } i.textContent="+"+NEWC.size; } else if(i) i.remove(); } }
 function newMark(ids){ ids.forEach(i=>NEWC.add(i)); newSave(); }
@@ -2456,7 +2557,7 @@ async function readAllNotifs(){ await sb.rpc("notif_read_all"); loadNotifs(); }
 /* ---------- missions & succès ---------- */
 let mzData=null, mzFilter="all";
 const rpd=async(n,a)=>{ const r=await rpc(n,a); return r?r.data:null; };
-function mzBadge(d){ const n=(d.claimable||0)+(d.streak.can_claim?1:0), b=$("mz-badge"); b.textContent=n; b.classList.toggle("hidden",!n); const m=$("mtab-mz"); if(m) m.classList.toggle("on",!!n); }
+function mzBadge(d){ const n=(d.claimable||0)+(d.streak.can_claim?1:0), b=$("mz-badge"); b.textContent=n; b.classList.toggle("hidden",!n); const m=$("mtab-mz"); if(m) m.classList.toggle("on",!!n); const mm=$("mtab-more"); if(mm) mm.classList.toggle("on",!!n); }
 async function refreshMissions(){ if(isGuest||!profile) return; const r=await sb.rpc("missions_get"); if(r.error||!r.data) return; mzData=r.data; mzBadge(r.data); if(!$("view-missions").classList.contains("hidden")) renderMissions(); }
 async function loadMissions(){
   if(gate("mz-body","Les missions sont réservées aux joueurs connectés avec Discord")){ $("mz-all").classList.add("hidden"); return; }
@@ -3435,9 +3536,21 @@ function socOpen(btn){ const old=$("socm"); if(old){ old.remove(); $("sb-grp").c
   document.body.appendChild(m); g.classList.add("open"); }
 document.addEventListener("click",e=>{ if(e.target.closest("#sb-grp .sbgh")||e.target.closest("#socm")) return; const m=$("socm"); if(m){ m.remove(); const g=$("sb-grp"); if(g) g.classList.remove("open"); } });
 addEventListener("scroll",()=>{ const m=$("socm"); if(m){ m.remove(); const g=$("sb-grp"); if(g) g.classList.remove("open"); } },{passive:true});
+function mavSet(){ const b=$("mav"); if(!b||!profile) return; const n=profile.username||"?"; b.innerHTML=profile.avatar_url?`<img src="${esc(profile.avatar_url)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:esc(n[0].toUpperCase()); }
+/* « Ouvrir » (téléphone) : tous les boosters dans une feuille, comme une appli */
+function openSheet(){ closeSheet(); mOpen(0); const f=freeNow(), g=(refSt&&refSt.gifts)||{};
+  const gifts=Object.keys(g).filter(k=>g[k]>0&&giftB(k)).map(k=>{ const b=giftB(k), c=PACK_THEME[k]||"#ff7a00"; return `<div class="osb" style="--bc:${c}"><div class="osb-t"><div class="osb-pk">${packHTML(b,"",`--bc:${c}`)}</div><div><b>${esc(b.name)}</b><small>Boosters offerts</small><em style="color:#ffb066">${g[k]} à ouvrir</em></div></div><div class="osb-a"><button class="go" onclick="closeSheet();openGift('${k}',1)">Ouvrir ×1</button>${g[k]>=5?`<button class="ghost" onclick="closeSheet();openGift('${k}',5)">×5</button>`:""}${g[k]>=10?`<button class="ghost" onclick="closeSheet();openGift('${k}',10)">×10</button>`:""}</div></div>`; }).join("");
+  const list=boosters.map(b=>{ const c=PACK_THEME[b.id]||"#d21f2e", free=b.free_ok&&f.n>0;
+    return `<div class="osb ${b.id===sel?"sel":""}" style="--bc:${c}"><div class="osb-t"><div class="osb-pk">${packHTML(b,"",`--bc:${c}`)}</div><div><b>${esc(b.name)}</b><small>${esc(b.description||PACK_SUB[b.id]||"")}</small><em>${b.free_ok?`Gratuit · ${f.n} restant${f.n>1?"s":""}`:`${b.price.toLocaleString("fr-FR")} ${CURRENCY}`}</em></div></div>
+      <div class="osb-g"><div><b>${b.cards_count}</b><span>cartes par booster</span></div><div><b>${RARITY[b.min_rarity]||"Commune"}</b><span>ou mieux, garanti</span></div></div>
+      <div class="osb-a">${free?`<button class="go" onclick="closeSheet();qty=1;openN('${b.id}',true)">Ouvrir gratuitement</button>`:""}<button class="${free?"ghost":"go"}" ${profile.balloons<b.price?"disabled":""} onclick="closeSheet();qty=1;openN('${b.id}',false)">${b.price.toLocaleString("fr-FR")} ⚽</button></div></div>`; }).join("");
+  const d=document.createElement("div"); d.className="osh"; d.id="osh"; d.onclick=e=>{ if(e.target===d) closeSheet(); };
+  d.innerHTML=`<div class="osh-in"><div class="osh-h"><b>Ouvrir</b><button class="osh-x" onclick="closeSheet()" aria-label="Fermer">×</button></div>${gifts}${list}</div>`;
+  document.body.appendChild(d); requestAnimationFrame(()=>d.classList.add("on")); document.querySelector('.mobn').classList.add("on"); }
+function closeSheet(){ const d=$("osh"); if(d) d.remove(); const b=document.querySelector('.mobn'); if(b) b.classList.remove("on"); }
 function mOpen(v){ document.body.classList.toggle("mopen",v===undefined?!document.body.classList.contains("mopen"):!!v); }
-function mtabSync(t){ const main=["boosters","collection","games","missions","profile"]; document.querySelectorAll("#mtab button").forEach(b=>b.classList.toggle("on",b.dataset.t===t||(b.dataset.t==="more"&&!main.includes(t)))); }
-function showTab(t,arg){ mtabSync(t); mOpen(0);
+function mtabSync(t){ const main=["boosters","collection","games"]; document.querySelectorAll("#mtab button").forEach(b=>b.classList.toggle("on",b.dataset.t===t||(b.dataset.t==="more"&&!main.includes(t)))); }
+function showTab(t,arg){ mtabSync(t); mOpen(0); closeSheet();
   TABS.forEach(x=>{ $("view-"+x).classList.toggle("hidden",x!==t); const b=$("tab-"+x); if(b) b.classList.toggle("on",x===t); });
   if(t==="collection") loadCollection(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings();
   $("sb-grp").classList.remove("open"); const sg=$("sb-grp").querySelector(".sbgh"); if(sg) sg.classList.toggle("on",t==="friends"||t==="messages"); if(t==="profile") loadProfile(arg); if(t==="friends") loadFriends(); if(t==="market") loadMarket(); if(t==="ballon"){ bd.off=0; loadBallon(); }
