@@ -2340,7 +2340,7 @@ function sheetFlip(k,auto){
 }
 /* ---------- cartes d'avant 2010 : couche de poussière à gratter (comme un ticket) ---------- */
 function cardYear(c){ const m=String(c.name).match(/(\d{2})\/(\d{2})$/); if(m){ const y=+m[1]; return y>=30?1900+y:2000+y; } const n=String(c.name).match(/(\d{4})$/); return n?+n[1]:null; }
-const isOld=c=>{ const y=cardYear(c); return y!=null&&y<2010; };
+const isOld=c=>{ if(ORDER.indexOf(c.rarity)<ORDER.indexOf("mythique")) return false; const y=cardYear(c); return y!=null&&y<2010; };
 function dustCover(card,onClean,need){ need=need||.55; const fr=card&&card.querySelector(".face.front"); if(!fr){ onClean&&onClean(); return {clear(){}}; }
   const W=316,H=456, cv=document.createElement("canvas"); cv.width=W; cv.height=H; cv.className="dust pre"; fr.appendChild(cv); requestAnimationFrame(()=>requestAnimationFrame(()=>cv.classList.remove("pre"))); const x=cv.getContext("2d");
   /* poussière : beige gris, grain, taches, fibres */
