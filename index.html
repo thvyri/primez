@@ -1838,7 +1838,55 @@ canvas.dust.pre{background:#7d725f}
 #view-games{position:relative}
 .gx-x{position:absolute;top:2px;right:0;z-index:20;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#1c1a1e;border:1px solid #ffffff2a;color:#fff;cursor:pointer;box-shadow:0 6px 16px #0008;transition:transform .15s,background .15s}
 .gx-x:hover{background:#e5202e;transform:rotate(90deg)}.gx-x svg{width:20px;height:20px}.gx-x.hidden{display:none}
-@media(max-width:760px){.lm-row{gap:5px}.lm-c{padding:3px}.lm-st i{display:none}.lm-st em{font-size:9px;padding:2px 4px}.lm-c .dr-sn span{display:none}.lm-an{height:200px!important}.lm-tk{width:30px}.gx-x{width:40px;height:40px;top:0}}
+@media(max-width:760px){.lm-row{gap:5px}.lm-c{padding:3px}.lm-st i{display:none}.lm-st em{font-size:9px;padding:2px 4px}.lm-c .dr-sn span{display:none}.lm-an{height:200px!important}.lm-tk{width:30px}.gx-x{width:40px;height:40px;top:4px;right:8px}}
+
+/* ===== v35 : match centré, histoire, carrière ===== */
+.lm-tk{animation:none!important}
+.lm-an{height:clamp(300px,36vh,680px)!important}
+.lm-an .lm-live{opacity:.5}
+.lm-stage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;width:min(600px,94%);max-height:94%;overflow:auto;margin:0!important;background:#141216f2;border:1px solid #ffffff26;border-radius:12px;box-shadow:0 24px 70px #000d;transition:opacity .25s}
+.lm-stage:empty{display:none}.lm-stage>*{margin:0!important;border:0!important;background:transparent!important}
+.lm-stage .lc-ask{text-align:center;padding:16px 18px}.lm-stage .lc-ask h4{font-size:clamp(18px,1.4vw,30px)}
+.lm-stage .dr-btns{justify-content:center}.lm-stage .lm-vs{justify-content:center;text-align:left}
+.an.act .lm-stage{opacity:0;pointer-events:none}
+.lm-an:has(.tk-sc){height:auto!important;min-height:600px}.lm-an:has(.tk-sc) .lm-stage{width:min(760px,96%)}
+.lm-side{display:block!important;position:static!important}
+@media(min-width:1200px){.lm{grid-template-columns:1fr!important}}
+@media(max-width:760px){.lm-an{height:auto!important;min-height:420px}.lm-stage{width:96%}.lm-stage .lc-ask{padding:12px}}
+.sy2{display:grid;gap:22px;max-width:1080px;margin:8px auto 0}
+.sy2-hd{display:grid;grid-template-columns:1fr minmax(260px,340px);gap:28px;align-items:end;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.sy2-hd h3{font:italic 900 clamp(34px,3vw,52px)/1 Outfit,Arial,sans-serif;text-transform:uppercase;margin:8px 0 10px}.sy2-hd p{color:#cfc8d3;margin:0;line-height:1.55;max-width:520px}
+.sy2-prog b{font:italic 900 34px/1 Outfit,Arial,sans-serif;color:#f5d061}.sy2-prog small{color:#a7a1ab}.sy2-prog .sy-bar{margin:10px 0 8px}.sy2-prog span{font-size:12px;color:#a7a1ab}
+.sy2-next{display:grid;grid-template-columns:1.1fr 1fr;gap:0;border:1px solid #f5b80055;background:radial-gradient(600px 260px at 0 0,#f5b80018,transparent 70%),var(--panel)}
+.sy2-club{padding:28px;display:grid;gap:10px;align-content:start}.sy2-club h4{font:italic 900 clamp(28px,2.4vw,42px)/1 Outfit,Arial,sans-serif;text-transform:uppercase;margin:0}.sy2-club p{margin:0;color:#cfc8d3}
+.sy2-go{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:12px}.sy2-rw{font:800 20px Outfit,Arial,sans-serif;color:#f5d061}
+.sy2-five{padding:28px;border-left:1px solid var(--line);display:grid;gap:14px;align-content:start}.sy2-five small{color:#a7a1ab;font-size:12px}
+.sy2-toks{display:flex;gap:14px;flex-wrap:wrap}.sy2-tk{display:grid;justify-items:center;gap:6px}.sy2-tk .tk-j{position:relative;left:auto;top:auto;transform:none;width:58px;height:58px}.sy2-tk .tk-j b{display:none}.sy2-tk small{font-size:11px;color:#cfc8d3;font-weight:700}
+.sy2-path{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.sy2-n{display:grid;gap:6px;padding:14px 12px;border:1px solid var(--line);background:var(--panel);min-width:0}
+.sy2-n i{font:italic 900 15px/1 Outfit,Arial,sans-serif;font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#ffffff0d;border:1px solid #ffffff22}
+.sy2-n b{font:italic 800 14px/1.15 Outfit,Arial,sans-serif;text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sy2-n em{font-style:normal;font:700 12px ui-monospace,Menlo,Consolas,monospace;color:#f5d061}
+.sy2-n.ok{opacity:.55}.sy2-n.ok i{background:#16a34a;border-color:#16a34a}.sy2-n.cur{border-color:#f5b800}.sy2-n.cur i{background:#f5b800;color:#111}.sy2-n.lock{opacity:.4}
+@media(max-width:760px){.sy2-hd,.sy2-next{grid-template-columns:1fr}.sy2-five{border-left:0;border-top:1px solid var(--line);padding:18px}.sy2-club{padding:18px}.sy2-path{grid-template-columns:repeat(3,minmax(0,1fr))}.sy2-tk .tk-j{width:46px;height:46px}.sy2-toks{gap:8px}}
+.cr-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cr-lab{font-size:12px;color:#a7a1ab;letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.cr-clubs{display:grid;gap:10px}.cr-tier{display:grid;grid-template-columns:220px 1fr;gap:12px;align-items:center;padding:10px 0;border-top:1px solid #ffffff0d}
+.cr-th{display:grid;gap:2px}.cr-th b{color:#f5b800;letter-spacing:2px}.cr-th b i{color:#ffffff22;font-style:normal}.cr-th span{font-weight:800}.cr-th small{color:#a7a1ab;font-size:12px;line-height:1.35}
+.cr-cl{display:flex;flex-wrap:wrap;gap:8px}.cr-cl button{padding:9px 12px!important;font-size:13px!important}.cr-cl button.on{border-color:var(--ac);background:#e5202e22;color:#fff}
+.cr-st5{color:#f5b800;font-style:normal;font-size:12px;letter-spacing:1px}.cr-bn{font-style:normal;font-size:11px;background:#f8717133;color:#fca5a5;padding:2px 6px;border-radius:4px;margin-left:4px}
+.cr-sub{color:#a7a1ab;font-weight:500;font-size:.8em}.cr-r{font:italic 900 13px Outfit,Arial,sans-serif;background:#93c5fd;color:#000;padding:1px 6px;margin-left:4px}
+.cr-dl{display:flex;flex-wrap:wrap;gap:6px}.cr-dl span{font:800 13px/1 Outfit,Arial,sans-serif;padding:7px 10px;border-radius:6px;animation:anin .35s ease-out both}
+.cr-dl span.up{background:#16a34a2b;color:#86efac;border:1px solid #16a34a66}.cr-dl span.dn{background:#f8717122;color:#fca5a5;border:1px solid #f8717155}
+.cr-dl span:nth-child(2){animation-delay:.08s}.cr-dl span:nth-child(3){animation-delay:.16s}.cr-dl span:nth-child(4){animation-delay:.24s}
+.cr-res h4{font-size:20px}
+.cr-log{padding:4px 14px!important}.cr-log div{display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:baseline}.cr-log b{white-space:nowrap}
+.cr-cup{border:1px solid var(--line);padding:12px 14px;display:grid;gap:6px;background:#ffffff04}.cr-cup>b{font:italic 900 16px Outfit,Arial,sans-serif;text-transform:uppercase;color:#93c5fd}
+.cr-rd{display:grid;grid-template-columns:150px 1fr auto auto;gap:10px;align-items:center;padding:7px 10px;border-radius:6px;background:#ffffff06;opacity:0;transform:translateY(4px);transition:.3s}
+.cr-rd.in{opacity:1;transform:none}.cr-rd span{font-weight:800;font-size:13px}.cr-rd em{font-style:normal;color:#cfc8d3;font-size:13px}.cr-rd i{font:800 15px ui-monospace,Menlo,Consolas,monospace;font-style:normal}
+.cr-rd u{text-decoration:none;font-size:12px;color:#f5d061}.cr-rd.w{background:#16a34a22}.cr-rd.w i{color:#4ade80}.cr-rd.l{background:#f8717118}.cr-rd.l i{color:#f87171}
+.cr-rd.wait i{animation:crwait .6s ease-in-out infinite alternate}@keyframes crwait{to{opacity:.2}}
+.cr-cr{font:italic 900 18px Outfit,Arial,sans-serif;opacity:0;transition:.4s}.cr-cr.in{opacity:1}.cr-cr.w{color:#f5d061}.cr-cr.l{color:#a7a1ab}
+.cr-bo{display:grid;gap:4px;padding:14px;border:1px solid #f5b80055;background:#f5b80010;opacity:0;transition:.5s}.cr-bo.in{opacity:1}.cr-bo span{font-size:12px;color:#a7a1ab;text-transform:uppercase;letter-spacing:.1em}.cr-bo b{font:italic 900 22px Outfit,Arial,sans-serif;color:#f5d061}
+@media(max-width:760px){.cr-2{grid-template-columns:1fr}.cr-tier{grid-template-columns:1fr}.cr-rd{grid-template-columns:1fr auto;}.cr-rd em{grid-column:1/-1;grid-row:2}}
 </style>
 <script>
 (function(){ try{ const base=location.href.split("#")[0].split("?")[0].replace(/[^\/]*$/,"");
@@ -2015,7 +2063,7 @@ function toast(m,ok){ const e=$("toast"); e.className=ok?"ok":"ko"; e.innerHTML=
 /* ---------- son (synthétisé, aucun fichier) ---------- */
 let AC=null, muted=false; try{ muted=localStorage.getItem("pz_mute")==="1"; }catch(e){}
 function actx(){ if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } return AC; }
-function toggleMute(){ muted=!muted; try{ localStorage.setItem("pz_mute",muted?"1":"0"); }catch(e){} $("mute-btn").textContent=muted?"🔇":"🔊"; }
+function toggleMute(){ muted=!muted; if(muted){ try{ crowdBed(false); crMusic(false); }catch(e){} } try{ localStorage.setItem("pz_mute",muted?"1":"0"); }catch(e){} $("mute-btn").textContent=muted?"🔇":"🔊"; }
 function whistle(){
   if(muted) return; const a=actx(); if(!a) return; const t=a.currentTime;
   const o=a.createOscillator(), g=a.createGain(), l=a.createOscillator(), lg=a.createGain();
@@ -2741,7 +2789,7 @@ function renderMissions(){
 }
 /* ---------- galerie « musée » autour des missions : des tableaux de légendes, un clic = une anecdote ---------- */
 function muPick(n){ const day=Math.floor(Date.now()/864e5), seen=new Set(), hs=k=>{ let h=day*2654435761>>>0; for(const ch of k) h=Math.imul(h^ch.charCodeAt(0),16777619)>>>0; return h; };
-  const pool=(typeof allCards!=="undefined"?allCards:[]).filter(c=>c.image_url&&ORDER.indexOf(c.rarity)>=3&&(INFO[infoKey(c)]||[])[2]).filter(c=>{ const k=infoKey(c); if(seen.has(k)) return false; seen.add(k); return true; });
+  const pool=(typeof allCards!=="undefined"?allCards:[]).filter(c=>c.image_url&&(c.rarity==="legende"||(ORDER.indexOf(c.rarity)>3&&owned[c.id]))&&(INFO[infoKey(c)]||[])[2]).filter(c=>{ const k=infoKey(c); if(seen.has(k)) return false; seen.add(k); return true; });
   return pool.sort((a,b)=>hs(infoKey(a))-hs(infoKey(b))).slice(0,n); }
 function muFrame(c,i){ const gold=ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique"), m=String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/);
   return `<button class="mu-fr ${gold?"g":"s"}" style="--r:${[-1.2,.8,-.5,1.1,-.9,.6][i%6]}deg" onclick="muOpen(${c.id})" title="Voir l’anecdote"><span class="mu-lamp"></span><span class="mu-cv"><img src="${esc(c.image_url)}" alt="" loading="lazy"></span><span class="mu-pl"><b>${esc(infoKey(c))}</b>${m?`<small>${m[1]}</small>`:""}</span></button>`; }
@@ -3701,7 +3749,7 @@ function openSheet(){ closeSheet(); mOpen(0); const f=freeNow(), g=(refSt&&refSt
 function closeSheet(){ const d=$("osh"); if(d) d.remove(); const b=document.querySelector('.mobn'); if(b) b.classList.remove("on"); }
 function mOpen(v){ document.body.classList.toggle("mopen",v===undefined?!document.body.classList.contains("mopen"):!!v); }
 function mtabSync(t){ const main=["boosters","collection","games"]; document.querySelectorAll("#mtab button").forEach(b=>b.classList.toggle("on",b.dataset.t===t||(b.dataset.t==="more"&&!main.includes(t)))); }
-function showTab(t,arg){ mtabSync(t); mOpen(0); closeSheet();
+function showTab(t,arg){ if(t!=="games"){ try{ crowdBed(false); crMusic(false); }catch(e){} } mtabSync(t); mOpen(0); closeSheet();
   TABS.forEach(x=>{ $("view-"+x).classList.toggle("hidden",x!==t); const b=$("tab-"+x); if(b) b.classList.toggle("on",x===t); });
   if(t==="collection") loadCollection(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings();
   $("sb-grp").classList.remove("open"); const sg=$("sb-grp").querySelector(".sbgh"); if(sg) sg.classList.toggle("on",t==="friends"||t==="messages"); if(t==="profile") loadProfile(arg); if(t==="friends") loadFriends(); if(t==="market") loadMarket(); if(t==="ballon"){ bd.off=0; loadBallon(); }
@@ -3760,7 +3808,7 @@ function drDuel(att,act,dfd,isGK){ const as=drStyles(att), ds=drStyles(dfd);
   return Math.max(.02,Math.min(.88,p)); }
 const DR_ACT=[["F","Frapper","Tenter sa chance"],["L","Une-deux","avec MATE"],["D","Dribbler","Un contre un"],["V","Accélérer","Dans la profondeur"],["P","En force","Épaule contre épaule"]];
 const DR_ANIM={F:0,P:0,L:1,D:2,V:2};
-const DR_RANGE={commune:[68,74],rare:[74,78],elite:[78,82],legende:[82,86],mythique:[86,90],prime:[90,94],promo:[92,95],goat:[95,97]};
+const DR_RANGE={commune:[68,74],rare:[74,78],elite:[78,82],legende:[82,86],mythique:[86,90],prime:[90,94],promo:[88,92],goat:[95,97]};
 const drHash=s=>{ let h=7; for(const ch of String(s)) h=(h*31+ch.charCodeAt(0))>>>0; return h; };
 const drRating=c=>{ const r=DR_RANGE[c.rarity]||[68,74]; return r[0]+drHash(c.name)%(r[1]-r[0]+1); };
 const drCard=id=>allCards.find(c=>c.id===id);
@@ -3941,7 +3989,7 @@ function tkScene(sh,gk,us){ return `<div class="tk-sc ${us?"us":"op"}"><div clas
   ${tkTok(gk,"tk-gk")}<i class="tk-ball"></i>${tkTok(sh,"tk-sh")}</div></div><div class="tk-txt"></div></div>`; }
 /* shot / keep : 0 gauche, 1 milieu, 2 droite ; renvoie le texte du résultat */
 async function tkShoot(root,o){ if(!root) return null; const P=root.querySelector(".tk-pitch"), cam=root.querySelector(".tk-cam"), G=root.querySelector(".tk-gk"), S=root.querySelector(".tk-sh"), B=root.querySelector(".tk-ball"), T=root.querySelector(".tk-txt"), net=root.querySelector(".tk-net");
-  const go=(el,k,d,e)=>el.animate(k,{duration:d,easing:e||"cubic-bezier(.3,.1,.2,1)",fill:"forwards"}).finished.catch(()=>{});
+  const go=(el,k,d,e)=>el.animate(k,{duration:d*1.35,easing:e||"cubic-bezier(.3,.1,.2,1)",fill:"forwards"}).finished.catch(()=>{});
   const sx=TK_X[o.shot], kx=TK_X[o.keep], type=o.goal?"goal":o.shot===o.keep?"save":pickOne(["post","wide"]);
   root.classList.add("live"); cam.animate([{transform:"scale(1)"},{transform:"scale(1.12) translateY(5%)"}],{duration:1500,easing:"ease-in-out",fill:"forwards"});
   await go(S,[{left:"42%",top:"70%"},{left:"48%",top:"55%"}],420,"ease-in"); thud();
@@ -3966,7 +4014,7 @@ function anReset(){ const A=$("an"); if(!A) return null; A.querySelectorAll(".an
 function anPl(c,x,y,side){ const A=$("an"); if(!A||!c) return null; const d=document.createElement("div"); d.className="an-pl "+(side||"");
   d.style.cssText=`left:${x}%;top:${y}%;--c:${COLOR[c.rarity]}`; d.innerHTML=`<div class="an-ph">${c.image_url?`<img src="${esc(c.image_url)}" alt="">`:SIL}</div><span>${esc(dispName(c).replace(/\s+\d{2}\/\d{2}$|\s+\d{4}$/,""))}</span>`; A.appendChild(d); return d; }
 function anTo(el,pts,dur,ease){ if(!el) return Promise.resolve(); const k=pts.map(p=>({left:p[0]+"%",top:p[1]+"%",transform:p[2]||"translate(-50%,-50%)"}));
-  const a=el.animate(k,{duration:dur,easing:ease||"cubic-bezier(.4,.1,.3,1)",fill:"forwards"}); return a.finished.catch(()=>{}); }
+  const a=el.animate(k,{duration:dur*1.3,easing:ease||"cubic-bezier(.4,.1,.3,1)",fill:"forwards"}); return a.finished.catch(()=>{}); }
 function anBall(x,y){ const b=$("an-ball"); if(!b) return null; b.getAnimations().forEach(a=>a.cancel()); b.className="an-ball"; b.style.left=x+"%"; b.style.top=y+"%"; return b; }
 function anMsg(t,cls,c){ const m=$("an-msg"); if(!m) return; m.style.setProperty("--c",c||"#fff"); m.className="an-msg show "+(cls||""); m.innerHTML=t; }
 function anNet(side){ const A=$("an"); if(A){ A.classList.remove("net-l","net-r"); void A.offsetWidth; A.classList.add(side==="l"?"net-l":"net-r"); } }
@@ -4055,13 +4103,13 @@ document.addEventListener("pointermove",e=>{ if(e.pointerType==="touch") return;
 document.addEventListener("mouseleave",()=>{ glOff(glC); glC=null; });
 /* ===================== JEUX : accueil + Tirs au but + Quiz + Ligue des Champions ===================== */
 let gx="hub";
-function gxGo(v){ gx=v; window.scrollTo(0,0); gxRender(); gxX(); }
+function gxGo(v){ gx=v; if(v!=="career") crMusic(false); if(v!=="ldc") crowdBed(false); window.scrollTo(0,0); gxRender(); gxX(); }
 const gxBack="";
 function gxX(){ const x=$("gx-x"); if(x) x.classList.toggle("hidden",gx==="hub"); }
 async function gxQuit(){
   if(gx==="draft"&&dr&&dr.run&&dr.stage!=="end"){ if(dr.m) await drQuitMatch(); else await drQuit(); return; }
   if(ldc.m&&ldc.m.turn<10&&ldc.m.story==null&&!confirm("Abandonner ce match ?")) return;
-  clearInterval(lmT); clearTimeout(qz.timer); ldc.m=null; ldc.view="home"; if(dr&&!dr.run) dr={stage:"lobby"};
+  clearInterval(lmT); clearTimeout(qz.timer); crowdBed(false); crMusic(false); ldc.m=null; ldc.view="home"; if(dr&&!dr.run) dr={stage:"lobby"};
   gx="hub"; window.scrollTo(0,0); gxRender(); }
 function gxRender(){
   const B=$("gx-body"); if(!B) return;
@@ -4092,10 +4140,10 @@ async function penRender(load){
   if(load!==false){ const r=await rpc("pen_state"); if(!r){ B.innerHTML=gxBack; return; } pen.state=r.data; pen.ses=r.data.session; }
   const s=pen.ses, left=pen.state?pen.state.left:0;
   if(!s){ B.innerHTML=`${gxBack}<div class="pn-lobby"><span class="dr-k">Tirs au but · ${left} séance${left>1?"s":""} restante${left>1?"s":""} aujourd'hui</span><h3>Séance de tirs au but</h3>
-      <p>Chaque niveau réussi rapporte <b>10 + 2 × niveau</b> ballons. Plus tu montes, plus le gardien te lit bien. Après chaque but : <b>Encaisser</b> pour tout garder, ou <b>Continuer</b>. Un raté et tu ne gardes que la moitié de la séance.</p>
+      <p>Chaque niveau réussi rapporte <b>2 ballons</b>, +1 tous les 5 niveaux. Plus tu montes, plus le gardien te lit bien. Après chaque but : <b>Encaisser</b> pour tout garder, ou <b>Continuer</b>. Un raté et tu ne gardes que la moitié de la séance.</p>
       ${pen.last?`<div class="pn-last">${pen.last}</div>`:""}
       <div class="dr-act"><button class="go" ${left?"":"disabled"} onclick="penStart()">${left?"Commencer une séance":"Reviens demain"}</button></div></div>`; return; }
-  const lv=s.level, nx=10+2*(lv+1);
+  const lv=s.level, nx=2+Math.floor((lv+1)/5);
   B.innerHTML=`${gxBack}<div class="pn"><div class="pn-top"><div><span class="dr-k">Niveau</span><b>${lv+1}<small> / 100</small></b></div><div><span class="dr-k">Cagnotte</span><b id="pn-bank">${nf(s.bank)}</b></div><div><span class="dr-k">Ce tir rapporte</span><b>+${nf(nx)}</b></div></div>
     <div class="pn-goal" id="pn-goal"><div class="pn-net"></div>${PEN_Z.map((z,i)=>`<button class="pn-z ${pen.zone===i?"on":""}" style="left:${z[1]}%;top:${z[2]}%" onclick="penZone(${i})" title="${z[0]}"></button>`).join("")}<div class="pn-gk" id="pn-gk"><i></i></div><div class="pn-ball" id="pn-ball"></div><div class="an-msg" id="pn-msg"></div></div>
     <div class="pn-ctl" id="pn-ctl">${pen.zone==null?`<p class="pn-h">Choisis où tirer dans le but.</p>`:`<div class="pn-gauge"><i class="ok"></i><u id="pn-cur"></u></div><button class="go" id="pn-shoot" onclick="penShoot()">Frapper (Espace)</button><p class="pn-h">Arrête le curseur dans la zone verte.</p>`}</div></div>`;
@@ -4205,7 +4253,7 @@ function ldcAITeam(){ const t=ldc.st?Math.min(6,Math.floor(ldc.st.points/100)):0
 async function ldcPlay(){ const r=await rpc("ldc_start"); if(!r) return; const d=r.data, opp=d.opp_cards&&d.opp_cards.every(id=>drCard(id))?d.opp_cards:ldcAITeam();
   ldc.m={id:d.match_id,name:d.opp_name||pickOne(DR_AI),ghost:!!d.opp_name,me:ldc.team.slice(),op:opp,turn:0,su:0,so:0,t0:Date.now(),first:Math.random()<.5,tired:{me:null,op:null,dme:null,dop:null},log:[],busy:false,pick:null};
   ldc.view="match"; whistle(); ldcMatchUI(); }
-function lmS(){ const B=$("gx-body"), W=((B&&B.clientWidth)||innerWidth)-(innerWidth>=1200?380:0), gap=W<600?5:14; return Math.max(.3,Math.min(1.2,((W-4*gap)/5-12)/158,((innerHeight-610)/2-60)/228)).toFixed(3); }
+function lmS(){ const B=$("gx-body"), W=(B&&B.clientWidth)||innerWidth, gap=W<600?5:14; return Math.max(.3,Math.min(1.2,((W-4*gap)/5-12)/158,((innerHeight*.64-300)/2-70)/228)).toFixed(3); }
 function lmCard(c,side,i,m){ const tired=(side==="me"?[m.tired.me,m.tired.dme]:[m.tired.op,m.tired.dop]).includes(c.id), st=drStyles(c);
   return `<div class="lc-p lm-c ${i===0?"gk":""} ${tired?"tired":""} ${m.pick===c.id?"on":""} ${side==="op"&&m.aiAtt===c.id&&m.want==="def"?"thr":""}" data-id="${c.id}" ${side==="me"&&i>0?`onclick="ldcSel(${c.id})"`:""}>${drMini(c,lmS())}${tired?'<i class="lc-t">fatigué</i>':""}
     <div class="lm-st"><em>${i===0?"GB":drPosD(c)}</em>${st.map(x=>`<i title="Fort contre : ${(STY_BEAT[x]||"").split("").map(y=>STY_N[y]).join(", ")}">${STY_N[x]}</i>`).join("")}</div></div>`; }
@@ -4216,14 +4264,21 @@ function ldcMatchUI(){ const m=ldc.m, B=$("gx-body"); const myTurn=((m.turn+(m.f
       <div class="dr-sc"><b>${m.su}</b><i>–</i><b>${m.so}</b><span>${done?"Fin":`Tour ${m.turn+1} / 10`}</span></div>
       <div class="dr-tm r"><span class="dr-k">${m.story!=null?`Histoire · club ${m.story+1} / 12`:m.ghost?"Équipe d'un joueur":"IA"}</span><b>${esc(m.name)}</b></div></div>
     <div class="lm-main"><div class="lm-team lm-op"><div class="lm-row">${m.op.map((id,i)=>lmCard(drCard(id),"op",i,m)).join("")}</div></div>
-    <div class="an lc-an lm-an" id="an"><div class="an-pitch"><i class="an-gl"></i><i class="an-gr"></i></div><div class="lm-live" id="lm-live">${m.me.map((id,k)=>tok(id,k,"me")).join("")}${m.op.map((id,k)=>tok(id,k,"op")).join("")}</div><div class="an-ball idle" id="an-ball"></div><div class="an-msg" id="an-msg"></div></div>
+    <div class="an lc-an lm-an" id="an"><div class="an-pitch"><i class="an-gl"></i><i class="an-gr"></i></div><div class="lm-live" id="lm-live">${m.me.map((id,k)=>tok(id,k,"me")).join("")}${m.op.map((id,k)=>tok(id,k,"op")).join("")}</div><div class="an-ball" id="an-ball"></div><div class="an-msg" id="an-msg"></div><div class="dr-stage lm-stage" id="lc-stage"></div></div>
     <div class="lm-team lm-me"><div class="lm-row">${m.me.map((id,i)=>lmCard(drCard(id),"me",i,m)).join("")}</div></div></div>
-    <div class="lm-side"><div class="dr-stage" id="lc-stage"></div><div class="dr-feed">${m.log.map(e=>`<div class="${e.c||""}"><b>T${e.t}</b>${e.x}</div>`).join("")}</div></div></div>`;
+    <div class="lm-side"><div class="dr-feed">${m.log.map(e=>`<div class="${e.c||""}"><b>T${e.t}</b>${e.x}</div>`).join("")}</div></div></div>`;
   if(!m.busy&&!done) ldcAsk(myTurn);
   if(m.want==="def"&&m.aiAtt){ const e=B.querySelector(`.lm-op [data-id="${m.aiAtt}"]`); if(e) e.classList.add("thr"); }
-  lmCirc(myTurn);
+  crowdBed(true);
 }
 /* le ballon circule entre les joueurs pendant qu'on réfléchit */
+/* fond sonore de stade : foule lointaine */
+let cbed=null;
+function crowdBed(on){ try{ if(!on||muted){ if(cbed){ const b=cbed; cbed=null; b.g.gain.setTargetAtTime(.0001,b.a.currentTime,.5); setTimeout(()=>{ try{ b.src.forEach(x=>x.stop()); }catch(e){} },2500); } return; }
+  if(cbed) return; const a=actx(); if(!a) return; const g=a.createGain(); g.gain.value=.0001; g.connect(a.destination); const src=[];
+  [[380,.6,1],[900,.9,.45]].forEach(([f,q,v])=>{ const n=sNoise(a,5); n.loop=true; const bp=a.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=f; bp.Q.value=q; const vg=a.createGain(); vg.gain.value=v; n.connect(bp); bp.connect(vg); vg.connect(g); n.start(); src.push(n); });
+  const lfo=a.createOscillator(), lg=a.createGain(); lfo.frequency.value=.11; lg.gain.value=.012; lfo.connect(lg); lg.connect(g.gain); lfo.start(); src.push(lfo);
+  g.gain.setTargetAtTime(.045,a.currentTime,1.5); cbed={a,g,src}; }catch(e){} }
 let lmT=null;
 function lmCirc(myTurn){ clearInterval(lmT); let last=null;
   const step=()=>{ const L=$("lm-live"), A=$("an"), b=$("an-ball"); if(!L||!ldc.m){ clearInterval(lmT); return; }
@@ -4268,7 +4323,7 @@ async function ldcDef(){ const m=ldc.m; if(m.busy||!m.pick) return; m.busy=true;
   m.tired.op=a.id; m.tired.dme=dfd.id; m.aiAtt=null; ldcNext(); }
 function ldcLog(x,c){ ldc.m.log.unshift({t:ldc.m.turn+1,x,c}); }
 function ldcNext(){ const m=ldc.m; setTimeout(()=>{ m.turn++; m.pick=null; m.busy=false; m.want=null; if(typeof anIdle==="function") anIdle();
-  if(m.turn>=10){ if(m.su===m.so) return ldcPens(); return ldcEnd(m.su>m.so); } ldcMatchUI(); },1200); }
+  if(m.turn>=10){ if(m.su===m.so) return ldcPens(); return ldcEnd(m.su>m.so); } ldcMatchUI(); },1900); }
 function ldcPens(){ const m=ldc.m; m.pen=[0,0]; m.pk=0; ldcMatchUI(); ldcPenTurn(); }
 function ldcPenTurn(){ const m=ldc.m, k=m.pk, tu=Math.ceil(k/2), to=Math.floor(k/2);
   if(k<6){ if(m.pen[0]>m.pen[1]+(3-to)) return ldcEnd(true,true); if(m.pen[1]>m.pen[0]+(3-tu)) return ldcEnd(false,true); } else if(k%2===0&&m.pen[0]!==m.pen[1]) return ldcEnd(m.pen[0]>m.pen[1],true);
@@ -4279,7 +4334,7 @@ function ldcPen(dir){ if(ldcPen.anim) return; const m=ldc.m, us=m.pk%2===0, r=Ma
   if(!ldcPen.anim){ ldcPen.anim=1; document.querySelectorAll("#lc-stage .dr-goal button").forEach(b=>b.disabled=true);
     return tkShoot(document.querySelector("#lc-stage .tk-sc"),{shot:us?dir:ai,keep:us?ai:dir,goal}).then(()=>setTimeout(()=>{ ldcPen.anim=0; ldcPenTurn(); },1100)); }
   ldcSt(`<div class="dr-res ${goal?(us?"goal":"ogoal"):"miss"}"><b>${goal?"Marqué":(us?"Arrêté":"Arrêt !")}</b><span>${m.pen[0]} – ${m.pen[1]}</span></div>`); if(goal&&us) boum(); setTimeout(ldcPenTurn,900); }
-async function ldcEnd(win,pens){ const m=ldc.m; if(m.story!=null) return storyEnd(win,pens); ldcSt(`<div class="dr-res"><span>Envoi du résultat…</span></div>`);
+async function ldcEnd(win,pens){ const m=ldc.m; if(m.story!=null) return storyEnd(win,pens); setTimeout(()=>crowdBed(false),5000); ldcSt(`<div class="dr-res"><span>Envoi du résultat…</span></div>`);
   const wait=Math.max(0,41000-(Date.now()-(m.t0||0))); if(!m.t0) m.t0=Date.now();
   const send=async()=>{ const r=await rpc("ldc_finish",{p_match:m.id,p_win:win}); const d=r&&r.data;
     ldcSt(`<div class="dr-end ${win?"champ":""}" style="margin:0"><span class="dr-k">${pens?`Tirs au but ${m.pen[0]} – ${m.pen[1]}`:"Fin du match"}</span><h3>${win?"Victoire":"Défaite"} ${m.su} – ${m.so}</h3>${d?`<p style="color:${d.delta>0?"#4ade80":"#f87171"}">${d.delta>0?"+":""}${d.delta} pts · ${d.points} pts${d.streak>=3?` · série de ${d.streak} 🔥`:""}</p>`:""}
@@ -4305,17 +4360,21 @@ function storyTeam(i){ const key=stNorm(STORY[i][0]), T=70+i*2.4, seen=new Set()
   for(const c of club){ if(ids.length>=5) break; if(drPos(c)==="G"||seen.has(infoKey(c))) continue; if(drRating(c)>T+8) continue; seen.add(infoKey(c)); ids.push(c.id); }
   while(ids.length<5){ const c=pickOne(near(c=>drPos(c)!=="G")); if(!c) break; seen.add(infoKey(c)); ids.push(c.id); }
   return ids; }
-async function storyRender(){ const B=$("gx-body"); if(!B) return; const r=await rpc("story_state"); if(!r){ B.innerHTML=gxBack; return; } story.stage=r.data.stage||0;
-  const st=story.stage, won=STORY_REW.slice(0,st).reduce((a,b)=>a+b,0), five=myFive();
-  B.innerHTML=`${gxBack}<div class="sy"><div class="sy-hd"><span class="dr-k">Mode Histoire · solo</span><h3>Le Tour d'Europe</h3><p>Ton five affronte 12 clubs, du plus petit au plus grand. Chaque club battu rapporte des ballons : <b>60 000 au total</b>, de quoi ouvrir 3 boosters Panthéon.</p>
-    <div class="sy-bar"><u style="width:${won/600}%"></u></div><small>${nf(won)} / 60 000 ${CURRENCY} · ${st} / 12 clubs battus</small></div>
-    <div class="sy-five"><span class="dr-k">Ton équipe</span>${five?`<div class="lc-five">${five.map((id,i)=>`<div>${drMini(drCard(id),.42)}<i class="dr-pos ok">${i===0?"GB":drPosD(drCard(id))}</i></div>`).join("")}</div><small class="lc-sub">${ldc.team&&ldc.team.every(Boolean)?"Ton five de Ligue des Champions":"Tes 5 meilleures cartes (compose ton five dans Ligue des Champions pour choisir)"}</small>`:`<p class="lc-sub">Il te faut au moins 5 cartes dont un gardien : ouvre quelques boosters d'abord.</p>`}</div>
-    <div class="sy-path">${STORY.map(([k,n,t],i)=>`<div class="sy-n ${i<st?"ok":i===st?"cur":"lock"}"><i>${i<st?"✓":i+1}</i><div><b>${esc(n)}</b><small>${esc(t)}</small></div><em>+${nf(STORY_REW[i])}</em>${i===st&&five?`<button class="go" onclick="storyPlay()">Jouer</button>`:""}</div>`).join("")}</div>
-    ${st>=12?`<div class="dr-end champ"><span class="dr-k">Terminé</span><h3>Tour d'Europe bouclé !</h3><p>Tu as battu les 12 clubs et gagné 60 000 ${CURRENCY}.</p></div>`:""}</div>`; }
+async function storyRender(){ const B=$("gx-body"); if(!B) return; const r=await rpc("story_state"); if(!r){ B.innerHTML=""; return; } story.stage=r.data.stage||0;
+  const st=story.stage, won=STORY_REW.slice(0,st).reduce((a,b)=>a+b,0), five=myFive(), cur=STORY[st];
+  const toks=five?five.map((id,i)=>{ const c=drCard(id); return `<div class="sy2-tk">${tkTok(c,"")}<small>${i===0?"GB":drPosD(c)} · ${drRating(c)}</small></div>`; }).join(""):"";
+  B.innerHTML=`<div class="sy2">
+    <header class="sy2-hd"><div><span class="dr-k">Mode Histoire · solo</span><h3>Le Tour d'Europe</h3><p>12 clubs, du plus petit au plus grand. Chaque club battu rapporte des ballons, une seule fois.</p></div>
+      <div class="sy2-prog"><b>${nf(won)}</b><small> / 60 000 ${CURRENCY}</small><div class="sy-bar"><u style="width:${won/600}%"></u></div><span>${st} / 12 clubs battus · 3 boosters Panthéon au bout</span></div></header>
+    ${cur?`<section class="sy2-next"><div class="sy2-club"><span class="dr-k">Prochain adversaire · club ${st+1} / 12</span><h4>${esc(cur[1])}</h4><p>${esc(cur[2])}</p>
+        <div class="sy2-go"><span class="sy2-rw">+${nf(STORY_REW[st])} ${CURRENCY}</span>${five?`<button class="go bigbtn" onclick="storyPlay()">Jouer le match</button>`:""}</div></div>
+      <div class="sy2-five"><span class="dr-k">Ton five</span>${five?`<div class="sy2-toks">${toks}</div><small>${ldc.team&&ldc.team.every(Boolean)?"Ton five de Ligue des Champions":"Tes 5 meilleures cartes · compose ton five dans Ligue des Champions pour le choisir"}</small>`:`<p class="lc-sub">Il te faut au moins 5 cartes dont un gardien : ouvre quelques boosters d'abord.</p>`}</div></section>`
+      :`<section class="sy2-next done"><div class="sy2-club"><span class="dr-k">Terminé</span><h4>Tour d'Europe bouclé !</h4><p>Tu as battu les 12 clubs et gagné 60 000 ${CURRENCY}.</p></div></section>`}
+    <section class="sy2-path">${STORY.map(([k,n],i)=>`<div class="sy2-n ${i<st?"ok":i===st?"cur":"lock"}"><i>${i<st?"✓":i+1}</i><b>${esc(n)}</b><em>+${nf(STORY_REW[i])}</em></div>`).join("")}</section></div>`; }
 async function storyPlay(){ const five=myFive(); if(!five) return toast("Il te faut au moins 5 cartes dont un gardien"); const r=await rpc("story_start"); if(!r) return; const i=r.data.stage;
   ldc.m={story:i,name:STORY[i][1],ghost:false,me:five,op:storyTeam(i),turn:0,su:0,so:0,t0:Date.now(),first:Math.random()<.5,tired:{me:null,op:null,dme:null,dop:null},log:[],busy:false,pick:null};
   gx="ldc"; ldc.view="match"; window.scrollTo(0,0); whistle(); ldcMatchUI(); }
-async function storyEnd(win,pens){ const m=ldc.m; ldcSt(`<div class="dr-res"><span>Coup de sifflet final…</span></div>`);
+async function storyEnd(win,pens){ const m=ldc.m; setTimeout(()=>crowdBed(false),5000); ldcSt(`<div class="dr-res"><span>Coup de sifflet final…</span></div>`);
   const send=async()=>{ const r=await rpc("story_finish",{p_win:win}); const d=r&&r.data; if(d){ profile.balloons=d.balloons; render(); }
     const next=d&&d.stage<12;
     ldcSt(`<div class="dr-end ${win?"champ":""}" style="margin:0"><span class="dr-k">${esc(m.name)}${pens?` · tirs au but ${m.pen[0]} – ${m.pen[1]}`:""}</span><h3>${win?"Victoire":"Défaite"} ${m.su} – ${m.so}</h3>${d&&d.reward?`<p style="color:#4ade80">+${nf(d.reward)} ${CURRENCY}</p>`:win?"":`<p>Retente ta chance, le club t'attend.</p>`}
@@ -4323,119 +4382,194 @@ async function storyEnd(win,pens){ const m=ldc.m; ldcSt(`<div class="dr-res"><sp
   const wait=Math.max(0,31000-(Date.now()-m.t0)); setTimeout(send,wait); }
 
 /* ===================== MODE CARRIÈRE ===================== */
-const CR_CLUBS=[[],["FC Lorient","Stade Brestois","Le Havre AC","Angers SCO","Clermont Foot"],["FC Nantes","RC Lens","OGC Nice","Stade Rennais","LOSC Lille"],["Olympique Lyonnais","Olympique de Marseille","AS Monaco","Séville FC","Ajax Amsterdam","Benfica"],["Borussia Dortmund","Atlético Madrid","Juventus","Chelsea","Arsenal","Inter Milan"],["Real Madrid","FC Barcelone","Bayern Munich","Manchester City","Liverpool","Paris Saint-Germain"]];
+const CR_CLUBS=[[],["FC Lorient","Stade Brestois","Le Havre AC","Angers SCO","Clermont Foot","AJ Auxerre"],["FC Nantes","RC Lens","OGC Nice","Stade Rennais","LOSC Lille","Toulouse FC"],["Olympique Lyonnais","Olympique de Marseille","AS Monaco","Séville FC","Ajax Amsterdam","Benfica","FC Porto"],["Borussia Dortmund","Atlético Madrid","Juventus","Chelsea","Arsenal","Inter Milan","AC Milan"],["Real Madrid","FC Barcelone","Bayern Munich","Manchester City","Liverpool","Paris Saint-Germain"]];
+const CR_TIER=["","Petit club","Club moyen","Bon club européen","Grand club","Géant mondial"];
+const CR_TIER_D=["","Tu joueras vite, mais la formation est plus modeste.","Bon équilibre entre temps de jeu et progression.","Belle formation, il faudra se battre pour jouer.","Formation d'élite, mais très dur de percer.","Le top mondial : percer ici est un exploit."];
 const CR_NAT={France:.86,Brésil:.85,Argentine:.85,Espagne:.84,Angleterre:.8,Portugal:.78,Allemagne:.78,Belgique:.7,Maroc:.66,Sénégal:.6,Algérie:.5,"Côte d'Ivoire":.55};
 const CR_EURO=["France","Espagne","Angleterre","Portugal","Allemagne","Belgique"];
+const CR_NT=["Brésil","Argentine","Espagne","Angleterre","Allemagne","Portugal","Pays-Bas","Italie","Belgique","Croatie","Maroc","Uruguay","Sénégal","Japon","États-Unis","Mexique","Colombie","Danemark","Suisse","France"];
+const CR_EUNT=["Espagne","Angleterre","Allemagne","Portugal","Pays-Bas","Italie","Belgique","Croatie","Danemark","Suisse","France","Autriche","Turquie","Pologne"];
 const CR_POS={A:"Attaquant",M:"Milieu",D:"Défenseur",G:"Gardien"};
-let cr=null;
+const CR_LAST=["Dupuis","Moreau","Lambert","Girard","Bonnet","Fontaine","Rousseau","Vincent","Muller","Lefèvre","Faure","Mercier","Blanc","Guérin","Boyer","Garnier","Chevalier","Legrand","Gauthier","Perrin","Robin","Clément","Morin","Roussel","Mathieu","Fernandes","Diallo","Traoré","Camara","Sow","Keita","Cissé","Silva","Santos","Costa","Rossi","Schmidt","Novak","Jansen","Kovač","Ortega","Lindqvist","Okafor","Yilmaz"];
+let cr=null, crNew={club:null,t:1,pos:"A"};
 const crR=(a,b)=>a+Math.random()*(b-a), crI=(a,b)=>Math.floor(crR(a,b+1)), crClamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const crLvl=t=>58+t*7; /* niveau moyen d'un club */
+const crR8=o=>o.r!=null?o.r:drRating(o);
 function crPickClub(t,not){ const L=CR_CLUBS[crClamp(t,1,5)].filter(x=>x!==not); return pickOne(L); }
 function crCard(){ const o=cr.ovr, r=o>=92?"goat":o>=88?"prime":o>=84?"mythique":o>=79?"legende":o>=73?"elite":o>=67?"rare":"commune"; return {id:-1,name:cr.name.toUpperCase(),rarity:r,image_url:cr.img||""}; }
-function crOpp(posF){ const tier=cr.club.t, lo=[0,66,70,76,81,86][tier], hi=lo+9;
-  const pool=allCards.filter(c=>posF(drPos(c))&&drRating(c)>=lo&&drRating(c)<=hi); return pickOne(pool.length?pool:allCards.filter(c=>posF(drPos(c))))||allCards[0]; }
-/* --- événements de saison (choix) --- */
+/* adversaire : d'abord des inconnus, les vraies stars arrivent quand tu montes de niveau */
+function crOpp(posF){ const t=cr.club.t, tgt=crClamp(Math.round((cr.ovr+crLvl(t))/2+crI(-3,4)),52,97);
+  if(tgt>=72&&(t>=3||cr.age>=21)&&!cr.youth&&Math.random()<.8){ const pool=allCards.filter(c=>posF(drPos(c))&&Math.abs(drRating(c)-tgt)<=3); if(pool.length){ const c=pickOne(pool); return Object.assign({},c,{r:drRating(c)}); } }
+  const club=cr.youth?`la réserve de ${crPickClub(Math.max(1,t-1),cr.club.n)}`:crPickClub(t,cr.club.n);
+  return {id:-2,name:`${String.fromCharCode(65+crI(0,25))}.${pickOne(CR_LAST).toUpperCase()}`,rarity:tgt>=79?"legende":tgt>=73?"elite":tgt>=67?"rare":"commune",image_url:"",r:tgt,fake:1,club}; }
+const crWho=o=>`${esc(dispName(o))}${o.fake?` <small class="cr-sub">(${esc(o.club)})</small>`:""}`;
+/* --- points gagnés / perdus, affichés après chaque choix --- */
+const CR_D=[["ovr","Note"],["moral","Confiance"],["fame","Notoriété"],["form","Forme"],["games","matchs joués"],["g","but"],["a","passe déc."],["cs","clean sheet"]];
+function crSnap(){ return {ovr:cr.ovr,moral:cr.moral,fame:cr.fame,form:cr.form||0,games:cr.games,g:cr.g,a:cr.a,cs:cr.cs,inj:cr.inj,bench:cr.bench,club:cr.club.n,longev:cr.longev||0,cap:cr.cap}; }
+function crDiff(s){ cr.moral=crClamp(cr.moral,0,100); cr.fame=crClamp(cr.fame,0,100); cr.ovr=crClamp(cr.ovr,45,99); const out=[];
+  CR_D.forEach(([k,l])=>{ const v=Math.round(((k==="form"?cr.form||0:cr[k])-s[k])); if(v) out.push({v,t:`${v>0?"+":""}${v} ${l}${Math.abs(v)>1&&/^(but|passe|clean)/.test(l)?"s":""}`,good:v>0}); });
+  if(cr.inj>s.inj) out.push({v:-1,t:"Blessure",good:false}); if(cr.bench&&!s.bench) out.push({v:-1,t:"Sur le banc",good:false});
+  if(cr.club.n!==s.club) out.push({v:1,t:`Transfert : ${cr.club.n}`,good:true}); if((cr.longev||0)>s.longev) out.push({v:1,t:"+ longévité",good:true}); if(cr.cap&&!s.cap) out.push({v:1,t:"Capitaine",good:true});
+  return out; }
+const crChips=d=>d&&d.length?`<div class="cr-dl">${d.map(x=>`<span class="${x.good?"up":"dn"}">${esc(x.t)}</span>`).join("")}</div>`:"";
+/* --- événements (choix) --- cd = saisons avant de pouvoir revenir, once = une fois par carrière --- */
 const CR_EV=[
- {w:3,c:()=>cr.age<=21&&cr.club.t<5,t:()=>`${crPickClub(cr.club.t+1)} te propose un contrat, mais tu commencerais sur le banc.`,o:[["Signer chez le grand club",()=>{ const n=crPickClub(cr.club.t+1); crMove(n,cr.club.t+1); cr.bench=1; return `Tu signes à ${n}. Il va falloir gagner ta place.`; }],["Rester titulaire ici",()=>{ cr.moral+=5; cr.ovr+=1; return "Tu restes et tu joues tous les matchs. Bonne progression."; }]]},
- {w:3,c:()=>cr.age>=21&&cr.age<=31&&cr.ovr>=crLvl(cr.club.t)+3&&cr.club.t<5,t:()=>`Ton agent t'appelle : ${crPickClub(cr.club.t+1)} est prêt à payer cher pour toi.`,o:[["Forcer le transfert",()=>{ if(Math.random()<.75){ const n=crPickClub(cr.club.t+1); crMove(n,cr.club.t+1); cr.fame+=5; return `Transfert réussi : direction ${n} !`; } cr.moral-=12; return "Ton club refuse. Les supporters te sifflent pendant des semaines."; }],["Prolonger et devenir le patron",()=>{ cr.moral+=8; cr.cap=1; return "Tu prolonges. Le coach te donne le brassard."; }]]},
- {w:2,t:()=>"La veille d'un gros match, tes potes t'invitent à une soirée.",o:[["Y aller « juste une heure »",()=>{ if(Math.random()<.45){ cr.ovr-=1; cr.fame-=3; return "Photos sur les réseaux à 4 h du matin. Le coach te met sur le banc."; } cr.moral+=6; return "Personne n'a rien vu, et tu as passé une bonne soirée."; }],["Rester te reposer",()=>{ cr.form+=4; return "Tu es frais comme jamais. Homme du match le lendemain."; }]]},
- {w:2,t:()=>"Tu sens une douleur à la cuisse avant un match important.",o:[["Jouer quand même",()=>{ if(Math.random()<.4){ crInjure(2); return "Ça lâche à la 20e minute. Grosse blessure aux ischios."; } cr.fame+=4; return "Tu tiens le coup et tu fais un gros match. Le public adore."; }],["Prévenir le staff",()=>{ cr.games-=3; return "Repos de deux semaines. La douleur disparaît."; }]]},
- {w:2,t:()=>"Un nouveau coach arrive. Il veut te faire jouer à un autre poste.",o:[["Accepter",()=>{ if(Math.random()<.5){ cr.ovr+=2; return "Tu découvres une autre facette de ton jeu. Tu progresses."; } cr.moral-=6; return "Ça ne marche pas. Tu te sens perdu sur le terrain."; }],["Refuser et t'expliquer",()=>{ if(Math.random()<.5){ cr.moral+=4; return "Le coach comprend et te remet à ton poste."; } cr.bench=1; return "Le coach n'apprécie pas. Banc pour plusieurs semaines."; }]]},
- {w:2,t:()=>"Tes vacances d'été arrivent.",o:[["Préparateur physique perso",()=>{ cr.ovr+=crI(1,2); cr.moral-=3; return "Tu reviens affûté. +1 en vitesse, tout le staff le remarque."; }],["Vraies vacances en famille",()=>{ cr.moral+=10; return "Tu recharges les batteries."; }]]},
- {w:2,c:()=>cr.age<=24,t:()=>"Un agent très bavard te promet des millions si tu signes avec lui.",o:[["Signer avec lui",()=>{ if(Math.random()<.5){ cr.fame-=6; cr.moral-=8; return "Il te met en conflit avec ton club pour toucher sa commission."; } cr.fame+=4; return "Il te trouve un gros contrat publicitaire."; }],["Garder ton père comme agent",()=>{ cr.moral+=5; return "La famille d'abord. Tu restes serein."; }]]},
- {w:1,t:()=>"Un problème dans ta famille : un proche est malade au pays.",o:[["Rentrer quelques semaines",()=>{ cr.games-=6; cr.moral+=8; return "Tu es là quand il le faut. Tu reviens plus fort mentalement."; }],["Rester et jouer pour lui",()=>{ if(Math.random()<.5){ cr.fame+=6; return "Tu lui dédies un but. Image forte dans tout le pays."; } cr.moral-=10; return "Tu n'as pas la tête au foot. Saison compliquée."; }]]},
- {w:2,t:()=>"Polémique sur les réseaux : un ancien coéquipier te critique en interview.",o:[["Répondre sur Instagram",()=>{ if(Math.random()<.5){ cr.fame+=5; return "Ta réponse fait le buzz, les fans sont avec toi."; } cr.fame-=5; cr.moral-=4; return "Ça tourne au clash. Le club te demande de te calmer."; }],["Répondre sur le terrain",()=>{ cr.form+=3; return "Doublé le week-end suivant. Pas besoin de mots."; }]]},
- {w:2,c:()=>cr.ovr>=78,t:()=>`Le sélectionneur ${cr.nat==="France"?"des Bleus":`de ${cr.nat}`} t'appelle pour un rassemblement.`,o:[["Y aller, même fatigué",()=>{ cr.intl=1; cr.fame+=4; if(Math.random()<.15){ crInjure(1); return "Tu te blesses en sélection. Ton club est furieux."; } return "Première sélection ! Tu entres en fin de match."; }],["Demander à souffler",()=>{ cr.intl=0; cr.moral+=3; return "Le sélectionneur note ta décision… et t'oublie un temps."; }]]},
- {w:2,c:()=>cr.age>=31,t:()=>"Un club d'Arabie saoudite t'offre un salaire énorme.",o:[["Accepter le pactole",()=>{ crMove(pickOne(["Al-Nassr","Al-Hilal","Al-Ittihad"]),2); cr.fame-=4; cr.moral+=6; cr.exile=1; return "Tu pars au soleil. Ta carrière européenne est derrière toi."; }],["Rester au plus haut niveau",()=>{ cr.moral+=3; return "Tu veux encore gagner des titres."; }]]},
- {w:2,c:()=>cr.cap!==1&&cr.age>=24,t:()=>"Dispute avec la star de l'équipe à l'entraînement.",o:[["Tenir tête",()=>{ if(Math.random()<.5){ cr.cap=1; cr.fame+=3; return "Le vestiaire te respecte. Tu deviens un leader."; } cr.bench=1; return "Le coach prend le parti de la star. Banc."; }],["Faire la paix",()=>{ cr.moral+=2; return "Vous vous serrez la main. Le groupe est soudé."; }]]},
- {w:1,t:()=>"Tu peux faire un stage de récupération et de nutrition très strict.",o:[["Le faire à fond",()=>{ cr.longev=(cr.longev||0)+1; return "Ton corps te remerciera dans quelques années."; }],["Pas pour moi",()=>{ return "Tu continues comme avant."; }]]},
+ {w:3,c:()=>cr.youth,t:()=>"Premier jour au centre de formation. Le coach des jeunes te demande ce que tu veux travailler.",o:[["Ton point faible, même si c'est ingrat",()=>{ cr.ovr+=2; cr.moral-=3; return "Des heures de travail invisible. Tu progresses vraiment."; }],["Ton point fort, pour te faire remarquer",()=>{ cr.fame+=4; cr.ovr+=1; return "Tes gestes font le tour du centre. Les recruteurs ont noté ton nom."; }]]},
+ {w:3,c:()=>cr.youth,t:()=>"Ton école te met la pression : il faut réussir ton bac en même temps.",o:[["Assurer le bac",()=>{ cr.moral+=6; cr.form-=2; return "Bac en poche ! Tes parents sont fiers, mais tu as moins joué."; }],["Tout miser sur le foot",()=>{ cr.ovr+=1; cr.moral-=4; return "Tu rates l'examen. Le foot devient ta seule porte de sortie."; }]]},
+ {w:2,c:()=>cr.youth,t:()=>"Le coach de l'équipe pro t'invite à t'entraîner avec les grands pour une semaine.",o:[["Jouer sans complexe",()=>{ if(Math.random()<.55){ cr.fame+=5; cr.ovr+=1; return "Tu mets un petit pont au capitaine. Le coach sourit."; } cr.moral-=6; return "Un tacle d'un ancien te remet à ta place. Dur."; }],["Écouter et observer",()=>{ cr.ovr+=1; cr.moral+=3; return "Tu apprends énormément en regardant les pros."; }]]},
+ {w:3,c:()=>!cr.youth&&cr.age<=22&&cr.club.t<5,t:()=>{ cr.tmp=crPickClub(cr.club.t+1); return `${cr.tmp} te propose un contrat, mais tu commencerais sur le banc.`; },o:[["Signer chez le grand club",()=>{ crMove(cr.tmp,cr.club.t+1); cr.bench=1; return `Tu signes à ${cr.tmp}. Il va falloir gagner ta place.`; }],["Rester titulaire ici",()=>{ cr.moral+=5; cr.ovr+=1; return "Tu restes et tu joues tous les matchs. Bonne progression."; }]]},
+ {w:3,cd:3,c:()=>!cr.youth&&cr.age>=21&&cr.age<=31&&cr.ovr>=crLvl(cr.club.t)+3&&cr.club.t<5,t:()=>{ cr.tmp=crPickClub(cr.club.t+1); return `Ton agent t'appelle : ${cr.tmp} est prêt à payer cher pour toi.`; },o:[["Forcer le transfert",()=>{ if(Math.random()<.7){ crMove(cr.tmp,cr.club.t+1); cr.fame+=5; return `Transfert réussi : direction ${cr.tmp} !`; } cr.moral-=12; cr.fame-=3; return "Ton club refuse. Les supporters te sifflent pendant des semaines."; }],["Prolonger et devenir le patron",()=>{ cr.moral+=8; cr.cap=1; return "Tu prolonges. Le coach te donne le brassard."; }]]},
+ {w:2,c:()=>cr.bench&&cr.age<=24,t:()=>{ cr.tmp=crPickClub(Math.max(1,cr.club.t-1)); return `Tu joues peu. ${cr.tmp} propose de te prêter pour la saison.`; },o:[["Accepter le prêt",()=>{ cr.loan=cr.club; crMove(cr.tmp,Math.max(1,cr.club.t-1)); cr.bench=0; cr.games+=10; return `Prêté à ${cr.tmp}. Enfin du temps de jeu !`; }],["Rester et s'accrocher",()=>{ if(Math.random()<.4){ cr.bench=0; cr.moral+=6; return "Une blessure d'un titulaire t'ouvre la porte. Tu la saisis."; } cr.moral-=8; return "Toujours sur le banc. La frustration monte."; }]]},
+ {w:2,t:()=>"La veille d'un gros match, tes potes t'invitent à une soirée.",o:[["Y aller « juste une heure »",()=>{ if(Math.random()<.45){ cr.form-=4; cr.fame-=3; cr.bench=1; return "Photos sur les réseaux à 4 h du matin. Le coach te met sur le banc."; } cr.moral+=6; return "Personne n'a rien vu, et tu as passé une bonne soirée."; }],["Rester te reposer",()=>{ cr.form+=4; return "Tu es frais comme jamais. Homme du match le lendemain."; }]]},
+ {w:2,cd:3,c:()=>!cr.youth,t:()=>"Tu sens une douleur à la cuisse avant un match important.",o:[["Jouer quand même",()=>{ if(Math.random()<.4){ crInjure(2); return "Ça lâche à la 20e minute. Grosse blessure aux ischios."; } cr.fame+=4; return "Tu tiens le coup et tu fais un gros match. Le public adore."; }],["Prévenir le staff",()=>{ cr.games-=3; return "Repos de deux semaines. La douleur disparaît."; }]]},
+ {w:2,cd:5,c:()=>!cr.youth,t:()=>"Un nouveau coach arrive. Il veut te faire jouer à un autre poste.",o:[["Accepter",()=>{ if(Math.random()<.5){ cr.ovr+=2; return "Tu découvres une autre facette de ton jeu. Tu progresses."; } cr.moral-=6; return "Ça ne marche pas. Tu te sens perdu sur le terrain."; }],["Refuser et t'expliquer",()=>{ if(Math.random()<.5){ cr.moral+=4; return "Le coach comprend et te remet à ton poste."; } cr.bench=1; return "Le coach n'apprécie pas. Banc pour plusieurs semaines."; }]]},
+ {w:2,cd:3,t:()=>"Tes vacances d'été arrivent.",o:[["Préparateur physique perso",()=>{ cr.ovr+=crI(1,2); cr.moral-=3; return "Tu reviens affûté, tout le staff le remarque."; }],["Vraies vacances en famille",()=>{ cr.moral+=10; return "Tu recharges les batteries."; }]]},
+ {w:2,once:1,c:()=>cr.age<=23,t:()=>"Un agent très bavard te promet des millions si tu signes avec lui.",o:[["Signer avec lui",()=>{ if(Math.random()<.5){ cr.fame-=6; cr.moral-=8; return "Il te met en conflit avec ton club pour toucher sa commission."; } cr.fame+=4; return "Il te trouve un gros contrat publicitaire."; }],["Garder ton père comme agent",()=>{ cr.moral+=5; return "La famille d'abord. Tu restes serein."; }]]},
+ {w:1,once:1,c:()=>!cr.youth,t:()=>"Un problème dans ta famille : un proche est malade au pays.",o:[["Rentrer quelques semaines",()=>{ cr.games-=6; cr.moral+=8; return "Tu es là quand il le faut. Tu reviens plus fort mentalement."; }],["Rester et jouer pour lui",()=>{ if(Math.random()<.5){ cr.fame+=6; return "Tu lui dédies un but. Image forte dans tout le pays."; } cr.moral-=10; return "Tu n'as pas la tête au foot. Saison compliquée."; }]]},
+ {w:2,cd:4,c:()=>!cr.youth,t:()=>"Polémique sur les réseaux : un ancien coéquipier te critique en interview.",o:[["Répondre sur Instagram",()=>{ if(Math.random()<.5){ cr.fame+=5; return "Ta réponse fait le buzz, les fans sont avec toi."; } cr.fame-=5; cr.moral-=4; return "Ça tourne au clash. Le club te demande de te calmer."; }],["Répondre sur le terrain",()=>{ cr.form+=3; cr.g+=cr.pos==="A"?2:0; return "Gros match le week-end suivant. Pas besoin de mots."; }]]},
+ {w:2,cd:3,c:()=>cr.ovr>=76&&!cr.youth,t:()=>`Le sélectionneur ${cr.nat==="France"?"des Bleus":`de ${cr.nat}`} t'appelle pour un rassemblement.`,o:[["Y aller, même fatigué",()=>{ cr.intl=1; cr.fame+=4; if(Math.random()<.15){ crInjure(1); return "Tu te blesses en sélection. Ton club est furieux."; } return cr.sel?"Tu enchaînes une nouvelle sélection.":"Première sélection ! Tu entres en fin de match."; }],["Demander à souffler",()=>{ cr.intl=0; cr.moral+=3; return "Le sélectionneur note ta décision… et t'oublie un temps."; }]]},
+ {w:2,once:1,c:()=>cr.age>=31,t:()=>"Un club d'Arabie saoudite t'offre un salaire énorme.",o:[["Accepter le pactole",()=>{ crMove(pickOne(["Al-Nassr","Al-Hilal","Al-Ittihad"]),2); cr.fame-=4; cr.moral+=6; cr.exile=1; return "Tu pars au soleil. Ta carrière européenne est derrière toi."; }],["Rester au plus haut niveau",()=>{ cr.moral+=3; return "Tu veux encore gagner des titres."; }]]},
+ {w:2,cd:4,c:()=>!cr.cap&&cr.age>=24,t:()=>"Dispute avec la star de l'équipe à l'entraînement.",o:[["Tenir tête",()=>{ if(Math.random()<.5){ cr.cap=1; cr.fame+=3; return "Le vestiaire te respecte. Tu deviens un leader."; } cr.bench=1; return "Le coach prend le parti de la star. Banc."; }],["Faire la paix",()=>{ cr.moral+=2; return "Vous vous serrez la main. Le groupe est soudé."; }]]},
+ {w:1,once:1,c:()=>cr.age>=24,t:()=>"Tu peux faire un stage de récupération et de nutrition très strict.",o:[["Le faire à fond",()=>{ cr.longev=(cr.longev||0)+1; cr.moral-=3; return "Ton corps te remerciera dans quelques années."; }],["Pas pour moi",()=>{ cr.moral+=2; return "Tu continues comme avant."; }]]},
+ {w:2,cd:5,c:()=>!cr.youth,t:()=>"Le club recrute un concurrent direct à ton poste.",o:[["Redoubler d'efforts",()=>{ if(Math.random()<.6){ cr.ovr+=1; cr.form+=3; return "Tu gardes ta place. La concurrence t'a réveillé."; } cr.bench=1; return "Il est en feu. Tu passes sur le banc."; }],["Demander des garanties",()=>{ if(cr.ovr>=crLvl(cr.club.t)+2){ cr.moral+=4; return "Le coach te rassure : tu es son titulaire."; } cr.moral-=6; return "Le coach ne promet rien. Ambiance tendue."; }]]},
+ {w:2,once:1,c:()=>cr.age>=22&&cr.fame>=20,t:()=>"Deux marques veulent te sponsoriser.",o:[["La grande marque mondiale",()=>{ cr.fame+=6; cr.moral-=2; return "Affiches partout. La pression monte avec la notoriété."; }],["La petite marque de ta ville",()=>{ cr.moral+=6; return "Les gens de ton quartier sont fiers de toi."; }]]},
+ {w:1,once:1,c:()=>cr.age>=20,t:()=>"Des coéquipiers parient sur des matchs. Ils te proposent de jouer avec eux.",o:[["Refuser net",()=>{ cr.moral+=2; return "Tu restes loin de ça. Bonne décision."; }],["Juste une fois",()=>{ if(Math.random()<.5){ cr.games-=15; cr.fame-=12; cr.moral-=10; return "La fédération enquête. Suspension de plusieurs mois."; } cr.moral-=4; return "Personne ne l'apprend, mais tu dors mal."; }]]},
+ {w:1,once:1,c:()=>cr.age>=24&&cr.age<=32,t:()=>"Ton premier enfant naît… le jour d'un match décisif.",o:[["Être à la maternité",()=>{ cr.moral+=12; cr.games-=1; return "Le plus beau jour de ta vie. Le club comprend."; }],["Jouer puis filer à l'hôpital",()=>{ if(Math.random()<.5){ cr.fame+=6; return "Tu marques et tu fais le geste du biberon. Image culte."; } cr.moral-=8; return "Tu arrives trop tard. Tu le regretteras."; }]]},
+ {w:2,cd:4,c:()=>!cr.youth&&cr.pos!=="G",t:()=>"Le coach cherche un tireur de penalty.",o:[["Prendre la responsabilité",()=>{ if(Math.random()<.65){ cr.g+=crI(2,5); cr.fame+=3; return "Tu ne trembles pas. Plusieurs penaltys marqués cette saison."; } cr.moral-=7; return "Tu rates le premier. Les critiques pleuvent."; }],["Laisser un coéquipier",()=>{ return "Tu te concentres sur ton jeu."; }]]},
+ {w:2,cd:4,c:()=>!cr.youth&&cr.inj>0,t:()=>"Après ta dernière blessure, le staff te propose une rééducation longue.",o:[["Rééducation complète",()=>{ cr.games-=5; cr.longev=(cr.longev||0)+1; return "Tu reviens plus lentement, mais solide."; }],["Revenir au plus vite",()=>{ if(Math.random()<.35){ crInjure(2); return "Rechute. Le genou lâche à nouveau."; } cr.games+=4; return "Retour express et sans douleur."; }]]},
+ {w:1,once:1,c:()=>cr.age>=29,t:()=>"Un jeune du centre de formation te demande de le prendre sous ton aile.",o:[["Devenir son mentor",()=>{ cr.moral+=6; cr.fame+=2; return "Il te ressemble. Le vestiaire te voit comme un grand frère."; }],["Rester concentré sur toi",()=>{ cr.form+=2; return "Tu restes focus sur tes objectifs."; }]]},
+ {w:2,cd:4,c:()=>!cr.youth&&cr.fame>=25,t:()=>"Un journaliste te tend un piège en interview sur ton coach.",o:[["Dire ce que tu penses",()=>{ if(Math.random()<.5){ cr.bench=1; cr.fame+=2; return "Le titre fait la une. Le coach te met à l'écart."; } cr.fame+=4; return "Ta franchise plaît au public."; }],["Langue de bois",()=>{ cr.moral+=1; return "Rien à signaler. Le club apprécie."; }]]},
 ];
 function crMove(name,t){ cr.club={n:name,t}; cr.clubs.push(name); }
 function crInjure(sev){ cr.inj++; if(sev===1){ cr.games-=8; return; } if(sev===2){ cr.games-=20; cr.ovr-=crI(1,3); return; } cr.over="injury"; }
-/* --- scènes de match (avec les cartes du jeu) --- */
-function crScene(){ const me=crCard(), p=cr.pos;
-  if(p==="G"){ const a=crOpp(x=>x==="A"); cr.sc={k:"pen",opp:a}; return `<div class="cr-q"><span class="dr-k">Penalty · ${esc(cr.club.n)}</span><h4>${esc(dispName(a))} pose le ballon. Tout le stade retient son souffle.</h4>${tkScene(a,me,false)}<div class="dr-goal keep"><button onclick="crAct(0)">Gauche</button><button onclick="crAct(1)">Milieu</button><button onclick="crAct(2)">Droite</button></div></div>`; }
-  if(p==="D"){ const a=crOpp(x=>x==="A"); cr.sc={k:"def",opp:a}; return `<div class="cr-q"><span class="dr-k">Contre-attaque adverse</span><h4>${esc(dispName(a))} fonce vers ton but, tu es le dernier défenseur.</h4>${crDuelHTML(me,a)}<div class="dr-btns"><button class="dr-b" onclick="crAct('tacle')"><b>Tacle glissé</b><small>Risqué mais spectaculaire</small></button><button class="dr-b" onclick="crAct('tempo')"><b>Temporiser</b><small>Le pousser vers l'extérieur</small></button><button class="dr-b" onclick="crAct('faute')"><b>Faute tactique</b><small>Carton jaune assuré</small></button></div></div>`; }
+/* --- scènes de match avec les cartes du jeu --- */
+function crScene(){ const me=crCard(), p=cr.pos, lab=cr.youth?"Match de la réserve":`${esc(cr.club.n)} · match de championnat`;
+  if(p==="G"){ const a=crOpp(x=>x==="A"); cr.sc={k:"pen",opp:a}; return `<div class="cr-q"><span class="dr-k">${lab} · penalty</span><h4>${crWho(a)} pose le ballon. Tout le stade retient son souffle.</h4>${tkScene(a,me,false)}<div class="dr-goal keep"><button onclick="crAct(0)">Gauche</button><button onclick="crAct(1)">Milieu</button><button onclick="crAct(2)">Droite</button></div></div>`; }
+  if(p==="D"){ const a=crOpp(x=>x==="A"); cr.sc={k:"def",opp:a}; return `<div class="cr-q"><span class="dr-k">${lab} · contre-attaque adverse</span><h4>${crWho(a)} <small class="cr-r">${crR8(a)}</small> fonce vers ton but, tu es le dernier défenseur.</h4>${crDuelHTML(me,a)}<div class="dr-btns"><button class="dr-b" onclick="crAct('tacle')"><b>Tacle glissé</b><small>Risqué mais spectaculaire</small></button><button class="dr-b" onclick="crAct('tempo')"><b>Temporiser</b><small>Le pousser vers l'extérieur</small></button><button class="dr-b" onclick="crAct('faute')"><b>Faute tactique</b><small>Carton jaune assuré</small></button></div></div>`; }
   const d=crOpp(x=>x==="D"); cr.sc={k:"att",opp:d};
-  return `<div class="cr-q"><span class="dr-k">${p==="M"?"Ballon à 25 mètres":"Face au défenseur"}</span><h4>${esc(dispName(d))} se dresse devant toi.</h4>${crDuelHTML(me,d)}<div class="dr-btns"><button class="dr-b" onclick="crAct('drib')"><b>Dribbler</b><small>Crochet, petit pont…</small></button><button class="dr-b" onclick="crAct('tir')"><b>Frapper</b><small>${p==="M"?"Frappe de loin":"Tenter ta chance"}</small></button><button class="dr-b" onclick="crAct('passe')"><b>Passe décisive</b><small>Servir un coéquipier</small></button></div></div>`; }
+  return `<div class="cr-q"><span class="dr-k">${lab} · ${p==="M"?"ballon à 25 mètres":"face au défenseur"}</span><h4>${crWho(d)} <small class="cr-r">${crR8(d)}</small> se dresse devant toi.</h4>${crDuelHTML(me,d)}<div class="dr-btns"><button class="dr-b" onclick="crAct('drib')"><b>Dribbler</b><small>Crochet, petit pont…</small></button><button class="dr-b" onclick="crAct('tir')"><b>Frapper</b><small>${p==="M"?"Frappe de loin":"Tenter ta chance"}</small></button><button class="dr-b" onclick="crAct('passe')"><b>Passe décisive</b><small>Servir un coéquipier</small></button></div></div>`; }
 function crDuelHTML(me,o){ return `<div class="cd-sc"><div class="cd-p">${tkTok(o,"cd-op")}${tkTok(me,"cd-me")}<i class="cd-ball"></i></div><div class="tk-txt cd-t"></div></div>`; }
 async function crDuel(kind,win){ const S=document.querySelector(".cd-sc"); if(!S) return; const M=S.querySelector(".cd-me"), O=S.querySelector(".cd-op"), Bl=S.querySelector(".cd-ball"), T=S.querySelector(".cd-t");
-  const go=(el,k,d,e)=>el.animate(k,{duration:d,easing:e||"cubic-bezier(.3,.1,.2,1)",fill:"forwards"}).finished.catch(()=>{});
+  const go=(el,k,d,e)=>el.animate(k,{duration:d*1.7,easing:e||"cubic-bezier(.3,.1,.2,1)",fill:"forwards"}).finished.catch(()=>{});
+  await anWait(500);
   if(kind==="drib"){ if(win){ await Promise.all([go(M,[{left:"30%",top:"72%"},{left:"58%",top:"52%"},{left:"40%",top:"30%"},{left:"52%",top:"10%"}],1000),go(Bl,[{left:"34%",top:"66%"},{left:"62%",top:"47%"},{left:"44%",top:"25%"},{left:"54%",top:"6%"}],1000),go(O,[{transform:"translate(-50%,-50%)"},{transform:"translate(-10%,-50%) rotate(25deg)"}],500)]); T.textContent="PASSÉ !"; T.className="tk-txt cd-t show goal"; sCrowd(.6); }
     else { await go(M,[{left:"30%",top:"72%"},{left:"46%",top:"52%"}],500); await Promise.all([go(O,[{left:"50%",top:"40%"},{left:"46%",top:"50%"}],250),go(Bl,[{left:"34%",top:"66%"},{left:"80%",top:"70%"}],500,"ease-out")]); sGlove(); T.textContent="TACLÉ"; T.className="tk-txt cd-t show miss"; sCrowd(.4,true); } }
   if(kind==="tacle"){ await go(O,[{left:"50%",top:"30%"},{left:"40%",top:"55%"}],450); await go(M,[{left:"30%",top:"72%",transform:"translate(-50%,-50%)"},{left:"40%",top:"58%",transform:"translate(-50%,-50%) rotate(-60deg)"}],260,"ease-in"); thud();
     if(win){ await Promise.all([go(Bl,[{left:"50%",top:"38%"},{left:"10%",top:"80%"}],420,"ease-out"),go(O,[{transform:"translate(-50%,-50%)"},{transform:"translate(-50%,-50%) rotate(80deg)"}],350)]); T.textContent="PROPRE !"; T.className="tk-txt cd-t show goal"; sCrowd(.6); }
     else { await go(Bl,[{left:"50%",top:"38%"},{left:"60%",top:"88%"}],420); T.textContent="RATÉ"; T.className="tk-txt cd-t show miss"; sCrowd(.4,true); } }
-  await anWait(700); }
-async function crAct(a){ if(!cr||cr.busy) return; cr.busy=true; const sc=cr.sc, o=sc.opp, r=drRating(o), lvl=cr.ovr+(cr.form||0)*.5; let txt="";
+  await anWait(1300); }
+async function crAct(a){ if(!cr||cr.busy) return; cr.busy=true; const sc=cr.sc, o=sc.opp, r=crR8(o), lvl=cr.ovr+(cr.form||0)*.5, snap=crSnap(); let txt="";
   document.querySelectorAll(".cr-q button").forEach(b=>b.disabled=true);
-  if(sc.k==="pen"){ const sh=Math.random()<.42?0:Math.random()<.3?1:2, save=a===sh&&Math.random()<.55+(lvl-r)/80; await tkShoot(document.querySelector(".cr-q .tk-sc"),{shot:sh,keep:a,goal:!save}); if(save){ cr.fame+=4; cr.big=(cr.big||0)+1; txt=`Arrêt décisif face à ${dispName(o)} !`; } else txt=`${dispName(o)} te prend à contre-pied.`; }
-  else if(sc.k==="def"){ if(a==="tacle"){ const p=.45+(lvl-r)/50, ok=Math.random()<p; await crDuel("tacle",ok);
-      if(ok){ cr.fame+=3; cr.big=(cr.big||0)+1; txt=`Tacle parfait sur ${dispName(o)}. Le stade se lève.`; if(Math.random()<.06){ cr.fame-=8; cr.moral-=15; txt=`Ton tacle est trop appuyé : ${dispName(o)} sort sur civière. Les médecins parlent d'une fin de carrière. Tu es suspendu et harcelé sur les réseaux.`; cr.games-=6; cr.dark=(cr.dark||[]).concat(dispName(o)); } }
-      else { if(Math.random()<.35){ cr.games-=3; txt="Tu arrives en retard : carton rouge direct."; } else txt=`${dispName(o)} saute par-dessus ton tacle et file au but.`; } }
-    else if(a==="tempo"){ const ok=Math.random()<.55+(lvl-r)/70; await crDuel("tacle",ok); txt=ok?`Tu pousses ${dispName(o)} vers la ligne, il perd le ballon.`:`${dispName(o)} accélère et te laisse sur place.`; if(ok) cr.big=(cr.big||0)+.5; }
-    else { await crDuel("tacle",true); txt="Faute tactique, carton jaune. Danger écarté."; } }
-  else { if(a==="drib"){ const ok=Math.random()<.45+(lvl-r)/45; await crDuel("drib",ok); if(ok){ cr.g++; cr.fame+=4; cr.big=(cr.big||0)+1; txt=`Tu élimines ${dispName(o)} et tu conclus. But magnifique !`; } else txt=`${dispName(o)} lit ton dribble et récupère le ballon.`; }
-    else if(a==="tir"){ const gk=crOpp(x=>x==="G"), ok=Math.random()<.35+(lvl-drRating(gk))/45; $("cr-sc").innerHTML=`<div class="cr-q"><span class="dr-k">Frappe</span>${tkScene(crCard(),gk,true)}</div>`; await anWait(350); await tkShoot(document.querySelector(".cr-q .tk-sc"),{shot:crI(0,2),keep:crI(0,2),goal:ok}); if(ok){ cr.g++; cr.fame+=3; cr.big=(cr.big||0)+1; txt=`Frappe imparable, ${dispName(gk)} n'a rien pu faire !`; } else txt=`${dispName(gk)} s'interpose.`; }
-    else { const ok=Math.random()<.6+(lvl-r)/80; await crDuel("drib",ok); if(ok){ cr.a++; cr.big=(cr.big||0)+.5; txt="Passe millimétrée, ton coéquipier marque !"; } else txt="Passe interceptée."; } }
-  cr.log.unshift(`<b>${cr.age} ans</b> ${esc(txt)}`); cr.last=txt; cr.busy=false; cr.step++; crSeason(); if(cr.over) return crEnd(); crRender(); }
-/* --- bilan de la saison --- */
-function crSeason(){ const t=cr.club.t, lvl=crLvl(t), start=cr.bench?.45:cr.ovr>=lvl+2?1:cr.ovr>=lvl-3?.8:.5; let games=Math.round(crClamp(38*start+cr.games,4,52)); cr.games=0; cr.bench=0;
-  if(Math.random()<.13-(cr.longev||0)*.04+(cr.age>31?.06:0)){ const s=Math.random(); if(s<.025&&cr.age>=22){ crInjure(3); } else if(s<.4){ crInjure(2); games=Math.round(games*.5); cr.events.push("Grosse blessure : plusieurs mois d'absence."); } else { crInjure(1); games-=6; cr.events.push("Petite blessure, quelques matchs ratés."); } }
+  if(sc.k==="pen"){ const sh=Math.random()<.42?0:Math.random()<.3?1:2, save=a===sh&&Math.random()<.55+(lvl-r)/80; await anWait(600); await tkShoot(document.querySelector(".cr-q .tk-sc"),{shot:sh,keep:a,goal:!save}); await anWait(1400);
+    if(save){ cr.fame+=4; cr.moral+=3; cr.big=(cr.big||0)+1; cr.cs++; txt=`Arrêt décisif face à ${dispName(o)} !`; } else { cr.moral-=2; txt=`${dispName(o)} te prend à contre-pied.`; } }
+  else if(sc.k==="def"){ if(a==="tacle"){ const ok=Math.random()<.45+(lvl-r)/50; await crDuel("tacle",ok);
+      if(ok){ cr.fame+=3; cr.moral+=3; cr.big=(cr.big||0)+1; txt=`Tacle parfait sur ${dispName(o)}. Le stade se lève.`; if(!o.fake&&Math.random()<.06){ cr.fame-=8; cr.moral-=15; txt=`Ton tacle est trop appuyé : ${dispName(o)} sort sur civière. Les médecins parlent d'une fin de carrière. Tu es suspendu et harcelé sur les réseaux.`; cr.games-=6; cr.dark=(cr.dark||[]).concat(dispName(o)); } }
+      else { if(Math.random()<.35){ cr.games-=3; cr.moral-=4; txt="Tu arrives en retard : carton rouge direct."; } else { cr.moral-=2; txt=`${dispName(o)} saute par-dessus ton tacle et file au but.`; } } }
+    else if(a==="tempo"){ const ok=Math.random()<.55+(lvl-r)/70; await crDuel("tacle",ok); if(ok){ cr.big=(cr.big||0)+.5; cr.form+=2; txt=`Tu pousses ${dispName(o)} vers la ligne, il perd le ballon.`; } else { cr.moral-=2; txt=`${dispName(o)} accélère et te laisse sur place.`; } }
+    else { await crDuel("tacle",true); cr.form-=1; txt="Faute tactique, carton jaune. Danger écarté."; } }
+  else { if(a==="drib"){ const ok=Math.random()<.45+(lvl-r)/45; await crDuel("drib",ok); if(ok){ cr.g++; cr.fame+=4; cr.moral+=3; cr.big=(cr.big||0)+1; txt=`Tu élimines ${dispName(o)} et tu conclus. But magnifique !`; } else { cr.moral-=2; txt=`${dispName(o)} lit ton dribble et récupère le ballon.`; } }
+    else if(a==="tir"){ const gk=crOpp(x=>x==="G"), ok=Math.random()<.35+(lvl-crR8(gk))/45; $("cr-sc").innerHTML=`<div class="cr-q"><span class="dr-k">Frappe · face à ${crWho(gk)}</span>${tkScene(crCard(),gk,true)}</div>`; await anWait(1200); await tkShoot(document.querySelector(".cr-q .tk-sc"),{shot:crI(0,2),keep:crI(0,2),goal:ok}); await anWait(1500);
+      if(ok){ cr.g++; cr.fame+=3; cr.moral+=3; cr.big=(cr.big||0)+1; txt=`Frappe imparable, ${dispName(gk)} n'a rien pu faire !`; } else { cr.moral-=1; txt=`${dispName(gk)} s'interpose.`; } }
+    else { const ok=Math.random()<.6+(lvl-r)/80; await crDuel("drib",ok); if(ok){ cr.a++; cr.moral+=2; cr.big=(cr.big||0)+.5; txt="Passe millimétrée, ton coéquipier marque !"; } else { cr.moral-=1; txt="Passe interceptée."; } } }
+  cr.busy=false; crResult(txt,crDiff(snap)); }
+/* --- résultat d'une étape : texte + points, puis Continuer --- */
+function crResult(txt,d){ cr.log.unshift(`<b>${cr.age} ans</b><span>${esc(txt)}</span>`); cr.res={txt,d}; crRender(); }
+function crCont(){ cr.res=null; cr.step++; if(cr.over) return crEnd(); if(cr.step>=cr.queue.length){ crSeason(); if(cr.over) return crEnd(); } crRender(); }
+function crChoose(i){ const q=cr.queue[cr.step]; if(!q||cr.res) return; const snap=crSnap(); const res=q.e.o[i][1](); cr.used[q.id]=cr.season; crResult(res,crDiff(snap)); }
+/* --- compétitions : on joue les tours un par un --- */
+function crCup(name,labels,firstP,P,opps,trophy){ const n=labels.length, kq=crClamp(Math.pow(Math.max(.005,P)/firstP.reduce((a,b)=>a*b,1),1/(n-firstP.length)),.3,.92), rounds=[];
+  for(let i=0;i<n;i++){ const p=i<firstP.length?firstP[i]:kq, win=Math.random()<p, tab=Math.random()<.14; let a,b;
+    if(tab){ a=b=crI(0,2); } else if(win){ a=crI(1,3); b=crI(0,a-1); } else { b=crI(1,3); a=crI(0,b-1); }
+    const me=win&&cr.pos!=="G"&&Math.random()<(cr.pos==="A"?.4:cr.pos==="M"?.25:.08);
+    rounds.push({l:labels[i],o:pickOne(opps),s:`${a} – ${b}${tab?(win?" (t.a.b.)":" (t.a.b.)"):""}`,win,me});
+    if(!win) break; }
+  const won=rounds.length===n&&rounds[n-1].win; if(won) cr.tr[trophy]++; return {name,rounds,won}; }
+function crSeason(){ const t=cr.club.t, lvl=crLvl(t), y=cr.youth, start=y?.6:cr.bench?.45:cr.ovr>=lvl+2?1:cr.ovr>=lvl-3?.8:.5, ov0=cr.ov0||cr.ovr; let games=y?0:Math.round(crClamp(38*start+cr.games,4,52)); cr.games=0;
+  const S={club:cr.club.n,age:cr.age,ev:[],cups:[],bo:null,youth:y}; cr.sum=S;
+  if(!y&&Math.random()<.12-(cr.longev||0)*.04+(cr.age>31?.06:0)){ const s=Math.random(); if(s<.025&&cr.age>=22){ crInjure(3); } else if(s<.4){ crInjure(2); games=Math.round(games*.5); S.ev.push("Grosse blessure : plusieurs mois d'absence."); } else { crInjure(1); games-=6; S.ev.push("Petite blessure, quelques matchs ratés."); } }
   if(cr.over) return;
-  const g=cr.pos==="A"?games*crClamp((cr.ovr-55)/70,.05,.75):cr.pos==="M"?games*crClamp((cr.ovr-60)/150,.02,.3):cr.pos==="D"?games*.04:0, a=cr.pos==="M"?games*crClamp((cr.ovr-55)/100,.05,.4):cr.pos==="A"?games*.15:games*.03;
-  cr.m+=games; cr.g+=Math.round(g*crR(.75,1.25)); cr.a+=Math.round(a*crR(.75,1.25)); if(cr.pos==="G") cr.cs+=Math.round(games*crClamp((cr.ovr-55)/90,.1,.45));
-  const k=crClamp((cr.ovr-lvl)/20+.5,.15,1.2)*(1+(cr.form||0)/40);
-  if(!cr.exile){ const lg=[0,.01,.05,.15,.22,.45][t]*k; if(Math.random()<lg){ cr.tr.lig++; cr.events.push("🏆 Champion !"); }
-    if(Math.random()<[0,.04,.08,.12,.15,.2][t]*k){ cr.tr.cup++; cr.events.push("🏆 Coupe nationale !"); }
-    if(t>=3&&Math.random()<[0,0,0,.03,.07,.17][t]*k){ cr.tr.ldc++; cr.fame+=10; cr.events.push("🏆 LIGUE DES CHAMPIONS !"); } }
-  else if(Math.random()<.35){ cr.tr.lig++; cr.events.push("🏆 Champion (Saudi Pro League)"); }
-  const year=cr.y0+cr.season; cr.intl=cr.ovr>=79?1:cr.intl&&cr.ovr>=76?1:0;
-  if(cr.intl){ cr.sel+=crI(4,10); const st=CR_NAT[cr.nat]||.5;
-    if(year%4===2){ const p=st*.18*(cr.ovr>=86?1.3:1); if(Math.random()<p){ cr.tr.cdm++; cr.fame+=20; cr.events.push(`🌍 CHAMPION DU MONDE avec ${cr.nat} !`); } else cr.events.push(`Coupe du monde avec ${cr.nat} : éliminé.`); }
-    if(year%4===0&&CR_EURO.includes(cr.nat)){ if(Math.random()<st*.2){ cr.tr.euro++; cr.fame+=10; cr.events.push("🏆 Champion d'Europe des nations !"); } } }
-  const bo=cr.ovr>=89?((cr.ovr-88)*.06+(cr.events.some(e=>/LIGUE DES|MONDE/.test(e))?.3:0)+(cr.pos==="A"?.08:cr.pos==="M"?.04:-.08)+(cr.big||0)*.03):0;
-  if(Math.random()<bo){ cr.tr.bo++; cr.fame+=15; cr.events.push("⭐ BALLON D'OR !"); } cr.big=0;
+  if(!y){ const g=cr.pos==="A"?games*crClamp((cr.ovr-55)/70,.05,.75):cr.pos==="M"?games*crClamp((cr.ovr-60)/150,.02,.3):cr.pos==="D"?games*.04:0, a=cr.pos==="M"?games*crClamp((cr.ovr-55)/100,.05,.4):cr.pos==="A"?games*.15:games*.03;
+    cr.m+=games; cr.g+=Math.round(g*crR(.75,1.25)); cr.a+=Math.round(a*crR(.75,1.25)); if(cr.pos==="G") cr.cs+=Math.round(games*crClamp((cr.ovr-55)/90,.1,.45));
+    const k=crClamp((cr.ovr-lvl)/20+.5,.15,1.2)*(1+(cr.form||0)/40);
+    if(!cr.exile){ if(Math.random()<[0,.01,.05,.15,.22,.45][t]*k){ cr.tr.lig++; S.ev.push("🏆 Champion !"); }
+      if(Math.random()<[0,.04,.08,.12,.15,.2][t]*k){ cr.tr.cup++; S.ev.push("🏆 Coupe nationale !"); }
+      if(t>=3&&Math.random()<[0,0,0,.5,.8,.95][t]){ S.cups.push(crCup("Ligue des Champions",["Phase de ligue","8e de finale","Quart de finale","Demi-finale","Finale"],[[0,0,0,.5,.65,.8][t]],[0,0,0,.03,.07,.17][t]*k*1.4,CR_CLUBS[4].concat(CR_CLUBS[5],CR_CLUBS[3]).filter(x=>x!==cr.club.n),"ldc")); } }
+    else if(Math.random()<.35){ cr.tr.lig++; S.ev.push("🏆 Champion (Saudi Pro League)"); }
+    const year=cr.y0+cr.season; cr.intl=cr.ovr>=79?1:cr.intl&&cr.ovr>=76?1:0;
+    if(cr.intl){ cr.sel+=crI(4,10); const st=CR_NAT[cr.nat]||.5, opp=CR_NT.filter(x=>x!==cr.nat);
+      if(year%4===2) S.cups.push(crCup(`Coupe du monde ${year}`,["Qualifications","Phase de groupes","8e de finale","Quart de finale","Demi-finale","Finale"],[.55+st*.45,.5+st*.45],st*.2*(cr.ovr>=86?1.3:1),opp,"cdm"));
+      if(year%4===0&&CR_EURO.includes(cr.nat)) S.cups.push(crCup(`Euro ${year}`,["Phase de groupes","8e de finale","Quart de finale","Demi-finale","Finale"],[.55+st*.4],st*.22,CR_EUNT.filter(x=>x!==cr.nat),"euro")); }
+    S.cups.forEach(c=>{ cr.fame+=c.won?(c.name.startsWith("Coupe du")?20:10):c.rounds.length>=4?3:0; });
+    if(cr.ovr>=86){ const pts=(cr.ovr-86)*.9+(S.cups.some(c=>c.won)?4:0)+(cr.pos==="A"?1.5:cr.pos==="M"?.8:-1.5)+(cr.big||0)*.6+crR(-2,2.5); const rank=pts>=7?1:pts>=5?2:pts>=3.5?3:pts>=1.5?crI(4,10):crI(11,30);
+      S.bo=rank; if(rank===1){ cr.tr.bo++; cr.fame+=15; } } }
+  else S.ev.push("Saison au centre de formation : tu signes ton premier contrat pro !");
+  cr.big=0;
   /* progression */
-  const a0=cr.age, gr=a0<=21?crR(1.5,4.5):a0<=25?crR(0,3):a0<=29?crR(-.8,1.2):a0<=32?-crR(1,3)+(cr.longev||0)*.6:-crR(2,4.5)+(cr.longev||0)*.6;
+  const a0=cr.age, gr=a0<=21?crR(1.5,4.5)+(y?cr.club.t*.35:0):a0<=25?crR(0,3):a0<=29?crR(-.8,1.2):a0<=32?-crR(1,3)+(cr.longev||0)*.6:-crR(2,4.5)+(cr.longev||0)*.6;
   cr.ovr=crClamp(Math.round(cr.ovr+gr*(gr>0?crClamp((cr.pot-cr.ovr)/8,0,1.2):1)+(cr.moral-60)/40),45,Math.max(cr.ovr,cr.pot+1)); cr.peak=Math.max(cr.peak,cr.ovr);
   cr.moral=crClamp(cr.moral+crR(-4,4),10,100); cr.form=0; cr.fame=crClamp(cr.fame,0,100);
-  cr.hist.push({age:cr.age,club:cr.club.n,ovr:cr.ovr,m:games}); cr.age++; cr.season++;
+  S.games=games; S.d=[]; const dv=cr.ovr-ov0; if(dv) S.d.push({v:dv,t:`${dv>0?"+":""}${dv} Note sur la saison`,good:dv>0});
+  if(cr.loan&&!y){ crMove(cr.loan.n,cr.loan.t); S.ev.push(`Fin du prêt : retour à ${cr.loan.n}.`); cr.loan=null; }
+  cr.bench=!y&&cr.ovr<lvl-6&&cr.club.t>=3?1:0;
+  cr.hist.push({age:cr.age,club:S.club,ovr:cr.ovr,m:games}); cr.age++; cr.season++; cr.youth=0;
   if(cr.age>=38||(cr.age>=33&&(cr.ovr<66||Math.random()<.18))) cr.over="age"; }
 function crScore(){ const T=cr.tr; return Math.round(crClamp((cr.peak-60)*1.05+T.bo*12+T.ldc*5+T.cdm*9+T.euro*4+T.lig*1.6+T.cup*.8+cr.g/25+cr.a/40+cr.cs/30+cr.sel/25+cr.fame/12-(cr.dark?cr.dark.length*3:0),0,100)); }
+/* --- musique (fichier career.mp3 à la racine du site, facultatif) --- */
+let crMus=null;
+function crMusic(on){ try{ if(!on||muted){ if(crMus){ const m=crMus; crMus=null; let v=m.volume; const f=setInterval(()=>{ v-=.04; if(v<=0){ clearInterval(f); m.pause(); } else m.volume=v; },60); } return; }
+  if(crMus) return; crMus=new Audio("career.mp3"); crMus.loop=true; crMus.volume=0; crMus.addEventListener("error",()=>{ crMus=null; }); const p=crMus.play(); if(p&&p.catch) p.catch(()=>{});
+  let v=0; const f=setInterval(()=>{ if(!crMus){ clearInterval(f); return; } v=Math.min(.32,v+.02); crMus.volume=v; if(v>=.32) clearInterval(f); },80); }catch(e){} }
 /* --- écrans --- */
-function careerRender(){ const B=$("gx-body"); if(!B) return; if(cr&&!cr.done) return crRender();
+function careerRender(){ const B=$("gx-body"); if(!B) return; if(cr&&!cr.done){ crMusic(true); return crRender(); }
   const nats=Object.keys(CR_NAT);
-  B.innerHTML=`${gxBack}<div class="cr"><div class="sy-hd"><span class="dr-k">Mode Carrière · solo</span><h3>Ma carrière</h3><p>Tu es un jeune de 17 ans dans un petit club. À toi de faire les bons choix : transferts, blessures, soirées, polémiques… À la fin, un bilan avec ta note sur 100, tes trophées et tes Ballons d'Or. Petite récompense en ballons (3 carrières par jour).</p></div>
-    <div class="cr-new"><label>Ton nom<input id="cr-name" maxlength="16" value="${esc((profile.username||"Joueur").slice(0,16))}"></label>
-      <label>Ton pays<select id="cr-nat">${nats.map(n=>`<option ${n==="France"?"selected":""}>${n}</option>`).join("")}</select></label>
-      <div class="cr-pos">${Object.entries(CR_POS).map(([k,v])=>`<button class="ghost ${k==="A"?"on":""}" data-p="${k}" onclick="document.querySelectorAll('.cr-pos button').forEach(b=>b.classList.toggle('on',b===this))">${v}</button>`).join("")}</div>
+  B.innerHTML=`<div class="cr"><div class="sy-hd"><span class="dr-k">Mode Carrière · solo</span><h3>Ma carrière</h3><p>Tu as 16 ans et tu entres au centre de formation. À toi de faire les bons choix : transferts, blessures, soirées, polémiques… À la fin, un bilan avec ta note sur 100, tes trophées et tes Ballons d'Or. Petite récompense en ballons (3 carrières par jour).</p></div>
+    <div class="cr-new"><div class="cr-2"><label>Ton nom<input id="cr-name" maxlength="16" value="${esc((profile.username||"Joueur").slice(0,16))}"></label>
+      <label>Ton pays<select id="cr-nat">${nats.map(n=>`<option ${n==="France"?"selected":""}>${n}</option>`).join("")}</select></label></div>
+      <span class="cr-lab">Ton poste</span><div class="cr-pos">${Object.entries(CR_POS).map(([k,v])=>`<button class="ghost ${k===crNew.pos?"on":""}" data-p="${k}" onclick="crNew.pos='${k}';document.querySelectorAll('.cr-pos button').forEach(b=>b.classList.toggle('on',b===this))">${v}</button>`).join("")}</div>
+      <span class="cr-lab">Ton centre de formation</span>
+      <div class="cr-clubs">${CR_CLUBS.map((L,t)=>t?`<div class="cr-tier"><div class="cr-th"><b>${"★".repeat(t)}<i>${"★".repeat(5-t)}</i></b><span>${CR_TIER[t]}</span><small>${CR_TIER_D[t]}</small></div><div class="cr-cl">${L.map(n=>`<button class="ghost ${crNew.club===n?"on":""}" onclick="crNew.club='${n.replace(/'/g,"\\'")}';crNew.t=${t};document.querySelectorAll('.cr-cl button').forEach(b=>b.classList.toggle('on',b===this))">${esc(n)}</button>`).join("")}</div></div>`:"").join("")}</div>
       <button class="go bigbtn" onclick="crStart()">Commencer ma carrière</button></div></div>`; }
-async function crStart(){ const r=await rpc("career_start"); const nm=($("cr-name").value||"Joueur").trim().slice(0,16), pos=(document.querySelector(".cr-pos .on")||{}).dataset.p||"A";
-  const pot=Math.round(68+27*Math.pow(Math.random(),1.7)), ovr=Math.round(crR(56,62)), t=1;
-  cr={id:r&&r.data.id,t0:Date.now(),img:(profile&&profile.avatar_url)||"",name:nm,nat:$("cr-nat").value,pos,age:17,ovr,peak:ovr,pot,moral:65,fame:5,form:0,games:0,club:{n:crPickClub(t),t},clubs:[],m:0,g:0,a:0,cs:0,sel:0,inj:0,tr:{lig:0,cup:0,ldc:0,cdm:0,euro:0,bo:0},log:[],hist:[],events:[],season:0,y0:new Date().getFullYear(),step:0,intl:0};
-  cr.clubs.push(cr.club.n); cr.log.unshift(`<b>17 ans</b> Tu signes ton premier contrat pro à ${esc(cr.club.n)}.`); crNextEvents(); crRender(); }
-function crNextEvents(){ const pool=CR_EV.filter(e=>!e.c||e.c()); const pick=[]; while(pick.length<2&&pool.length){ const tot=pool.reduce((a,e)=>a+e.w,0); let x=Math.random()*tot, i=0; for(;i<pool.length;i++){ x-=pool[i].w; if(x<=0) break; } pick.push(pool.splice(Math.min(i,pool.length-1),1)[0]); }
-  cr.queue=pick.map(e=>({e,txt:e.t()})); cr.events=[]; cr.step=0; cr.last=""; }
-function crChoose(i){ const q=cr.queue[cr.step]; if(!q) return; const res=q.e.o[i][1](); cr.ovr=crClamp(cr.ovr,45,99); cr.log.unshift(`<b>${cr.age} ans</b> ${esc(res)}`); cr.last=res; cr.step++; if(cr.over) return crEnd(); crRender(); }
+async function crStart(){ if(!crNew.club) return toast("Choisis ton club de départ"); const r=await rpc("career_start"); const nm=($("cr-name").value||"Joueur").trim().slice(0,16), pos=crNew.pos||"A";
+  const pot=Math.round(68+27*Math.pow(Math.random(),1.7)), ovr=Math.round(crR(52,57));
+  cr={id:r&&r.data.id,t0:Date.now(),img:(profile&&profile.avatar_url)||"",name:nm,nat:$("cr-nat").value,pos,age:16,youth:1,ovr,peak:ovr,pot,moral:65,fame:2,form:0,games:0,club:{n:crNew.club,t:crNew.t},clubs:[crNew.club],m:0,g:0,a:0,cs:0,sel:0,inj:0,tr:{lig:0,cup:0,ldc:0,cdm:0,euro:0,bo:0},log:[],hist:[],season:0,y0:new Date().getFullYear(),step:0,intl:0,used:{}};
+  cr.log.unshift(`<b>16 ans</b><span>Tu entres au centre de formation de ${esc(cr.club.n)}.</span>`); crNextEvents(); crMusic(true); crRender(); }
+function crNextEvents(){ const pool=CR_EV.map((e,id)=>({e,id})).filter(({e,id})=>(!e.c||e.c())&&!(e.once&&cr.used[id]!=null)&&(cr.used[id]==null||cr.season-cr.used[id]>=(e.cd||4)));
+  const pick=[], n=cr.youth?2:2; while(pick.length<n&&pool.length){ const tot=pool.reduce((a,x)=>a+x.e.w,0); let x=Math.random()*tot, i=0; for(;i<pool.length;i++){ x-=pool[i].e.w; if(x<=0) break; } pick.push(pool.splice(Math.min(i,pool.length-1),1)[0]); }
+  const ev=pick.map(p=>({k:"ev",id:p.id,e:p.e}));
+  cr.queue=cr.youth?[ev[0],{k:"sc"},ev[1]].filter(Boolean):[ev[0],{k:"sc"},ev[1],{k:"sc"}].filter(Boolean);
+  cr.step=0; cr.res=null; cr.sum=null; cr.ov0=cr.ovr; }
 function crRender(){ const B=$("gx-body"); if(!B||!cr) return; if(cr.done) return crDebrief();
-  const head=`<div class="cr-hd"><div class="cr-av">${tkTok(crCard(),"")}</div><div class="cr-id"><b>${esc(cr.name)}</b><span>${CR_POS[cr.pos]} · ${esc(cr.nat)} · ${cr.age} ans</span><span class="cr-club">${esc(cr.club.n)}</span></div>
+  const head=`<div class="cr-hd"><div class="cr-av">${tkTok(crCard(),"")}</div><div class="cr-id"><b>${esc(cr.name)}</b><span>${CR_POS[cr.pos]} · ${esc(cr.nat)} · ${cr.age} ans</span><span class="cr-club">${cr.youth?"Centre de formation · ":""}${esc(cr.club.n)} <i class="cr-st5">${"★".repeat(cr.club.t)}</i>${cr.bench?' <em class="cr-bn">remplaçant</em>':""}</span></div>
     <div class="cr-st"><div><b>${cr.ovr}</b><small>Note</small></div><div><b>${cr.m}</b><small>Matchs</small></div><div><b>${cr.pos==="G"?cr.cs:cr.g}</b><small>${cr.pos==="G"?"Clean sheets":"Buts"}</small></div><div><b>${Object.values(cr.tr).reduce((a,b)=>a+b,0)}</b><small>Trophées</small></div></div>
-    <div class="cr-gauge"><span>Moral</span><i><u style="width:${cr.moral}%"></u></i><span>Notoriété</span><i><u style="width:${cr.fame}%;background:#f5b800"></u></i></div></div>`;
-  let body="";
-  if(cr.step<cr.queue.length){ const q=cr.queue[cr.step]; body=`${cr.last?`<p class="cr-last">${esc(cr.last)}</p>`:""}<div class="cr-q"><span class="dr-k">Saison ${cr.season+1} · choix ${cr.step+1}/3</span><h4>${esc(q.txt)}</h4><div class="cr-ch">${q.e.o.map((o,i)=>`<button class="ghost" onclick="crChoose(${i})">${esc(o[0])}</button>`).join("")}</div></div>`; }
-  else if(cr.step===cr.queue.length){ body=`${cr.last?`<p class="cr-last">${esc(cr.last)}</p>`:""}<div id="cr-sc">${crScene()}</div>`; }
-  else {
-    body=`<p class="cr-last">${esc(cr.last||"")}</p><div class="cr-q"><span class="dr-k">Bilan de la saison · ${cr.age-1} ans</span><h4>${esc(cr.hist[cr.hist.length-1].club)} · ${cr.hist[cr.hist.length-1].m} matchs · note ${cr.ovr}</h4>${cr.events.length?`<ul class="cr-ev">${cr.events.map(e=>`<li>${esc(e)}</li>`).join("")}</ul>`:"<p class='lc-sub'>Saison tranquille.</p>"}
-      <div class="dr-act">${cr.age>=33?`<button class="ghost" onclick="cr.over='retraite';crEnd()">Prendre ma retraite</button>`:""}<button class="go" onclick="crNextEvents();crRender()">Saison suivante</button></div></div>`; }
-  B.innerHTML=`<div class="cr">${head}${body}<div class="dr-feed cr-log">${cr.log.slice(0,14).map(x=>`<div>${x}</div>`).join("")}</div></div>`; }
-async function crEnd(){ cr.done=true; cr.score=crScore(); const wait=Math.max(0,61000-(Date.now()-cr.t0)); crDebrief(true);
-  const send=async()=>{ if(!cr.id) return; const r=await rpc("career_finish",{p_id:cr.id,p_score:cr.score,p_summary:{name:cr.name,pos:cr.pos,nat:cr.nat,peak:cr.peak,tr:cr.tr,g:cr.g,a:cr.a,m:cr.m,clubs:cr.clubs}}); if(r&&r.data){ cr.reward=r.data.reward; profile.balloons=r.data.balloons; render(); crDebrief(); } };
+    <div class="cr-gauge"><span>Confiance</span><i><u style="width:${cr.moral}%"></u></i><span>Notoriété</span><i><u style="width:${cr.fame}%;background:#f5b800"></u></i></div></div>`;
+  let body=""; const tot=cr.queue.length;
+  if(cr.sum){ body=crSumHTML(); }
+  else if(cr.res){ body=`<div class="cr-q cr-res"><span class="dr-k">Saison ${cr.season+1} · étape ${cr.step+1}/${tot}</span><h4>${esc(cr.res.txt)}</h4>${crChips(cr.res.d)}<div class="dr-act"><button class="go" onclick="crCont()">Continuer</button></div></div>`; }
+  else { const q=cr.queue[cr.step];
+    if(q.k==="ev"){ const txt=q.txt||(q.txt=q.e.t()); body=`<div class="cr-q"><span class="dr-k">Saison ${cr.season+1} · étape ${cr.step+1}/${tot}</span><h4>${esc(txt)}</h4><div class="cr-ch">${q.e.o.map((o,i)=>`<button class="ghost" onclick="crChoose(${i})">${esc(o[0])}</button>`).join("")}</div></div>`; }
+    else body=`<div id="cr-sc">${q.html||(q.html=crScene())}</div>`; }
+  B.innerHTML=`<div class="cr">${head}${body}<div class="dr-feed cr-log">${cr.log.slice(0,14).map(x=>`<div>${x}</div>`).join("")}</div></div>`;
+  if(cr.sum&&!cr.sum.shown) crReveal(); }
+function crSumHTML(){ const S=cr.sum, sh=S.shown;
+  return `<div class="cr-q cr-sum"><span class="dr-k">Bilan de la saison · ${S.age} ans</span><h4>${esc(S.club)} · ${S.youth?"centre de formation":`${S.games} matchs`} · note ${cr.ovr}</h4>${crChips(S.d)}
+    ${S.ev.length?`<ul class="cr-ev">${S.ev.map(e=>`<li>${esc(e)}</li>`).join("")}</ul>`:(S.cups.length?"":"<p class='lc-sub'>Saison tranquille.</p>")}
+    ${S.cups.map((c,ci)=>`<div class="cr-cup"><b>${esc(c.name)}</b>${c.rounds.map((r,ri)=>`<div class="cr-rd ${sh?"in "+(r.win?"w":"l"):""}" data-r="${ci}-${ri}"><span>${esc(r.l)}</span><em>vs ${esc(r.o)}</em><i>${sh?esc(r.s):"…"}</i>${r.me&&sh?'<u>⚽ tu marques</u>':""}</div>`).join("")}<div class="cr-cr ${sh?"in":""} ${c.won?"w":"l"}">${c.won?"🏆 VAINQUEUR !":"Éliminé"}</div></div>`).join("")}
+    ${S.bo?`<div class="cr-bo ${sh?"in":""}"><span>Cérémonie du Ballon d'Or</span><b>${S.bo===1?"⭐ BALLON D'OR !":`${S.bo}${S.bo===1?"er":"e"} du classement`}</b></div>`:""}
+    <div class="dr-act">${cr.age>=33?`<button class="ghost" onclick="cr.over='retraite';crEnd()">Prendre ma retraite</button>`:""}<button class="go" id="cr-next" ${sh?"":"disabled"} onclick="crNextEvents();crRender()">Saison suivante</button></div></div>`; }
+async function crReveal(){ const S=cr.sum; if(!S||S.rev) return; S.rev=1;
+  for(let ci=0;ci<S.cups.length;ci++){ const c=S.cups[ci];
+    for(let ri=0;ri<c.rounds.length;ri++){ const r=c.rounds[ri], el=document.querySelector(`.cr-rd[data-r="${ci}-${ri}"]`); if(!el) return; el.classList.add("in","wait"); await anWait(ri===c.rounds.length-1&&r.l==="Finale"?1700:1000);
+      el.classList.remove("wait"); el.classList.add(r.win?"w":"l"); el.querySelector("i").textContent=r.s; if(r.me) el.insertAdjacentHTML("beforeend","<u>⚽ tu marques</u>"); if(r.win) sCrowd(r.l==="Finale"?.9:.45); else sCrowd(.35,true); await anWait(500); }
+    const res=document.querySelectorAll(".cr-cr")[ci]; if(res){ res.classList.add("in"); if(c.won) whistle(); } await anWait(700); }
+  if(S.bo){ const b=document.querySelector(".cr-bo"); if(b){ await anWait(400); b.classList.add("in"); if(S.bo===1) sCrowd(1); } }
+  S.shown=1; const n=$("cr-next"); if(n) n.disabled=false; }
+async function crEnd(){ cr.done=true; cr.score=crScore(); const wait=Math.max(0,181000-(Date.now()-cr.t0)); crDebrief(true);
+  const send=async()=>{ if(!cr||!cr.id) return; const r=await rpc("career_finish",{p_id:cr.id,p_score:cr.score,p_summary:{name:cr.name,pos:cr.pos,nat:cr.nat,peak:cr.peak,tr:cr.tr,g:cr.g,a:cr.a,m:cr.m,clubs:cr.clubs}}); if(r&&r.data&&cr){ cr.reward=r.data.reward; profile.balloons=r.data.balloons; render(); if(gx==="career") crDebrief(); } };
   setTimeout(send,wait); }
 function crDebrief(wait){ const B=$("gx-body"); const T=cr.tr, sc=cr.score, why=cr.over==="injury"?"Une blessure terrible met fin à ta carrière.":cr.over==="retraite"?"Tu décides de raccrocher les crampons.":"L'heure de la retraite a sonné.";
   const grade=sc>=90?"Légende éternelle":sc>=75?"Immense joueur":sc>=60?"Grande carrière":sc>=45?"Belle carrière":sc>=30?"Bon pro":"Carrière discrète";
   const tile=(n,l,c)=>`<div class="cr-tr ${n?"on":""}" style="--c:${c}"><b>${n}</b><small>${l}</small></div>`;
-  B.innerHTML=`${gxBack}<div class="cr cr-end"><div class="cr-ring" style="--p:${sc}"><b>${sc}</b><small>/ 100</small></div><h3>${esc(cr.name)}</h3><p class="cr-gr">${grade}</p><p class="lc-sub">${why} ${CR_POS[cr.pos]} · ${esc(cr.nat)} · fin à ${cr.age} ans · note max ${cr.peak}</p>
+  B.innerHTML=`<div class="cr cr-end"><div class="cr-ring" style="--p:${sc}"><b>${sc}</b><small>/ 100</small></div><h3>${esc(cr.name)}</h3><p class="cr-gr">${grade}</p><p class="lc-sub">${why} ${CR_POS[cr.pos]} · ${esc(cr.nat)} · fin à ${cr.age} ans · note max ${cr.peak}</p>
     <div class="cr-trs">${tile(T.bo,"Ballon d'Or","#f5b800")}${tile(T.cdm,"Coupe du monde","#4ade80")}${tile(T.ldc,"Ligue des Champions","#60a5fa")}${tile(T.euro,"Euro","#a78bfa")}${tile(T.lig,"Championnats","#f87171")}${tile(T.cup,"Coupes","#fb923c")}</div>
     <div class="cr-st crb"><div><b>${cr.m}</b><small>Matchs</small></div><div><b>${cr.g}</b><small>Buts</small></div><div><b>${cr.a}</b><small>Passes déc.</small></div><div><b>${cr.pos==="G"?cr.cs:cr.sel}</b><small>${cr.pos==="G"?"Clean sheets":"Sélections"}</small></div><div><b>${cr.inj}</b><small>Blessures</small></div></div>
     <div class="cr-path"><span class="dr-k">Parcours</span><p>${cr.clubs.map(esc).join(" → ")}</p></div>
