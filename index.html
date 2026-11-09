@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="PrimeZ">
 <title>PrimeZ</title>
+<meta name="description" content="Ouvre des boosters, collectionne les légendes du foot et décroche les cartes les plus rares. Draft, Ligue des Champions, quiz.">
+<meta property="og:type" content="website"><meta property="og:site_name" content="PrimeZ"><meta property="og:url" content="https://primez-one.vercel.app/">
+<meta property="og:title" content="PrimeZ · Collectionne les légendes du foot"><meta property="og:description" content="Ouvre des boosters, chasse les cartes les plus rares et défie tes potes. Gratuit.">
+<meta property="og:image" content="https://primez-one.vercel.app/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://primez-one.vercel.app/og.jpg"><meta name="theme-color" content="#e5202e">
 <link rel="icon" type="image/png" href="logo.png"><meta name="theme-color" content="#18161a"><link rel="apple-touch-icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Mr+Dafoe&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
@@ -1922,6 +1927,21 @@ function sCrowd(k,ooh){ if(muted) return; const a=actx(); if(!a) return; k=Math.
 /* les gants du gardien qui claquent sur le ballon */
 function sGlove(){ if(muted) return; const a=actx(); if(!a) return; const t=a.currentTime, n=sNoise(a,.08), bp=a.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=1400; bp.Q.value=1.2;
   const g=a.createGain(); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.8,t+.003); g.gain.exponentialRampToValueAtTime(.0001,t+.07); n.connect(bp); bp.connect(g); g.connect(a.destination); n.start(t); thud(); }
+/* passe / tir léger : « toc » plus aigu que la frappe sourde */
+function sPass(){ if(muted) return; const a=actx(); if(!a) return; const t=a.currentTime, o=a.createOscillator(), g=a.createGain(); o.type="triangle"; o.frequency.setValueAtTime(320+Math.random()*80,t); o.frequency.exponentialRampToValueAtTime(140,t+.06);
+  g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.55,t+.004); g.gain.exponentialRampToValueAtTime(.0001,t+.12); o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+.14);
+  const n=sNoise(a,.03), hp=a.createBiquadFilter(); hp.type="highpass"; hp.frequency.value=1800; const ng=a.createGain(); ng.gain.value=.25; n.connect(hp); hp.connect(ng); ng.connect(a.destination); n.start(t); }
+/* coup de sifflet court */
+function sToot(){ if(muted) return; const a=actx(); if(!a) return; const t=a.currentTime, o=a.createOscillator(), l=a.createOscillator(), lg=a.createGain(), g=a.createGain(); o.type="sine"; o.frequency.value=2900; l.frequency.value=34; lg.gain.value=90; l.connect(lg); lg.connect(o.frequency);
+  g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.16,t+.02); g.gain.setValueAtTime(.16,t+.16); g.gain.exponentialRampToValueAtTime(.0001,t+.24); o.connect(g); g.connect(a.destination); o.start(t); l.start(t); o.stop(t+.26); l.stop(t+.26); }
+/* chaque rareté a son ambiance, avec un peu de hasard pour que ça ne soit jamais pareil */
+function revealSfx(c){ if(muted||!c) return; const r=ORDER.indexOf(c.rarity), P=a=>a[Math.floor(Math.random()*a.length)], L=(f,ms)=>setTimeout(f,ms);
+  if(r<=0) return P([()=>sPass(),()=>sGlove(),()=>{ sPass(); L(()=>sNet(.35),90); }])();
+  if(r===1) return P([()=>{ sPass(); L(()=>sNet(.6),110); },()=>{ thud(); L(()=>sCrowd(.25),80); },()=>{ sGlove(); L(()=>sCrowd(.3,true),60); }])();
+  if(r===2) return P([()=>{ thud(); L(()=>sNet(.8),100); L(()=>sCrowd(.4),160); },()=>{ sToot(); L(()=>sCrowd(.45),120); }])();
+  if(r===3) return P([()=>{ thud(); L(()=>sNet(1),100); L(()=>sCrowd(.65),150); },()=>{ sBar(.7); L(()=>sCrowd(.6),200); }])();
+  if(r===4){ sBar(.9); L(()=>sCrowd(.8),180); L(sToot,700); return; }
+  thud(); L(()=>sNet(1),100); L(()=>sBar(1),220); L(()=>sCrowd(1),260); L(sToot,900); L(sToot,1150); }
 /* révélation : plus la carte est rare, plus ça fait du bruit (frappe, filet, barre, foule) */
 function roar(p){
   if(muted) return; thud(); if(p>=1){ setTimeout(()=>sNet(.8),90); setTimeout(()=>sCrowd(.25+p*.15),160); } if(p>=3) sBar(.8); return; const a=actx(); if(!a) return; const t=a.currentTime;
@@ -1943,7 +1963,7 @@ function fx(c){
   const r=c.rarity; if(ORDER.indexOf(r)<3) return;
   $("overlay").classList.toggle("sheetmode",!!document.querySelector("#reveal .sheet")); const bn=$("banner"); bn.textContent=BANNER[r]; bn.style.fontSize=`min(150px,${(86/(BANNER[r].length*0.62)).toFixed(2)}vw)`; bn.style.setProperty("--c",COLOR[r]); bn.className=""; /* plus de grosse bannière : elle mangeait l'écran */
   
-  roar(ORDER.indexOf(r)-2);
+  revealSfx(c);
 }
 
 /* ---------- connexion ---------- */
@@ -2187,7 +2207,8 @@ function play(list,b,had){
     const K=$("op-slot").firstChild;
     setTimeout(()=>{ if(K.isConnected){ K.classList.add("hit"); boum(); } },820);
     setTimeout(()=>{ if(K.isConnected) K.classList.add("torn"); },980);
-    setTimeout(()=>{ if(K.isConnected){ $("op-slot").innerHTML=""; showSeq(); } },1650);
+    let kd=false; const kGo=()=>{ if(kd||!K.isConnected) return; kd=true; $("op-slot").innerHTML=""; showSeq(); };
+    $("op-slot").onclick=kGo; setTimeout(kGo,1650);
   } else { $("op-slot").innerHTML=""; showSeq(); }
 }
 const minute=(i,n)=>Math.round((i+1)/n*90)+"′";
@@ -2201,7 +2222,7 @@ function showSeq(){
       <div class="wl"><span class="tg">${RARITY[c.rarity]}</span><span>${esc(TITLE[c.rarity]||"")}${c.club?" · "+esc(c.club):""}${c.league&&c.league!=="Autres"?" · "+esc(c.league):""}</span></div></div>
     <div class="clock"><div class="ct"><span>CARTE ${seq.i+1} / ${n}</span><span>${minute(seq.i,n)}</span></div><div class="trk" style="--p:${pct}%"><i></i><b></b></div></div>
     <div class="sa">${n>1?`<button class="ghost" onclick="showSheet(0)">Tout passer</button>`:""}<button class="go" onclick="stepSeq()">${seq.i+1<n?"Suivante":"Terminer"}</button></div>
-    <div class="hint">Clique sur la carte pour la retourner · Espace pour continuer</div></div>`;
+    <div class="hint">Touche l’écran pour retourner la carte, puis encore pour passer à la suivante</div></div>`;
   const stg=$("stg"), card=r.querySelector(".card"); seq.phase="num";
   if(c.sfx_url) sfxPrep(c);
   const old=isOld(c);
@@ -2209,11 +2230,11 @@ function showSeq(){
     if(old&&seq.phase!=="dust"&&seq.phase!=="clean"){ seq.phase="dust"; dgAll(); stg.classList.remove("sus","vid"); const h=stg.querySelector(".hint"); if(h) h.textContent="Gratte la poussière avec ta souris · clic ailleurs pour tout enlever";
       seq.dust=dustCover(card,()=>{ seq.phase="clean"; seq.dust=null; reveal(); }); requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add("flip"))); return; }
     seq.done=true; seq.phase="card"; stg.style.setProperty("--sc",COLOR[c.rarity]); $("overlay").style.setProperty("--glow",COLOR[c.rarity]); dgAll(); stg.classList.remove("sus","vid"); card.classList.add("flip"); (seq.seen=seq.seen||new Set()).add(seq.i);
-    stg.classList.add("on"); const h=stg.querySelector(".hint"); if(h) h.textContent="Espace ou clic pour continuer"; glow(c); fx(c); if(ORDER.indexOf(c.rarity)<3) thud(); if(c.rarity===seq.best.rarity) seq.fxDone=true; };
+    stg.classList.add("on"); const h=stg.querySelector(".hint"); if(h) h.textContent="Espace ou clic pour continuer"; glow(c); fx(c); if(ORDER.indexOf(c.rarity)<3) revealSfx(c); if(c.rarity===seq.best.rarity) seq.fxDone=true; };
   const afterNum=()=>{ if(seq.phase!=="num"||!stg.isConnected) return; dgAll(); if(!old&&(c.sfx_url||ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique"))){ seq.phase="vfx"; sfxBuild(c,stg,card,reveal); } else reveal(); };
   seq.skip=()=>{ if(!stg.isConnected) return false; if(seq.phase==="num"){ afterNum(); return true; } if(seq.phase==="vfx"){ sfxEnd(); return true; } if(seq.phase==="dust"&&seq.dust){ seq.dust.clear(); return true; } return false; };
-  card.addEventListener("click",e=>{ e.stopPropagation(); if(!seq.skip()) reveal(); });
-  stg.addEventListener("click",e=>{ if(!e.target.closest("button")) seq.skip(); });
+  card.addEventListener("click",e=>{ e.stopPropagation(); if(seq.skip()) return; if(seq.done) nextCard(); else reveal(); });
+  stg.addEventListener("click",e=>{ if(e.target.closest("button")) return; if(seq.skip()) return; if(seq.done) nextCard(); else reveal(); });
   if(sus) dgStart(afterNum); else dgClear();
 }
 /* suspense : le numéro se dévoile chiffre par chiffre (boum, boum, boum) puis la carte et l'édit arrivent d'un coup */
@@ -2269,7 +2290,7 @@ function sheetFlip(k,auto){
   if(seq.rev.has(k)) return; seq.rev.add(k); const c=seq.L[k];
   const w=document.querySelector(`#reveal [data-k="${k}"]`), flipIt=()=>{ if(w){ w.classList.add("rv"); const cd=w.querySelector(".card"); if(cd) cd.classList.add("flip"); } };
   if(!auto&&ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique")){ const cd0=w&&w.querySelector(".card"); if(cd0) cd0.classList.remove("flip"); setTimeout(()=>{ if(cd0&&!seq.spotDone) cd0.classList.remove("flip"); },0); sheetProgress(); spotReveal(c,w&&w.querySelector(".card"),()=>{ flipIt(); glow(c); fx(c); sheetProgress(); }); return; }
-  const fxs0=1; const fxs=()=>{ if(ORDER.indexOf(c.rarity)<3) thud(); else { glow(c); fx(c); } if(c.sfx_url) sfxPlay(c); };
+  const fxs0=1; const fxs=()=>{ if(ORDER.indexOf(c.rarity)<3) revealSfx(c); else { glow(c); fx(c); } if(c.sfx_url) sfxPlay(c); };
   if(!auto&&isOld(c)&&w){ dustCover(w.querySelector(".card"),fxs,.42); requestAnimationFrame(()=>requestAnimationFrame(flipIt)); } else { flipIt(); if(!auto) fxs(); }
   sheetProgress();
 }
@@ -2637,7 +2658,7 @@ async function vfxUpload(f){
   const c=vfxCard(); if(!f) return; if(!c){ toast("Choisis d’abord la carte dans la liste"); return; }
   if(f.size>45*1024*1024){ toast("Vidéo trop lourde (45 Mo max). Raccourcis-la ou compresse-la."); return; }
   toast("Envoi de la vidéo…",true); const ext=f.type==="video/webm"?"webm":"mp4", path=`vfx/${phSlug(c.name)}.${ext}`;
-  const up=await sb.storage.from("cards").upload(path,f,{upsert:true,contentType:f.type}); if(up.error){ toast(up.error.message); return; }
+  const up=await stUpload(path,f,{upsert:true,contentType:f.type}); if(up.error){ toast(up.error.message); return; }
   $("vx-url").value=sb.storage.from("cards").getPublicUrl(path).data.publicUrl+"?v="+Date.now(); await vfxSave();
 }
 function vfxTest(){
@@ -2661,7 +2682,7 @@ async function sfxDel(){ const c=vfxCard(); if(!c){ toast("Choisis une carte dan
 async function sfxUpload(f){ const c=vfxCard(); if(!f) return; if(!c){ toast("Choisis d’abord la carte dans la liste"); return; }
   if(f.size>15*1024*1024){ toast("Son trop lourd (15 Mo max)."); return; } toast("Envoi du son…",true);
   const ext=(f.name.split(".").pop()||"mp3").toLowerCase().replace(/[^a-z0-9]/g,"")||"mp3", path=`vfx/son-${phSlug(c.name)}.${ext}`;
-  const up=await sb.storage.from("cards").upload(path,f,{upsert:true,contentType:f.type||"audio/mpeg"}); if(up.error){ toast(up.error.message); return; }
+  const up=await stUpload(path,f,{upsert:true,contentType:f.type||"audio/mpeg"}); if(up.error){ toast(up.error.message); return; }
   $("vx-url").value=sb.storage.from("cards").getPublicUrl(path).data.publicUrl+"?v="+Date.now(); await sfxSave(); }
 function sfxTest(){ const c=vfxCard(), raw=$("vx-url").value.trim(); if(!c){ toast("Choisis d’abord la carte dans la liste"); return; } if(!raw){ toast("Mets d’abord un lien ou envoie un son"); return; }
   play([Object.assign({},c,{sfx_url:sfxWith(raw,parseSec($("vx-start").value),parseDl($("vx-delay").value)),vfx_url:null})],null,new Set()); seq.test=true;
@@ -2860,11 +2881,16 @@ async function phPick(i){
   try{ const im=await phLoadImg(PH.cands[i].url); if(PH.sel!==i) return; PH.img=im; phCrop(im,$("ph-mode").value,$("ph-cv")); }
   catch(e){ toast("Cette image ne se charge pas, choisis-en une autre"); }
 }
+/* envoi dans le stockage : si refusé alors qu'on est admin en vue Modo (mode Joueur resté actif côté serveur), on repasse en Modo et on réessaie */
+async function stUpload(path,body,opt){ let up=await sb.storage.from("cards").upload(path,body,opt);
+  if(up.error&&/policy|security/i.test(up.error.message||"")&&realAdmin){ if(viewMode!=="modo"){ return {error:{message:"Repasse en vue Modo (panneau de droite) pour envoyer des fichiers."}}; }
+    await sb.rpc("set_admin_mode",{p_off:false}); up=await sb.storage.from("cards").upload(path,body,opt); }
+  return up; }
 async function phSave(it,cand,im,mode){
   const cv=phCrop(im,mode), blob=await new Promise(r=>cv.toBlob(r,"image/jpeg",.88));
   const path=`players/${phSlug(it.key)}.jpg`;
-  const up=await sb.storage.from("cards").upload(path,blob,{upsert:true,contentType:"image/jpeg"});
-  if(up.error) throw new Error(up.error.message.includes("policy")?"Envoi refusé : lance d’abord 12-photos.sql dans Supabase":up.error.message);
+  const up=await stUpload(path,blob,{upsert:true,contentType:"image/jpeg"});
+  if(up.error) throw new Error(/policy|security/i.test(up.error.message)?"Envoi refusé par Supabase : ton compte n’est pas reconnu comme admin (vue Modo, ou 12-photos.sql pas lancé)":up.error.message);
   const url=sb.storage.from("cards").getPublicUrl(path).data.publicUrl+"?v="+Date.now();
   const u=await sb.from("cards").update({image_url:url}).in("id",it.ids); if(u.error) throw new Error(u.error.message);
   adminCards.forEach(c=>{ if(it.ids.includes(c.id)) c.image_url=url; });
@@ -2890,7 +2916,7 @@ async function phAuto(){
     try{
       const c=await phSearchCands(it,""); const best=c.find(x=>x.score>=20)||null; if(!best){ ko++; phLog(it.key+" : aucune photo fiable"); continue; }
       const im=await phLoadImg(best.url); await phSave(it,best,im,"top"); ok++; phLog(`${it.key} → ${best.file||it.title} (${best.artist||best.lic||"?"})`,true);
-    }catch(e){ ko++; phLog(it.key+" : "+e.message); if(/12-photos/.test(e.message)){ PH.stop=true; toast(e.message); } }
+    }catch(e){ ko++; phLog(it.key+" : "+e.message); if(/Supabase|Modo/.test(e.message)){ PH.stop=true; toast(e.message); } }
     await phSleep(300);
   }
   PH.busy=false; $("ph-autob").textContent="Tout faire en automatique"; toast(`Terminé : ${ok} photos, ${ko} à faire à la main`,true); initPhotos();
