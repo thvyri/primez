@@ -1887,6 +1887,25 @@ canvas.dust.pre{background:#7d725f}
 .cr-cr{font:italic 900 18px Outfit,Arial,sans-serif;opacity:0;transition:.4s}.cr-cr.in{opacity:1}.cr-cr.w{color:#f5d061}.cr-cr.l{color:#a7a1ab}
 .cr-bo{display:grid;gap:4px;padding:14px;border:1px solid #f5b80055;background:#f5b80010;opacity:0;transition:.5s}.cr-bo.in{opacity:1}.cr-bo span{font-size:12px;color:#a7a1ab;text-transform:uppercase;letter-spacing:.1em}.cr-bo b{font:italic 900 22px Outfit,Arial,sans-serif;color:#f5d061}
 @media(max-width:760px){.cr-2{grid-template-columns:1fr}.cr-tier{grid-template-columns:1fr}.cr-rd{grid-template-columns:1fr auto;}.cr-rd em{grid-column:1/-1;grid-row:2}}
+
+/* ===== étoiles ===== */
+.st5{position:relative;display:inline-block;font-style:normal;line-height:1;color:#ffffff26;letter-spacing:1px;white-space:nowrap}
+.st5::before{content:"★★★★★"}.st5 u{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#f5b800;text-decoration:none}.st5 u::before{content:"★★★★★"}
+.st-g{display:grid;gap:3px;font-size:clamp(10px,.62vw,15px)}.st-g div{display:grid;grid-template-columns:30px auto;gap:6px;align-items:center}.st-g span{font-weight:800;color:#a7a1ab;letter-spacing:.04em;font-size:.9em}
+.lm-c{display:grid!important;grid-template-columns:auto auto;align-items:center;gap:4px 10px}.lm-c .lm-st{display:grid;gap:6px;justify-items:start;margin:0}.lm-c .lm-st em{justify-self:start}
+.lm-row{gap:10px!important}
+.cv-sty .st-g{font-size:15px;gap:6px}.cv-sty .st-g div{grid-template-columns:120px auto}.cv-sty .st-g span{font-weight:700;color:#cfc8d3}
+.lm-vs{align-items:flex-start!important}.lm-vc{display:grid!important;gap:8px}.lm-vh{display:flex;align-items:center;gap:6px}.lm-vc .st-g{font-size:12px}
+.dr-b.adv{box-shadow:inset 0 -3px 0 #4ade80}.dr-b.dis{box-shadow:inset 0 -3px 0 #f87171}
+.sy2-tk{gap:12px!important}.sy2-tk small{margin-top:2px}
+@media(max-width:760px){.lm-c{grid-template-columns:auto}.lm-c .lm-st .st-g{display:none}.lm-c .lm-st{justify-items:center}.lm-c .lm-st em{justify-self:center}.lm-vc .st-g{font-size:11px}}
+
+.st5,.lm-st .st5,.lm-vs .st5{padding:0!important;background:none!important;border:0!important;border-radius:0!important;font-size:1em!important;letter-spacing:1px!important;text-transform:none!important;color:#ffffff26!important;font-weight:400!important;box-shadow:none!important}
+.st5 u{color:#f5b800!important}
+.lm-an{height:clamp(380px,42vh,760px)!important}
+.lm-stage{width:min(820px,96%)!important}
+.lm-stage .dr-btns{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px!important}.lm-stage .dr-b{min-width:0;padding:10px 8px!important}.lm-stage .dr-b b{font-size:15px}.lm-stage .dr-b small{font-size:11px;white-space:normal}
+@media(max-width:760px){.lm-stage .dr-btns{grid-template-columns:1fr 1fr}.lm-an{height:auto!important;min-height:440px}}
 </style>
 <script>
 (function(){ try{ const base=location.href.split("#")[0].split("?")[0].replace(/[^\/]*$/,"");
@@ -2159,11 +2178,11 @@ async function lgCards(){ const box=$("lg-cards"); if(!box||typeof cardHTML!=="f
     data.forEach(c=>{ if(pick.length<5&&!seen.has(infoKey(c))){ pick.push(c); seen.add(infoKey(c)); } });
     if(pick.length>=5){ draw([pick[3],pick[1],pick[0],pick[2],pick[4]]); } }catch(e){} }
 async function refPreview(){ const c=refCode(), box=$("lg-ref"); if(!c||!box) return; try{ const {data}=await sb.rpc("ref_preview",{p_code:c}); if(!data||!data.username) return;
-  box.innerHTML=`<div><b>${esc(data.username)}</b> t’invite sur PrimeZ</div><span>Connecte-toi avec Discord : <em>5 boosters Prolongation offerts</em> dès 15 boosters ouverts</span>`; box.classList.remove("hidden"); }catch(e){} }
+  box.innerHTML=`<div><b>${esc(data.username)}</b> t’invite sur PrimeZ</div><span>Connecte-toi avec Discord : <em>5 boosters Prolongation + 2 000 ballons offerts</em> dès 15 boosters ouverts</span>`; box.classList.remove("hidden"); }catch(e){} }
 let refSt=null;
 async function refClaim(){ const c=refCode(); if(!c||isGuest) return; const {data,error}=await sb.rpc("ref_claim",{p_code:c}); if(error) return;
   if(data&&(data.ok||data.reason!=="guest")) try{ localStorage.removeItem("pz_ref"); }catch(e){}
-  if(data&&data.ok){ toast(`Invitation de ${data.inviter} validée : ouvre 15 boosters et vous gagnez chacun 5 boosters Prolongation !`,true); await refLoad(); refreshSocial&&refreshSocial(); } }
+  if(data&&data.ok){ toast(`Invitation de ${data.inviter} validée : ouvre 15 boosters et vous gagnez chacun 5 boosters Prolongation + 2 000 ballons !`,true); await refLoad(); refreshSocial&&refreshSocial(); } }
 async function refLoad(){ if(isGuest) return; const {data,error}=await sb.rpc("ref_state"); if(error) return; refSt=data; renderGifts(); }
 const PROMO_B={id:"promo",name:"PROMO",cards_count:3,price:0,description:"3 cartes PROMO · 15 % de chance d’avoir L.YAMAL PROMO"};
 const giftB=k=>boosters.find(b=>b.id===k)||(k==="promo"?PROMO_B:null);
@@ -2180,12 +2199,12 @@ async function openGift(id,n){ if(busy) return; n=Math.max(1,Math.min(n||1,(refS
 const giftBtns=(k,have)=>[1,5,10].filter((n,i)=>i===0||have>=n).map((n,i)=>`<button class="${i===0?"go":"ghost"}" onclick="openGift('${k}',${n})">Ouvrir ×${n}</button>`).join("");
 const refLink=()=>`${location.origin}${location.pathname}?ref=${fmtCode(refSt&&refSt.code||profile&&profile.friend_code||"")}`;
 function refCopy(){ const l=refLink(); try{ navigator.clipboard.writeText(l).then(()=>toast("Lien copié",true),()=>toast(l,true)); }catch(e){ toast(l,true); } }
-function refShare(){ const l=refLink(), t="Viens ouvrir des boosters de légendes du foot sur PrimeZ avec mon lien : 5 boosters Prolongation offerts !";
+function refShare(){ const l=refLink(), t="Viens ouvrir des boosters de légendes du foot sur PrimeZ avec mon lien : 5 boosters Prolongation + 2 000 ballons offerts !";
   if(navigator.share) navigator.share({title:"PrimeZ",text:t,url:l}).catch(()=>{}); else refCopy(); }
 function refBox(){ if(isGuest) return `<div class="refx"><div class="refh"><span class="dr-k">Parrainage</span><h3>Invite tes potes</h3><p>Connecte-toi avec Discord pour avoir ton lien d’invitation.</p></div></div>`;
   const s=refSt||{invited:0,rewarded:0,month:0,list:[]};
   return `<div class="refx"><div class="refh"><span class="dr-k">Parrainage</span><h3>Invite tes potes</h3>
-    <p>Quand ton pote inscrit avec ton lien a ouvert <b>15 boosters</b>, vous gagnez <b>chacun 5 boosters Prolongation</b>. Tous les <b>10 filleuls</b> : un <b class="pr">booster PROMO</b> (3 cartes PROMO, 15 % de chance d’avoir <b class="pr">L.YAMAL PROMO</b>).</p>
+    <p>Quand ton pote inscrit avec ton lien a ouvert <b>15 boosters</b>, vous gagnez <b>chacun 5 boosters Prolongation + 2 000 ballons</b>. Tous les <b>10 filleuls</b> : un <b class="pr">booster PROMO</b> (3 cartes PROMO, 15 % de chance d’avoir <b class="pr">L.YAMAL PROMO</b>).</p>
     <div class="refl"><input readonly value="${esc(refLink())}" onclick="this.select()"><button class="go" onclick="refCopy()">Copier</button><button class="ghost" onclick="refShare()">Partager</button></div></div>
     <div class="refs"><div><b>${s.invited}</b><small>invités</small></div><div><b>${s.rewarded}</b><small>récompensés</small></div><div><b>${s.month}/30</b><small>ce mois-ci</small></div><div class="pr"><b>${s.to_promo??10}</b><small>avant PROMO</small></div></div>
     ${s.list&&s.list.length?`<div class="refli">${s.list.map(x=>`<div><span>${esc(x.username||"Joueur")}</span><em class="${x.rewarded?"ok":""}">${x.rewarded?"+5 boosters chacun":`${x.opened}/15 boosters ouverts`}</em></div>`).join("")}</div>`:""}</div>`; }
@@ -2789,7 +2808,7 @@ function renderMissions(){
 }
 /* ---------- galerie « musée » autour des missions : des tableaux de légendes, un clic = une anecdote ---------- */
 function muPick(n){ const day=Math.floor(Date.now()/864e5), seen=new Set(), hs=k=>{ let h=day*2654435761>>>0; for(const ch of k) h=Math.imul(h^ch.charCodeAt(0),16777619)>>>0; return h; };
-  const pool=(typeof allCards!=="undefined"?allCards:[]).filter(c=>c.image_url&&(c.rarity==="legende"||(ORDER.indexOf(c.rarity)>3&&owned[c.id]))&&(INFO[infoKey(c)]||[])[2]).filter(c=>{ const k=infoKey(c); if(seen.has(k)) return false; seen.add(k); return true; });
+  const pool=(typeof allCards!=="undefined"?allCards:[]).filter(c=>c.image_url&&c.rarity==="legende"&&(INFO[infoKey(c)]||[])[2]).filter(c=>{ const k=infoKey(c); if(seen.has(k)) return false; seen.add(k); return true; });
   return pool.sort((a,b)=>hs(infoKey(a))-hs(infoKey(b))).slice(0,n); }
 function muFrame(c,i){ const gold=ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique"), m=String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/);
   return `<button class="mu-fr ${gold?"g":"s"}" style="--r:${[-1.2,.8,-.5,1.1,-.9,.6][i%6]}deg" onclick="muOpen(${c.id})" title="Voir l’anecdote"><span class="mu-lamp"></span><span class="mu-cv"><img src="${esc(c.image_url)}" alt="" loading="lazy"></span><span class="mu-pl"><b>${esc(infoKey(c))}</b>${m?`<small>${m[1]}</small>`:""}</span></button>`; }
@@ -3401,7 +3420,7 @@ function openCard(id,src,full){
     <div class="cv-r">
       <div class="cv-chips"><span class="${q?"on":""}"><b>×${q}</b> exemplaire${q>1?"s":""}</span>${rt?`<span><b>${rt}</b> note</span>`:""}${seas&&SIMPLE.indexOf(c.rarity)<0?`<span><b>${seas}</b> saison</span>`:""}<span style="--k:${col}"><b>${esc(TITLE[c.rarity]||"")}</b></span></div>
       <div class="cv-own ${q?"on":""}">${q?`Dans ta collection${q>1?` · ${q} exemplaires`:""}`:"Tu ne possèdes pas encore cette carte"}</div>
-      <div class="cv-box"><div class="cv-k">Profil de jeu</div>${pos?`<p class="cv-p">${esc(pos)}</p>`:""}<div class="cv-sty">${!full&&typeof drStyles==="function"?drStyles(c).map(x=>`<span>${STY_N[x]}</span>`).join(""):""}</div></div>
+      <div class="cv-box"><div class="cv-k">Profil de jeu</div>${pos?`<p class="cv-p">${esc(pos)}</p>`:""}<div class="cv-sty">${!full&&typeof drStats==="function"?drStatsHTML(c):""}</div></div>
       ${chips?`<div class="cv-box"><div class="cv-k">Palmarès</div><div class="chp">${chips}</div></div>`:""}
       ${I&&I[2]?`<div class="cv-box cv-know"><div class="cv-k">Le saviez-vous</div><p>${esc(I[2])}</p></div>`:""}
       ${!I?`<div class="cv-box"><p class="cv-p">Fiche en préparation.</p></div>`:""}
@@ -3800,17 +3819,35 @@ const STY=Object.fromEntries(`A.DEL PIERO:DF|A.DI STÉFANO:LFD|A.GRIEZMANN:LF|A.
 const STY_BEAT={V:"PF",P:"DL",D:"VL",L:"VF",F:"PD",R:"FP",S:"VD"};
 function drStyles(c){ const k=infoKey(c); let s=STY[k]; if(!s){ const p=drPosD(c); s=({GB:"R",DC:"P",DG:"V",DD:"V",MDC:"L",MC:"L",MOC:"D",MG:"V",MD:"V",AG:"D",AD:"V",BU:"F"})[p]||"L"; }
   const n=c.rarity==="goat"?3:c.rarity==="prime"||c.rarity==="promo"?2:1; return s.slice(0,n).split(""); }
+/* ===== capacités notées sur 5 étoiles ===== */
+const ST_F=[["vit","Vitesse","VIT"],["dri","Dribble","DRI"],["fra","Frappe","FRA"],["phy","Physique","PHY"],["lec","Lecture du jeu","LEC"]];
+const ST_G=[["ref","Réflexes","REF"],["sor","Sorties","SOR"],["pla","Placement","PLA"],["pie","Jeu au pied","PIE"],["men","Mental","MEN"]];
+const ST_W={BU:[1,1,1.7,1.1,.8],AG:[1.5,1.4,1.1,.7,.8],AD:[1.5,1.4,1.1,.7,.8],MOC:[.9,1.4,1.1,.6,1.4],MC:[.8,1,.9,1,1.4],MDC:[.8,.7,.7,1.4,1.5],MG:[1.4,1.2,.9,.8,1],MD:[1.4,1.2,.9,.8,1],DC:[.8,.5,.5,1.6,1.5],DG:[1.5,.9,.6,1.1,1.1],DD:[1.5,.9,.6,1.1,1.1],GB:[1.3,1,1.1,.7,.9]};
+const ST_TOT={commune:10,rare:12,elite:14,legende:16,mythique:18,promo:16,prime:20.5,goat:23};
+const ST_IDX={V:0,D:1,F:2,P:3,L:4,R:0,S:1};
+const ACT_A={F:"fra",D:"dri",V:"vit",P:"phy",L:"lec"}, ACT_D={F:"lec",D:"lec",V:"vit",P:"phy",L:"lec"}, ACT_G={F:"ref",D:"sor",V:"sor",P:"sor",L:"pla"};
+const ST_NAME=Object.fromEntries(ST_F.concat(ST_G).map(k=>[k[0],k[1]]));
+const stCache=new Map(), stFmt=v=>String(v).replace(".",",");
+function drStats(c){ if(!c) return null; const key=c.id+"|"+c.name+"|"+c.rarity; let o=stCache.get(key); if(o) return o;
+  const pos=drPosD(c), gk=pos==="GB", keys=gk?ST_G:ST_F; let tot=c.rarity==="promo"&&/^L\.YAMAL/i.test(c.name)?22:(ST_TOT[c.rarity]||10); tot+=((drHash(c.name)%3)-1)*.5;
+  const w=(ST_W[pos]||ST_W.MC).slice(); drStyles(c).forEach((x,i)=>{ const k=ST_IDX[x]; if(k!=null) w[k]*=[1.6,1.35,1.2][i]; });
+  w.forEach((x,i)=>w[i]=x*(.92+(drHash(c.name+"#"+i)%17)/100));
+  const sw=w.reduce((a,b)=>a+b,0); let v=w.map(x=>x/sw*tot);
+  for(let it=0;it<8;it++){ let ex=0; v=v.map(x=>{ if(x>5){ ex+=x-5; return 5; } return x; }); if(ex<.001) break; const fs=v.reduce((a,x)=>a+(x<5?x:0),0); v=v.map(x=>x<5?x+ex*x/fs:x); }
+  v=v.map(x=>Math.max(.5,Math.min(5,Math.round(x*2)/2)));
+  o={gk,keys,v,tot:v.reduce((a,b)=>a+b,0),m:Object.fromEntries(keys.map((k,i)=>[k[0],v[i]]))}; stCache.set(key,o); return o; }
+const stA=(c,k)=>{ const s=drStats(c); return s.gk?1:s.m[ACT_A[k]||"fra"]; };
+const stD=(c,k,gk)=>{ const s=drStats(c); if(gk) return s.gk?s.m[ACT_G[k]||"ref"]:1; return s.gk?1:s.m[ACT_D[k]||"lec"]; };
+const stars=v=>`<i class="st5" title="${stFmt(v)} / 5"><u style="width:${v*20}%"></u></i>`;
+function drStatsHTML(c){ const s=drStats(c); return `<div class="st-g">${s.keys.map((k,i)=>`<div title="${k[1]}"><span>${k[2]}</span>${stars(s.v[i])}</div>`).join("")}</div>`; }
+const drBestAct=c=>Object.keys(ACT_A).filter(k=>k!=="L").sort((x,y)=>stA(c,y)-stA(c,x))[0];
 /* chance qu'une action passe : la note compte beaucoup, le style fait la différence entre deux joueurs proches */
-function drDuel(att,act,dfd,isGK){ const as=drStyles(att), ds=drStyles(dfd);
-  let p=isGK?.32:.42; p+=(drRating(att)-drRating(dfd))/40;
-  p+=as[0]===act?.12:as.includes(act)?.09:-.06;
-  if(ds.some(d=>(STY_BEAT[d]||"").includes(act))) p-=.16; else if(ds.some(d=>(STY_BEAT[act]||"").includes(d))) p+=.14;
-  return Math.max(.02,Math.min(.88,p)); }
+function drDuel(att,act,dfd,isGK){ if(!ACT_A[act]) act="F"; let p=isGK?.36:.44; p+=(stA(att,act)-stD(dfd,act,isGK))*.1; p+=(drRating(att)-drRating(dfd))/150; return Math.max(.08,Math.min(.9,p)); }
 const DR_ACT=[["F","Frapper","Tenter sa chance"],["L","Une-deux","avec MATE"],["D","Dribbler","Un contre un"],["V","Accélérer","Dans la profondeur"],["P","En force","Épaule contre épaule"]];
 const DR_ANIM={F:0,P:0,L:1,D:2,V:2};
 const DR_RANGE={commune:[68,74],rare:[74,78],elite:[78,82],legende:[82,86],mythique:[86,90],prime:[90,94],promo:[88,92],goat:[95,97]};
 const drHash=s=>{ let h=7; for(const ch of String(s)) h=(h*31+ch.charCodeAt(0))>>>0; return h; };
-const drRating=c=>{ const r=DR_RANGE[c.rarity]||[68,74]; return r[0]+drHash(c.name)%(r[1]-r[0]+1); };
+const drRating=c=>{ const s=drStats(c); return s?Math.round(50+s.tot*2):70; };
 const drCard=id=>allCards.find(c=>c.id===id);
 const DR_FORM={
  "4-3-3":[["G",50,89],["D",13,69],["D",37,74],["D",63,74],["D",87,69],["M",25,48],["M",50,53],["M",75,48],["A",17,22],["A",50,15],["A",83,22]],
@@ -4123,7 +4160,7 @@ function gxRender(){
   if(gx==="career") return careerRender();
   const T=(id,k,t,p,c,ic)=>`<button class="gx-tile" style="--c:${c}" onclick="gxGo('${id}')"><span class="gx-ic">${ic}</span><span class="dr-k">${k}</span><h3>${t}</h3><p>${p}</p></button>`;
   B.innerHTML=`<div class="gx-hub">
-    ${T("story","Solo · 12 clubs à battre","Mode Histoire","Ton five fait le tour d'Europe, de Nantes au Real Madrid. 60 000 ballons à gagner : de quoi ouvrir 3 Panthéon.","#f5b800","➜")}
+    ${T("story","Solo · 12 clubs à battre","Mode Histoire","Ton five fait le tour d'Europe, de Nantes au Real Madrid. 45 000 ballons à gagner : de quoi ouvrir 3 Panthéon.","#f5b800","➜")}
     ${T("career","Solo · une vie de footballeur","Ma carrière","De 17 ans à la retraite : transferts, blessures, soirées, polémiques… Bilan final avec une note sur 100 et tes Ballons d'Or.","#a78bfa","☆")}
     ${T("ldc","Classé · saison de 2 semaines","Ligue des Champions","Ton five (gardien + 4) contre les équipes des autres joueurs. Grimpe jusqu'à Champion d'Europe et gagne des packs LDC.","#3b82f6","★")}
     ${T("draft","Solo contre l'IA","Draft","Formation, capitaine, 5 choix par poste, banc, puis 4 matchs à élimination directe.","#4ade80","⚽")}
@@ -4140,10 +4177,10 @@ async function penRender(load){
   if(load!==false){ const r=await rpc("pen_state"); if(!r){ B.innerHTML=gxBack; return; } pen.state=r.data; pen.ses=r.data.session; }
   const s=pen.ses, left=pen.state?pen.state.left:0;
   if(!s){ B.innerHTML=`${gxBack}<div class="pn-lobby"><span class="dr-k">Tirs au but · ${left} séance${left>1?"s":""} restante${left>1?"s":""} aujourd'hui</span><h3>Séance de tirs au but</h3>
-      <p>Chaque niveau réussi rapporte <b>2 ballons</b>, +1 tous les 5 niveaux. Plus tu montes, plus le gardien te lit bien. Après chaque but : <b>Encaisser</b> pour tout garder, ou <b>Continuer</b>. Un raté et tu ne gardes que la moitié de la séance.</p>
+      <p>Chaque niveau réussi rapporte <b>8 ballons</b>. Plus tu montes, plus le gardien te lit bien. Après chaque but : <b>Encaisser</b> pour tout garder, ou <b>Continuer</b>. Un raté et tu ne gardes que la moitié de la séance.</p>
       ${pen.last?`<div class="pn-last">${pen.last}</div>`:""}
       <div class="dr-act"><button class="go" ${left?"":"disabled"} onclick="penStart()">${left?"Commencer une séance":"Reviens demain"}</button></div></div>`; return; }
-  const lv=s.level, nx=2+Math.floor((lv+1)/5);
+  const lv=s.level, nx=8;
   B.innerHTML=`${gxBack}<div class="pn"><div class="pn-top"><div><span class="dr-k">Niveau</span><b>${lv+1}<small> / 100</small></b></div><div><span class="dr-k">Cagnotte</span><b id="pn-bank">${nf(s.bank)}</b></div><div><span class="dr-k">Ce tir rapporte</span><b>+${nf(nx)}</b></div></div>
     <div class="pn-goal" id="pn-goal"><div class="pn-net"></div>${PEN_Z.map((z,i)=>`<button class="pn-z ${pen.zone===i?"on":""}" style="left:${z[1]}%;top:${z[2]}%" onclick="penZone(${i})" title="${z[0]}"></button>`).join("")}<div class="pn-gk" id="pn-gk"><i></i></div><div class="pn-ball" id="pn-ball"></div><div class="an-msg" id="pn-msg"></div></div>
     <div class="pn-ctl" id="pn-ctl">${pen.zone==null?`<p class="pn-h">Choisis où tirer dans le but.</p>`:`<div class="pn-gauge"><i class="ok"></i><u id="pn-cur"></u></div><button class="go" id="pn-shoot" onclick="penShoot()">Frapper (Espace)</button><p class="pn-h">Arrête le curseur dans la zone verte.</p>`}</div></div>`;
@@ -4253,10 +4290,10 @@ function ldcAITeam(){ const t=ldc.st?Math.min(6,Math.floor(ldc.st.points/100)):0
 async function ldcPlay(){ const r=await rpc("ldc_start"); if(!r) return; const d=r.data, opp=d.opp_cards&&d.opp_cards.every(id=>drCard(id))?d.opp_cards:ldcAITeam();
   ldc.m={id:d.match_id,name:d.opp_name||pickOne(DR_AI),ghost:!!d.opp_name,me:ldc.team.slice(),op:opp,turn:0,su:0,so:0,t0:Date.now(),first:Math.random()<.5,tired:{me:null,op:null,dme:null,dop:null},log:[],busy:false,pick:null};
   ldc.view="match"; whistle(); ldcMatchUI(); }
-function lmS(){ const B=$("gx-body"), W=(B&&B.clientWidth)||innerWidth, gap=W<600?5:14; return Math.max(.3,Math.min(1.2,((W-4*gap)/5-12)/158,((innerHeight*.64-300)/2-70)/228)).toFixed(3); }
+function lmS(){ const B=$("gx-body"), W=(B&&B.clientWidth)||innerWidth, gap=W<600?5:14, side=W<760?12:122; return Math.max(.3,Math.min(1.1,((W-4*gap)/5-side)/158,((innerHeight*.58-290)/2-36)/228)).toFixed(3); }
 function lmCard(c,side,i,m){ const tired=(side==="me"?[m.tired.me,m.tired.dme]:[m.tired.op,m.tired.dop]).includes(c.id), st=drStyles(c);
   return `<div class="lc-p lm-c ${i===0?"gk":""} ${tired?"tired":""} ${m.pick===c.id?"on":""} ${side==="op"&&m.aiAtt===c.id&&m.want==="def"?"thr":""}" data-id="${c.id}" ${side==="me"&&i>0?`onclick="ldcSel(${c.id})"`:""}>${drMini(c,lmS())}${tired?'<i class="lc-t">fatigué</i>':""}
-    <div class="lm-st"><em>${i===0?"GB":drPosD(c)}</em>${st.map(x=>`<i title="Fort contre : ${(STY_BEAT[x]||"").split("").map(y=>STY_N[y]).join(", ")}">${STY_N[x]}</i>`).join("")}</div></div>`; }
+    <div class="lm-st"><em>${i===0?"GB":drPosD(c)}</em>${drStatsHTML(c)}</div></div>`; }
 const LM_POS=[[6,50],[24,24],[24,76],[40,38],[40,63]];
 function ldcMatchUI(){ const m=ldc.m, B=$("gx-body"); const myTurn=((m.turn+(m.first?0:1))%2)===0, done=m.turn>=10;
   const tok=(id,k,side)=>{ const c=drCard(id), p=LM_POS[k], x=side==="me"?p[0]:100-p[0]; return `<div class="lm-tk ${side}" data-id="${id}" style="left:${x}%;top:${p[1]}%;--c:${COLOR[c.rarity]};--d:${(k*.37).toFixed(2)}s"><span>${c.image_url?`<img src="${esc(c.image_url)}" alt="">`:""}</span></div>`; };
@@ -4295,20 +4332,20 @@ function ldcSel(id){ const m=ldc.m; if(!m||m.busy||!m.want) return; const c=drCa
   m.pick=id; ldcMatchUI(); }
 function ldcAsk(myTurn){ const m=ldc.m;
   if(myTurn){ m.want="att"; const c=m.pick&&drCard(m.pick);
-    ldcSt(`<div class="lc-ask"><span class="dr-k">À toi d'attaquer</span><h4>${c?`${esc(dispName(c))} a le ballon`:"Choisis ton attaquant (clique sur un de tes joueurs)"}</h4>${c?lmVs(c,m.op.slice(1).filter(id=>id!==m.tired.dop).map(drCard),"Leur défense"):""}${c?`<div class="dr-btns">${DR_ACT.map(([k,t,s])=>`<button class="dr-b" onclick="ldcAtt('${k}')"><b>${t}</b><small>${esc(s.replace("MATE","un coéquipier"))}</small></button>`).join("")}</div>`:""}</div>`); }
-  else { if(!m.aiAtt){ const av=m.op.slice(1).filter(id=>id!==m.tired.op); m.aiAtt=pickOne(av.sort((a,b)=>drRating(drCard(b))-drRating(drCard(a))).slice(0,3)); const ac=drCard(m.aiAtt), st=drStyles(ac); m.aiAct=Math.random()<.65?st[0]:pickOne("FDVPL".split("")); }
+    ldcSt(`<div class="lc-ask"><span class="dr-k">À toi d'attaquer</span><h4>${c?`${esc(dispName(c))} a le ballon`:"Choisis ton attaquant (clique sur un de tes joueurs)"}</h4>${c?lmVs(c,m.op.slice(1).filter(id=>id!==m.tired.dop).map(drCard),"Leur défense"):""}${c?`<div class="dr-btns">${DR_ACT.map(([k,t])=>{ const ds=m.op.slice(1).filter(id=>id!==m.tired.dop).map(drCard), mine=stA(c,k), their=Math.max(...ds.map(d=>stD(d,k,false))); return `<button class="dr-b ${mine>their?"adv":mine<their?"dis":""}" onclick="ldcAtt('${k}')"><b>${t}</b><small>${ST_NAME[ACT_A[k]]} ${stFmt(mine)}★ · eux ${stFmt(their)}★</small></button>`; }).join("")}</div>`:""}</div>`); }
+  else { if(!m.aiAtt){ const av=m.op.slice(1).filter(id=>id!==m.tired.op); m.aiAtt=pickOne(av.sort((a,b)=>drRating(drCard(b))-drRating(drCard(a))).slice(0,3)); const ac=drCard(m.aiAtt); m.aiAct=Math.random()<.65?drBestAct(ac):pickOne("FDVPL".split("")); }
     m.want="def"; const a=drCard(m.aiAtt), c=m.pick&&drCard(m.pick);
     ldcSt(`<div class="lc-ask def"><span class="dr-k">${esc(m.name)} attaque</span><h4>${esc(dispName(a))} fonce vers ton but</h4>${lmVs(a,c?[c]:[],c?"Ton défenseur":"")}<p>Qui envoies-tu au duel ? ${lmTip(a,m.me.slice(1).filter(id=>id!==m.tired.dme).map(drCard))}</p>${c?`<div class="dr-act"><button class="go" onclick="ldcDef()">Envoyer ${esc(dispName(c))}</button></div>`:""}</div>`); }
 }
-function lmVs(a,defs,lab){ const st=drStyles(a); const ok=x=>defs.some(d=>drStyles(d).some(y=>(STY_BEAT[y]||"").includes(x)));
-  return `<div class="lm-vs"><div><b>${drRating(a)}</b><span>${esc(dispName(a))}</span>${st.map(x=>`<i class="${defs.length&&ok(x)?"bad":""}">${STY_N[x]}</i>`).join("")}</div>${defs.length?`<em>vs</em><div class="r"><small>${lab}</small>${defs.map(d=>`<span class="lm-d"><b>${drRating(d)}</b>${esc(dispName(d).replace(/\s+\d{2}\/\d{2}$|\s+\d{4}$/,""))} · ${drStyles(d).map(y=>STY_N[y]).join("/")}</span>`).join("")}</div>`:""}</div>`; }
-function lmTip(a,mine){ const st=drStyles(a)[0], best=mine.filter(d=>drStyles(d).some(y=>(STY_BEAT[y]||"").includes(st))).sort((x,y)=>drRating(y)-drRating(x))[0];
-  return best?`<span class="lm-tip">Conseil : ${esc(dispName(best))} (${drStyles(best).map(y=>STY_N[y]).join("/")}) est fort contre le style ${STY_N[st]}.</span>`:""; }
+function lmVs(a,defs,lab){ const one=defs.length===1?defs[0]:null;
+  return `<div class="lm-vs"><div class="lm-vc"><div class="lm-vh"><b>${drRating(a)}</b><span>${esc(dispName(a))}</span></div>${drStatsHTML(a)}</div>${defs.length?`<em>vs</em><div class="lm-vc r"><small>${lab}</small>${one?`<div class="lm-vh"><b>${drRating(one)}</b><span>${esc(dispName(one))}</span></div>${drStatsHTML(one)}`:defs.map(d=>`<span class="lm-d"><b>${drRating(d)}</b>${esc(dispName(d).replace(/\s+\d{2}\/\d{2}$|\s+\d{4}$/,""))}</span>`).join("")}</div>`:""}</div>`; }
+function lmTip(a,mine){ const k=drBestAct(a), best=mine.slice().sort((x,y)=>stD(y,k,false)-stD(x,k,false))[0];
+  return `<span class="lm-tip">Son point fort : ${ST_NAME[ACT_A[k]]} ${stFmt(stA(a,k))}★.${best?` Conseil : ${esc(dispName(best))} (${ST_NAME[ACT_D[k]]} ${stFmt(stD(best,k,false))}★).`:""}</span>`; }
 const ldcGkR=c=>drPos(c)==="G"?drRating(c):drRating(c)-15; // un joueur de champ dans les cages est bien moins fort
-function ldcFinish(a,act,dfd,gk){ let p=drDuel(a,act,dfd,false); p*=Math.max(.25,Math.min(.88,.58+(drRating(a)-ldcGkR(gk))/60)); return p; }
+function ldcFinish(a,act,dfd,gk){ let p=drDuel(a,act,dfd,false); p*=Math.max(.25,Math.min(.88,.6+(stA(a,"F")-stD(gk,"F",true))*.08)); return p; }
 async function ldcAtt(k){ const m=ldc.m; if(m.busy||!m.pick) return; m.busy=true; const a=drCard(m.pick), gk=drCard(m.op[0]);
   const dfs=m.op.slice(1).filter(id=>id!==m.tired.dop).map(drCard); // l'IA lit l'attaquant : elle met souvent un défenseur dont le style contre le sien
-  const st=drStyles(a)[0], counter=dfs.filter(d=>drStyles(d).some(x=>(STY_BEAT[x]||"").includes(st))); const dfd=Math.random()<.55&&counter.length?pickOne(counter):dfs.sort((x,y)=>drRating(y)-drRating(x))[0];
+  const ranked=dfs.slice().sort((x,y)=>stD(y,k,false)-stD(x,k,false)); const dfd=Math.random()<.6?ranked[0]:pickOne(ranked);
   const goal=Math.random()<ldcFinish(a,k,dfd,gk); const act=DR_ACT.find(x=>x[0]===k);
   ldcSt(`<div class="dr-res"><span>${esc(dispName(a))} : ${esc(act[1].toLowerCase())} face à ${esc(dispName(dfd))}…</span></div>`);
   const mate=drCard(pickOne(m.me.slice(1).filter(id=>id!==a.id)));
@@ -4345,7 +4382,7 @@ async function ldcEnd(win,pens){ const m=ldc.m; if(m.story!=null) return storyEn
 
 /* ===================== MODE HISTOIRE : 12 clubs, 60 000 ballons ===================== */
 const STORY=[["Nantes","FC Nantes","Les Canaris ouvrent le bal. Premier vrai test pour ton five."],["Lens","RC Lens","Bollaert chante, le Kop sang et or pousse fort."],["Lyon","Olympique Lyonnais","Le Groupama Stadium, l'école des grands talents."],["Marseille","Olympique de Marseille","Le Vélodrome en fusion. Ne tremble pas."],["Paris","Paris Saint-Germain","Le Parc des Princes et ses stars."],["Dortmund","Borussia Dortmund","Le Mur jaune : 25 000 supporters debout."],["Atlético","Atlético Madrid","Le bloc de Simeone ne lâche rien."],["Juventus","Juventus","La Vieille Dame et sa défense de fer."],["Liverpool","Liverpool","You'll Never Walk Alone résonne à Anfield."],["Bayern","Bayern Munich","La machine allemande, champion en série."],["Barcelone","FC Barcelone","Le Camp Nou, le jeu de passes le plus beau du monde."],["Real Madrid","Real Madrid","Le boss final. Les rois de l'Europe."]];
-const STORY_REW=[1000,1500,2000,2500,3000,3500,4500,5000,6000,7000,9000,15000];
+const STORY_REW=[750,1100,1500,1900,2250,2600,3400,3750,4500,5250,6750,11250];
 let story={stage:0};
 const stNorm=x=>phAscii(String(x||"")).toLowerCase();
 function myFive(){ if(ldc.team&&ldc.team.length===5&&ldc.team.every(id=>id&&owned[id]&&drCard(id))) return ldc.team.slice();
@@ -4365,11 +4402,11 @@ async function storyRender(){ const B=$("gx-body"); if(!B) return; const r=await
   const toks=five?five.map((id,i)=>{ const c=drCard(id); return `<div class="sy2-tk">${tkTok(c,"")}<small>${i===0?"GB":drPosD(c)} · ${drRating(c)}</small></div>`; }).join(""):"";
   B.innerHTML=`<div class="sy2">
     <header class="sy2-hd"><div><span class="dr-k">Mode Histoire · solo</span><h3>Le Tour d'Europe</h3><p>12 clubs, du plus petit au plus grand. Chaque club battu rapporte des ballons, une seule fois.</p></div>
-      <div class="sy2-prog"><b>${nf(won)}</b><small> / 60 000 ${CURRENCY}</small><div class="sy-bar"><u style="width:${won/600}%"></u></div><span>${st} / 12 clubs battus · 3 boosters Panthéon au bout</span></div></header>
+      <div class="sy2-prog"><b>${nf(won)}</b><small> / 45 000 ${CURRENCY}</small><div class="sy-bar"><u style="width:${won/450}%"></u></div><span>${st} / 12 clubs battus · 3 boosters Panthéon au bout</span></div></header>
     ${cur?`<section class="sy2-next"><div class="sy2-club"><span class="dr-k">Prochain adversaire · club ${st+1} / 12</span><h4>${esc(cur[1])}</h4><p>${esc(cur[2])}</p>
         <div class="sy2-go"><span class="sy2-rw">+${nf(STORY_REW[st])} ${CURRENCY}</span>${five?`<button class="go bigbtn" onclick="storyPlay()">Jouer le match</button>`:""}</div></div>
       <div class="sy2-five"><span class="dr-k">Ton five</span>${five?`<div class="sy2-toks">${toks}</div><small>${ldc.team&&ldc.team.every(Boolean)?"Ton five de Ligue des Champions":"Tes 5 meilleures cartes · compose ton five dans Ligue des Champions pour le choisir"}</small>`:`<p class="lc-sub">Il te faut au moins 5 cartes dont un gardien : ouvre quelques boosters d'abord.</p>`}</div></section>`
-      :`<section class="sy2-next done"><div class="sy2-club"><span class="dr-k">Terminé</span><h4>Tour d'Europe bouclé !</h4><p>Tu as battu les 12 clubs et gagné 60 000 ${CURRENCY}.</p></div></section>`}
+      :`<section class="sy2-next done"><div class="sy2-club"><span class="dr-k">Terminé</span><h4>Tour d'Europe bouclé !</h4><p>Tu as battu les 12 clubs et gagné 45 000 ${CURRENCY}.</p></div></section>`}
     <section class="sy2-path">${STORY.map(([k,n],i)=>`<div class="sy2-n ${i<st?"ok":i===st?"cur":"lock"}"><i>${i<st?"✓":i+1}</i><b>${esc(n)}</b><em>+${nf(STORY_REW[i])}</em></div>`).join("")}</section></div>`; }
 async function storyPlay(){ const five=myFive(); if(!five) return toast("Il te faut au moins 5 cartes dont un gardien"); const r=await rpc("story_start"); if(!r) return; const i=r.data.stage;
   ldc.m={story:i,name:STORY[i][1],ghost:false,me:five,op:storyTeam(i),turn:0,su:0,so:0,t0:Date.now(),first:Math.random()<.5,tired:{me:null,op:null,dme:null,dop:null},log:[],busy:false,pick:null};
@@ -4398,7 +4435,7 @@ const crR8=o=>o.r!=null?o.r:drRating(o);
 function crPickClub(t,not){ const L=CR_CLUBS[crClamp(t,1,5)].filter(x=>x!==not); return pickOne(L); }
 function crCard(){ const o=cr.ovr, r=o>=92?"goat":o>=88?"prime":o>=84?"mythique":o>=79?"legende":o>=73?"elite":o>=67?"rare":"commune"; return {id:-1,name:cr.name.toUpperCase(),rarity:r,image_url:cr.img||""}; }
 /* adversaire : d'abord des inconnus, les vraies stars arrivent quand tu montes de niveau */
-function crOpp(posF){ const t=cr.club.t, tgt=crClamp(Math.round((cr.ovr+crLvl(t))/2+crI(-3,4)),52,97);
+function crOpp(posF){ const t=cr.club.t, tgt=crClamp(Math.round((cr.ovr+crLvl(t))/2+crI(-1,6)),52,97);
   if(tgt>=72&&(t>=3||cr.age>=21)&&!cr.youth&&Math.random()<.8){ const pool=allCards.filter(c=>posF(drPos(c))&&Math.abs(drRating(c)-tgt)<=3); if(pool.length){ const c=pickOne(pool); return Object.assign({},c,{r:drRating(c)}); } }
   const club=cr.youth?`la réserve de ${crPickClub(Math.max(1,t-1),cr.club.n)}`:crPickClub(t,cr.club.n);
   return {id:-2,name:`${String.fromCharCode(65+crI(0,25))}.${pickOne(CR_LAST).toUpperCase()}`,rarity:tgt>=79?"legende":tgt>=73?"elite":tgt>=67?"rare":"commune",image_url:"",r:tgt,fake:1,club}; }
@@ -4462,13 +4499,13 @@ async function crAct(a){ if(!cr||cr.busy) return; cr.busy=true; const sc=cr.sc, 
   document.querySelectorAll(".cr-q button").forEach(b=>b.disabled=true);
   if(sc.k==="pen"){ const sh=Math.random()<.42?0:Math.random()<.3?1:2, save=a===sh&&Math.random()<.55+(lvl-r)/80; await anWait(600); await tkShoot(document.querySelector(".cr-q .tk-sc"),{shot:sh,keep:a,goal:!save}); await anWait(1400);
     if(save){ cr.fame+=4; cr.moral+=3; cr.big=(cr.big||0)+1; cr.cs++; txt=`Arrêt décisif face à ${dispName(o)} !`; } else { cr.moral-=2; txt=`${dispName(o)} te prend à contre-pied.`; } }
-  else if(sc.k==="def"){ if(a==="tacle"){ const ok=Math.random()<.45+(lvl-r)/50; await crDuel("tacle",ok);
+  else if(sc.k==="def"){ if(a==="tacle"){ const ok=Math.random()<.41+(lvl-r)/50; await crDuel("tacle",ok);
       if(ok){ cr.fame+=3; cr.moral+=3; cr.big=(cr.big||0)+1; txt=`Tacle parfait sur ${dispName(o)}. Le stade se lève.`; if(!o.fake&&Math.random()<.06){ cr.fame-=8; cr.moral-=15; txt=`Ton tacle est trop appuyé : ${dispName(o)} sort sur civière. Les médecins parlent d'une fin de carrière. Tu es suspendu et harcelé sur les réseaux.`; cr.games-=6; cr.dark=(cr.dark||[]).concat(dispName(o)); } }
       else { if(Math.random()<.35){ cr.games-=3; cr.moral-=4; txt="Tu arrives en retard : carton rouge direct."; } else { cr.moral-=2; txt=`${dispName(o)} saute par-dessus ton tacle et file au but.`; } } }
     else if(a==="tempo"){ const ok=Math.random()<.55+(lvl-r)/70; await crDuel("tacle",ok); if(ok){ cr.big=(cr.big||0)+.5; cr.form+=2; txt=`Tu pousses ${dispName(o)} vers la ligne, il perd le ballon.`; } else { cr.moral-=2; txt=`${dispName(o)} accélère et te laisse sur place.`; } }
     else { await crDuel("tacle",true); cr.form-=1; txt="Faute tactique, carton jaune. Danger écarté."; } }
-  else { if(a==="drib"){ const ok=Math.random()<.45+(lvl-r)/45; await crDuel("drib",ok); if(ok){ cr.g++; cr.fame+=4; cr.moral+=3; cr.big=(cr.big||0)+1; txt=`Tu élimines ${dispName(o)} et tu conclus. But magnifique !`; } else { cr.moral-=2; txt=`${dispName(o)} lit ton dribble et récupère le ballon.`; } }
-    else if(a==="tir"){ const gk=crOpp(x=>x==="G"), ok=Math.random()<.35+(lvl-crR8(gk))/45; $("cr-sc").innerHTML=`<div class="cr-q"><span class="dr-k">Frappe · face à ${crWho(gk)}</span>${tkScene(crCard(),gk,true)}</div>`; await anWait(1200); await tkShoot(document.querySelector(".cr-q .tk-sc"),{shot:crI(0,2),keep:crI(0,2),goal:ok}); await anWait(1500);
+  else { if(a==="drib"){ const ok=Math.random()<.41+(lvl-r)/45; await crDuel("drib",ok); if(ok){ cr.g++; cr.fame+=4; cr.moral+=3; cr.big=(cr.big||0)+1; txt=`Tu élimines ${dispName(o)} et tu conclus. But magnifique !`; } else { cr.moral-=2; txt=`${dispName(o)} lit ton dribble et récupère le ballon.`; } }
+    else if(a==="tir"){ const gk=crOpp(x=>x==="G"), ok=Math.random()<.31+(lvl-crR8(gk))/45; $("cr-sc").innerHTML=`<div class="cr-q"><span class="dr-k">Frappe · face à ${crWho(gk)}</span>${tkScene(crCard(),gk,true)}</div>`; await anWait(1200); await tkShoot(document.querySelector(".cr-q .tk-sc"),{shot:crI(0,2),keep:crI(0,2),goal:ok}); await anWait(1500);
       if(ok){ cr.g++; cr.fame+=3; cr.moral+=3; cr.big=(cr.big||0)+1; txt=`Frappe imparable, ${dispName(gk)} n'a rien pu faire !`; } else { cr.moral-=1; txt=`${dispName(gk)} s'interpose.`; } }
     else { const ok=Math.random()<.6+(lvl-r)/80; await crDuel("drib",ok); if(ok){ cr.a++; cr.moral+=2; cr.big=(cr.big||0)+.5; txt="Passe millimétrée, ton coéquipier marque !"; } else { cr.moral-=1; txt="Passe interceptée."; } } }
   cr.busy=false; crResult(txt,crDiff(snap)); }
@@ -4563,7 +4600,7 @@ async function crReveal(){ const S=cr.sum; if(!S||S.rev) return; S.rev=1;
     const res=document.querySelectorAll(".cr-cr")[ci]; if(res){ res.classList.add("in"); if(c.won) whistle(); } await anWait(700); }
   if(S.bo){ const b=document.querySelector(".cr-bo"); if(b){ await anWait(400); b.classList.add("in"); if(S.bo===1) sCrowd(1); } }
   S.shown=1; const n=$("cr-next"); if(n) n.disabled=false; }
-async function crEnd(){ cr.done=true; cr.score=crScore(); const wait=Math.max(0,181000-(Date.now()-cr.t0)); crDebrief(true);
+async function crEnd(){ cr.done=true; cr.score=crScore(); const wait=Math.max(0,61000-(Date.now()-cr.t0)); crDebrief(true);
   const send=async()=>{ if(!cr||!cr.id) return; const r=await rpc("career_finish",{p_id:cr.id,p_score:cr.score,p_summary:{name:cr.name,pos:cr.pos,nat:cr.nat,peak:cr.peak,tr:cr.tr,g:cr.g,a:cr.a,m:cr.m,clubs:cr.clubs}}); if(r&&r.data&&cr){ cr.reward=r.data.reward; profile.balloons=r.data.balloons; render(); if(gx==="career") crDebrief(); } };
   setTimeout(send,wait); }
 function crDebrief(wait){ const B=$("gx-body"); const T=cr.tr, sc=cr.score, why=cr.over==="injury"?"Une blessure terrible met fin à ta carrière.":cr.over==="retraite"?"Tu décides de raccrocher les crampons.":"L'heure de la retraite a sonné.";
