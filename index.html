@@ -1803,6 +1803,42 @@ canvas.dust.pre{background:#7d725f}
 .cr-dark{color:#f87171;margin:0}.cr-rw{font:800 20px Outfit,Arial,sans-serif;color:#4ade80;margin:0}
 .sy,.cr{width:100%;min-width:0;box-sizing:border-box}.sy>*,.cr>*,.cr-new>*,.cr-hd>*{min-width:0}.cr-new input,.cr-new select{width:100%;box-sizing:border-box;min-width:0}.cr-pos button{padding:11px 6px!important;min-width:0}
 @media(max-width:760px){.cr-pos{grid-template-columns:1fr 1fr}.cr-st div{padding:8px 4px}.cr-st b{font-size:18px}.sy-hd h3{font-size:30px}.sy-n{grid-template-columns:34px 1fr auto;padding:10px}.sy-n button{grid-column:1/-1}.sy-n i{width:30px;height:30px}.sy-n b{font-size:15px}.cr-st.crb{grid-template-columns:repeat(3,minmax(0,1fr))}.cr-st small{letter-spacing:.02em;font-size:9px}.cr-trs{grid-template-columns:repeat(2,1fr)}.cr-gauge{grid-template-columns:auto 1fr}}
+
+/* ===== match LDC / Histoire : nouvelle mise en page ===== */
+.lm{margin-top:12px;display:grid;gap:12px;min-width:0}.lm-main,.lm-side{display:grid;gap:10px;min-width:0;align-content:start}.lm .dr-sc span{white-space:nowrap}
+@media(min-width:1200px){.lm{grid-template-columns:minmax(0,1fr) 360px;align-items:start}.lm>.dr-sb{grid-column:1/-1}.lm-side{position:sticky;top:90px}.lm-side .dr-feed{max-height:40vh;overflow:auto}.lm-side .dr-btns{grid-template-columns:1fr 1fr}}
+.lm-team{min-width:0}.lm-row{display:flex;justify-content:center;gap:16px;flex-wrap:nowrap}
+.lm-c{padding:6px 6px 8px;border-radius:8px;background:#ffffff05}.lm-op .lm-c{background:#f8717108}
+.lm-c .dr-sn{max-width:none}.lm-c .dr-sn span{font-size:clamp(11px,.75vw,18px)}.lm-c .dr-sn b{font-size:clamp(14px,.95vw,22px)}
+.lm-st{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:4px}
+.lm-st em,.lm-st i{font:700 clamp(9px,.62vw,14px)/1 Outfit,Arial,sans-serif;font-style:normal;padding:3px 6px;border-radius:4px;background:#ffffff10;color:#e9e3ec;text-transform:uppercase;letter-spacing:.04em}
+.lm-st em{background:#16a34a;color:#fff}
+.lm-c.thr{border-color:#f87171;box-shadow:0 0 0 1px #f8717155,0 0 24px #f8717133;animation:lmthr 1s ease-in-out infinite alternate}
+@keyframes lmthr{to{box-shadow:0 0 0 1px #f87171aa,0 0 34px #f8717166}}
+.lm-c .lc-t{top:38%}
+.lm-an{height:clamp(190px,24vh,620px)!important}
+.lm-live{position:absolute;inset:0;z-index:2;transition:opacity .25s}.an.act .lm-live{opacity:0}
+.lm-tk{position:absolute;width:clamp(34px,2.6vw,64px);aspect-ratio:1;transform:translate(-50%,-50%);animation:lmbob 2.6s ease-in-out var(--d) infinite alternate}
+.lm-tk span{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:3px solid var(--c);background:#1c1a1e;box-shadow:0 4px 10px #000a}
+.lm-tk.op span{border-style:dashed}
+.lm-tk img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.lm-tk.ball span{box-shadow:0 0 0 3px #fff8,0 0 18px #ffffffaa}
+@keyframes lmbob{0%{translate:0 0}50%{translate:6px -5px}100%{translate:-5px 4px}}
+.an-ball.circ{transition:left .75s cubic-bezier(.35,.1,.25,1),top .75s cubic-bezier(.35,.1,.25,1);animation:lmspin .75s linear infinite}
+@keyframes lmspin{to{rotate:360deg}}
+.lm-vs{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 12px;background:#ffffff06;border:1px solid var(--line);margin:4px 0 10px}
+.lm-vs>div{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.lm-vs>div.r{flex-direction:column;align-items:flex-start;gap:4px}
+.lm-vs b{font:italic 900 18px/1 Outfit,Arial,sans-serif;background:#f5b800;color:#000;padding:2px 6px}
+.lm-vs span{font-weight:700;text-transform:uppercase;font-size:13px}.lm-vs small{font-size:10px;color:#a7a1ab;letter-spacing:.1em;text-transform:uppercase}
+.lm-vs i{font-style:normal;font-size:11px;padding:3px 7px;border-radius:4px;background:#16a34a33;color:#86efac;text-transform:uppercase;font-weight:700}
+.lm-vs i.bad{background:#f8717126;color:#fca5a5}
+.lm-vs em{font-style:normal;color:#a7a1ab;font-weight:800}
+.lm-d{font-size:12px!important;font-weight:600!important;color:#cfc8d3}.lm-d b{font-size:12px;margin-right:6px;background:#93c5fd}
+.lm-tip{display:block;margin-top:6px;color:#f5d061;font-size:13px}
+#view-games{position:relative}
+.gx-x{position:absolute;top:2px;right:0;z-index:20;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#1c1a1e;border:1px solid #ffffff2a;color:#fff;cursor:pointer;box-shadow:0 6px 16px #0008;transition:transform .15s,background .15s}
+.gx-x:hover{background:#e5202e;transform:rotate(90deg)}.gx-x svg{width:20px;height:20px}.gx-x.hidden{display:none}
+@media(max-width:760px){.lm-row{gap:5px}.lm-c{padding:3px}.lm-st i{display:none}.lm-st em{font-size:9px;padding:2px 4px}.lm-c .dr-sn span{display:none}.lm-an{height:200px!important}.lm-tk{width:30px}.gx-x{width:40px;height:40px;top:0}}
 </style>
 <script>
 (function(){ try{ const base=location.href.split("#")[0].split("?")[0].replace(/[^\/]*$/,"");
@@ -1890,7 +1926,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
 
     <section id="view-missions" class="page hidden"><div class="mz-head"><div><h2 class="disp">Missions &amp; succès</h2><p class="pnote">Reviens chaque jour : la connexion, les missions du jour et de la semaine et les succès te rapportent des ballons.</p></div><button class="go hidden" id="mz-all" onclick="claimAllMissions()">Tout réclamer</button></div><div id="mz-body"></div></section>
 
-    <section id="view-games" class="page hidden"><h2 class="disp">Jeux</h2><div id="gx-body"><div class="gx-empty"><h3 class="disp">Bientôt</h3><p>Cette page accueillera les jeux de PrimeZ. Il n’y en a pas encore.</p></div></div></section>
+    <section id="view-games" class="page hidden"><h2 class="disp">Jeux</h2><button id="gx-x" class="gx-x hidden" onclick="gxQuit()" title="Quitter et revenir aux jeux" aria-label="Quitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div id="gx-body"><div class="gx-empty"><h3 class="disp">Bientôt</h3><p>Cette page accueillera les jeux de PrimeZ. Il n’y en a pas encore.</p></div></div></section>
 
     <section id="view-market" class="page hidden"><h2 class="disp">Marché</h2><div id="mk-body"></div></section>
 
@@ -4019,11 +4055,18 @@ document.addEventListener("pointermove",e=>{ if(e.pointerType==="touch") return;
 document.addEventListener("mouseleave",()=>{ glOff(glC); glC=null; });
 /* ===================== JEUX : accueil + Tirs au but + Quiz + Ligue des Champions ===================== */
 let gx="hub";
-function gxGo(v){ gx=v; window.scrollTo(0,0); gxRender(); }
-const gxBack=`<button class="ghost gx-back" onclick="gxGo('hub')">← Jeux</button>`;
+function gxGo(v){ gx=v; window.scrollTo(0,0); gxRender(); gxX(); }
+const gxBack="";
+function gxX(){ const x=$("gx-x"); if(x) x.classList.toggle("hidden",gx==="hub"); }
+async function gxQuit(){
+  if(gx==="draft"&&dr&&dr.run&&dr.stage!=="end"){ if(dr.m) await drQuitMatch(); else await drQuit(); return; }
+  if(ldc.m&&ldc.m.turn<10&&ldc.m.story==null&&!confirm("Abandonner ce match ?")) return;
+  clearInterval(lmT); clearTimeout(qz.timer); ldc.m=null; ldc.view="home"; if(dr&&!dr.run) dr={stage:"lobby"};
+  gx="hub"; window.scrollTo(0,0); gxRender(); }
 function gxRender(){
   const B=$("gx-body"); if(!B) return;
   if(gx==="hub"&&dr&&dr.stage&&dr.stage!=="lobby"&&dr.stage!=="end") gx="draft";
+  gxX();
   if(gx==="draft") return drRender();
   if(gx==="pen") return penRender();
   if(gx==="quiz") return quizRender();
@@ -4162,17 +4205,34 @@ function ldcAITeam(){ const t=ldc.st?Math.min(6,Math.floor(ldc.st.points/100)):0
 async function ldcPlay(){ const r=await rpc("ldc_start"); if(!r) return; const d=r.data, opp=d.opp_cards&&d.opp_cards.every(id=>drCard(id))?d.opp_cards:ldcAITeam();
   ldc.m={id:d.match_id,name:d.opp_name||pickOne(DR_AI),ghost:!!d.opp_name,me:ldc.team.slice(),op:opp,turn:0,su:0,so:0,t0:Date.now(),first:Math.random()<.5,tired:{me:null,op:null,dme:null,dop:null},log:[],busy:false,pick:null};
   ldc.view="match"; whistle(); ldcMatchUI(); }
+function lmS(){ const B=$("gx-body"), W=((B&&B.clientWidth)||innerWidth)-(innerWidth>=1200?380:0), gap=W<600?5:14; return Math.max(.3,Math.min(1.2,((W-4*gap)/5-12)/158,((innerHeight-610)/2-60)/228)).toFixed(3); }
+function lmCard(c,side,i,m){ const tired=(side==="me"?[m.tired.me,m.tired.dme]:[m.tired.op,m.tired.dop]).includes(c.id), st=drStyles(c);
+  return `<div class="lc-p lm-c ${i===0?"gk":""} ${tired?"tired":""} ${m.pick===c.id?"on":""} ${side==="op"&&m.aiAtt===c.id&&m.want==="def"?"thr":""}" data-id="${c.id}" ${side==="me"&&i>0?`onclick="ldcSel(${c.id})"`:""}>${drMini(c,lmS())}${tired?'<i class="lc-t">fatigué</i>':""}
+    <div class="lm-st"><em>${i===0?"GB":drPosD(c)}</em>${st.map(x=>`<i title="Fort contre : ${(STY_BEAT[x]||"").split("").map(y=>STY_N[y]).join(", ")}">${STY_N[x]}</i>`).join("")}</div></div>`; }
+const LM_POS=[[6,50],[24,24],[24,76],[40,38],[40,63]];
 function ldcMatchUI(){ const m=ldc.m, B=$("gx-body"); const myTurn=((m.turn+(m.first?0:1))%2)===0, done=m.turn>=10;
-  const row=(ids,side)=>ids.map((id,i)=>{ const c=drCard(id); const tired=(side==="me"?[m.tired.me,m.tired.dme]:[m.tired.op,m.tired.dop]).includes(id);
-    return `<div class="lc-p ${i===0?"gk":""} ${tired?"tired":""} ${m.pick===id?"on":""}" data-id="${id}" ${side==="me"&&i>0?`onclick="ldcSel(${id})"`:""}>${drMini(c,.42)}${tired?'<i class="lc-t">fatigué</i>':""}</div>`; }).join("");
-  B.innerHTML=`<div class="lc-m"><div class="dr-sb"><div class="dr-tm"><span class="dr-k">Ton five</span><b>${esc(profile.username||"Toi")}</b></div>
+  const tok=(id,k,side)=>{ const c=drCard(id), p=LM_POS[k], x=side==="me"?p[0]:100-p[0]; return `<div class="lm-tk ${side}" data-id="${id}" style="left:${x}%;top:${p[1]}%;--c:${COLOR[c.rarity]};--d:${(k*.37).toFixed(2)}s"><span>${c.image_url?`<img src="${esc(c.image_url)}" alt="">`:""}</span></div>`; };
+  B.innerHTML=`<div class="lm"><div class="dr-sb"><div class="dr-tm"><span class="dr-k">Ton five</span><b>${esc(profile.username||"Toi")}</b></div>
       <div class="dr-sc"><b>${m.su}</b><i>–</i><b>${m.so}</b><span>${done?"Fin":`Tour ${m.turn+1} / 10`}</span></div>
       <div class="dr-tm r"><span class="dr-k">${m.story!=null?`Histoire · club ${m.story+1} / 12`:m.ghost?"Équipe d'un joueur":"IA"}</span><b>${esc(m.name)}</b></div></div>
-    <div class="lc-row op">${row(m.op,"op")}</div>
-    <div class="an lc-an" id="an"><div class="an-pitch"><i class="an-gl"></i><i class="an-gr"></i></div><div class="an-ball idle" id="an-ball"></div><div class="an-msg" id="an-msg"></div></div>
-    <div class="lc-row me">${row(m.me,"me")}</div><div class="dr-stage" id="lc-stage"></div><div class="dr-feed">${m.log.map(e=>`<div class="${e.c||""}"><b>T${e.t}</b>${e.x}</div>`).join("")}</div></div>`;
+    <div class="lm-main"><div class="lm-team lm-op"><div class="lm-row">${m.op.map((id,i)=>lmCard(drCard(id),"op",i,m)).join("")}</div></div>
+    <div class="an lc-an lm-an" id="an"><div class="an-pitch"><i class="an-gl"></i><i class="an-gr"></i></div><div class="lm-live" id="lm-live">${m.me.map((id,k)=>tok(id,k,"me")).join("")}${m.op.map((id,k)=>tok(id,k,"op")).join("")}</div><div class="an-ball idle" id="an-ball"></div><div class="an-msg" id="an-msg"></div></div>
+    <div class="lm-team lm-me"><div class="lm-row">${m.me.map((id,i)=>lmCard(drCard(id),"me",i,m)).join("")}</div></div></div>
+    <div class="lm-side"><div class="dr-stage" id="lc-stage"></div><div class="dr-feed">${m.log.map(e=>`<div class="${e.c||""}"><b>T${e.t}</b>${e.x}</div>`).join("")}</div></div></div>`;
   if(!m.busy&&!done) ldcAsk(myTurn);
+  if(m.want==="def"&&m.aiAtt){ const e=B.querySelector(`.lm-op [data-id="${m.aiAtt}"]`); if(e) e.classList.add("thr"); }
+  lmCirc(myTurn);
 }
+/* le ballon circule entre les joueurs pendant qu'on réfléchit */
+let lmT=null;
+function lmCirc(myTurn){ clearInterval(lmT); let last=null;
+  const step=()=>{ const L=$("lm-live"), A=$("an"), b=$("an-ball"); if(!L||!ldc.m){ clearInterval(lmT); return; }
+    if(ldc.m.busy||A.classList.contains("act")) return;
+    const side=ldc.m.want==="def"?"op":ldc.m.want==="att"?"me":(myTurn?"me":"op");
+    const ts=[...L.querySelectorAll(".lm-tk."+side)].filter(t=>t!==last&&!(t.dataset.id==ldc.m[side==="me"?"me":"op"][0]&&Math.random()<.7));
+    const t=pickOne(ts); if(!t) return; last=t; L.querySelectorAll(".lm-tk.ball").forEach(x=>x.classList.remove("ball")); t.classList.add("ball");
+    b.classList.remove("idle"); b.classList.add("circ"); b.style.left=`calc(${t.style.left} + 14px)`; b.style.top=`calc(${t.style.top} + 14px)`; };
+  step(); lmT=setInterval(step,1100); }
 function ldcSt(h){ const e=$("lc-stage"); if(e) e.innerHTML=h; }
 function ldcSel(id){ const m=ldc.m; if(!m||m.busy||!m.want) return; const c=drCard(id); if(!c) return;
   if(m.want==="att"&&id===m.tired.me) return toast("Ce joueur vient d'attaquer, il souffle ce tour-ci");
@@ -4180,11 +4240,15 @@ function ldcSel(id){ const m=ldc.m; if(!m||m.busy||!m.want) return; const c=drCa
   m.pick=id; ldcMatchUI(); }
 function ldcAsk(myTurn){ const m=ldc.m;
   if(myTurn){ m.want="att"; const c=m.pick&&drCard(m.pick);
-    ldcSt(`<div class="lc-ask"><span class="dr-k">À toi d'attaquer</span><h4>${c?`${esc(dispName(c))} a le ballon`:"Choisis ton attaquant (clique sur un de tes joueurs)"}</h4>${c?`<div class="dr-btns">${DR_ACT.map(([k,t,s])=>`<button class="dr-b" onclick="ldcAtt('${k}')"><b>${t}</b><small>${esc(s.replace("MATE","un coéquipier"))}</small></button>`).join("")}</div>`:""}</div>`); }
+    ldcSt(`<div class="lc-ask"><span class="dr-k">À toi d'attaquer</span><h4>${c?`${esc(dispName(c))} a le ballon`:"Choisis ton attaquant (clique sur un de tes joueurs)"}</h4>${c?lmVs(c,m.op.slice(1).filter(id=>id!==m.tired.dop).map(drCard),"Leur défense"):""}${c?`<div class="dr-btns">${DR_ACT.map(([k,t,s])=>`<button class="dr-b" onclick="ldcAtt('${k}')"><b>${t}</b><small>${esc(s.replace("MATE","un coéquipier"))}</small></button>`).join("")}</div>`:""}</div>`); }
   else { if(!m.aiAtt){ const av=m.op.slice(1).filter(id=>id!==m.tired.op); m.aiAtt=pickOne(av.sort((a,b)=>drRating(drCard(b))-drRating(drCard(a))).slice(0,3)); const ac=drCard(m.aiAtt), st=drStyles(ac); m.aiAct=Math.random()<.65?st[0]:pickOne("FDVPL".split("")); }
     m.want="def"; const a=drCard(m.aiAtt), c=m.pick&&drCard(m.pick);
-    ldcSt(`<div class="lc-ask def"><span class="dr-k">${esc(m.name)} attaque</span><h4>${esc(dispName(a))} fonce vers ton but</h4><p>Qui envoies-tu au duel ?</p>${c?`<div class="dr-act"><button class="go" onclick="ldcDef()">Envoyer ${esc(dispName(c))}</button></div>`:""}</div>`); }
+    ldcSt(`<div class="lc-ask def"><span class="dr-k">${esc(m.name)} attaque</span><h4>${esc(dispName(a))} fonce vers ton but</h4>${lmVs(a,c?[c]:[],c?"Ton défenseur":"")}<p>Qui envoies-tu au duel ? ${lmTip(a,m.me.slice(1).filter(id=>id!==m.tired.dme).map(drCard))}</p>${c?`<div class="dr-act"><button class="go" onclick="ldcDef()">Envoyer ${esc(dispName(c))}</button></div>`:""}</div>`); }
 }
+function lmVs(a,defs,lab){ const st=drStyles(a); const ok=x=>defs.some(d=>drStyles(d).some(y=>(STY_BEAT[y]||"").includes(x)));
+  return `<div class="lm-vs"><div><b>${drRating(a)}</b><span>${esc(dispName(a))}</span>${st.map(x=>`<i class="${defs.length&&ok(x)?"bad":""}">${STY_N[x]}</i>`).join("")}</div>${defs.length?`<em>vs</em><div class="r"><small>${lab}</small>${defs.map(d=>`<span class="lm-d"><b>${drRating(d)}</b>${esc(dispName(d).replace(/\s+\d{2}\/\d{2}$|\s+\d{4}$/,""))} · ${drStyles(d).map(y=>STY_N[y]).join("/")}</span>`).join("")}</div>`:""}</div>`; }
+function lmTip(a,mine){ const st=drStyles(a)[0], best=mine.filter(d=>drStyles(d).some(y=>(STY_BEAT[y]||"").includes(st))).sort((x,y)=>drRating(y)-drRating(x))[0];
+  return best?`<span class="lm-tip">Conseil : ${esc(dispName(best))} (${drStyles(best).map(y=>STY_N[y]).join("/")}) est fort contre le style ${STY_N[st]}.</span>`:""; }
 const ldcGkR=c=>drPos(c)==="G"?drRating(c):drRating(c)-15; // un joueur de champ dans les cages est bien moins fort
 function ldcFinish(a,act,dfd,gk){ let p=drDuel(a,act,dfd,false); p*=Math.max(.25,Math.min(.88,.58+(drRating(a)-ldcGkR(gk))/60)); return p; }
 async function ldcAtt(k){ const m=ldc.m; if(m.busy||!m.pick) return; m.busy=true; const a=drCard(m.pick), gk=drCard(m.op[0]);
