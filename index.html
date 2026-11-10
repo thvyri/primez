@@ -2501,7 +2501,7 @@ input,select,textarea{border-radius:12px!important}
 .bl-patch.gone{opacity:0;pointer-events:none}
 .bl-shine{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 30% 24%,#ffffff70 0,#ffffff10 22%,transparent 40%);transition:opacity .4s}
 /* la carte qui sort du ballon (zoomée = nette) */
-.bl-card{position:absolute;left:50%;top:calc(50% - 5vh);width:158px;height:228px;margin:-114px 0 0 -79px;zoom:1.45;z-index:5;opacity:0;transform:scale(.15);transition:transform .7s cubic-bezier(.2,1.1,.3,1),opacity .45s;pointer-events:none}
+.bl-card{position:absolute;inset:0;width:158px;height:228px;margin:auto;zoom:1.45;z-index:5;opacity:0;transform:scale(.15);transition:transform .7s cubic-bezier(.2,1.1,.3,1),opacity .45s;pointer-events:none}
 .bl-card.up{opacity:1;transform:translateY(-10px)}
 .bl-card .card{cursor:default}
 .bl-card.tray{transition:transform .6s cubic-bezier(.4,0,.2,1)}
@@ -3265,14 +3265,13 @@ const refLink=()=>`${location.origin}${location.pathname}?ref=${fmtCode(refSt&&r
 function refCopy(){ const l=refLink(); try{ navigator.clipboard.writeText(l).then(()=>toast("Lien copié",true),()=>toast(l,true)); }catch(e){ toast(l,true); } }
 function refShare(){ const l=refLink(), t="Viens ouvrir des boosters de légendes du foot sur PrimeZ avec mon lien : 5 boosters Prolongation + 2 000 ballons offerts !";
   if(navigator.share) navigator.share({title:"PrimeZ",text:t,url:l}).catch(()=>{}); else refCopy(); }
-/* popup d'invitation : une seule fois par compte, à l'arrivée (ou à la demande depuis l'admin) */
+/* popup d'invitation : à chaque lancement du jeu (une fois par chargement), ou à la demande depuis l'admin */
 function inviteIntro(force){
   if(!profile||$("inv")) return;
-  const key="pz_inv_"+profile.id;
-  if(!force){ try{ if(localStorage.getItem(key)) return; }catch(e){ return; }
+  if(!force){ if(inviteIntro.done) return;
     /* on attend que les cartes soient chargées et qu'aucun booster ne soit en cours d'ouverture */
     if((!allCards.length||$("overlay").classList.contains("show"))&&(inviteIntro.n=(inviteIntro.n||0)+1)<20){ setTimeout(()=>inviteIntro(),800); return; }
-    try{ localStorage.setItem(key,"1"); }catch(e){} }
+    inviteIntro.done=true; }
   const promos=allCards.filter(c=>c.rarity==="promo"&&c.image_url), ya=promos.find(c=>/YAMAL/i.test(c.name)), pick=promos.filter(c=>c!==ya).slice(0,2);
   if(ya) pick.splice(Math.min(1,pick.length),0,ya);
   const cards=(pick.length?pick:[{id:0,name:"L.YAMAL 25/26",rarity:"promo",image_url:IMG["h-yamal"]||""}]).slice(0,3), mid=(cards.length-1)/2;
@@ -3354,11 +3353,11 @@ const PACK_THEME={"coup-envoi":"#d21f2e","prolongation":"#1f5fd6","pantheon":"#c
 const PACK_SUB={"coup-envoi":"Toutes les raretés","prolongation":"Élite ou mieux","pantheon":"Mythique garantie","ldc":"Hommes du match","promo":"3 cartes PROMO"};
 const PACK_ICO={"coup-envoi":"▲","prolongation":"◆","pantheon":"★","ldc":"★","promo":"%"};
 function packHTML(b,cls,sty){
-  const h=heroOf(b), img=PACK_IMG[b.id]||(h.pack&&(IMG["k-"+h.pack]||IMG["h-"+h.pack]))||"", k=Math.max(0,boosters.indexOf(b))+1;
+  const h=heroOf(b), img=PACK_IMG[b.id]||(h.pack&&(IMG["k-"+h.pack]||IMG["h-"+h.pack]))||"", k=Math.max(0,boosters.indexOf(b))+1, pr=/promo/i.test(b.id)||boosters.indexOf(b)<0;
   const art=img?`<img src="${img}" alt="">`:b.id==="pantheon"?PANART:`<img class="lg" src="logo.png" alt="">`;
   return `<div class="bpk ${b.id} ${cls||""}" style="--bc:${PACK_THEME[b.id]||"#d21f2e"};--n:${b.name.length};${sty||""}">
-  <div class="bp-art">${art}</div><div class="bp-num">${String(k).padStart(2,"0")}</div><div class="bp-pitch"></div>
-  <div class="bp-side">PrimeZ · Booster N°${String(k).padStart(3,"0")} · ${b.cards_count} cartes</div>
+  <div class="bp-art">${art}</div>${pr?"":`<div class="bp-num">${String(k).padStart(2,"0")}</div>`}<div class="bp-pitch"></div>
+  <div class="bp-side">PrimeZ · ${pr?"Édition PROMO":`Booster N°${String(k).padStart(3,"0")}`} · ${b.cards_count} cartes</div>
   <div class="bp-hd"><img src="logo.png" alt="" onerror="this.style.display='none'"><span>PrimeZ</span><i>${PACK_ICO[b.id]||"★"}</i></div>
   <div class="bp-band"><div class="bp-name"><span>${esc(b.name)}</span></div><div class="bp-chips"><b>${b.cards_count} cartes</b><span>${PACK_SUB[b.id]||""}</span></div></div>
   <div class="bp-sheen"></div></div>`;
@@ -3544,7 +3543,9 @@ function ballStep(){ const s=bl; if(!s||s.busy) return; if(s.shown) return ballT
   const peel=()=>{ g.forEach((e,k)=>setTimeout(()=>{ const dir=(+e.dataset.cx<s.bw.clientWidth/2)?-1:1; e.style.transform=`translateZ(60px) rotateY(${dir*-170}deg) translate(${dir*80}px,-30px)`; e.classList.add("gone"); },k*70));
     try{ boum(); }catch(e){}
     setTimeout(()=>{ if(!s.bw.isConnected) return; if(last){ s.bw.querySelector(".bl-shine").style.opacity="0"; }
-      const w=document.createElement("div"); w.className="bl-card"; w.dataset.i=idx; w.style.zoom=Math.max(1.1,Math.min(3.2,innerHeight*.66/228,innerWidth*.8/158)).toFixed(2); w.innerHTML=cardHTML(c,false,0); w.querySelector(".card").removeAttribute("onclick");
+      const w=document.createElement("div"); w.className="bl-card"; w.dataset.i=idx; { /* la carte est centrée entre le haut (badge « Nouveau », « Tout passer ») et le texte du bas */
+        const fb=innerWidth<=700?150:180, ft=innerWidth<=700?70:64, z=Math.max(1.1,Math.min(3.2,innerHeight*.66/228,(innerHeight-fb-ft-30)/228,innerWidth*.8/158));
+        w.style.zoom=z.toFixed(2); w.style.top=(ft/z).toFixed(1)+"px"; w.style.bottom=(fb/z).toFixed(1)+"px"; } w.innerHTML=cardHTML(c,false,0); w.querySelector(".card").removeAttribute("onclick");
       if(seq.isNew&&seq.isNew.get(c)) w.insertAdjacentHTML("beforeend",'<span class="bl-new">Nouveau</span>');
       s.bw.parentNode.appendChild(w); requestAnimationFrame(()=>requestAnimationFrame(()=>w.classList.add("up")));
       const done=()=>{ seq.seen.add(idx); s.shown=w; s.busy=false; if(last) s.bw.classList.add("empty"); const h=$("bl-hint"); if(h) h.textContent=(TOUCH?"Touche":"Clique")+(last?" pour voir ta feuille de match":" pour continuer"); };
