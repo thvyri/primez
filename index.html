@@ -2580,6 +2580,23 @@ input,select,textarea{border-radius:12px!important}
 .rk-last.bad,.rk-flash.bad{background:#dc262622;border:1px solid #f8717166}.rk-last.bad b,.rk-flash.bad b{color:#f87171}
 .rk-flash{padding:40px 16px;animation:rkin .35s cubic-bezier(.2,1.2,.3,1)}.rk-flash b{font-size:44px}
 .rk-ff{font-size:12px!important;padding:8px 14px!important;opacity:.8}
+/* ===================== v11 : téléphone ===================== */
+.card>canvas.dust{border-radius:12px;transform:translateZ(2px);z-index:40}
+.stg.spx{z-index:300!important}.rfx{z-index:320!important}
+/* étiquettes « Nouveau » discrètes, « Doublon » masqué */
+.tg2{font-size:8px!important;padding:2px 7px!important;letter-spacing:.12em!important;top:-7px!important;border-radius:999px!important}
+.tg2:not(.new){display:none!important}
+.tg2.new{background:#16a34ad9!important;border-color:#4ade80!important;color:#fff!important;box-shadow:0 2px 8px #0006}
+.hbox .tg2{top:auto!important;bottom:-7px!important}
+@media (hover:none){
+  .grid .card .pk-shine,.grid .card .pk-glare,.grid .card .gl,.grid .card .fx,.tn .card .pk-shine,.tn .card .pk-glare{display:none!important}
+  .card.lk .art img{filter:grayscale(1) brightness(.33)!important;transform:none!important}
+  .csec .grid .card::after{display:none!important}
+  body::after{display:none!important}
+  .nav2,.sb,.inv,.stg.spx{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .stg.spx{background:radial-gradient(ellipse 60% 55% at 50% 46%,color-mix(in srgb,var(--sc) 26%,#0b090c),#0b090c 72%)!important}
+  .inv{background:#07060af2!important}
+}
 @media(max-width:900px){.rk-cm .tn{zoom:.72}.rk-empty{width:50px;height:72px}.rk-code{font-size:9px}.rk-acts{grid-template-columns:1fr}.rk-duel .tn{zoom:.75}.rk-mm{grid-template-columns:1fr}}
 </style>
 <script>
@@ -2744,6 +2761,9 @@ const esc = t => String(t ?? "").replace(/&/g,"&amp;").replace(/"/g,"&quot;").re
 const SIMPLE=["commune","rare","elite"];
 const dispName=c=>SIMPLE.includes(c.rarity)?String(c.name).replace(/\s+(\d{2}\/\d{2}|\d{4})$/,""):c.name;
 let numMap={}; const numOf=c=>numMap[c.name]||c.id;
+/* téléphone ou tablette (pas de souris) : textes et effets adaptés */
+const TOUCH=matchMedia("(hover:none)").matches;
+const DUSTH=()=>TOUCH?"Gratte la poussière avec ton doigt · touche à côté pour tout enlever":"Gratte la poussière avec ta souris · clic à côté pour tout enlever";
 /* numéro affiché : « 1 » pour les deux GOAT, « ? » pour les autres en attendant la vraie numérotation */
 const numTxt=c=>c&&c.rarity==="goat"?"001":"?";
 function buildNums(){ numMap={}; const top=c=>c.rarity==="goat"&&/^(L\.MESSI|C\.RONALDO)/.test(c.name); let n=1; allCards.forEach(c=>{ if(top(c)) numMap[c.name]=1; }); allCards.forEach(c=>{ if(!top(c)&&c.rarity!=="promo") numMap[c.name]=++n; }); allCards.forEach(c=>{ if(c.rarity==="promo") numMap[c.name]=++n; }); }
@@ -2752,7 +2772,7 @@ const PANART=`<svg viewBox="0 0 240 340" preserveAspectRatio="xMidYMid slice"><d
 <rect width="240" height="340" fill="url(#pg)"/><g transform="translate(30,-8) scale(.75)" fill="#0a0a0a" stroke="#fff3b0" stroke-opacity=".7" stroke-width="2.2" stroke-linejoin="round"><circle cx="120" cy="112" r="16"/><path d="M104 108q16-26 32 0q-16-9-32 0z"/><path d="M104 132h32l5 58h-42z"/><text x="120" y="172" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-style="italic" font-weight="800" font-size="30" fill="#f5b800" stroke="none">10</text><path d="M104 136L60 112l-6 9 46 33z"/><path d="M136 136l44-24 6 9-46 33z"/><path d="M99 188h42l3 28h-48z"/><path d="M99 214h20l-6 78H93z"/><path d="M121 214h20l7 78h-20z"/><path d="M90 292h26l2 9H88zM126 292h26l2 9h-30z"/></g>
 </svg>`;
 const SIL = '<svg viewBox="0 0 100 140" preserveAspectRatio="xMidYMid slice"><g fill="currentColor" fill-opacity=".8"><circle cx="50" cy="54" r="20"/><path d="M10 140C10 98 29 82 50 82s40 16 40 58z"/></g><path d="M38 84l12 14 12-14" fill="none" stroke="#070f24" stroke-opacity=".5" stroke-width="3"/></svg>';
-const art = c => `<div class="art">${SIL}${c.image_url?`<img src="${esc(c.image_url)}" alt="" loading="lazy" onerror="this.remove()">`:""}</div>`;
+const art = c => `<div class="art">${SIL}${c.image_url?`<img src="${esc(c.image_url)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:""}</div>`;
 function toast(m,ok){ const e=$("toast"); e.className=ok?"ok":"ko"; e.innerHTML=`<i>${ok?"✓":"!"}</i><span>${esc(m)}</span>`; e.style.display="flex"; e.classList.remove("in"); void e.offsetWidth; e.classList.add("in");
   clearTimeout(toast.t); toast.t=setTimeout(()=>{ e.classList.add("bye"); setTimeout(()=>{ if(e.classList.contains("bye")) e.style.display="none"; },300); },3500); }
 
@@ -3154,7 +3174,7 @@ function ballFaces(){ const p=(1+Math.sqrt(5))/2, V=[[0,1,p],[0,1,-p],[0,-1,p],[
 let bl=null;
 function ballStart(){ const r=$("reveal"), L=seq.list; glow(null); seq.mode="ball"; seq.seen=new Set(); r.className="seqv ballv";
   r.innerHTML=`<div class="bl-st"><div class="bl-ball"><div class="bl-core"></div><div class="bl-skin"></div></div>
-    <div class="bl-hint" id="bl-hint">Clique sur le ballon</div><div class="bl-tray" id="bl-tray">${L.map(()=>'<i></i>').join("")}</div>
+    <div class="bl-hint" id="bl-hint">${TOUCH?"Touche":"Clique sur"} le ballon</div><div class="bl-tray" id="bl-tray">${L.map(()=>'<i></i>').join("")}</div>
     ${L.length>1?`<div class="bl-sa"><button class="ghost" onclick="ballSkip()">Tout passer</button></div>`:""}</div>`;
   const bw=r.querySelector(".bl-ball"), S=bw.clientWidth/2, faces=ballFaces().sort((a,b)=>a.cen[2]-b.cen[2]);
   const els=faces.map(f=>{ const mx=f.pts.reduce((a,q)=>a+q[0],0)/f.pts.length, my=f.pts.reduce((a,q)=>a+q[1],0)/f.pts.length, px=f.pts.map(q=>[S+(mx+(q[0]-mx)*.955)*S,S-(my+(q[1]-my)*.955)*S]);
@@ -3175,7 +3195,7 @@ function ballStep(){ const s=bl; if(!s||s.busy) return; if(s.shown) return ballT
       const w=document.createElement("div"); w.className="bl-card"; w.dataset.i=idx; w.innerHTML=cardHTML(c,false,0); w.querySelector(".card").removeAttribute("onclick");
       if(seq.isNew&&seq.isNew.get(c)) w.insertAdjacentHTML("beforeend",'<span class="bl-new">Nouveau</span>');
       s.bw.parentNode.appendChild(w); requestAnimationFrame(()=>requestAnimationFrame(()=>w.classList.add("up")));
-      const done=()=>{ seq.seen.add(idx); s.shown=w; s.busy=false; if(last) s.bw.classList.add("empty"); const h=$("bl-hint"); if(h) h.textContent=last?"Clique pour voir ta feuille de match":"Clique pour continuer"; };
+      const done=()=>{ seq.seen.add(idx); s.shown=w; s.busy=false; if(last) s.bw.classList.add("empty"); const h=$("bl-hint"); if(h) h.textContent=(TOUCH?"Touche":"Clique")+(last?" pour voir ta feuille de match":" pour continuer"); };
       if(big){ /* grande révélation plein écran (poussière, vidéo…), puis la carte est retournée au centre */
         setTimeout(()=>spotReveal(c,w.querySelector(".card"),()=>{ w.querySelector(".card").classList.add("flip"); glow(c); done(); setTimeout(()=>{ if(s.shown===w) ballTray(); },350); }),380); }
       else { setTimeout(()=>{ w.querySelector(".card").classList.add("flip"); if(rare){ glow(c); fx(c); } else revealSfx(c); if(c.sfx_url) sfxPlay(c); },420); setTimeout(done,900); }
@@ -3185,7 +3205,7 @@ function ballTray(){ const s=bl, w=s.shown, k=+w.dataset.i, slot=$("bl-tray")&&$
   /* la carte est zoomée : le déplacement se compte en pixels « non zoomés » */
   const z=parseFloat(getComputedStyle(w).zoom)||1, a=w.getBoundingClientRect(), b=slot.getBoundingClientRect(), cur=new DOMMatrix(getComputedStyle(w).transform);
   w.style.transform=`translate(${(cur.m41+(b.left+b.width/2-(a.left+a.width/2))/z).toFixed(1)}px,${(cur.m42+(b.top+b.height/2-(a.top+a.height/2))/z).toFixed(1)}px) scale(${(b.width/a.width).toFixed(3)})`; w.classList.add("tray");
-  if(s.i>=seq.list.length){ s.busy=true; setTimeout(ballEnd,600); } else { const h=$("bl-hint"); if(h) h.textContent="Clique sur le ballon"; } }
+  if(s.i>=seq.list.length){ s.busy=true; setTimeout(ballEnd,600); } else { const h=$("bl-hint"); if(h) h.textContent=TOUCH?"Touche le ballon":"Clique sur le ballon"; } }
 function ballEnd(){ if(seq.mode!=="ball") return; sfxStop&&sfxStop(); if(seq.list.length===1){ closeOverlay(); return; } showSheet(0); }
 function ballSkip(){ if(!bl) return; seq.list.forEach((c,i)=>{ if(ORDER.indexOf(c.rarity)<ORDER.indexOf("mythique")) seq.seen.add(i); }); bl.busy=true; document.querySelector(".spx")?.remove(); ballEnd(); }
 /* joueur stylisé pour l'ouverture (maillot, short, numéro dans le dos du maillot, nom sous les pieds) */
@@ -3215,7 +3235,7 @@ function showSeq(){
   if(c.sfx_url) sfxPrep(c);
   const old=isOld(c);
   const reveal=()=>{ if(seq.done||!stg.isConnected) return;
-    if(old&&seq.phase!=="dust"&&seq.phase!=="clean"){ seq.phase="dust"; dgAll(); stg.classList.remove("sus","vid"); const h=stg.querySelector(".hint"); if(h) h.textContent="Gratte la poussière avec ta souris · clic ailleurs pour tout enlever";
+    if(old&&seq.phase!=="dust"&&seq.phase!=="clean"){ seq.phase="dust"; dgAll(); stg.classList.remove("sus","vid"); const h=stg.querySelector(".hint"); if(h) h.textContent=DUSTH();
       seq.dust=dustCover(card,()=>{ seq.phase="clean"; seq.dust=null; reveal(); }); requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add("flip"))); return; }
     seq.done=true; seq.phase="card"; stg.style.setProperty("--sc",COLOR[c.rarity]); $("overlay").style.setProperty("--glow",COLOR[c.rarity]); dgAll(); stg.classList.remove("sus","vid"); card.classList.add("flip"); (seq.seen=seq.seen||new Set()).add(seq.i);
     stg.classList.add("on"); const h=stg.querySelector(".hint"); if(h) h.textContent="Espace ou clic pour continuer"; glow(c); fx(c); if(ORDER.indexOf(c.rarity)<3) revealSfx(c); if(c.rarity===seq.best.rarity) seq.fxDone=true; };
@@ -3239,7 +3259,7 @@ function boum(){ if(muted) return; const a=actx(); if(!a) return; const t=a.curr
   g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.7,t+.004); g.gain.exponentialRampToValueAtTime(.0001,t+.11); o.connect(g); g.connect(out); o.start(t); o.stop(t+.13); }
 function dgOne(){ const e=document.querySelector("#bnum span:not(.on)"); if(!e) return; e.textContent=e.dataset.d; e.classList.add("on"); boum(); }
 function dgAll(){ dgClear(); while(dgLeft()) dgOne(); }
-function dgStart(done){ dgClear(); const n=dgLeft(), h=document.querySelector("#reveal .hint"); if(h) h.textContent="Clique pour passer le suspense";
+function dgStart(done){ dgClear(); const n=dgLeft(), h=document.querySelector("#reveal .hint"); if(h) h.textContent=(TOUCH?"Touche":"Clique")+" pour passer le suspense";
   for(let i=0;i<n;i++) dgT.push(setTimeout(dgOne,900+i*1000)); dgT.push(setTimeout(done,900+(n-1)*1000+800)); }
 function stepSeq(){ if(seq.mode==="seq"&&seq.skip&&seq.skip()) return; if(!seq.done){ const el=document.querySelector("#reveal .card"); if(el) el.click(); } else nextCard(); }
 function nextCard(){ stopVfx(); sfxStop(); dgClear(); if(seq.i+1<seq.list.length){ seq.i++; showSeq(); } else if(seq.list.length===1) closeOverlay(); else showSheet(0); }
@@ -3287,7 +3307,7 @@ function sheetFlip(k,auto){
 function cardYear(c){ const m=String(c.name).match(/(\d{2})\/(\d{2})$/); if(m){ const y=+m[1]; return y>=30?1900+y:2000+y; } const n=String(c.name).match(/(\d{4})$/); return n?+n[1]:null; }
 const isOld=c=>{ if(ORDER.indexOf(c.rarity)<ORDER.indexOf("mythique")) return false; const y=cardYear(c); return y!=null&&y<2010; };
 function dustCover(card,onClean,need){ need=need||.55; const fr=card&&card.querySelector(".face.front"); if(!fr){ onClean&&onClean(); return {clear(){}}; }
-  const W=316,H=456, cv=document.createElement("canvas"); cv.width=W; cv.height=H; cv.className="dust pre"; fr.appendChild(cv); requestAnimationFrame(()=>requestAnimationFrame(()=>cv.classList.remove("pre"))); const x=cv.getContext("2d");
+  const W=316,H=456, cv=document.createElement("canvas"); cv.width=W; cv.height=H; cv.className="dust pre"; card.appendChild(cv); /* posé sur la carte, hors de la face retournée en 3D : sur iPhone, les touches n'arrivaient pas */ requestAnimationFrame(()=>requestAnimationFrame(()=>cv.classList.remove("pre"))); const x=cv.getContext("2d");
   /* poussière : beige gris, grain, taches, fibres */
   const g=x.createLinearGradient(0,0,W,H); g.addColorStop(0,"#9a8e78"); g.addColorStop(.5,"#7d725f"); g.addColorStop(1,"#5f5647"); x.fillStyle=g; x.fillRect(0,0,W,H);
   for(let i=0;i<14;i++){ const r=40+Math.random()*90, cx=Math.random()*W, cy=Math.random()*H, rg=x.createRadialGradient(cx,cy,0,cx,cy,r); rg.addColorStop(0,Math.random()<.5?"#c9bfa955":"#3b342a44"); rg.addColorStop(1,"#0000"); x.fillStyle=rg; x.fillRect(cx-r,cy-r,2*r,2*r); }
@@ -3309,15 +3329,15 @@ function dustCover(card,onClean,need){ need=need||.55; const fr=card&&card.query
 function spotReveal(c,src,done){ const old=document.querySelector(".spx"); if(old) old.remove();
   const d=document.createElement("div"); d.className="stg bld spx"+(c.rarity==="promo"?" promo":""); d.style.setProperty("--sc",MYST(c)?SUS_C:COLOR[c.rarity]);
   d.innerHTML=`<div class="spx-rays"></div><div class="bfx"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="big">${cardHTML(c,true,0)}</div><div class="bflash"></div>
-    <div class="spx-nm"><span class="tg">${RARITY[c.rarity]}</span><b>${esc(dispName(c))}</b></div><div class="spx-h">Clique pour passer</div>`;
+    <div class="spx-nm"><span class="tg">${RARITY[c.rarity]}</span><b>${esc(dispName(c))}</b></div><div class="spx-h">${TOUCH?"Touche":"Clique"} pour passer</div>`;
   document.body.appendChild(d); const card=d.querySelector(".card"), fr=card.querySelector(".face.front"); if(fr) fr.insertAdjacentHTML("beforeend",'<div class="bm"><i></i></div>');
   const big=d.querySelector(".big"), vint=isOld(c); let dust=null;
   /* zoom (net) au lieu d'un agrandissement étiré, et une seule fois : la carte tient dans ~58 % de la hauteur */
   const bs=Math.max(1.2,Math.min(2.4,(innerHeight*.56)/228,(innerWidth*.8)/158)); big.style.setProperty("zoom",bs.toFixed(3)); big.style.setProperty("transform","none"); big.style.setProperty("margin","0","important");
-  if(vint){ d.classList.remove("bld"); d.querySelectorAll(".bm,.bfx").forEach(e=>e.remove()); d.querySelector(".spx-h").textContent="Gratte la poussière avec ta souris · clic à côté pour tout enlever"; }
+  if(vint){ d.classList.remove("bld"); d.querySelectorAll(".bm,.bfx").forEach(e=>e.remove()); d.querySelector(".spx-h").textContent=DUSTH(); }
   if(src&&big.animate){ const a=src.getBoundingClientRect(), b=big.getBoundingClientRect(); big.animate([{transform:`translate(${((a.left+a.width/2-(b.left+b.width/2))/bs).toFixed(1)}px,${((a.top+a.height/2-(b.top+b.height/2))/bs).toFixed(1)}px) scale(${(a.width/b.width).toFixed(3)})`,opacity:.6},{transform:"none",opacity:1}],{duration:520,easing:"cubic-bezier(.2,.8,.2,1)"}); }
   requestAnimationFrame(()=>d.classList.add("in")); thud(); if(c.sfx_url) sfxPlay(c);
-  let st=0; const T=[]; const built=()=>{ if(st) return; if(dust){ const x=dust; dust=null; x.clear(); return; } st=1; T.forEach(clearTimeout); d.classList.remove("bld"); d.querySelectorAll(".bm,.bfx").forEach(e=>e.remove()); d.classList.add("done"); d.style.setProperty("--sc",COLOR[c.rarity]); thud(); rareFx(c); if(c.rarity==="promo"){ d.classList.add("hit"); setTimeout(thud,180); setTimeout(thud,360); } const h=d.querySelector(".spx-h"); if(h) h.textContent="Clique pour continuer"; };
+  let st=0; const T=[]; const built=()=>{ if(st) return; if(dust){ const x=dust; dust=null; x.clear(); return; } st=1; T.forEach(clearTimeout); d.classList.remove("bld"); d.querySelectorAll(".bm,.bfx").forEach(e=>e.remove()); d.classList.add("done"); d.style.setProperty("--sc",COLOR[c.rarity]); thud(); rareFx(c); if(c.rarity==="promo"){ d.classList.add("hit"); setTimeout(thud,180); setTimeout(thud,360); } const h=d.querySelector(".spx-h"); if(h) h.textContent=(TOUCH?"Touche":"Clique")+" pour continuer"; };
   const close=()=>{ if(st<1){ built(); return; } if(st>1) return; st=2; d.classList.add("out"); setTimeout(()=>d.remove(),320); done&&done(); };
   if(vint) dust=dustCover(card,()=>{ dust=null; built(); }); else T.push(setTimeout(built,SFX_D));
   d.addEventListener("click",close); }
@@ -3433,7 +3453,7 @@ function sfxBuild(c,stg,card,done){ sfxT.forEach(clearTimeout); sfxT=[];
   const fr=card.querySelector(".face.front"); card.classList.add("flip");
   if(fr) fr.insertAdjacentHTML("beforeend",'<div class="bm"><i></i></div>');
   stg.insertAdjacentHTML("beforeend",'<div class="bfx"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="bflash"></div>');
-  stg.classList.add("bld"); if(c.sfx_url){ sfxGo(c); sfxBar(); } thud(); const h=stg.querySelector(".hint"); if(h) h.textContent="Clique pour passer";
+  stg.classList.add("bld"); if(c.sfx_url){ sfxGo(c); sfxBar(); } thud(); const h=stg.querySelector(".hint"); if(h) h.textContent=(TOUCH?"Touche":"Clique")+" pour passer";
   sfxEnd=()=>{ sfxT.forEach(clearTimeout); sfxT=[]; if(!stg.isConnected) return; stg.classList.remove("bld"); stg.querySelectorAll(".bm,.bfx,.bflash").forEach(e=>e.remove()); sfxEnd=()=>{}; done(); };
   [820,1640,2460].forEach((t,i)=>sfxT.push(setTimeout(()=>{ if(stg.isConnected) stg.style.setProperty("--bk",String(i+1)); },t)));
   sfxT.push(setTimeout(()=>sfxEnd(),SFX_D)); }
@@ -3519,14 +3539,22 @@ function renderCollection(){
   const sortV=$("c-sort").value, asc=sortV==="rar-asc";
   let order=defs.map(d=>d[0]); if(groupBy==="rarete"&&!asc) order=order.reverse();
   const meta=Object.fromEntries(defs.map(d=>[d[0],d]));
+  /* les cartes s'affichent par paquets au fil du défilement : afficher 400 cartes d'un coup faisait planter Safari sur iPhone (mémoire) */
+  const CH=matchMedia("(hover:none)").matches?18:36, one=c=>owned[c.id]?cardHTML(c,true,owned[c.id]):lockedCard(c); collQ=[];
   const parts=order.filter(g=>filter==="all"||g===filter).map(g=>{
     const items=list.filter(c=>c[key]===g); if(!items.length) return "";
-    const all=allCards.filter(c=>c[key]===g), o=all.filter(c=>owned[c.id]).length, col=meta[g][2], pct=all.length?Math.round(o/all.length*100):0;
+    const all=allCards.filter(c=>c[key]===g), o=all.filter(c=>owned[c.id]).length, col=meta[g][2], pct=all.length?Math.round(o/all.length*100):0, qi=collQ.push({items,from:CH,step:CH})-1;
     return `<section class="csec" style="--c:${col}"><div class="csh"><i></i><h3>${esc(meta[g][1])}</h3><span class="cn">${o}/${all.length}</span><div class="cbar"><b style="width:${pct}%"></b></div></div>
-    <div class="grid">${items.map(c=>owned[c.id]?cardHTML(c,true,owned[c.id]):lockedCard(c)).join("")}</div></section>`; });
+    <div class="grid">${items.slice(0,CH).map(one).join("")}</div>${items.length>CH?`<i class="coll-more" data-q="${qi}"></i>`:""}</section>`; });
   $("coll-n").textContent=`${list.length} carte${list.length>1?"s":""}`;
   $("collection-grid").innerHTML=parts.join("")||"<p style='color:var(--mute)'>Aucune carte.</p>"; markNew();
+  if(collObs) collObs.disconnect();
+  collObs=new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting) return; const s=e.target, q=collQ[+s.dataset.q]; if(!q) return;
+    const nx=q.items.slice(q.from,q.from+q.step); q.from+=q.step; s.previousElementSibling.insertAdjacentHTML("beforeend",nx.map(one).join("")); markNew();
+    if(q.from>=q.items.length){ collObs.unobserve(s); s.remove(); } }),{rootMargin:"900px 0px"});
+  document.querySelectorAll("#collection-grid .coll-more").forEach(s=>collObs.observe(s));
 }
+let collQ=[], collObs=null;
 
 /* ---------- messages ---------- */
 async function loadMessages(){
