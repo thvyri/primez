@@ -2402,6 +2402,66 @@ input,select,textarea{border-radius:12px!important}
 .mz2-m .mz2-bar{width:100%}
 .mz2-mf{width:100%;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--mute)}.mz2-mf em{font-style:normal;font-weight:800;color:#4ade80}.mz2-mf em.rw{color:#ffd166}.mz2-mf .go{padding:6px 12px;font-size:12px}
 @media(max-width:900px){.mz2-cols{grid-template-columns:1fr}.mz2-n i{width:42px;height:42px;font-size:15px}.mz2-line{top:23px}.mz2-n span{font-size:10px}}
+
+/* ===================== v8 : ouverture Neymar (arc-en-ciel) + retournée de Cristiano ===================== */
+#op-slot{position:relative;z-index:3;transition:opacity .55s ease,transform .55s ease}
+#op-slot.out{opacity:0;transform:scale(1.12);pointer-events:none}
+#reveal.fromkick .stg{animation:stgIn .6s ease both}
+@keyframes stgIn{from{opacity:0;transform:scale(.97)}}
+.kick.k2{overflow:visible}
+.kpl2{position:absolute;width:88%;aspect-ratio:170/240;pointer-events:none;filter:drop-shadow(0 14px 16px #000b)}
+.kpl2 svg{width:100%;height:100%;overflow:visible}
+.kpl2 g{transform-box:view-box}
+.kpl2 path,.kpl2 circle{stroke:#0008;stroke-width:1.5;stroke-linejoin:round}
+.kpl2 span{position:absolute;left:50%;bottom:-6%;transform:translateX(-50%);white-space:nowrap;font:italic 900 11px/1 Outfit,Arial,sans-serif;letter-spacing:.14em;color:#fff;padding:4px 8px;border-radius:6px;background:#000a;opacity:.9}
+/* Neymar : course, puis talon qui envoie le ballon par-dessus la tête */
+.knj{left:-125%;bottom:-6%;animation:knjIn .7s cubic-bezier(.2,.7,.3,1) both}
+.knj .kleg1{transform-origin:131px 214px;animation:knjL1 1s linear both}
+.knj .kleg2{transform-origin:109px 214px;animation:knjL2 1s linear both}
+.knj .karm1{transform-origin:136px 140px;animation:ka1 1s linear both}
+.knj .karm2{transform-origin:104px 140px;animation:ka2 1s linear both}
+.knj .kbody{animation:kbob .18s ease-in-out 4 alternate}
+@keyframes knjIn{from{transform:translateX(-60vw)}}
+@keyframes knjL1{0%{transform:rotate(28deg)}14%{transform:rotate(-26deg)}28%{transform:rotate(28deg)}42%{transform:rotate(-26deg)}58%{transform:rotate(10deg)}70%{transform:rotate(18deg)}80%{transform:rotate(95deg)}100%{transform:rotate(12deg)}}
+@keyframes knjL2{0%{transform:rotate(-26deg)}14%{transform:rotate(28deg)}28%{transform:rotate(-26deg)}42%{transform:rotate(26deg)}58%{transform:rotate(-6deg)}100%{transform:rotate(-4deg)}}
+/* Cristiano : surgit dans un nuage, se retourne en l'air et frappe en retournée */
+.kcr{left:41%;top:-21%;opacity:0;transform-origin:50% 50%;animation:kcrFly .75s 1s cubic-bezier(.3,.6,.3,1) both;z-index:3}
+.kcr .kleg1{transform-origin:131px 214px;animation:kcrL1 .75s 1s ease-in-out both}
+.kcr .kleg2{transform-origin:109px 214px;animation:kcrL2 .75s 1s ease-in-out both}
+.kcr .karm1{transform-origin:136px 140px;transform:rotate(-60deg)}
+.kcr .karm2{transform-origin:104px 140px;transform:rotate(60deg)}
+.kcr span{transform:translateX(-50%) rotate(180deg);bottom:auto;top:-6%}
+@keyframes kcrFly{0%{opacity:0;transform:scale(.6) rotate(0deg)}12%{opacity:1;transform:scale(1) rotate(-20deg)}44%{opacity:1;transform:rotate(-165deg)}70%{opacity:1;transform:translateY(8%) rotate(-205deg)}100%{opacity:0;transform:translateY(30%) rotate(-240deg)}}
+@keyframes kcrL1{0%,30%{transform:rotate(30deg)}44%{transform:rotate(-70deg)}60%,100%{transform:rotate(-30deg)}}
+@keyframes kcrL2{0%,30%{transform:rotate(-40deg)}44%{transform:rotate(30deg)}100%{transform:rotate(10deg)}}
+.kpuff{position:absolute;left:85%;top:15%;width:70%;aspect-ratio:1;margin:-35% 0 0 -35%;border-radius:50%;pointer-events:none;opacity:0;
+  background:radial-gradient(circle,#fff 0,#ffffffaa 25%,#ffffff22 55%,transparent 70%);animation:kpuff .5s .98s ease-out both;z-index:2}
+@keyframes kpuff{0%{opacity:0;transform:scale(.2)}30%{opacity:.9}100%{opacity:0;transform:scale(1.4)}}
+/* ballon : trajectoire de l'arc-en-ciel puis la reprise jusqu'au cœur du booster */
+.kball{position:absolute;left:-79%;top:93%;width:9%;aspect-ratio:1;border-radius:50%;z-index:4;pointer-events:none;transform:translate(-50%,-50%);opacity:0;
+  background:radial-gradient(circle at 34% 30%,#fff 0 18%,#e8e8e8 40%,#9a9a9a 100%);box-shadow:0 6px 10px #0009,inset -3px -4px 6px #0005;animation:kball 1s .65s linear both}
+.kball::after{content:"";position:absolute;inset:22%;background:#222;clip-path:polygon(50% 0,100% 38%,82% 100%,18% 100%,0 38%);opacity:.85;animation:kspin .25s linear infinite}
+@keyframes kspin{to{transform:rotate(360deg)}}
+@keyframes kball{0%{left:-79%;top:93%;opacity:0}4%{opacity:1}12%{left:-98%;top:88%;animation-timing-function:ease-out}32%{left:-80%;top:30%}50%{left:-30%;top:-20%}62%{left:30%;top:-28%;animation-timing-function:ease-in}68%{left:85%;top:-12%;animation-timing-function:cubic-bezier(.6,0,.9,.6)}80%{left:68%;top:20%}88%{left:50%;top:50%;opacity:1;transform:translate(-50%,-50%) scale(1)}100%{left:50%;top:50%;opacity:0;transform:translate(-50%,-50%) scale(2.6)}}
+/* le ballon éclate : onde + morceaux */
+.kburst{position:absolute;left:50%;top:50%;width:0;height:0;z-index:5;pointer-events:none}
+.kburst::before{content:"";position:absolute;left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;border:4px solid #fff;opacity:0;box-shadow:0 0 40px var(--pc,#fff)}
+.kick.hit .kburst::before{animation:kring .45s ease-out forwards}
+.kburst i{position:absolute;left:-8px;top:-8px;width:16px;height:16px;background:#f2f2f2;clip-path:polygon(50% 0,100% 38%,82% 100%,18% 100%,0 38%);opacity:0}
+.kburst i:nth-child(even){background:#222}
+.kick.hit .kburst i{animation:kshard .7s cubic-bezier(.2,.7,.3,1) forwards}
+.kburst i:nth-child(1){--a:0deg}.kburst i:nth-child(2){--a:45deg}.kburst i:nth-child(3){--a:90deg}.kburst i:nth-child(4){--a:135deg}.kburst i:nth-child(5){--a:180deg}.kburst i:nth-child(6){--a:225deg}.kburst i:nth-child(7){--a:270deg}.kburst i:nth-child(8){--a:315deg}
+@keyframes kring{0%{opacity:1;transform:scale(.2)}100%{opacity:0;transform:scale(2.4)}}
+@keyframes kshard{0%{opacity:1;transform:rotate(var(--a)) translateX(0) rotate(0)}100%{opacity:0;transform:rotate(var(--a)) translateX(140px) rotate(320deg)}}
+.kick.k2 .kfx{left:50%;top:50%}
+.kick.k2.hit::after{left:calc(50% - 90px);top:calc(50% - 90px)}
+/* tirs au but : rien ne passe devant les zones de tir (gardien, ballon, filet) */
+.pn-gk,.pn-ball,.pn-net{pointer-events:none!important}
+.pn-z{z-index:6!important;cursor:pointer}
+.kick.k2.torn .kpl2{transition:opacity .35s;opacity:0}
+.kick.k2.torn .kh.top{transform:translate(40px,-230px) rotate(-16deg)}
+.kick.k2.torn .kh.bot{transform:translate(-30px,220px) rotate(12deg)}
+@media (prefers-reduced-motion:reduce){.kpl2,.kball,.kcr,.kpuff{animation-duration:.01s!important}}
 </style>
 <script>
 (function(){ try{ const base=location.href.split("#")[0].split("?")[0].replace(/[^\/]*$/,"");
@@ -2917,15 +2977,32 @@ function play(list,b,had){
     const bi=ORDER.indexOf(seq.best.rarity), bc=COLOR[seq.best.rarity], T=[bc,bi>=3?bc:bc+"66"];
     const big=bi>=ORDER.indexOf("mythique")?`<div class="kbig" style="--c:${bc}"><small>Booster</small>${RARITY[seq.best.rarity]}</div>`:"";
     const pk=packHTML(b,"rar",`--bc:${bc}`);
-    $("op-slot").innerHTML=`<div class="kick" style="--pc:${T[0]};--pg:${T[1]}"><div class="kp"><div class="kh top">${pk}</div><div class="kh bot">${pk}</div></div>${KICKER}<div class="kfx"><i></i><i></i><i></i><i></i><i></i></div>${big}</div>`; whistle();
-    const K=$("op-slot").firstChild;
-    setTimeout(()=>{ if(K.isConnected){ K.classList.add("hit"); boum(); } },820);
-    setTimeout(()=>{ if(K.isConnected) K.classList.add("torn"); },980);
-    let kd=false; const kGo=()=>{ if(kd||!K.isConnected) return; kd=true; $("op-slot").innerHTML=""; showSeq(); };
-    $("op-slot").onclick=kGo; setTimeout(kGo,1650);
+    /* Neymar arrive balle au pied, fait un arc-en-ciel ; Cristiano surgit et reprend de volée en retournée : le ballon éclate dans le booster */
+    $("op-slot").innerHTML=`<div class="kick k2" style="--pc:${T[0]};--pg:${T[1]}"><div class="kp"><div class="kh top">${pk}</div><div class="kh bot">${pk}</div></div>
+      ${kPlayer("knj","#f7d117","#0a8f3c","#1d4ed8","10","#1d4ed8","#7a4a2a","NEYMAR JR")}${kPlayer("kcr","#f4f4f4","#c9a227","#f4f4f4","7","#1b1b1b","#c58c5c","CRISTIANO")}
+      <i class="kpuff"></i><i class="kball"></i><div class="kburst"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="kfx"><i></i><i></i><i></i><i></i><i></i></div>${big}</div>`; whistle();
+    const K=$("op-slot").firstChild; $("op-slot").classList.remove("out");
+    setTimeout(()=>{ if(K.isConnected){ try{ boum(); }catch(e){} } },1310);
+    setTimeout(()=>{ if(K.isConnected){ K.classList.add("hit"); try{ boum(); thud&&thud(); }catch(e){} } },1530);
+    setTimeout(()=>{ if(K.isConnected) K.classList.add("torn"); },1700);
+    /* enchaînement sans coupure : la première carte apparaît pendant que le booster déchiré s'efface */
+    let kd=false; const kGo=()=>{ if(kd||!K.isConnected) return; kd=true; K.classList.add("torn"); $("reveal").classList.add("fromkick"); showSeq(); const s=$("op-slot"); s.classList.add("out"); setTimeout(()=>{ if(s.classList.contains("out")){ s.innerHTML=""; s.classList.remove("out"); } $("reveal").classList.remove("fromkick"); },650); };
+    $("op-slot").onclick=kGo; setTimeout(kGo,2050);
   } else { $("op-slot").innerHTML=""; showSeq(); }
 }
 const minute=(i,n)=>Math.round((i+1)/n*90)+"′";
+/* joueur stylisé pour l'ouverture (maillot, short, numéro dans le dos du maillot, nom sous les pieds) */
+function kPlayer(cls,jer,trim,sho,num,numc,skin,name){
+  return `<div class="kpl2 ${cls}"><svg viewBox="40 84 170 240" aria-hidden="true"><g class="kbody">
+    <g class="kleg2"><path d="M99 214h20l-6 78H93z" fill="${skin}"/><path d="M95 262h22l-3 30H93z" fill="#fff"/><path d="M90 292h26l2 9H88z" fill="#111"/></g>
+    <g class="karm2"><path d="M104 136L60 112l-6 9 46 33z" fill="${jer}"/></g>
+    <circle cx="120" cy="112" r="16" fill="${skin}"/><path d="M104 108q16-26 32 0q-16-9-32 0z" fill="#1a1110"/>
+    <path d="M104 132h32l5 58h-42z" fill="${jer}"/><path d="M104 132h32l1 6h-34z" fill="${trim}"/>
+    <text x="120" y="174" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-style="italic" font-weight="900" font-size="30" fill="${numc}">${num}</text>
+    <path d="M99 188h42l3 28h-48z" fill="${sho}"/>
+    <g class="karm1"><path d="M136 136l44-24 6 9-46 33z" fill="${jer}"/></g>
+    <g class="kleg1"><path d="M121 214h20l7 78h-20z" fill="${skin}"/><path d="M123 262h22l3 30h-22z" fill="#fff"/><path d="M126 292h26l2 9h-30z" fill="#111"/></g>
+  </g></svg><span>${name}</span></div>`; }
 function showSeq(){
   const c=seq.list[seq.i], n=seq.list.length, r=$("reveal"); glow(null); $("overlay").style.setProperty("--glow",MYST(c)?SUS_C:COLOR[c.rarity]); seq.mode="seq"; seq.done=false; r.className="seqv";
   const sus=ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique"), num=String(numOf(c)).padStart(3,"0"), pct=n>1?(seq.i/(n-1))*100:100;
@@ -3956,7 +4033,7 @@ function openCard(id,src,full){
     <div class="cv-r">
       <div class="cv-chips"><span class="${q?"on":""}"><b>×${q}</b> exemplaire${q>1?"s":""}</span>${rt?`<span><b>${rt}</b> note</span>`:""}${seas&&SIMPLE.indexOf(c.rarity)<0?`<span><b>${seas}</b> saison</span>`:""}<span style="--k:${col}"><b>${esc(TITLE[c.rarity]||"")}</b></span></div>
       <div class="cv-own ${q?"on":""}">${q?`Dans ta collection${q>1?` · ${q} exemplaires`:""}`:"Tu ne possèdes pas encore cette carte"}</div>
-      <div class="cv-box"><div class="cv-k">Profil de jeu</div>${pos?`<p class="cv-p">${esc(pos)}</p>`:""}<div class="cv-sty">${!full&&typeof drStats==="function"?drStatsHTML(c):""}</div></div>
+      <div class="cv-box"><div class="cv-k">Profil de jeu</div>${pos?`<p class="cv-p">${esc(pos)}</p>`:""}<div class="cv-sty">${full!==true&&typeof drStats==="function"?drStatsHTML(c):""}</div></div>
       ${chips?`<div class="cv-box"><div class="cv-k">Palmarès</div><div class="chp">${chips}</div></div>`:""}
       ${I&&I[2]?`<div class="cv-box cv-know"><div class="cv-k">Le saviez-vous</div><p>${esc(I[2])}</p></div>`:""}
       ${!I?`<div class="cv-box"><p class="cv-p">Fiche en préparation.</p></div>`:""}
@@ -4011,7 +4088,8 @@ function tiltify(el,max){ if(!el||el.dataset.tilt) return; el.dataset.tilt=1; ma
 document.addEventListener("click",e=>{
   const el=e.target.closest(".card[data-cid],.slot[data-cid]"); if(!el) return;
   if(!el.closest("#collection-grid,#pf-body,#mk-list,#fr-body")||el.closest("#gm")||el.closest(".fv.ed")) return;
-  openCard(+el.dataset.cid,el);
+  /* carte d'un autre joueur (marché, amis, profil) : on la montre en entier, sans « ? » ni flou */
+  openCard(+el.dataset.cid,el,el.closest("#collection-grid")?false:"seen");
 });
 /* ---------- social : profil, amis, échanges, marché, classement ---------- */
 const LVL_T=[[31,"Ballon d’Or"],[26,"Légende vivante"],[21,"Capitaine"],[16,"International"],[11,"Titulaire"],[6,"Remplaçant"],[1,"Recrue"]];
