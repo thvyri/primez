@@ -1120,7 +1120,7 @@ button:active:not(:disabled){transform:scale(.96)}
 
 /* reflet vitre au survol : un calque pré-dessiné qu'on fait glisser (pas de recalcul des dégradés, pas d'inclinaison 3D qui pixellise) */
 .card .gl{position:absolute;inset:3.5px;border-radius:9px;z-index:8;pointer-events:none;opacity:0;transition:opacity .35s;overflow:hidden;mix-blend-mode:screen}
-.card .gl::before{content:"";position:absolute;left:-50%;top:-50%;width:200%;height:200%;will-change:transform;transform:translate(var(--tx,0),var(--ty,0));
+.card .gl::before{content:"";position:absolute;left:-50%;top:-50%;width:200%;height:200%;transform:translate(var(--tx,0),var(--ty,0));
   background:radial-gradient(circle at 50% 50%,#ffffffa6 0,#ffffff44 6%,#ffffff12 14%,transparent 24%),linear-gradient(115deg,transparent 38%,#ffffff40 46%,#ffffff14 49.5%,transparent 50.5%,#ffffff30 53%,transparent 57%)}
 .card .gl::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 1px 0 #ffffff40,inset 1px 0 0 #ffffff1a}
 .card.glare .gl{opacity:1}
@@ -2918,6 +2918,32 @@ html{overflow-x:hidden}
   /* ouverture : la rangée de cartes au-dessus de la barre de l'iPhone */
   .bl-tray{bottom:calc(18px + env(safe-area-inset-bottom))!important}
 }
+
+/* ===================== v12 : iPhone — mémoire et carré noir au défilement ===================== */
+/* sur téléphone, Safari plante (« problème récurrent ») et dessine des carrés noirs quand il y a trop de calques GPU :
+   flous d'arrière-plan, modes de fusion, animations infinies sur chaque carte. On les coupe tous sur écran tactile. */
+@media (hover:none){
+  *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;will-change:auto!important}
+  .card .gl,.card .fx,.pk-shine,.pk-glare{display:none!important}
+  .grid .card,.grid .card *,.tn .card,.tn .card *{animation:none!important}
+  .card .front{mix-blend-mode:normal!important}
+  .vx .vbg,.vx .vblur{filter:none!important}
+  .cv{background:#0b090cf2!important}.dr-modal,.mu-pop{background:#141216!important}.mtab{background:#121014!important}.nav2,.sb{background:#121014!important}
+  .stg.spx{background:radial-gradient(ellipse 60% 60% at 50% 45%,color-mix(in srgb,var(--sc) 22%,#0b090c),#0b090c 75%)!important}
+  .inv{background:#0b090cf0!important}
+  .csec{content-visibility:auto;contain-intrinsic-size:auto 900px}
+}
+/* popup parrainage sur téléphone : Yamal et les cartes au-dessus du texte, en grand */
+@media (max-width:760px){
+  .inv-box{grid-template-columns:1fr!important;width:100%!important}
+  .inv-vis{min-height:215px!important;height:215px}
+  .inv-fan{top:0!important}
+  .inv-c{zoom:.55!important}
+  .inv-glow{width:340px;height:340px;margin:-170px 0 0 -170px}
+  .inv-t{padding:0 18px 20px!important;gap:12px!important}
+  .inv-t h2{font-size:26px!important}
+  .inv-rw{grid-template-columns:1fr 1fr!important}.inv-rw div{padding:10px!important;gap:8px!important}.inv-rw b{font-size:22px!important}
+}
 </style>
 <script>
 (function(){ try{ const base=location.href.split("#")[0].split("?")[0].replace(/[^\/]*$/,"");
@@ -3474,7 +3500,7 @@ function cardHTML(c,flipped,qn,delay){
   const num=numTxt(c);
   return `<div class="card r-${c.rarity} ${flipped?"flip":""}" data-cid="${c.id}" style="${delay!=null?`animation-delay:${delay}ms`:""}" onclick="this.classList.add('flip')"><div class="in">
   <div class="face back ${MYST(c)?"mx":""}" style="--bk:${MYST(c)?"#c9a227":COLOR[c.rarity]}">${MYST(c)?'<i class="mx-fx"></i><b class="mx-q">?</b>':""}${c.image_url&&!flipped&&!MYST(c)?`<img class="bk-art" src="${esc(c.image_url)}" alt="" loading="lazy" onerror="this.remove()">`:""}<i class="bk-tint"></i><i class="bk-pitch"></i><div class="bk-hd"><img src="logo.png" alt="" onerror="this.style.display='none'"><span>PrimeZ</span><i>?</i></div><div class="bk-side">PrimeZ · booster</div><div class="bk-band"><b class="bk-sig">PrimeZ</b><span>${CK1} pour retourner</span></div>${flipped?"":'<i class="bk-sheen"></i>'}</div>
-  <div class="face front">${art(c)}<i class="fx"></i><i class="pk-shine"></i><i class="gl"></i><i class="pk-glare"></i><div class="top2"><span>N°${num}</span><span>${TITLE[c.rarity]||""}</span></div>${qn>1?`<span class="qty">x${qn}</span>`:""}
+  <div class="face front">${art(c)}<i class="fx"></i><i class="gl"></i><div class="top2"><span>N°${num}</span><span>${TITLE[c.rarity]||""}</span></div>${qn>1?`<span class="qty">x${qn}</span>`:""}
   <div class="plate">${c.sig||c.rarity==="prime"||c.rarity==="promo"||c.rarity==="goat"?`<div class="nm sig">${esc(sigName(c))}${(m=>m?`<small>${m[1]}</small>`:"")(String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/))}</div>`:`<div class="nm">${esc(dispName(c))}</div>`}<div class="rl"><i class="gem"></i>${RARITY[c.rarity]||c.rarity}</div></div></div></div></div>`;
 }
 
@@ -5444,7 +5470,7 @@ function drPen(dir,sid){ if(drPen.anim) return; const m=dr.m, us=m.pk%2===0, sh=
 const PK=new Map(); let pkRaf=0, pkCur=null, pkT0=0;
 const pkClamp=(v,a=0,b=100)=>Math.min(b,Math.max(a,v));
 function pkGet(c){ let s=PK.get(c); if(!s){ s={c,v:{rx:0,ry:0,gx:50,gy:50,go:0,bx:50,by:50},vel:{rx:0,ry:0,gx:0,gy:0,go:0,bx:0,by:0},t:{rx:0,ry:0,gx:50,gy:50,go:0,bx:50,by:50},k:.066,d:.25}; PK.set(c,s); } return s; }
-function pkMove(c,e){ const s=pkGet(c), r=c.getBoundingClientRect(); if(!r.width) return;
+function pkMove(c,e){ const fr=c.querySelector(".face.front"); if(fr&&!fr.querySelector(".pk-shine")) fr.insertAdjacentHTML("beforeend",'<i class="pk-shine"></i><i class="pk-glare"></i>'); const s=pkGet(c), r=c.getBoundingClientRect(); if(!r.width) return;
   const px=pkClamp(Math.round((e.clientX-r.left)/r.width*100)), py=pkClamp(Math.round((e.clientY-r.top)/r.height*100));
   s.t={rx:Math.round(-(px-50)/3.5),ry:Math.round((py-50)/3.5),gx:px,gy:py,go:1,bx:37+px*.26,by:33+py*.34}; s.k=.066; s.d=.25; c.classList.add("pk-on"); pkGo(); }
 function pkLeave(c){ const s=PK.get(c); if(!s) return; setTimeout(()=>{ if(pkCur===c) return; s.t={rx:0,ry:0,gx:50,gy:50,go:0,bx:50,by:50}; s.k=.02; s.d=.1; pkGo(); },300); }
@@ -5456,7 +5482,7 @@ function pkTick(now){ pkRaf=0; const dt=Math.min(3,(now-pkT0)*60/1000); pkT0=now
     st.setProperty("--pointer-x",v.gx.toFixed(2)+"%"); st.setProperty("--pointer-y",v.gy.toFixed(2)+"%"); st.setProperty("--pointer-from-center",pfc.toFixed(3));
     st.setProperty("--pointer-from-left",(v.gx/100).toFixed(3)); st.setProperty("--pointer-from-top",(v.gy/100).toFixed(3)); st.setProperty("--card-opacity",pkClamp(v.go,0,1).toFixed(3));
     st.setProperty("--rotate-x",v.rx.toFixed(2)+"deg"); st.setProperty("--rotate-y",v.ry.toFixed(2)+"deg"); st.setProperty("--background-x",v.bx.toFixed(2)+"%"); st.setProperty("--background-y",v.by.toFixed(2)+"%");
-    if(moving) alive=true; else if(s.t.go===0){ c.classList.remove("pk-on"); PK.delete(c); } });
+    if(moving) alive=true; else if(s.t.go===0){ c.classList.remove("pk-on"); c.querySelectorAll(".pk-shine,.pk-glare").forEach(x=>x.remove()); PK.delete(c); } });
   if(alive) pkRaf=requestAnimationFrame(pkTick); }
 document.addEventListener("pointermove",e=>{ if(e.pointerType==="touch"&&!(e.target.closest&&e.target.closest("#cview"))) return; let c=e.target.closest&&e.target.closest(".card.flip"); if(c&&c.querySelector("canvas.dust")) c=null;
   if(pkCur&&pkCur!==c){ const o=pkCur; pkCur=null; pkLeave(o); } if(!c) return; pkCur=c; pkMove(c,e); },{passive:true});
