@@ -1385,7 +1385,7 @@ canvas.dust:active{cursor:grabbing}canvas.dust.gone{opacity:0;pointer-events:non
 @keyframes dustp{to{transform:translate(var(--dx),46px);opacity:0}}
 /* révélation au centre : nom collé sous la carte */
 .spx-nm{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;margin-top:92px}
-@media(max-height:820px){.spx-nm{margin-top:58px}}
+@media(max-height:820px){.spx-nm{margin-top:28px}}
 
 /* dos : bande couleur rareté, signature bien cadrée */
 .card .back .bk-band b.bk-sig{font-size:27px!important;line-height:1.25!important;padding:0 10px 2px;margin:0!important;transform:skewY(8deg) rotate(-3deg)!important;white-space:nowrap}
@@ -2540,8 +2540,9 @@ function spotReveal(c,src,done){ const old=document.querySelector(".spx"); if(ol
     <div class="spx-nm"><span class="tg">${RARITY[c.rarity]}</span><b>${esc(dispName(c))}</b></div><div class="spx-h">Clique pour passer</div>`;
   document.body.appendChild(d); const card=d.querySelector(".card"), fr=card.querySelector(".face.front"); if(fr) fr.insertAdjacentHTML("beforeend",'<div class="bm"><i></i></div>');
   const big=d.querySelector(".big"), vint=isOld(c); let dust=null;
+  const bs=Math.max(1.5,Math.min(2.6,(innerHeight*.58)/228,(innerWidth*.86)/158)); big.style.transform=`scale(${bs.toFixed(3)})`; big.style.setProperty("margin",`${Math.round(114*(bs-1))}px 0`,"important");
   if(vint){ d.classList.remove("bld"); d.querySelectorAll(".bm,.bfx").forEach(e=>e.remove()); d.querySelector(".spx-h").textContent="Gratte la poussière avec ta souris · clic à côté pour tout enlever"; }
-  if(src&&big.animate){ const a=src.getBoundingClientRect(), b=big.getBoundingClientRect(); big.animate([{transform:`translate(${a.left+a.width/2-(b.left+b.width/2)}px,${a.top+a.height/2-(b.top+b.height/2)}px) scale(${(a.width/b.width*1.5).toFixed(3)})`,opacity:.6},{transform:"scale(1.5)",opacity:1}],{duration:520,easing:"cubic-bezier(.2,.8,.2,1)"}); }
+  if(src&&big.animate){ const a=src.getBoundingClientRect(), b=big.getBoundingClientRect(); big.animate([{transform:`translate(${a.left+a.width/2-(b.left+b.width/2)}px,${a.top+a.height/2-(b.top+b.height/2)}px) scale(${(a.width/b.width*bs).toFixed(3)})`,opacity:.6},{transform:`scale(${bs.toFixed(3)})`,opacity:1}],{duration:520,easing:"cubic-bezier(.2,.8,.2,1)"}); }
   requestAnimationFrame(()=>d.classList.add("in")); thud(); if(c.sfx_url) sfxPlay(c);
   let st=0; const T=[]; const built=()=>{ if(st) return; if(dust){ const x=dust; dust=null; x.clear(); return; } st=1; T.forEach(clearTimeout); d.classList.remove("bld"); d.querySelectorAll(".bm,.bfx").forEach(e=>e.remove()); d.classList.add("done"); d.style.setProperty("--sc",COLOR[c.rarity]); thud(); if(c.rarity==="promo"){ d.classList.add("hit"); setTimeout(thud,180); setTimeout(thud,360); } const h=d.querySelector(".spx-h"); if(h) h.textContent="Clique pour continuer"; };
   const close=()=>{ if(st<1){ built(); return; } if(st>1) return; st=2; d.classList.add("out"); setTimeout(()=>d.remove(),320); done&&done(); };
@@ -4179,7 +4180,7 @@ function pkTick(now){ pkRaf=0; const dt=Math.min(3,(now-pkT0)*60/1000); pkT0=now
     st.setProperty("--rotate-x",v.rx.toFixed(2)+"deg"); st.setProperty("--rotate-y",v.ry.toFixed(2)+"deg"); st.setProperty("--background-x",v.bx.toFixed(2)+"%"); st.setProperty("--background-y",v.by.toFixed(2)+"%");
     if(moving) alive=true; else if(s.t.go===0){ c.classList.remove("pk-on"); PK.delete(c); } });
   if(alive) pkRaf=requestAnimationFrame(pkTick); }
-document.addEventListener("pointermove",e=>{ if(e.pointerType==="touch"&&!(e.target.closest&&e.target.closest("#cview"))) return; const c=e.target.closest&&e.target.closest(".card.flip");
+document.addEventListener("pointermove",e=>{ if(e.pointerType==="touch"&&!(e.target.closest&&e.target.closest("#cview"))) return; let c=e.target.closest&&e.target.closest(".card.flip"); if(c&&c.querySelector("canvas.dust")) c=null;
   if(pkCur&&pkCur!==c){ const o=pkCur; pkCur=null; pkLeave(o); } if(!c) return; pkCur=c; pkMove(c,e); },{passive:true});
 document.addEventListener("pointerleave",()=>{ if(pkCur){ const o=pkCur; pkCur=null; pkLeave(o); } });
 document.addEventListener("mouseleave",()=>{ if(pkCur){ const o=pkCur; pkCur=null; pkLeave(o); } });
