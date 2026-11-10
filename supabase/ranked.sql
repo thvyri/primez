@@ -286,3 +286,6 @@ grant execute on function public.ranked_forfeit(bigint) to authenticated;
 grant execute on function public.ranked_live() to authenticated;
 revoke execute on function public.rk_me() from anon, authenticated, public;
 revoke execute on function public.rk_finalize(bigint,boolean) from anon, authenticated, public;
+
+-- recharge la liste des fonctions côté API (sinon : « Could not find the function … in the schema cache »)
+notify pgrst, 'reload schema';

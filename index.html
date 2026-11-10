@@ -2485,7 +2485,7 @@ input,select,textarea{border-radius:12px!important}
 .bl-patch.gone{opacity:0;pointer-events:none}
 .bl-shine{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 30% 24%,#ffffff70 0,#ffffff10 22%,transparent 40%);transition:opacity .4s}
 /* la carte qui sort du ballon (zoomée = nette) */
-.bl-card{position:absolute;left:50%;top:calc(50% - 6vh);width:158px;height:228px;margin:-114px 0 0 -79px;zoom:1.45;z-index:5;opacity:0;transform:scale(.15);transition:transform .7s cubic-bezier(.2,1.1,.3,1),opacity .45s;pointer-events:none}
+.bl-card{position:absolute;left:50%;top:calc(50% - 5vh);width:158px;height:228px;margin:-114px 0 0 -79px;zoom:1.45;z-index:5;opacity:0;transform:scale(.15);transition:transform .7s cubic-bezier(.2,1.1,.3,1),opacity .45s;pointer-events:none}
 .bl-card.up{opacity:1;transform:translateY(-10px)}
 .bl-card .card{cursor:default}
 .bl-card.tray{transition:transform .6s cubic-bezier(.4,0,.2,1)}
@@ -2597,6 +2597,85 @@ input,select,textarea{border-radius:12px!important}
   .stg.spx{background:radial-gradient(ellipse 60% 55% at 50% 46%,color-mix(in srgb,var(--sc) 26%,#0b090c),#0b090c 72%)!important}
   .inv{background:#07060af2!important}
 }
+
+/* ===================== v12 : menu en pastilles de couleur + pages Cagnotte / Discord ===================== */
+#tab-boosters{--mc:#e5202e}#tab-collection{--mc:#3b82f6}#tab-missions{--mc:#22c55e}#tab-games{--mc:#a855f7}#tab-market{--mc:#f59e0b}
+#sb-grp .sbgh,#tab-friends{--mc:#ec4899}#tab-messages{--mc:#06b6d4}#tab-ballon{--mc:#f5b800}#tab-cagnotte{--mc:#ff4d8d}#tab-discord{--mc:#5865f2}
+#tab-profile{--mc:#14b8a6}#tab-settings{--mc:#64748b}.adk{--mc:#94a3b8}
+.sb .sbi .sbic{--mc2:var(--mc,#64748b);width:28px!important;height:28px!important;flex:0 0 28px;display:grid!important;place-items:center;border-radius:9px!important;color:#fff!important;
+  background:linear-gradient(150deg,color-mix(in srgb,var(--mc2) 70%,#fff) 0%,var(--mc2) 45%,color-mix(in srgb,var(--mc2) 70%,#000) 100%)!important;border:0!important;
+  box-shadow:0 3px 0 color-mix(in srgb,var(--mc2) 45%,#000),0 6px 14px -4px color-mix(in srgb,var(--mc2) 80%,transparent),inset 0 1px 0 #ffffff55;transition:transform .15s,box-shadow .15s}
+.sb .sbi .sbic svg{width:15px!important;height:15px!important;filter:drop-shadow(0 1px 1px #0006)}
+.sb .sbi:hover .sbic{transform:translateY(-2px);box-shadow:0 5px 0 color-mix(in srgb,var(--mc2) 45%,#000),0 10px 20px -4px var(--mc2),inset 0 1px 0 #ffffff66}
+.sb .sbi.on .sbic{color:#fff!important;transform:translateY(-1px);box-shadow:0 3px 0 color-mix(in srgb,var(--mc2) 45%,#000),0 0 0 2px #ffffff30,0 8px 22px -2px var(--mc2),inset 0 1px 0 #ffffff66}
+.sb .sbi.on{box-shadow:inset 0 -2px var(--mc,#e5202e)!important;text-shadow:0 0 18px color-mix(in srgb,var(--mc,#e5202e) 70%,transparent)}
+.sb .sbi.on .sbic{filter:none}
+
+/* pages Cagnotte / Discord */
+.sp{display:grid;gap:16px;margin-top:6px;--a:#ff4d8d;--a2:#e5202e}
+.sp-dc{--a:#7c86ff;--a2:#5865f2}
+.sp-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:20px;padding:34px 36px;border-radius:26px;
+  background:radial-gradient(700px 360px at 0 0,color-mix(in srgb,var(--a) 26%,transparent),transparent 70%),repeating-linear-gradient(115deg,#ffffff05 0 1px,transparent 1px 26px),linear-gradient(180deg,#1d1922,#121015);
+  border:1px solid color-mix(in srgb,var(--a) 45%,#ffffff12);box-shadow:inset 0 1px 0 #ffffff12,0 24px 50px -30px #000}
+.sp-hero::before{content:"";position:absolute;right:-60px;bottom:-120px;width:520px;height:520px;border-radius:50%;border:1px solid #ffffff10;box-shadow:inset 0 0 0 60px #ffffff04,inset 0 0 0 61px #ffffff10;pointer-events:none}
+.sp-txt{position:relative;display:grid;gap:14px;justify-items:start}
+.sp-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--a) 18%,transparent);border:1px solid color-mix(in srgb,var(--a) 55%,transparent);
+  font:800 11px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:color-mix(in srgb,var(--a) 45%,#fff)}
+.sp-pill i{font-style:normal}
+.sp-hero h2{font:italic 900 clamp(34px,4.4vw,56px)/1.02 Outfit,Arial,sans-serif;margin:0;text-transform:none}
+.sp-hero h2::before{display:none!important}
+.sp-hero h2{display:block!important}
+.sp-hero h2 em{font-style:inherit;background:linear-gradient(90deg,color-mix(in srgb,var(--a) 50%,#fff),var(--a));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sp-txt p{margin:0;max-width:560px;color:#d6cfd9;font-size:15px;line-height:1.6}
+.sp-cta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sp-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:14px;font:800 15px/1 Outfit,Arial,sans-serif;color:#fff;text-decoration:none;border:0;cursor:pointer;
+  background:linear-gradient(150deg,color-mix(in srgb,var(--a) 75%,#fff),var(--a) 40%,var(--a2));box-shadow:0 4px 0 color-mix(in srgb,var(--a2) 55%,#000),0 14px 30px -10px var(--a);transition:transform .12s,box-shadow .12s,filter .15s}
+.sp-btn i{font-style:normal;font-size:18px}
+.sp-btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.sp-btn:active{transform:translateY(2px);box-shadow:0 1px 0 color-mix(in srgb,var(--a2) 55%,#000)}
+.sp-btn.off{filter:saturate(.5) brightness(.85)}
+.sp-copy{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 14px;border-radius:14px;background:#0f0d12;border:1px solid var(--line)}
+.sp-copy code{font:600 13px ui-monospace,Menlo,Consolas,monospace;color:#d6cfd9}
+.sp-copy button{padding:7px 12px!important;border-radius:10px!important;font-size:12px!important;background:#ffffff12!important;border:1px solid #ffffff22!important;box-shadow:none!important}
+.sp-vis{position:relative;display:grid;place-items:center;min-height:240px}
+.sp-jersey{width:min(220px,80%);filter:drop-shadow(0 20px 30px #000a) drop-shadow(0 0 40px color-mix(in srgb,var(--a) 45%,transparent));animation:spfloat 5s ease-in-out infinite;transform-origin:50% 80%}
+@keyframes spfloat{50%{transform:translateY(-10px) rotate(-3deg)}}
+.sp-heart{position:absolute;right:18%;top:8%;font-size:44px;color:#fff;text-shadow:0 0 24px var(--a);animation:spbeat 1.4s ease-in-out infinite}
+@keyframes spbeat{20%{transform:scale(1.2)}40%{transform:scale(1)}}
+.sp-wm{position:absolute;right:-6px;bottom:-4px;font:italic 900 64px/1 Outfit,Arial,sans-serif;letter-spacing:-.02em;color:#ffffff08;pointer-events:none;white-space:nowrap}
+.sp-grid{display:grid;gap:12px}.sp-grid.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.sp-grid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sp-tile{display:grid;gap:8px;align-content:start;padding:18px;border-radius:20px;background:radial-gradient(260px 120px at 0 0,color-mix(in srgb,var(--k) 16%,transparent),transparent 70%),linear-gradient(180deg,#1a171e,#121015);border:1px solid color-mix(in srgb,var(--k) 30%,#ffffff10);box-shadow:inset 0 1px 0 #ffffff0d;transition:transform .2s,border-color .2s}
+.sp-tile:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--k) 65%,transparent)}
+.sp-tile i{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-style:normal;font-size:21px;background:linear-gradient(150deg,color-mix(in srgb,var(--k) 70%,#fff),var(--k) 45%,color-mix(in srgb,var(--k) 70%,#000));box-shadow:0 3px 0 color-mix(in srgb,var(--k) 45%,#000),0 8px 18px -6px var(--k)}
+.sp-tile b{font-size:16px;font-weight:800;color:color-mix(in srgb,var(--k) 45%,#fff)}
+.sp-tile p{margin:0;color:#bdb6c2;font-size:13px;line-height:1.5}
+.sp-msg{position:relative;padding:26px 30px;border-radius:24px;background:linear-gradient(180deg,#1a171e,#121015);border:1px solid var(--line);border-left:4px solid var(--a);display:grid;gap:12px}
+.sp-mh{display:flex;gap:14px;align-items:center;margin-bottom:6px}
+.sp-mh i{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-style:normal;font-size:22px;background:linear-gradient(150deg,color-mix(in srgb,var(--a) 70%,#fff),var(--a));box-shadow:0 3px 0 color-mix(in srgb,var(--a2) 55%,#000)}
+.sp-k{font:800 11px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:color-mix(in srgb,var(--a) 50%,#fff)}
+.sp-mh h3{font:italic 900 26px/1.1 Outfit,Arial,sans-serif;margin:4px 0 0}
+.sp-msg p{margin:0;max-width:780px;color:#ddd6e0;font-size:15px;line-height:1.7}
+.sp-u{font-weight:800;color:#fff;text-decoration:underline;text-decoration-color:var(--a);text-decoration-thickness:2px;text-underline-offset:3px}
+.sp-sign{font-weight:800;color:color-mix(in srgb,var(--a) 45%,#fff)!important}
+.sp-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 24px;border-radius:22px;background:linear-gradient(90deg,color-mix(in srgb,var(--a) 14%,#151217),#121015);border:1px solid color-mix(in srgb,var(--a) 35%,#ffffff10)}
+.sp-bar b{display:block;font-size:18px;font-weight:800}.sp-bar small{color:var(--mute);font-size:12.5px}
+@media(max-width:900px){.sp-hero{grid-template-columns:1fr;padding:24px 20px}.sp-vis{min-height:180px;order:-1}.sp-jersey{width:150px}.sp-grid.g4,.sp-grid.g3{grid-template-columns:1fr 1fr}.sp-msg{padding:20px}.sp-wm{font-size:44px}}
+@media(max-width:520px){.sp-grid.g4,.sp-grid.g3{grid-template-columns:1fr}.sp-btn{width:100%;justify-content:center}.sp-copy{width:100%;justify-content:space-between}}
+/* compteurs du haut : pastilles en relief */
+#balloons-pill,#free-pill{height:auto!important;min-height:0!important;line-height:1!important;display:inline-flex!important;align-items:center;gap:8px;padding:4px 14px 4px 4px!important;border-radius:14px!important;position:relative;overflow:hidden;font-style:normal;cursor:default;
+  background:linear-gradient(180deg,#2a2430,#17141b)!important;border:1px solid #ffffff1f!important;box-shadow:0 3px 0 #08070a,0 10px 20px -10px #000,inset 0 1px 0 #ffffff1f!important;transition:transform .15s}
+#balloons-pill:hover,#free-pill:hover{transform:translateY(-1px)}
+.pz-ic{width:30px;height:30px!important;align-self:center;flex:0 0 30px;border-radius:10px;display:grid;place-items:center;box-shadow:0 2px 0 #0007,inset 0 1px 0 #ffffff66}
+.pz-ic.ball{background:radial-gradient(circle at 35% 28%,#5ee98f,#16a34a 55%,#0c5a2b)}
+.pz-ic.ball svg{width:22px;height:22px;filter:drop-shadow(0 2px 1px #0008);animation:pzspin 7s linear infinite}
+@keyframes pzspin{to{transform:rotate(360deg)}}
+.pz-ic.pz-pk{background:linear-gradient(150deg,#ff8590,#e5202e 50%,#8f0f1a)}
+.pz-ic.pz-pk svg{width:18px;height:18px;filter:drop-shadow(0 1px 1px #0007)}
+#balloons-pill .pz-v,#free-pill .pz-v{font:italic 900 17px/1 Outfit,Arial,sans-serif;color:#fff;text-shadow:0 2px 0 #000a;letter-spacing:.01em}
+#balloons-pill small,#free-pill small{font:700 11px/1 Outfit,Arial,sans-serif;color:#a49dab;margin-left:-3px;text-transform:lowercase}
+#free-pill::after{content:"";position:absolute;left:42px;right:12px;bottom:4px;height:3px;border-radius:3px;background:linear-gradient(90deg,#e5202e var(--fp,50%),#ffffff1c var(--fp,50%))!important;display:block!important}
+#balloons-pill.up{box-shadow:0 3px 0 #08070a,0 0 22px #22c55e88,inset 0 1px 0 #ffffff1f!important}
+@media(max-width:760px){#balloons-pill,#free-pill{padding:3px 10px 3px 3px!important;gap:6px;border-radius:12px!important}.pz-ic{width:26px;height:26px!important;flex-basis:26px;border-radius:9px}.pz-ic.ball svg{width:19px;height:19px}#balloons-pill .pz-v,#free-pill .pz-v{font-size:14px}#free-pill::after{left:36px;right:9px;bottom:3px}}
 @media(max-width:900px){.rk-cm .tn{zoom:.72}.rk-empty{width:50px;height:72px}.rk-code{font-size:9px}.rk-acts{grid-template-columns:1fr}.rk-duel .tn{zoom:.75}.rk-mm{grid-template-columns:1fr}}
 </style>
 <script>
@@ -2609,6 +2688,9 @@ input,select,textarea{border-radius:12px!important}
 <body>
 <script>
 const SUPABASE_URL = "https://rvqjtymzquicdmzxxnij.supabase.co";
+/* liens de la page Cagnotte et de la page Discord : colle ici tes liens (laisser vide = « Lien bientôt disponible ») */
+const CAGNOTTE_URL = "";
+const DISCORD_URL = "";
 const SUPABASE_KEY = "sb_publishable_U-eAR__gGmDxFXQB8R3DAw_zaydeeTj";
 const CURRENCY = "ballons";
 const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
@@ -2649,6 +2731,9 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
       </div>
     </div>
     <button class="sbi" id="tab-ballon" onclick="showTab('ballon')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 20h8"/></svg></span><span class="sbt"><b>Ballon d’Or</b><small>Classement de la semaine</small></span></button>
+    <div class="sbl">Soutien</div>
+    <button class="sbi" id="tab-cagnotte" onclick="showTab('cagnotte')"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.3 1 4.1 2.3h3C14.3 6 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z"/></svg></span><span class="sbt"><b>Cagnotte</b><small>Soutenir PrimeZ</small></span></button>
+    <button class="sbi" id="tab-discord" onclick="showTab('discord')"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18 18 0 0 0-5.6 0L8.6 3a19.6 19.6 0 0 0-4.9 1.5C.6 9.1-.3 13.6.1 18a19.8 19.8 0 0 0 6 3l1.3-2a12.8 12.8 0 0 1-2-1l.5-.4a14 14 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.7 19.7 0 0 0 6-3c.5-5.1-.8-9.6-3.6-13.6ZM8.3 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm7.4 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg></span><span class="sbt"><b>Discord</b><small>La communauté</small></span></button>
     <div class="sbl">Compte</div>
     <button class="sbi" id="tab-profile" onclick="showTab('profile')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span><span class="sbt"><b>Profil</b><small>Ta vitrine &amp; tes cartes préférées</small></span></button>
     <button class="sbi" id="tab-settings" onclick="showTab('settings')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2" fill="#0d0d0d"/><circle cx="15" cy="12" r="2" fill="#0d0d0d"/><circle cx="8" cy="18" r="2" fill="#0d0d0d"/></svg></span><span class="sbt"><b>Paramètres</b><small>Compte, son &amp; application</small></span></button>
@@ -2692,6 +2777,10 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
     <section id="view-friends" class="page hidden"><h2 class="disp">Amis &amp; échanges</h2><div id="fr-body"></div></section>
 
     <section id="view-ballon" class="page hidden"><div id="bd-body"></div></section>
+
+    <section id="view-cagnotte" class="page hidden"><div id="cg-body"></div></section>
+
+    <section id="view-discord" class="page hidden"><div id="dc-body"></div></section>
 
     <section id="view-profile" class="page hidden"><div id="pf-body"></div></section>
 
@@ -3001,7 +3090,7 @@ function freeNow(){
 function renderFree(){
   if(!profile) return; const f=freeNow(); let t="";
   if(f.next){ const m=Math.ceil(f.next); t=`+1 dans ${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`; }
-  $("free-pill").textContent=innerWidth<=760?`${f.n}/${cap()}`:`${f.n}/${cap()} gratuits`; $("free-pill").style.setProperty("--fp",(f.n/cap()*100)+"%");
+  { const fp=$("free-pill"), html=`<i class="pz-ic pz-pk">${PZ_PACK}</i><b class="pz-v">${f.n}</b><small>/${cap()}${innerWidth>760?" gratuits":""}</small>`; if(fp.dataset.h!==html){ fp.innerHTML=html; fp.dataset.h=html; } fp.title=f.next?t:"Stock plein"; fp.style.setProperty("--fp",(f.n/cap()*100)+"%"); }
   const mb=$("mob-n"); if(mb){ const gi=(refSt&&refSt.gifts)?Object.values(refSt.gifts).reduce((a,b)=>a+(+b||0),0):0; mb.textContent=f.n+gi>0?String(f.n+gi):""; }
   const pn=$("pf-n"), pt=$("pf-t"); if(pn) pn.textContent=`${f.n}/${cap()}`; if(pt) pt.textContent=f.n>=cap()?"boosters gratuits · stock plein":"boosters gratuits · "+t;
   document.querySelectorAll(".btn-free").forEach(b=>b.disabled=f.n<(+b.dataset.q||1)||busy);
@@ -3059,9 +3148,14 @@ function promoBarAnim(){ const u=$("pbar-u"), t=$("pbar-n"); if(!u) return; cons
 function lgPreview(){ lgCards(); $("login").classList.remove("hidden"); $("login").classList.add("preview"); if(!$("lg-x")){ const b=document.createElement("button"); b.id="lg-x"; b.className="vfxx"; b.textContent="Fermer l’aperçu ×"; b.onclick=()=>{ $("login").classList.add("hidden"); $("login").classList.remove("preview"); b.remove(); }; document.body.appendChild(b); } }
 let balShown=null;
 const balTxt=v=>innerWidth<=760?(v>=1e6?(v/1e6).toLocaleString("fr-FR",{maximumFractionDigits:v>=1e7?0:1})+" M":v>=1e4?(v/1e3).toLocaleString("fr-FR",{maximumFractionDigits:0})+" k":v.toLocaleString("fr-FR"))+" ⚽":`${v.toLocaleString("fr-FR")} ${CURRENCY}`;
+/* compteurs du haut avec du relief : un vrai petit ballon / un booster dans une pastille, le nombre en gras */
+const PZ_BALL=`<svg viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="pzb" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#e6e6e6"/><stop offset="1" stop-color="#8d8d8d"/></radialGradient></defs><circle cx="16" cy="16" r="15" fill="url(#pzb)"/><path d="M16 9.5l5.2 3.8-2 6.1h-6.4l-2-6.1z" fill="#1b1b1b"/><path d="M16 1.5v8M27 8.8l-5.8 4.5M23.6 27l-4.4-7.6M8.4 27l4.4-7.6M5 8.8l5.8 4.5" stroke="#1b1b1b" stroke-width="1.5" fill="none"/><path d="M1.6 15l3.6 1.6.4 5.2M30.4 15l-3.6 1.6-.4 5.2M10.4 2.4l2.4 3.8M21.6 2.4l-2.4 3.8M12.8 30.4l3.2-3.4 3.2 3.4" fill="none" stroke="#1b1b1b" stroke-width="1.4"/><ellipse cx="11" cy="8.5" rx="4.2" ry="2.4" fill="#fff" opacity=".75"/></svg>`;
+const PZ_PACK=`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.5" fill="#fff"/><path d="M5 8.5h14" stroke="#e5202e" stroke-width="2"/><path d="M12 12v6M9 15h6" stroke="#e5202e" stroke-width="2.2" stroke-linecap="round"/></svg>`;
+const balNum=v=>innerWidth<=760?(v>=1e6?(v/1e6).toLocaleString("fr-FR",{maximumFractionDigits:v>=1e7?0:1})+" M":v>=1e4?(v/1e3).toLocaleString("fr-FR",{maximumFractionDigits:0})+" k":v.toLocaleString("fr-FR")):v.toLocaleString("fr-FR");
+function setBal(e,v){ const b=e.querySelector("b.pz-v"); if(b){ b.textContent=balNum(v); return; } e.innerHTML=`<i class="pz-ic ball">${PZ_BALL}</i><b class="pz-v">${balNum(v)}</b>${innerWidth>760?`<small>${CURRENCY}</small>`:""}`; e.title=v.toLocaleString("fr-FR")+" "+CURRENCY; }
 function animBalloons(n){ const e=$("balloons-pill"); if(!e) return; const from=balShown==null?n:balShown; balShown=n; cancelAnimationFrame(animBalloons.r);
-  if(from===n){ e.textContent=balTxt(n); return; } e.classList.remove("up","down"); void e.offsetWidth; e.classList.add(n>from?"up":"down");
-  const t0=performance.now(), d=700; const f=t=>{ const k=Math.min(1,(t-t0)/d), v=Math.round(from+(n-from)*(1-Math.pow(1-k,3))); e.textContent=balTxt(v); if(k<1) animBalloons.r=requestAnimationFrame(f); }; animBalloons.r=requestAnimationFrame(f); }
+  if(from===n){ setBal(e,n); return; } e.classList.remove("up","down"); void e.offsetWidth; e.classList.add(n>from?"up":"down");
+  const t0=performance.now(), d=700; const f=t=>{ const k=Math.min(1,(t-t0)/d), v=Math.round(from+(n-from)*(1-Math.pow(1-k,3))); setBal(e,v); if(k<1) animBalloons.r=requestAnimationFrame(f); }; animBalloons.r=requestAnimationFrame(f); }
 let NEWC=new Set(); try{ NEWC=new Set(JSON.parse(localStorage.getItem("pz_new")||"[]")); }catch(e){}
 function newSave(){ try{ localStorage.setItem("pz_new",JSON.stringify([...NEWC])); }catch(e){} const b=$("tab-collection"); if(b){ let i=b.querySelector(".nwb"); if(NEWC.size){ if(!i){ i=document.createElement("i"); i.className="nwb"; b.appendChild(i); } i.textContent="+"+NEWC.size; } else if(i) i.remove(); } }
 function newMark(ids){ ids.forEach(i=>NEWC.add(i)); newSave(); }
@@ -3192,7 +3286,7 @@ function ballStep(){ const s=bl; if(!s||s.busy) return; if(s.shown) return ballT
   const peel=()=>{ g.forEach((e,k)=>setTimeout(()=>{ const dir=(+e.dataset.cx<s.bw.clientWidth/2)?-1:1; e.style.transform=`translateZ(60px) rotateY(${dir*-170}deg) translate(${dir*80}px,-30px)`; e.classList.add("gone"); },k*70));
     try{ boum(); }catch(e){}
     setTimeout(()=>{ if(!s.bw.isConnected) return; if(last){ s.bw.querySelector(".bl-shine").style.opacity="0"; }
-      const w=document.createElement("div"); w.className="bl-card"; w.dataset.i=idx; w.innerHTML=cardHTML(c,false,0); w.querySelector(".card").removeAttribute("onclick");
+      const w=document.createElement("div"); w.className="bl-card"; w.dataset.i=idx; w.style.zoom=Math.max(1.1,Math.min(3.2,innerHeight*.66/228,innerWidth*.8/158)).toFixed(2); w.innerHTML=cardHTML(c,false,0); w.querySelector(".card").removeAttribute("onclick");
       if(seq.isNew&&seq.isNew.get(c)) w.insertAdjacentHTML("beforeend",'<span class="bl-new">Nouveau</span>');
       s.bw.parentNode.appendChild(w); requestAnimationFrame(()=>requestAnimationFrame(()=>w.classList.add("up")));
       const done=()=>{ seq.seen.add(idx); s.shown=w; s.busy=false; if(last) s.bw.classList.add("empty"); const h=$("bl-hint"); if(h) h.textContent=(TOUCH?"Touche":"Clique")+(last?" pour voir ta feuille de match":" pour continuer"); };
@@ -4316,42 +4410,34 @@ async function wdFind(c){ const k=infoKey(c), parts=k.split("."), sur=parts[part
   try{ const r=await (await fetch(`https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${encodeURIComponent(sur)}&language=fr&uselang=fr&type=item&format=json&limit=12&origin=*`)).json();
     const h=(r.search||[]).find(x=>/foot|soccer/i.test(x.description||"")&&(!ini||String(x.label).toUpperCase().startsWith(ini))); if(h) return h.id; }catch(e){}
   return null; }
+/* fiche au dos : uniquement des faits qui ne bougent pas (naissance, lieu, nationalité, taille, poste) + le palmarès du site.
+   Plus de matchs / buts / passes : ces chiffres changent chaque semaine et n'étaient jamais à jour. */
 async function wdStats(c){ const k=infoKey(c); if(WD.has(k)) return WD.get(k);
-  try{ const x=JSON.parse(localStorage.getItem("pz_wd_"+k)||"null"); if(x&&Date.now()-x.t<7*864e5){ WD.set(k,x.d); return x.d; } }catch(e){}
+  try{ const x=JSON.parse(localStorage.getItem("pz_wd2_"+k)||"null"); if(x&&Date.now()-x.t<30*864e5){ WD.set(k,x.d); return x.d; } }catch(e){}
   const qid=await wdFind(c); let o=null;
-  if(qid){ const r=await wdSparql(`SELECT ?itemLabel ?birth ?placeLabel ?m ?g ?aw WHERE { BIND(wd:${qid} AS ?item)
-      OPTIONAL { ?item wdt:P569 ?birth } OPTIONAL { ?item wdt:P19 ?place }
-      OPTIONAL { SELECT (SUM(?mm) AS ?m) (SUM(?gg) AS ?g) WHERE { wd:${qid} p:P54 ?st . OPTIONAL { ?st pq:P1350 ?mm } OPTIONAL { ?st pq:P1351 ?gg } } }
-      OPTIONAL { SELECT (COUNT(DISTINCT ?a) AS ?aw) WHERE { wd:${qid} wdt:P166 ?a } }
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". } } LIMIT 1`);
-    const x=r[0]||{}; o={qid,full:x.itemLabel&&x.itemLabel.value,birth:x.birth&&x.birth.value,place:x.placeLabel&&x.placeLabel.value,m:x.m?+x.m.value:null,g:x.g?+x.g.value:null,aw:x.aw?+x.aw.value:null}; }
-  WD.set(k,o); try{ localStorage.setItem("pz_wd_"+k,JSON.stringify({t:Date.now(),d:o})); }catch(e){} return o; }
+  if(qid){ const r=await wdSparql(`SELECT ?itemLabel ?birth ?placeLabel ?countryLabel ?h (GROUP_CONCAT(DISTINCT ?natL;separator=" · ") AS ?nat) (SAMPLE(?posL) AS ?pos) WHERE { BIND(wd:${qid} AS ?item)
+      OPTIONAL { ?item wdt:P569 ?birth } OPTIONAL { ?item wdt:P19 ?place . OPTIONAL { ?place wdt:P17 ?country } } OPTIONAL { ?item wdt:P2048 ?h }
+      OPTIONAL { ?item wdt:P1532 ?sn . ?sn rdfs:label ?natL . FILTER(LANG(?natL)="fr") }
+      OPTIONAL { ?item wdt:P413 ?p . ?p rdfs:label ?posL . FILTER(LANG(?posL)="fr") }
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". } } GROUP BY ?itemLabel ?birth ?placeLabel ?countryLabel ?h LIMIT 1`);
+    const x=r[0]||{}; o={qid,full:x.itemLabel&&x.itemLabel.value,birth:x.birth&&x.birth.value,place:x.placeLabel&&x.placeLabel.value,country:x.countryLabel&&x.countryLabel.value,
+      nat:x.nat&&x.nat.value,h:x.h?Math.round(+x.h.value*(+x.h.value<3?100:1)):null,pos:x.pos&&x.pos.value}; }
+  WD.set(k,o); try{ localStorage.setItem("pz_wd2_"+k,JSON.stringify({t:Date.now(),d:o})); }catch(e){} return o; }
 async function cardStats(el){ const c=allCards.find(x=>x.id===+el.dataset.cid); if(!c) return; const bk=el.querySelector(".face.back"); if(!bk) return;
   let box=bk.querySelector(".cst"); if(!box){ bk.insertAdjacentHTML("beforeend",'<div class="cst"></div>'); box=bk.querySelector(".cst"); }
-  const k=infoKey(c), I=INFO[k]||[], pal=I[1]?String(I[1]).split("|").filter(Boolean):[], seas=(String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/)||[])[1];
+  const k=infoKey(c), I=INFO[k]||[], pal=I[1]?String(I[1]).split("|").filter(Boolean):[], seas=(String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/)||[])[1], ip=I[0]?String(I[0]).split(" · "):[];
   const head=`<span class="cst-k">${esc(RARITY[c.rarity])}${seas?" · "+esc(seas):""}</span>`;
   const trophies=pal.length?`<div class="cst-tr"><b>🏆 ${pal.length} titre${pal.length>1?"s":""}</b><small>${pal.slice(0,3).map(esc).join(" · ")}${pal.length>3?"…":""}</small></div>`:"";
   box.innerHTML=`${head}<h4>${esc(k)}</h4><p class="cst-ld">Chargement de la fiche…</p>${trophies}`;
-  let s=null, ps=null; try{ [s,ps]=await Promise.all([wdStats(c).catch(()=>null),pStats(k)]); }catch(e){}
+  let s=null; try{ s=await wdStats(c); }catch(e){}
   if(!box.isConnected) return;
-  const b=s&&s.birth?new Date(s.birth):null, age=b?Math.floor((Date.now()-b)/31557600000):null, fmt=n=>n==null||isNaN(n)?"–":Number(n).toLocaleString("fr-FR");
-  /* matchs / buts / passes : d'abord nos stats (mises à jour par l'admin), sinon Wikidata ; les passes D ne viennent que de nos stats */
-  const m=ps&&ps.matches!=null?ps.matches:s&&s.m, g=ps&&ps.goals!=null?ps.goals:s&&s.g, as=ps&&ps.assists!=null?ps.assists:null;
-  const src=ps?`Stats PrimeZ · à jour du ${new Date(ps.updated_at).toLocaleDateString("fr-FR")}`:"Clubs + sélection · Wikidata";
-  const edit=profile&&profile.is_admin?`<button class="cst-ed" onclick="event.stopPropagation();pStatsEdit('${esc(k).replace(/'/g,"\\'")}')">✎ Modifier</button>`:"";
-  box.innerHTML=`${head}<h4>${esc(s&&s.full||k)}</h4>${s||ps?`<div class="cst-g">
+  const b=s&&s.birth?new Date(s.birth):null, age=b?Math.floor((Date.now()-b)/31557600000):null;
+  const nat=ip[1]||(s&&s.nat)||"–", pos=POS_TXT[drPosD(c)]||ip[0]||(s&&s.pos)||"–", place=s&&s.place?(s.place+(s.country&&s.country!==s.place?", "+s.country:"")):"–";
+  box.innerHTML=`${head}<h4>${esc(s&&s.full||k)}</h4><div class="cst-g">
       <div class="f"><b>${b?b.toLocaleDateString("fr-FR"):"–"}${age!=null?` <i>· ${age} ans</i>`:""}</b><small>Né le</small></div>
-      <div class="f"><b>${esc(s&&s.place||"–")}</b><small>Lieu de naissance</small></div>
-      <div><b>${fmt(m)}</b><small>Matchs</small></div><div><b>${fmt(g)}</b><small>Buts</small></div>
-      <div><b>${fmt(as)}</b><small>Passes D.</small></div><div><b>${fmt(s&&s.aw)}</b><small>Distinctions</small></div></div>`
-    :`<p class="cst-ld">Fiche introuvable pour ce joueur.</p>`}${trophies}<span class="cst-src">${src}</span>${edit}`; }
-/* stats tenues à jour par l'admin (table player_stats) */
-let PSTATS=null;
-async function pStats(k){ if(!PSTATS){ PSTATS=new Map(); try{ const {data}=await sb.from("player_stats").select("*"); (data||[]).forEach(r=>PSTATS.set(r.key,r)); }catch(e){} } return PSTATS.get(String(k).toUpperCase())||null; }
-async function pStatsEdit(k){ const cur=PSTATS&&PSTATS.get(k)||{}, v=prompt(`Stats de ${k} (toutes compétitions, clubs + sélection)\nFormat : matchs, buts, passes décisives`,[cur.matches??"",cur.goals??"",cur.assists??""].join(", "));
-  if(v==null) return; const n=v.split(/[,;\s]+/).filter(Boolean).map(x=>x===""?null:parseInt(x,10)); if(n.length<3||n.some(x=>x!=null&&isNaN(x))){ toast("Format : matchs, buts, passes"); return; }
-  const r=await rpc("set_player_stats",{p_key:k,p_matches:n[0],p_goals:n[1],p_assists:n[2]}); if(!r) return; PSTATS=null; toast("Stats enregistrées",true);
-  const el=document.querySelector("#cview .card"); if(el) cardStats(el); }
+      <div class="f"><b>${esc(place)}</b><small>Lieu de naissance</small></div>
+      <div><b>${esc(nat)}</b><small>Nation</small></div><div><b>${s&&s.h?(s.h/100).toFixed(2).replace(".",",")+" m":"–"}</b><small>Taille</small></div>
+      <div class="f"><b>${esc(pos)}</b><small>Poste</small></div></div>${trophies}<span class="cst-src">${s?"Fiche · Wikidata":"Fiche du site"}</span>`; }
 function closeCard(now){ const d=$("cview"); if(!d) return; if(now){ d.remove(); return; } d.classList.remove("show"); d.classList.add("out"); setTimeout(()=>d.remove(),280); }
 document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&$("cview")) closeCard(); });
 /* inclinaison 3D qui suit la souris + reflet */
@@ -4631,7 +4717,7 @@ async function claimWeekly(){
   profile.balloons=r.data.balloons; renderPills(); toast(`+${nf(r.data.amount)} ${CURRENCY} (n°${r.data.rank})`,true); loadBallon();
 }
 /* ---------- navigation ---------- */
-const TABS=["boosters","collection","missions","games","market","friends","ballon","messages","profile","settings","admin-cards","admin-photos","admin-players"];
+const TABS=["boosters","collection","missions","games","market","friends","ballon","cagnotte","discord","messages","profile","settings","admin-cards","admin-photos","admin-players"];
 /* admin : basculer l'affichage entre modo, joueur normal et invité (rien ne change côté serveur) */
 let realAdmin=false, realGuest=false, viewMode="modo";
 function applyView(silent){ if(!realAdmin) viewMode="modo";
@@ -4667,13 +4753,64 @@ function mOpen(v){ document.body.classList.toggle("mopen",v===undefined?!documen
 function mtabSync(t){ const main=["boosters","collection","games"]; document.querySelectorAll("#mtab button").forEach(b=>b.classList.toggle("on",b.dataset.t===t||(b.dataset.t==="more"&&!main.includes(t)))); }
 function showTab(t,arg){ if(t!=="games"){ try{ crowdBed(false); crMusic(false); }catch(e){} } mtabSync(t); mOpen(0); closeSheet();
   TABS.forEach(x=>{ $("view-"+x).classList.toggle("hidden",x!==t); const b=$("tab-"+x); if(b) b.classList.toggle("on",x===t); });
-  if(t==="collection") loadCollection(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings();
+  if(t==="collection") loadCollection(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings(); if(t==="cagnotte") renderCagnotte(); if(t==="discord") renderDiscord();
   $("sb-grp").classList.remove("open"); const sg=$("sb-grp").querySelector(".sbgh"); if(sg) sg.classList.toggle("on",t==="friends"||t==="messages"); if(t==="profile") loadProfile(arg); if(t==="friends") loadFriends(); if(t==="market") loadMarket(); if(t==="ballon"){ bd.off=0; loadBallon(); }
   closeGm(); closeCard(true); window.scrollTo(0,0);
-  const TT={boosters:"Boosters",collection:"Collection",missions:"Missions",games:"Jeux",market:"Marché",friends:"Amis",ballon:"Ballon d’Or",messages:"Messages",profile:"Profil",settings:"Paramètres"}; document.title=(TT[t]?TT[t]+" · ":"")+"PrimeZ";
+  const TT={boosters:"Boosters",collection:"Collection",missions:"Missions",games:"Jeux",market:"Marché",friends:"Amis",ballon:"Ballon d’Or",cagnotte:"Cagnotte",discord:"Discord",messages:"Messages",profile:"Profil",settings:"Paramètres"}; document.title=(TT[t]?TT[t]+" · ":"")+"PrimeZ";
   if(showTab.prev==="collection"&&t!=="collection"&&NEWC.size){ NEWC.clear(); newSave(); } showTab.prev=t;
   const v=$("view-"+t); if(v){ v.classList.remove("venter"); void v.offsetWidth; v.classList.add("venter"); }
 }
+/* ===================== CAGNOTTE & DISCORD ===================== */
+function supCopy(u){ if(!u){ toast("Lien bientôt disponible"); return; } try{ navigator.clipboard.writeText(u).then(()=>toast("Lien copié",true),()=>toast(u,true)); }catch(e){ toast(u,true); } }
+const supLink=(u,cls,html)=>u?`<a class="${cls}" href="${esc(u)}" target="_blank" rel="noopener">${html}</a>`:`<button class="${cls} off" onclick="toast('Lien bientôt disponible')">${html}</button>`;
+const supShort=u=>u?u.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""):"bientôt disponible";
+const supTile=(e,t,p,c)=>`<div class="sp-tile" style="--k:${c}"><i>${e}</i><b>${t}</b><p>${p}</p></div>`;
+/* maillot stylisé (visuel des deux pages) */
+const supJersey=(c1,c2,txt,num)=>`<svg class="sp-jersey" viewBox="0 0 200 210" aria-hidden="true"><defs><linearGradient id="spj${num}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+  <path d="M62 14l20-8c4 10 12 15 18 15s14-5 18-15l20 8 46 28-18 42-24-12v124H58V72L34 84 16 42z" fill="url(#spj${num})" stroke="#ffffff40" stroke-width="2"/>
+  <path d="M82 6c4 10 12 15 18 15s14-5 18-15" fill="none" stroke="#ffffffaa" stroke-width="4"/>
+  <text x="100" y="92" text-anchor="middle" font-family="Outfit,Arial" font-weight="900" font-size="14" letter-spacing="3" fill="#ffffffcc">${txt}</text>
+  <text x="100" y="168" text-anchor="middle" font-family="Outfit,Arial" font-style="italic" font-weight="900" font-size="74" fill="#fff">${num}</text></svg>`;
+function renderCagnotte(){ const B=$("cg-body"); if(!B) return; const U=CAGNOTTE_URL;
+  B.innerHTML=`<div class="sp sp-cg">
+    <section class="sp-hero"><div class="sp-txt"><span class="sp-pill"><i>♥</i>Soutenir PrimeZ</span>
+        <h2>Fais vivre <em>le vestiaire</em>.</h2>
+        <p>PrimeZ est un projet de passionnés de foot : gratuit, sans pub, sans abonnement. Une petite cagnotte nous aide à payer les serveurs et à sortir de nouveaux modes plus vite. Totalement libre.</p>
+        <div class="sp-cta">${supLink(U,"sp-btn",`<i>♥</i>Participer à la cagnotte`)}<div class="sp-copy"><code>${esc(supShort(U))}</code><button onclick="supCopy(CAGNOTTE_URL)">Copier</button></div></div></div>
+      <div class="sp-vis">${supJersey("#ff5a78","#a3121d","SUPPORTER","12")}<span class="sp-heart">♥</span><span class="sp-wm">SUPPORTERS</span></div></section>
+    <div class="sp-grid g4">
+      ${supTile("⚽","100 % pour le site","Chaque euro sert à faire tourner PrimeZ : serveurs, base de données et outils pour développer.","#22c55e")}
+      ${supTile("🤝","Jamais obligatoire","Tu ne donnes rien ? Aucun souci. Jouer, collectionner et partager, c'est déjà nous soutenir.","#3b82f6")}
+      ${supTile("⚖️","Zéro pay-to-win","Pas de mercato payant : aucune carte, aucun booster ni avantage ne s'achète avec de l'argent réel.","#f5b800")}
+      ${supTile("📋","Transparence","On vous dira à quoi sert la cagnotte : pas de surprise, pas de petites lignes.","#a855f7")}
+    </div>
+    <section class="sp-msg"><div class="sp-mh"><i>📣</i><div><span class="sp-k">Le mot du vestiaire</span><h3>Pourquoi une cagnotte ?</h3></div></div>
+      <p><b>Salut à tous !</b></p>
+      <p>PrimeZ, c'est un petit club : quelques passionnés qui codent le soir pour que vous puissiez ouvrir des boosters, compléter votre album de légendes et défier vos potes.</p>
+      <p>Faire tourner le site a un coût : l'hébergement, la base de données, et tous les outils qui nous aident à corriger les bugs et à ajouter des modes comme le Classé ou la Ligue des Champions.</p>
+      <p>C'est pour ça qu'on ouvre une cagnotte. <span class="sp-u">L'argent sert uniquement au site.</span> Et surtout : <span class="sp-u">personne n'est obligé de participer.</span> Le jeu reste gratuit et le restera.</p>
+      <p>Notre règle, c'est <span class="sp-u">pas de pay-to-win</span> : un joueur qui donne n'aura jamais de meilleures cartes qu'un autre. Sur le terrain, tout le monde part à égalité.</p>
+      <p>Merci à tous ceux qui jouent, partagent et nous font remonter les bugs. C'est vous, le douzième homme.</p>
+      <p class="sp-sign">— L'équipe PrimeZ</p></section>
+    <section class="sp-bar"><div><b>Un coup de pouce, si tu le souhaites</b><small>Montant libre · 100 % pour le site · sans engagement</small></div>${supLink(U,"sp-btn",`<i>♥</i>Ouvrir la cagnotte`)}</section>
+  </div>`; }
+function renderDiscord(){ const B=$("dc-body"); if(!B) return; const U=DISCORD_URL;
+  B.innerHTML=`<div class="sp sp-dc">
+    <section class="sp-hero"><div class="sp-txt"><span class="sp-pill"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18 18 0 0 0-5.6 0L8.6 3a19.6 19.6 0 0 0-4.9 1.5C.6 9.1-.3 13.6.1 18a19.8 19.8 0 0 0 6 3l1.3-2a12.8 12.8 0 0 1-2-1l.5-.4a14 14 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.7 19.7 0 0 0 6-3c.5-5.1-.8-9.6-3.6-13.6Z"/></svg>Serveur officiel</span>
+        <h2>Le kop <em>PrimeZ</em><br>t'attend sur Discord.</h2>
+        <p>Annonces en avant-première, nouvelles cartes en exclu, tournois et échanges entre collectionneurs : toute la tribune se retrouve sur le serveur.</p>
+        <div class="sp-cta">${supLink(U,"sp-btn",`Rejoindre le Discord`)}<div class="sp-copy"><code>${esc(supShort(U))}</code><button onclick="supCopy(DISCORD_URL)">Copier</button></div></div></div>
+      <div class="sp-vis">${supJersey("#7c86ff","#3b3fb8","KOP","10")}<span class="sp-wm">TRIBUNE</span></div></section>
+    <div class="sp-grid g3">
+      ${supTile("📣","Les annonces d'abord","Chaque mise à jour est présentée sur le Discord avant d'arriver sur le site.","#5865f2")}
+      ${supTile("👀","Avant-premières","Les nouvelles cartes, raretés et modes de jeu en exclusivité, avant tout le monde.","#ff4d8d")}
+      ${supTile("🏆","Tournois & concours","Défis de la communauté, tournois entre membres et récompenses à gagner.","#f5b800")}
+      ${supTile("🔁","Échanges de cartes","Trouve la légende qui te manque et organise tes échanges avec les autres collectionneurs.","#22c55e")}
+      ${supTile("🗳️","Ton avis compte","Sondages et idées : la communauté choisit les prochaines nouveautés.","#22d3ee")}
+      ${supTile("🛠️","Aide & bugs","Un souci ? L'équipe répond directement sur le serveur.","#a855f7")}
+    </div>
+    <section class="sp-bar"><div><b>Rejoins la tribune en un clic</b><small>Gratuit · ouvert à tous les joueurs PrimeZ</small></div>${supLink(U,"sp-btn",`Ouvrir ${esc(supShort(U))}`)}</section>
+  </div>`; }
 /* ===================== JEUX : DRAFT contre l'IA ===================== */
 const DR_FEE=300, DR_REW=[100,350,800,1600,3500], DR_ROUNDS=["Huitièmes","Quarts","Demi-finale","Finale"];
 const DR_POSN={G:"GB",D:"DEF",M:"MIL",A:"ATT"};
