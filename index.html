@@ -2458,6 +2458,9 @@ input,select,textarea{border-radius:12px!important}
 /* tirs au but : rien ne passe devant les zones de tir (gardien, ballon, filet) */
 .pn-gk,.pn-ball,.pn-net{pointer-events:none!important}
 .pn-z{z-index:6!important;cursor:pointer}
+/* le rétrécissement au clic annulait le centrage : le carré sautait et le clic se perdait (surtout à droite) */
+.pn-z:active,.pn-z:active:not(:disabled){transform:translate(-50%,-50%) scale(.96)!important}
+.rk-tok:active:not(:disabled){transform:translate(-50%,-50%) scale(.96)!important}
 .kick.k2.torn .kpl2{transition:opacity .35s;opacity:0}
 .kick.k2.torn .kh.top{transform:translate(40px,-230px) rotate(-16deg)}
 .kick.k2.torn .kh.bot{transform:translate(-30px,220px) rotate(12deg)}
@@ -2510,6 +2513,74 @@ input,select,textarea{border-radius:12px!important}
 .cst-tr small{display:block;font:600 5.5px/1.3 Outfit,Arial,sans-serif;color:#d4cdd8;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .cst-ld{margin:auto 0;font:600 7px/1.3 Outfit,Arial,sans-serif;color:#a49dab;text-align:center}
 .cst-src{margin-top:auto;font:600 4.5px/1 Outfit,Arial,sans-serif;color:#7d7684;letter-spacing:.06em}
+.cst-ed{position:absolute;right:6px;top:6px;pointer-events:auto;padding:2px 6px!important;border-radius:5px!important;font:800 6px/1.2 Outfit,Arial,sans-serif!important;background:#ffffff1a!important;border:.5px solid #ffffff33!important;color:#fff;box-shadow:none!important;z-index:2}
+/* effets rares (vent + paillettes) par-dessus tout */
+.rfx{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:120}
+/* le ballon vit : il flotte, tangue et sa lumière bouge en attendant le clic */
+.bl-ball{animation:bldrop 1.1s cubic-bezier(.3,.6,.3,1) both,blidle 2.6s 1.1s ease-in-out infinite}
+@keyframes blidle{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-10px) rotate(-3deg)}50%{transform:translateY(-14px) rotate(1deg)}75%{transform:translateY(-6px) rotate(3deg)}}
+.bl-ball::after{animation:blshadow 2.6s 1.1s ease-in-out infinite}
+@keyframes blshadow{50%{transform:scale(.82);opacity:.6}}
+.bl-ball:hover .bl-shine{opacity:1;background:radial-gradient(circle at 34% 26%,#ffffff90 0,#ffffff18 24%,transparent 42%)}
+.bl-ball:hover{filter:drop-shadow(0 0 22px #ffffff30)}
+.bl-ball.shake{animation:blshake .5s ease-in-out!important}
+.bl-ball.empty{animation:none}
+
+/* ===================== v10 : Classé avec de vraies cartes + temps forts ===================== */
+/* tableau tactique : une vraie carte par poste */
+.rk-pitch{aspect-ratio:.78}
+.rk-tc{width:auto!important;display:grid;justify-items:center;gap:4px}
+.rk-cm{display:block;border-radius:8px;transition:transform .2s,box-shadow .2s}
+.rk-cm .tn{box-shadow:0 8px 16px #000a;border-radius:8px}
+.rk-tc.on .rk-cm{transform:scale(1.08);box-shadow:0 0 0 3px #e5202e,0 0 24px #e5202e;border-radius:8px}
+.rk-tc:hover .rk-cm{transform:scale(1.05)}
+.rk-empty{width:70px;height:101px;border-radius:9px;display:grid;place-items:center;border:2px dashed #ffffff55;background:#0f2d1c99;color:#ffffffaa}
+.rk-empty svg{width:22px;height:22px}
+.rk-tc.on .rk-empty{border:2px solid #e5202e;box-shadow:0 0 22px #e5202e;color:#fff}
+.rk-code{font-style:normal;padding:2px 7px;border-radius:7px;background:#0b0a0dd9;font-size:10px;font-weight:800;color:#fff;white-space:nowrap;border:1px solid #ffffff22}
+.rk-code.f2{border-color:#4ade80}.rk-code.f1{border-color:#f59e0b}.rk-code.f0{border-color:#ef4444}
+.rk-tc.on .rk-code{background:#e5202e}
+/* mini terrain de l'accueil du Classé */
+.rk-mini{aspect-ratio:1.05}
+.rk-mini i{width:auto!important;height:auto!important;margin:0!important;transform:translate(-50%,-50%);border:0!important;background:none!important;border-radius:6px!important;overflow:visible!important}
+.rk-mini i .tn{box-shadow:0 6px 12px #000a;border-radius:6px}
+.rk-mini i.e{width:57px!important;height:82px!important;border:1px dashed #ffffff55!important;border-radius:6px!important}
+/* plus de ronds : vignettes rectangulaires */
+.rk-av img,.rk-cur img{border-radius:6px!important;width:34px!important;height:48px!important}
+.rk-av button{grid-template-columns:34px 1fr 10px auto!important}
+.rk-mt>div{grid-template-columns:32px 1fr auto!important}
+.rk-mth{display:block;width:32px;height:46px;overflow:hidden;border-radius:5px}
+.rk-mt.op>div{grid-template-columns:auto 1fr 32px!important}
+/* frise des temps forts */
+.rk-tl{height:10px}
+.rk-tl i{width:16px;height:16px;margin:-8px 0 0 -8px;background:#2a2630;border:2px solid #0b0a0d}
+.rk-tl i.att{background:#2563eb}.rk-tl i.def{background:#7c2d12}
+.rk-tl i.goal{box-shadow:0 0 0 3px #4ade80}.rk-tl i.miss{opacity:.45}
+.rk-tl i.cur{box-shadow:0 0 0 3px #fff,0 0 14px #fff;transform:scale(1.15)}
+.rk-tl u{background:linear-gradient(90deg,#ffffff22,#ffffff55)!important}
+/* temps fort en cours */
+.rk-stage{display:grid;gap:12px;align-content:start}
+.rk-mo{display:grid;gap:12px;justify-items:center;text-align:center;padding:18px;border-radius:20px;background:var(--glass);border:1px solid var(--line)}
+.rk-mo.att{border-color:#3b82f666;background:radial-gradient(400px 160px at 50% 0,#3b82f622,transparent 70%),var(--glass)}
+.rk-mo.def{border-color:#ef444466;background:radial-gradient(400px 160px at 50% 0,#ef444422,transparent 70%),var(--glass)}
+.rk-mk{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#d4cdd8}
+.rk-duel{display:flex;align-items:center;gap:16px}
+.rk-duel>div{display:grid;justify-items:center;gap:6px}.rk-duel small{font-size:11px;color:var(--mute);font-weight:700}
+.rk-duel>b{font:italic 900 26px/1 Outfit,Arial;color:#fff;opacity:.8}
+.rk-mo p{margin:0;color:#e6dfe9;font-size:14px}
+.rk-acts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%}
+.rk-acts button{display:grid;gap:3px;padding:12px 8px!important}
+.rk-acts b{font-size:14px;font-weight:900}.rk-acts small{font-size:10.5px;font-weight:600;opacity:.85}
+.rk-mo.def .rk-acts .go{--ac:#ef4444;background:linear-gradient(135deg,#f87171,#dc2626)}
+.rk-mo.att .rk-acts .go{--ac:#3b82f6;background:linear-gradient(135deg,#60a5fa,#2563eb)}
+.rk-last,.rk-flash{display:grid;gap:4px;justify-items:center;padding:12px;border-radius:16px;text-align:center}
+.rk-last b,.rk-flash b{font:italic 900 22px/1 Outfit,Arial;text-transform:uppercase}
+.rk-last small,.rk-flash small{color:#d4cdd8;font-size:12.5px}
+.rk-last.good,.rk-flash.good{background:#16a34a22;border:1px solid #4ade8066}.rk-last.good b,.rk-flash.good b{color:#4ade80}
+.rk-last.bad,.rk-flash.bad{background:#dc262622;border:1px solid #f8717166}.rk-last.bad b,.rk-flash.bad b{color:#f87171}
+.rk-flash{padding:40px 16px;animation:rkin .35s cubic-bezier(.2,1.2,.3,1)}.rk-flash b{font-size:44px}
+.rk-ff{font-size:12px!important;padding:8px 14px!important;opacity:.8}
+@media(max-width:900px){.rk-cm .tn{zoom:.72}.rk-empty{width:50px;height:72px}.rk-code{font-size:9px}.rk-acts{grid-template-columns:1fr}.rk-duel .tn{zoom:.75}.rk-mm{grid-template-columns:1fr}}
 </style>
 <script>
 (function(){ try{ const base=location.href.split("#")[0].split("?")[0].replace(/[^\/]*$/,"");
@@ -2673,6 +2744,8 @@ const esc = t => String(t ?? "").replace(/&/g,"&amp;").replace(/"/g,"&quot;").re
 const SIMPLE=["commune","rare","elite"];
 const dispName=c=>SIMPLE.includes(c.rarity)?String(c.name).replace(/\s+(\d{2}\/\d{2}|\d{4})$/,""):c.name;
 let numMap={}; const numOf=c=>numMap[c.name]||c.id;
+/* numéro affiché : « 1 » pour les deux GOAT, « ? » pour les autres en attendant la vraie numérotation */
+const numTxt=c=>c&&c.rarity==="goat"?"001":"?";
 function buildNums(){ numMap={}; const top=c=>c.rarity==="goat"&&/^(L\.MESSI|C\.RONALDO)/.test(c.name); let n=1; allCards.forEach(c=>{ if(top(c)) numMap[c.name]=1; }); allCards.forEach(c=>{ if(!top(c)&&c.rarity!=="promo") numMap[c.name]=++n; }); allCards.forEach(c=>{ if(c.rarity==="promo") numMap[c.name]=++n; }); }
 const PACK_IMG={pantheon:""}; PACK_IMG.promo=IMG["h-yamal"]||""; /* colle ici le lien d'une image pour le fond du Panthéon, sinon silhouette par défaut */
 const PANART=`<svg viewBox="0 0 240 340" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="pg" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#fff3b0" stop-opacity=".95"/><stop offset=".45" stop-color="#f5b800" stop-opacity=".35"/><stop offset="1" stop-color="#6b3f00" stop-opacity="0"/></radialGradient></defs>
@@ -2753,11 +2826,45 @@ function confetti(col,n){ return; /* confettis retirés */
     ps.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=.35; p.r+=p.vr; p.l-=.008; ctx.save(); ctx.globalAlpha=Math.max(0,p.l); ctx.translate(p.x,p.y); ctx.rotate(p.r); ctx.fillStyle=p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6); ctx.restore(); });
     if(++f<150) requestAnimationFrame(step); else ctx.clearRect(0,0,cv.width,cv.height); })();
 }
+/* ===== effets rares : Légende = vent doré + paillettes jaunes ; au-dessus, la même chose dans la couleur de la rareté, en plus fort ===== */
+const RFX={legende:{c:["#f5b800","#ffe27a","#fff6cc"],lvl:1},mythique:{c:["#ff4d8d","#ffb3cf","#fff0f6"],lvl:2},promo:{c:["#ff7a00","#ffc37a","#fff1de"],lvl:2},
+  prime:{c:["#14915f","#5eead4","#e6fff6"],lvl:3},goat:{c:["#ff0a3c","#ffd166","#fff4e0"],lvl:4}};
+function rareFx(c){ const R=RFX[c&&c.rarity]; if(!R) return; if(rareFx.last&&rareFx.last.id===c.id&&Date.now()-rareFx.last.t<2500) return; rareFx.last={id:c.id,t:Date.now()}; rareSfx(R.lvl);
+  const cv=document.createElement("canvas"); cv.className="rfx"; document.body.appendChild(cv);
+  const dpr=Math.min(2,window.devicePixelRatio||1), W=innerWidth, H=innerHeight; cv.width=W*dpr; cv.height=H*dpr; const g=cv.getContext("2d"); g.scale(dpr,dpr);
+  const cx=W/2, cy=H*.45, n=R.lvl, P=[], S=[], rnd=(a,b)=>a+Math.random()*(b-a), col=()=>R.c[Math.floor(Math.random()*R.c.length)];
+  /* vent : traînées qui balaient l'écran de gauche à droite */
+  for(let i=0;i<18+n*12;i++) S.push({x:rnd(-W*.6,-40),y:rnd(H*.1,H*.9),v:rnd(14,26)+n*2,l:rnd(80,240),w:rnd(1,2.6),a:rnd(.35,.8),c:col(),ph:rnd(0,6.28),d:rnd(0,18)});
+  /* paillettes : étoiles qui jaillissent autour de la carte puis scintillent en retombant */
+  for(let i=0;i<60+n*35;i++){ const an=rnd(0,6.28), sp=rnd(1.5,7)+n*.8; P.push({x:cx+rnd(-60,60),y:cy+rnd(-80,80),vx:Math.cos(an)*sp,vy:Math.sin(an)*sp-rnd(1,3),s:rnd(1.5,4.5)+n*.3,c:col(),t:rnd(0,6.28),life:rnd(70,130),d:rnd(0,12+n*6)}); }
+  const rings=n>=2?[{r:10,a:.9},{r:-30,a:.7}].concat(n>=4?[{r:-70,a:.6}]:[]):[];
+  const star=(x,y,s,a,c)=>{ g.globalAlpha=a; g.fillStyle=c; g.beginPath(); g.moveTo(x,y-s*2.2); g.quadraticCurveTo(x,y,x+s*2.2,y); g.quadraticCurveTo(x,y,x,y+s*2.2); g.quadraticCurveTo(x,y,x-s*2.2,y); g.quadraticCurveTo(x,y,x,y-s*2.2); g.fill(); };
+  let f=0; const tick=()=>{ f++; g.clearRect(0,0,W,H); g.globalCompositeOperation="lighter";
+    S.forEach(s=>{ if(f<s.d) return; s.x+=s.v; const y=s.y+Math.sin((s.x/90)+s.ph)*14; const gr=g.createLinearGradient(s.x-s.l,y,s.x,y); gr.addColorStop(0,"transparent"); gr.addColorStop(1,s.c);
+      g.globalAlpha=s.a*Math.max(0,1-f/120); g.strokeStyle=gr; g.lineWidth=s.w; g.beginPath(); g.moveTo(s.x-s.l,y+6); g.quadraticCurveTo(s.x-s.l/2,y-4,s.x,y); g.stroke(); });
+    rings.forEach(r=>{ r.r+=9+n; if(r.r<=0) return; g.globalAlpha=Math.max(0,r.a*(1-r.r/(Math.max(W,H)*.6))); g.strokeStyle=R.c[0]; g.lineWidth=3; g.beginPath(); g.arc(cx,cy,r.r,0,6.28); g.stroke(); });
+    P.forEach(p=>{ if(f<p.d) return; const k=f-p.d; if(k>p.life) return; p.x+=p.vx; p.y+=p.vy; p.vx*=.97; p.vy=p.vy*.97+.06; p.t+=.25; star(p.x,p.y,p.s,Math.max(0,(1-k/p.life))*(.55+.45*Math.sin(p.t)),p.c); });
+    g.globalAlpha=1; g.globalCompositeOperation="source-over";
+    if(f<170) requestAnimationFrame(tick); else cv.remove(); };
+  requestAnimationFrame(tick); }
+/* sons : carillon scintillant (Légende), + souffle et grosse caisse (Mythique et plus), + accord éclatant (Prime, GOAT) */
+function rareSfx(lvl){ if(muted) return; const a=actx(); if(!a) return; const t=a.currentTime, out=a.createGain(); out.gain.value=.55; out.connect(a.destination);
+  const tone=(f,st,dur,type,vol)=>{ const o=a.createOscillator(), gn=a.createGain(); o.type=type||"sine"; o.frequency.value=f; gn.gain.setValueAtTime(.0001,t+st); gn.gain.exponentialRampToValueAtTime(vol||.25,t+st+.015); gn.gain.exponentialRampToValueAtTime(.0001,t+st+dur); o.connect(gn); gn.connect(out); o.start(t+st); o.stop(t+st+dur+.05); };
+  const whoosh=(st,dur,vol)=>{ const len=Math.floor(a.sampleRate*dur), buf=a.createBuffer(1,len,a.sampleRate), d=buf.getChannelData(0); for(let i=0;i<len;i++) d[i]=Math.random()*2-1;
+    const s=a.createBufferSource(), bp=a.createBiquadFilter(), gn=a.createGain(); s.buffer=buf; bp.type="bandpass"; bp.Q.value=1.2; bp.frequency.setValueAtTime(400,t+st); bp.frequency.exponentialRampToValueAtTime(4200,t+st+dur*.8);
+    gn.gain.setValueAtTime(.0001,t+st); gn.gain.exponentialRampToValueAtTime(vol,t+st+dur*.35); gn.gain.exponentialRampToValueAtTime(.0001,t+st+dur); s.connect(bp); bp.connect(gn); gn.connect(out); s.start(t+st); };
+  whoosh(0,.9,.35+lvl*.08);
+  [1046.5,1318.5,1568,2093,2637].forEach((f,i)=>tone(f,.08+i*.07,.7,"sine",.16));
+  if(lvl>=2){ const o=a.createOscillator(), gn=a.createGain(); o.type="sine"; o.frequency.setValueAtTime(120,t); o.frequency.exponentialRampToValueAtTime(42,t+.5); gn.gain.setValueAtTime(.0001,t); gn.gain.exponentialRampToValueAtTime(.9,t+.01); gn.gain.exponentialRampToValueAtTime(.0001,t+.6); o.connect(gn); gn.connect(out); o.start(t); o.stop(t+.65);
+    [523.25,659.25,783.99].forEach(f=>tone(f,.02,1.2,"triangle",.12)); }
+  if(lvl>=3){ [1046.5,1318.5,1568,2093].forEach(f=>tone(f*1.5,.45,1.4,"sine",.09)); whoosh(.35,1.2,.25); }
+  if(lvl>=4){ [261.63,329.63,392,523.25].forEach((f,i)=>tone(f,.6+i*.05,1.8,"sawtooth",.05)); }
+}
 function fx(c){
   const r=c.rarity; if(ORDER.indexOf(r)<3) return;
   $("overlay").classList.toggle("sheetmode",!!document.querySelector("#reveal .sheet")); const bn=$("banner"); bn.textContent=BANNER[r]; bn.style.fontSize=`min(150px,${(86/(BANNER[r].length*0.62)).toFixed(2)}vw)`; bn.style.setProperty("--c",COLOR[r]); bn.className=""; /* plus de grosse bannière : elle mangeait l'écran */
   
-  revealSfx(c);
+  revealSfx(c); rareFx(c);
 }
 
 /* ---------- connexion ---------- */
@@ -2918,7 +3025,7 @@ let heroPromo=false;
 const heroDots=cur=>`<div class="dots">${boosters.map(x=>`<button class="dot ${!heroPromo&&x.id===cur?"on":""}" title="${esc(x.name)}" onclick="pick('${x.id}')"></button>`).join("")}<button class="dot promo ${heroPromo?"on":""}" title="PROMO" onclick="heroPromo=true;render()"></button></div>`;
 function promoProg(){ if(profile&&profile.is_admin) return 10; const r=(refSt&&refSt.rewarded)||0; return r>0&&r%10===0?10:r%10; }
 function promoHeroHTML(){ const n=promoProg(), have=(refSt&&refSt.gifts&&refSt.gifts.promo)||0;
-  const y=allCards.find(c=>c.rarity==="promo")||{id:0,name:"L.YAMAL 25/26",rarity:"promo",image_url:IMG["h-yamal"]||""};
+  const y=allCards.find(c=>c.rarity==="promo"&&/YAMAL/i.test(c.name)&&c.image_url)||allCards.find(c=>c.rarity==="promo")||{id:0,name:"L.YAMAL 25/26",rarity:"promo",image_url:IMG["h-yamal"]||""};
   return `<div class="hl"><div class="htag" style="color:#ff9a3c">Booster PROMO · Exclusif parrainage</div><h1 class="disp" style="--n:5">PROMO</h1>
     <p>3 cartes <b style="color:#ff9a3c">PROMO</b> à chaque ouverture : les joueurs qui ont eu une saison de folie. Et <b style="color:#ff9a3c">15 % de chance</b> de décrocher <b style="color:#ff9a3c">L.YAMAL PROMO</b>.</p>
     <div class="pbar ${n>=10?"full":""}"><div class="pbar-h"><span>Filleuls pour ton prochain booster PROMO</span><b><em id="pbar-n">0</em> / 10</b></div><div class="pbar-t"><u id="pbar-u" data-n="${n}"></u>${Array.from({length:9},(_,i)=>`<i style="left:${(i+1)*10}%"></i>`).join("")}</div>${n>=10?`<div class="pbar-ok">Débloqué !</div>`:""}</div>
@@ -2993,7 +3100,7 @@ function sigName(c){ const k=String(c.name).replace(/\s+(\d{2}\/\d{2}|\d{4})$/,"
 const MYST=c=>c.rarity==="promo"||c.rarity==="prime"||c.rarity==="goat";
 const SUS_C="#c9a227";
 function cardHTML(c,flipped,qn,delay){
-  const num=String(numOf(c)).padStart(3,"0");
+  const num=numTxt(c);
   return `<div class="card r-${c.rarity} ${flipped?"flip":""}" data-cid="${c.id}" style="${delay!=null?`animation-delay:${delay}ms`:""}" onclick="this.classList.add('flip')"><div class="in">
   <div class="face back ${MYST(c)?"mx":""}" style="--bk:${MYST(c)?"#c9a227":COLOR[c.rarity]}">${MYST(c)?'<i class="mx-fx"></i><b class="mx-q">?</b>':""}${c.image_url&&!flipped&&!MYST(c)?`<img class="bk-art" src="${esc(c.image_url)}" alt="" loading="lazy" onerror="this.remove()">`:""}<i class="bk-tint"></i><i class="bk-pitch"></i><div class="bk-hd"><img src="logo.png" alt="" onerror="this.style.display='none'"><span>PrimeZ</span><i>?</i></div><div class="bk-side">PrimeZ · booster</div><div class="bk-band"><b class="bk-sig">PrimeZ</b><span>Clique pour retourner</span></div>${flipped?"":'<i class="bk-sheen"></i>'}</div>
   <div class="face front">${art(c)}<i class="fx"></i><i class="pk-shine"></i><i class="gl"></i><i class="pk-glare"></i><div class="top2"><span>N°${num}</span><span>${TITLE[c.rarity]||""}</span></div>${qn>1?`<span class="qty">x${qn}</span>`:""}
@@ -3080,7 +3187,7 @@ function ballTray(){ const s=bl, w=s.shown, k=+w.dataset.i, slot=$("bl-tray")&&$
   w.style.transform=`translate(${(cur.m41+(b.left+b.width/2-(a.left+a.width/2))/z).toFixed(1)}px,${(cur.m42+(b.top+b.height/2-(a.top+a.height/2))/z).toFixed(1)}px) scale(${(b.width/a.width).toFixed(3)})`; w.classList.add("tray");
   if(s.i>=seq.list.length){ s.busy=true; setTimeout(ballEnd,600); } else { const h=$("bl-hint"); if(h) h.textContent="Clique sur le ballon"; } }
 function ballEnd(){ if(seq.mode!=="ball") return; sfxStop&&sfxStop(); if(seq.list.length===1){ closeOverlay(); return; } showSheet(0); }
-function ballSkip(){ if(!bl) return; seq.list.forEach((c,i)=>seq.seen.add(i)); bl.busy=true; document.querySelector(".spx")?.remove(); ballEnd(); }
+function ballSkip(){ if(!bl) return; seq.list.forEach((c,i)=>{ if(ORDER.indexOf(c.rarity)<ORDER.indexOf("mythique")) seq.seen.add(i); }); bl.busy=true; document.querySelector(".spx")?.remove(); ballEnd(); }
 /* joueur stylisé pour l'ouverture (maillot, short, numéro dans le dos du maillot, nom sous les pieds) */
 function kPlayer(cls,jer,trim,sho,num,numc,skin,name){
   return `<div class="kpl2 ${cls}"><svg viewBox="40 84 170 240" aria-hidden="true"><g class="kbody">
@@ -3095,7 +3202,7 @@ function kPlayer(cls,jer,trim,sho,num,numc,skin,name){
   </g></svg><span>${name}</span></div>`; }
 function showSeq(){
   const c=seq.list[seq.i], n=seq.list.length, r=$("reveal"); glow(null); $("overlay").style.setProperty("--glow",MYST(c)?SUS_C:COLOR[c.rarity]); seq.mode="seq"; seq.done=false; r.className="seqv";
-  const sus=ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique"), num=String(numOf(c)).padStart(3,"0"), pct=n>1?(seq.i/(n-1))*100:100;
+  const sus=ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique"), num=numTxt(c), pct=n>1?(seq.i/(n-1))*100:100;
   r.innerHTML=`<div class="stg ${sus?"sus":""}" id="stg" style="--sc:${MYST(c)?SUS_C:COLOR[c.rarity]}">
     <div class="spot"></div><div class="ring"></div><div class="bnum" id="bnum">${[...num].map(d=>sus?`<span data-d="${d}">?</span>`:`<span class="on" data-d="${d}">${d}</span>`).join("")}</div>
     <div class="big">${cardHTML(c,false,0,0)}</div>
@@ -3210,12 +3317,13 @@ function spotReveal(c,src,done){ const old=document.querySelector(".spx"); if(ol
   if(vint){ d.classList.remove("bld"); d.querySelectorAll(".bm,.bfx").forEach(e=>e.remove()); d.querySelector(".spx-h").textContent="Gratte la poussière avec ta souris · clic à côté pour tout enlever"; }
   if(src&&big.animate){ const a=src.getBoundingClientRect(), b=big.getBoundingClientRect(); big.animate([{transform:`translate(${((a.left+a.width/2-(b.left+b.width/2))/bs).toFixed(1)}px,${((a.top+a.height/2-(b.top+b.height/2))/bs).toFixed(1)}px) scale(${(a.width/b.width).toFixed(3)})`,opacity:.6},{transform:"none",opacity:1}],{duration:520,easing:"cubic-bezier(.2,.8,.2,1)"}); }
   requestAnimationFrame(()=>d.classList.add("in")); thud(); if(c.sfx_url) sfxPlay(c);
-  let st=0; const T=[]; const built=()=>{ if(st) return; if(dust){ const x=dust; dust=null; x.clear(); return; } st=1; T.forEach(clearTimeout); d.classList.remove("bld"); d.querySelectorAll(".bm,.bfx").forEach(e=>e.remove()); d.classList.add("done"); d.style.setProperty("--sc",COLOR[c.rarity]); thud(); if(c.rarity==="promo"){ d.classList.add("hit"); setTimeout(thud,180); setTimeout(thud,360); } const h=d.querySelector(".spx-h"); if(h) h.textContent="Clique pour continuer"; };
+  let st=0; const T=[]; const built=()=>{ if(st) return; if(dust){ const x=dust; dust=null; x.clear(); return; } st=1; T.forEach(clearTimeout); d.classList.remove("bld"); d.querySelectorAll(".bm,.bfx").forEach(e=>e.remove()); d.classList.add("done"); d.style.setProperty("--sc",COLOR[c.rarity]); thud(); rareFx(c); if(c.rarity==="promo"){ d.classList.add("hit"); setTimeout(thud,180); setTimeout(thud,360); } const h=d.querySelector(".spx-h"); if(h) h.textContent="Clique pour continuer"; };
   const close=()=>{ if(st<1){ built(); return; } if(st>1) return; st=2; d.classList.add("out"); setTimeout(()=>d.remove(),320); done&&done(); };
   if(vint) dust=dustCover(card,()=>{ dust=null; built(); }); else T.push(setTimeout(built,SFX_D));
   d.addEventListener("click",close); }
 function sheetAll(){
-  const todo=[...Array(seq.L.length).keys()].filter(k=>!seq.rev.has(k));
+  /* « Tout retourner » laisse les Mythique et plus face cachée : à toi de les retourner */
+  const todo=[...Array(seq.L.length).keys()].filter(k=>!seq.rev.has(k)&&ORDER.indexOf(seq.L[k].rarity)<ORDER.indexOf("mythique"));
   todo.forEach((k,i)=>setTimeout(()=>sheetFlip(k,true),i*140));
   setTimeout(()=>{ const b=seq.best; if(todo.length&&ORDER.indexOf(b.rarity)>=3){ glow(b); fx(b); if(b.sfx_url) sfxPlay(b); } },todo.length*140+450);
 }
@@ -3407,7 +3515,7 @@ function renderCollection(){
   const SORTS={"rar-asc":byRar,"rar-desc":(x,y)=>ORDER.indexOf(y.rarity)-ORDER.indexOf(x.rarity)||x.name.localeCompare(y.name),"num-asc":(x,y)=>numOf(x)-numOf(y),"num-desc":(x,y)=>numOf(y)-numOf(x),"az":(x,y)=>x.name.localeCompare(y.name),"za":(x,y)=>y.name.localeCompare(x.name),
     "qty-desc":(x,y)=>qn(y)-qn(x)||byRar(x,y),"own-first":(x,y)=>(qn(y)>0)-(qn(x)>0)||byRar(x,y),"miss-first":(x,y)=>(qn(x)>0)-(qn(y)>0)||byRar(x,y)};
   const list=[...allCards].sort(SORTS[$("c-sort").value]||byRar).filter(c=>(filter==="all"||c[key]===filter)&&(!q||(owned[c.id]?c.name.toLowerCase().includes(q):cardHint(c).toLowerCase().includes(q)))&&(own==="all"||(own==="own"?owned[c.id]:!owned[c.id])));
-  const slot=c=>`<div class="slot" data-cid="${c.id}" style="--c:${COLOR[c.rarity]}"><i class="sl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></i><small>N°${String(numOf(c)).padStart(3,"0")}</small><em>${RARITY[c.rarity]}</em>${(h=>h?`<span class="hint">${esc(h)}</span>`:"")(cardHint(c))}</div>`;
+  const slot=c=>`<div class="slot" data-cid="${c.id}" style="--c:${COLOR[c.rarity]}"><i class="sl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></i><small>N°${numTxt(c)}</small><em>${RARITY[c.rarity]}</em>${(h=>h?`<span class="hint">${esc(h)}</span>`:"")(cardHint(c))}</div>`;
   const sortV=$("c-sort").value, asc=sortV==="rar-asc";
   let order=defs.map(d=>d[0]); if(groupBy==="rarete"&&!asc) order=order.reverse();
   const meta=Object.fromEntries(defs.map(d=>[d[0],d]));
@@ -4108,7 +4216,7 @@ document.addEventListener("click",e=>{ const b=e.target.closest(".dr-eye"); if(!
 function openCard(id,src,full){
   const c=allCards.find(x=>x.id===id); if(!c) return; closeCard(true);
   const k=infoKey(c), I=INFO[k], seas=(String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/)||[])[1];
-  const q=owned[c.id]||0, col=COLOR[c.rarity], num=String(numOf(c)).padStart(3,"0");
+  const q=owned[c.id]||0, col=COLOR[c.rarity], num=numTxt(c);
   const chips=I&&I[1]?I[1].split("|").map(x=>`<span>${esc(x)}</span>`).join(""):"";
   if(!q&&!full) return openLocked(c,src,col,num);
   const pos=I?I[0]:"", sub=[c.club,c.league&&c.league!=="Autres"?c.league:""].filter(Boolean).map(esc).join(" · ");
@@ -4196,15 +4304,26 @@ async function cardStats(el){ const c=allCards.find(x=>x.id===+el.dataset.cid); 
   const head=`<span class="cst-k">${esc(RARITY[c.rarity])}${seas?" · "+esc(seas):""}</span>`;
   const trophies=pal.length?`<div class="cst-tr"><b>🏆 ${pal.length} titre${pal.length>1?"s":""}</b><small>${pal.slice(0,3).map(esc).join(" · ")}${pal.length>3?"…":""}</small></div>`:"";
   box.innerHTML=`${head}<h4>${esc(k)}</h4><p class="cst-ld">Chargement de la fiche…</p>${trophies}`;
-  let s=null; try{ s=await wdStats(c); }catch(e){}
+  let s=null, ps=null; try{ [s,ps]=await Promise.all([wdStats(c).catch(()=>null),pStats(k)]); }catch(e){}
   if(!box.isConnected) return;
-  const b=s&&s.birth?new Date(s.birth):null, age=b?Math.floor((Date.now()-b)/31557600000):null, fmt=n=>n==null||isNaN(n)?"–":n.toLocaleString("fr-FR");
-  box.innerHTML=`${head}<h4>${esc(s&&s.full||k)}</h4>${s?`<div class="cst-g">
+  const b=s&&s.birth?new Date(s.birth):null, age=b?Math.floor((Date.now()-b)/31557600000):null, fmt=n=>n==null||isNaN(n)?"–":Number(n).toLocaleString("fr-FR");
+  /* matchs / buts / passes : d'abord nos stats (mises à jour par l'admin), sinon Wikidata ; les passes D ne viennent que de nos stats */
+  const m=ps&&ps.matches!=null?ps.matches:s&&s.m, g=ps&&ps.goals!=null?ps.goals:s&&s.g, as=ps&&ps.assists!=null?ps.assists:null;
+  const src=ps?`Stats PrimeZ · à jour du ${new Date(ps.updated_at).toLocaleDateString("fr-FR")}`:"Clubs + sélection · Wikidata";
+  const edit=profile&&profile.is_admin?`<button class="cst-ed" onclick="event.stopPropagation();pStatsEdit('${esc(k).replace(/'/g,"\\'")}')">✎ Modifier</button>`:"";
+  box.innerHTML=`${head}<h4>${esc(s&&s.full||k)}</h4>${s||ps?`<div class="cst-g">
       <div class="f"><b>${b?b.toLocaleDateString("fr-FR"):"–"}${age!=null?` <i>· ${age} ans</i>`:""}</b><small>Né le</small></div>
-      <div class="f"><b>${esc(s.place||"–")}</b><small>Lieu de naissance</small></div>
-      <div><b>${fmt(s.m)}</b><small>Matchs</small></div><div><b>${fmt(s.g)}</b><small>Buts</small></div>
-      <div><b>${s.m&&s.g!=null?(s.g/s.m).toFixed(2):"–"}</b><small>Buts / match</small></div><div><b>${fmt(s.aw)}</b><small>Distinctions</small></div></div>`
-    :`<p class="cst-ld">Fiche introuvable pour ce joueur.</p>`}${trophies}<span class="cst-src">Clubs + sélection · Wikidata</span>`; }
+      <div class="f"><b>${esc(s&&s.place||"–")}</b><small>Lieu de naissance</small></div>
+      <div><b>${fmt(m)}</b><small>Matchs</small></div><div><b>${fmt(g)}</b><small>Buts</small></div>
+      <div><b>${fmt(as)}</b><small>Passes D.</small></div><div><b>${fmt(s&&s.aw)}</b><small>Distinctions</small></div></div>`
+    :`<p class="cst-ld">Fiche introuvable pour ce joueur.</p>`}${trophies}<span class="cst-src">${src}</span>${edit}`; }
+/* stats tenues à jour par l'admin (table player_stats) */
+let PSTATS=null;
+async function pStats(k){ if(!PSTATS){ PSTATS=new Map(); try{ const {data}=await sb.from("player_stats").select("*"); (data||[]).forEach(r=>PSTATS.set(r.key,r)); }catch(e){} } return PSTATS.get(String(k).toUpperCase())||null; }
+async function pStatsEdit(k){ const cur=PSTATS&&PSTATS.get(k)||{}, v=prompt(`Stats de ${k} (toutes compétitions, clubs + sélection)\nFormat : matchs, buts, passes décisives`,[cur.matches??"",cur.goals??"",cur.assists??""].join(", "));
+  if(v==null) return; const n=v.split(/[,;\s]+/).filter(Boolean).map(x=>x===""?null:parseInt(x,10)); if(n.length<3||n.some(x=>x!=null&&isNaN(x))){ toast("Format : matchs, buts, passes"); return; }
+  const r=await rpc("set_player_stats",{p_key:k,p_matches:n[0],p_goals:n[1],p_assists:n[2]}); if(!r) return; PSTATS=null; toast("Stats enregistrées",true);
+  const el=document.querySelector("#cview .card"); if(el) cardStats(el); }
 function closeCard(now){ const d=$("cview"); if(!d) return; if(now){ d.remove(); return; } d.classList.remove("show"); d.classList.add("out"); setTimeout(()=>d.remove(),280); }
 document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&$("cview")) closeCard(); });
 /* inclinaison 3D qui suit la souris + reflet */
@@ -4916,7 +5035,7 @@ function gxX(){ const x=$("gx-x"); if(x) x.classList.toggle("hidden",gx==="hub")
 async function gxQuit(){
   if(gx==="draft"&&dr&&dr.run&&dr.stage!=="end"){ if(dr.m) await drQuitMatch(); else await drQuit(); return; }
   if(ldc.m&&ldc.m.turn<10&&ldc.m.story==null&&!confirm("Abandonner ce match ?")) return;
-  clearInterval(lmT); clearInterval(rk.it); if(rk.m&&!rk.m.done) rkEnd(); rk.m=null; rk.view="home"; clearTimeout(qz.timer); crowdBed(false); crMusic(false); ldc.m=null; ldc.view="home"; if(dr&&!dr.run) dr={stage:"lobby"};
+  clearInterval(lmT); clearInterval(rk.it); rk.m=null; rk.view="home"; clearTimeout(qz.timer); crowdBed(false); crMusic(false); ldc.m=null; ldc.view="home"; if(dr&&!dr.run) dr={stage:"lobby"};
   gx="hub"; window.scrollTo(0,0); gxRender(); }
 function gxRender(){
   const B=$("gx-body"); if(!B) return;
@@ -4949,7 +5068,7 @@ function gxRender(){
 function gxImg(k,alt){ const c=allCards.find(c=>infoKey(c)===k&&c.image_url); return c?c.image_url:(alt&&IMG[alt])||""; }
 
 /* ===================== MODE CLASSÉ : 11 contre 11, Elo, rangs, top 10 =====================
-   Le match est calculé par le serveur (fonction ranked_play) : ici on ne fait que composer l'équipe et afficher. */
+   Le match est arbitré par le serveur (ranked_start / ranked_move) : ici on ne fait que composer l'équipe et afficher. */
 const RK_T=[["Remplaçant","commune",0],["Titulaire","rare",950],["International","legende",1100],["Capitaine","elite",1300],["Historique","mythique",1550],["Prime","prime",1800],["GOAT","goat",2100]];
 const RK_FORMS=["4-3-3","4-4-2","4-2-3-1","3-5-2","3-4-3","5-3-2","4-1-2-1-2"];
 let rk={st:null,view:"home",form:"4-3-3",team:Array(11).fill(null),slot:0,q:"",m:null,loading:0,missing:false};
@@ -4982,7 +5101,7 @@ function rkLayout(form){ const S=DR_SLOT[form], line=c=>c==="GB"?0:/^D/.test(c)?
 
 async function rkRender(){ const B=$("gx-body"); if(!B) return;
   if(rk.view==="build") return rkBuild(); if(rk.view==="match"&&rk.m) return rkMatchUI();
-  const {data,error}=await sb.rpc("ranked_state");
+  const [{data,error},lvr]=await Promise.all([sb.rpc("ranked_state"),sb.rpc("ranked_live").then(x=>x,()=>({}))]); rk.lv=lvr&&lvr.data||null;
   if(error){ rk.missing=true; B.innerHTML=`<div class="rk-soon"><span class="dr-k">Classé 11 contre 11</span><h3>Bientôt disponible</h3><p>Le mode classé arrive très vite.</p>${profile&&profile.is_admin?`<p class="rk-adm">Admin : exécute le fichier <b>supabase/ranked.sql</b> dans Supabase (SQL Editor) pour l'activer.<br><small>${esc(error.message)}</small></p>`:""}</div>`; return; }
   const s=rk.st=data; if(s.cards&&s.cards.length===11){ rk.team=s.cards.slice(); rk.form=s.formation||"4-3-3"; }
   const t=rkTier(s.elo), ok=s.cards&&s.cards.length===11&&s.cards.every(id=>owned[id]), n=s.wins+s.draws+s.losses, lay=rkLayout(rk.form);
@@ -4990,13 +5109,13 @@ async function rkRender(){ const B=$("gx-body"); if(!B) return;
     <section class="rk-hero">${gxImg("L.MESSI","h-messi")?`<img class="rk-hero-pl" src="${esc(gxImg("L.MESSI","h-messi"))}" alt="">`:""}
       <div class="rk-rank">${rkBadge(s.elo,124)}<div><span class="dr-k">Ton rang</span><h2>${t.name} <em>${t.div}</em></h2><div class="rk-elo"><b>${s.elo}</b> Elo · record ${s.best}</div>
         <div class="rk-bar"><u style="width:${t.pct}%"></u></div><small>${t.next?`${t.next-s.elo} Elo avant ${t.d===2?RK_T[t.i+1][0]+" III":t.name+" "+["III","II","I"][t.d+1]}`:"Rang maximum atteint"}</small></div></div>
-      <div class="rk-cta"><button class="go rk-play" ${ok?"":"disabled"} onclick="rkPlay()">${ok?"Jouer un match classé":"Compose ton onze d'abord"}</button>
+      <div class="rk-cta">${rk.lv?`<button class="go rk-play" onclick="rkOpen(rk.lv)">Reprendre le match en cours (${rk.lv.my_score} – ${rk.lv.opp_score})</button>`:`<button class="go rk-play" ${ok?"":"disabled"} onclick="rkPlay()">${ok?"Jouer un match classé":"Compose ton onze d'abord"}</button>`}
         <button class="ghost" onclick="rk.view='build';rkRender()">${ok?"Modifier mon onze":"Composer mon onze"}</button>
         <div class="rk-chips"><span><b>${s.wins}</b> V</span><span><b>${s.draws}</b> N</span><span><b>${s.losses}</b> D</span>${s.streak>=2?`<span class="hot"><b>${s.streak}</b> 🔥 série</span>`:""}<span>${n?`<b>#${s.rank}</b> / ${s.players}`:"Pas encore classé"}</span></div>
         <small class="rk-day">${s.won_today?"Première victoire du jour déjà prise":"🎁 Première victoire du jour : <b>+500 ballons</b>"} · ${Math.min(s.today,40)}/40 matchs récompensés aujourd'hui</small></div></section>
     <div class="rk-grid">
       <section class="rk-box rk-team"><div class="rk-h"><b>Mon onze</b><span class="rk-tag">${rk.form}</span></div>
-        <div class="rk-mini">${lay.map((p,i)=>{ const c=rk.team[i]&&drCard(rk.team[i]); return `<i style="left:${p[0]}%;top:${p[1]}%">${c&&c.image_url?`<img src="${esc(c.image_url)}" alt="">`:""}</i>`; }).join("")}</div>
+        <div class="rk-mini">${lay.map((p,i)=>{ const c=rk.team[i]&&drCard(rk.team[i]); return `<i class="${c?"":"e"}" style="left:${p[0]}%;top:${p[1]}%">${c?tn(c,.36):""}</i>`; }).join("")}</div>
         <div class="rk-tstat"><div><b>${ok?rkNote(rk.team):"–"}</b><small>Note</small></div><div><b>${ok?s.cohesion:"–"}</b><small>Cohésion</small></div></div></section>
       <section class="rk-box"><div class="rk-h"><b>Derniers matchs</b></div><div class="rk-rec">${(s.recent||[]).map(m=>{ const r=m.my_score>m.opp_score?"w":m.my_score<m.opp_score?"l":"d"; return `<div class="${r}"><i>${r==="w"?"V":r==="l"?"D":"N"}</i><span>${esc(m.opp_name)}</span><b>${m.my_score} – ${m.opp_score}</b><em>${m.delta>0?"+":""}${m.delta}</em>${m.reward?`<small>+${nf(m.reward)}</small>`:""}</div>`; }).join("")||'<p class="rk-sub">Aucun match pour l’instant.</p>'}</div></section>
       <section class="rk-box rk-ladder"><div class="rk-h"><b>Les rangs</b></div>${RK_T.map((r,i)=>`<div class="${t.i===i?"on":""}" style="--k:${COLOR[r[1]]}">${rkBadge(Math.max(r[2],1)+(i<6?1:0),30)}<span>${r[0]}</span><em>${r[2]}+</em><small>Victoire : ${nf(150+40*i)}</small></div>`).join("")}
@@ -5021,9 +5140,9 @@ function rkBuild(){ const B=$("gx-body"), S=DR_SLOT[rk.form], lay=rkLayout(rk.fo
   B.innerHTML=`<div class="rk-b">
     <section class="rk-board"><div class="rk-h"><b>Tableau tactique</b><select onchange="rkForm(this.value)">${RK_FORMS.map(f=>`<option ${f===rk.form?"selected":""}>${f}</option>`).join("")}</select></div>
       <div class="rk-pitch"><i class="rk-l1"></i><i class="rk-l2"></i><i class="rk-l3"></i><i class="rk-l4"></i>
-        ${lay.map((p,i)=>{ const c=T[i]&&drCard(T[i]), f=c?drFit(S[i],c):-1; return `<button class="rk-tok ${i===sel?"on":""} ${c?"full f"+f:""}" style="left:${p[0]}%;top:${p[1]}%;--k:${c?COLOR[c.rarity]:"#ffffff40"}" onclick="rk.slot=${i};rkBuild()">
-          <span class="rk-ph">${c&&c.image_url?`<img src="${esc(c.image_url)}" alt="">`:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3l-5 3 2 5 2-1v11h10V10l2 1 2-5-5-3c-1 2-2 3-4 3s-3-1-4-3z"/></svg>`}</span>
-          ${c?`<em>${drRating(c)}</em>`:""}<b>${c?esc(dispName(c)):S[i]}</b></button>`; }).join("")}</div>
+        ${lay.map((p,i)=>{ const c=T[i]&&drCard(T[i]), f=c?drFit(S[i],c):-1; return `<button class="rk-tok rk-tc ${i===sel?"on":""} ${c?"full f"+f:""}" style="left:${p[0]}%;top:${p[1]}%;--k:${c?COLOR[c.rarity]:"#ffffff40"}" onclick="rk.slot=${i};rkBuild()">
+          ${c?`<span class="rk-cm">${tn(c,.44)}</span>`:`<span class="rk-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></span>`}
+          <i class="rk-code ${c?"f"+f:""}">${S[i]}${c?` · ${drRating(c)}`:""}</i></button>`; }).join("")}</div>
       <div class="rk-leg"><span><i class="g"></i>À son poste</span><span><i class="o"></i>Poste proche</span><span><i class="r"></i>Hors poste</span></div></section>
     <section class="rk-sheet"><div class="rk-h"><b>Feuille de match</b><span class="rk-tag">Note ${note||"–"} · Cohésion ${coh}</span></div>
       <div class="rk-sel"><i>${code}</i><div><small>Poste sélectionné</small><b>${esc(POS_TXT[code]||code)}</b></div></div>
@@ -5043,30 +5162,46 @@ function rkAuto(){ const S=DR_SLOT[rk.form], used=new Set(rk.team.filter(Boolean
   rkBuild(); }
 async function rkSave(){ const r=await rpc("ranked_save_team",{p_form:rk.form,p_cards:rk.team}); if(!r) return; toast("Onze enregistré",true); rk.view="home"; rkRender(); }
 
-/* ---------- match : le serveur joue, on raconte ---------- */
-async function rkPlay(){ if(rk.busy) return; rk.busy=true; const r=await rpc("ranked_play"); rk.busy=false; if(!r) return;
-  rk.m=Object.assign({},r.data,{t:0,shown:0,su:0,so:0,done:false}); rk.view="match"; whistle&&whistle(); rkMatchUI(); rkTick(); }
-function rkTeamCol(ids,side){ return `<div class="rk-mt ${side}">${ids.map((id,i)=>{ const c=drCard(id); return c?`<div><img src="${esc(c.image_url||"")}" alt=""><span>${esc(dispName(c))}</span><em style="--k:${COLOR[c.rarity]}">${drRating(c)}</em></div>`:""; }).join("")}</div>`; }
-function rkMatchUI(){ const m=rk.m, B=$("gx-body"), me=profile&&profile.username||"Toi";
+/* ---------- match interactif : 8 temps forts, le serveur tranche (choix adverse caché) ---------- */
+const RK_ACT={att:[["F","Frapper","Tente ta chance"],["D","Dribbler","Élimine ton vis-à-vis"],["P","Passer","Trouve un coéquipier"]],
+  def:[["F","Contrer la frappe","Tu te jettes devant"],["D","Tacler le dribble","Tu restes sur tes appuis"],["P","Couper la passe","Tu lis la trajectoire"]]};
+const RK_VERB={F:"la frappe",D:"le dribble",P:"la passe"};
+async function rkPlay(){ if(rk.busy) return; rk.busy=true; const r=await rpc("ranked_start"); rk.busy=false; if(!r) return; rkOpen(r.data); whistle&&whistle(); }
+async function rkResume(){ const {data}=await sb.rpc("ranked_live"); if(data){ rkOpen(data); return true; } return false; }
+function rkOpen(d){ rk.m=Object.assign({},d,{last:null,done:d.status!=="live",fin:null}); rk.view="match"; rkMatchUI(); }
+function rkTeamCol(ids,side){ return `<div class="rk-mt ${side}">${ids.map(id=>{ const c=drCard(id); return c?`<div><span class="rk-mth">${tn(c,.2)}</span><span>${esc(dispName(c))}</span><em style="--k:${COLOR[c.rarity]}">${drRating(c)}</em></div>`:""; }).join("")}</div>`; }
+function rkMatchUI(){ const m=rk.m, B=$("gx-body"), me=profile&&profile.username||"Toi", mo=m.moments[m.step], n=m.moments.length;
+  const cur=m.step<n?(m.moments[m.step].m+"'"):"Terminé";
   B.innerHTML=`<div class="rk-m"><div class="rk-sb"><div class="rk-tm"><span class="dr-k">${rkBadge(m.elo_before,22)} ${m.elo_before}</span><b>${esc(me)}</b><small>Force ${m.my_power}</small></div>
-      <div class="rk-sc"><b id="rk-su">${m.su}</b><i>–</i><b id="rk-so">${m.so}</b><span id="rk-min">${m.done?"Terminé":m.t+"'"}</span></div>
+      <div class="rk-sc"><b id="rk-su">${m.my_score}</b><i>–</i><b id="rk-so">${m.opp_score}</b><span id="rk-min">${cur}</span></div>
       <div class="rk-tm r"><span class="dr-k">${m.bot?"IA":"Joueur"} · ${m.opp_elo}</span><b>${esc(m.opp_name)}</b><small>Force ${m.opp_power}</small></div></div>
-    <div class="rk-tl"><u id="rk-tlu" style="width:${m.t/90*100}%"></u>${m.events.map(e=>`<i class="${e.side}" style="left:${e.m/90*100}%"></i>`).join("")}</div>
-    <div class="rk-mm">${rkTeamCol(m.my_cards||rk.team,"me")}<div class="rk-feed" id="rk-feed">${rkFeed(m)}</div>${rkTeamCol(m.opp_cards,"op")}</div>
-    <div id="rk-res">${m.done?rkResult(m):`<div class="rk-act c"><button class="ghost" onclick="rkSkip()">Passer au résultat</button></div>`}</div></div>`; }
-function rkFeed(m){ const ev=m.events.slice(0,m.shown).map(e=>{ const c=drCard(e.card); return `<div class="g ${e.side}"><b>${e.m}'</b><span>⚽ But ${e.side==="me"?"pour toi":"adverse"}</span><em>${esc(c?dispName(c):"")}</em></div>`; }).reverse().join("");
-  return ev+`<div class="k"><b>0'</b><span>Coup d'envoi</span></div>`; }
-function rkTick(){ const m=rk.m; clearInterval(rk.it); rk.it=setInterval(()=>{ if(!rk.m||rk.m!==m||!$("rk-min")){ clearInterval(rk.it); return; }
-    m.t=Math.min(90,m.t+1); while(m.shown<m.events.length&&m.events[m.shown].m<=m.t){ const e=m.events[m.shown++]; if(e.side==="me"){ m.su++; boum&&boum(); try{ roar(1); }catch(x){} } else m.so++; }
-    $("rk-min").textContent=m.t+"'"; $("rk-su").textContent=m.su; $("rk-so").textContent=m.so; $("rk-tlu").style.width=(m.t/90*100)+"%"; if(m.fs!==m.shown){ m.fs=m.shown; $("rk-feed").innerHTML=rkFeed(m); }
-    if(m.t>=90) rkEnd(); },95); }
-function rkSkip(){ const m=rk.m; if(!m) return; m.t=90; m.shown=m.events.length; m.su=m.my_score; m.so=m.opp_score; rkEnd(); rkMatchUI(); }
-function rkEnd(){ const m=rk.m; clearInterval(rk.it); if(m.done) return; m.done=true; whistle&&whistle(); if(profile){ profile.balloons=m.balloons; render(); }
-  if(rk.st){ rk.st.elo=m.elo_after; } const r=$("rk-res"); if(r) r.innerHTML=rkResult(m); const mn=$("rk-min"); if(mn) mn.textContent="Terminé"; }
-function rkResult(m){ const w=m.my_score>m.opp_score, l=m.my_score<m.opp_score, a=rkTier(m.elo_before), b=rkTier(m.elo_after), up=b.i>a.i||(b.i===a.i&&b.d>a.d), down=b.i<a.i||(b.i===a.i&&b.d<a.d);
-  return `<div class="rk-res ${w?"w":l?"l":"d"}" style="--c:${b.col}"><h3>${w?"Victoire":l?"Défaite":"Match nul"}</h3>
-    <div class="rk-rr">${rkBadge(m.elo_after,72)}<div><b>${b.name} ${b.div}</b><span class="rk-d ${m.delta>=0?"p":"n"}">${m.delta>=0?"+":""}${m.delta} Elo</span><small>${m.elo_after} Elo${up?" · <b class=up>Promotion !</b>":down?" · Rétrogradation":""}</small></div>
-      <div class="rk-gain"><b>+${nf(m.reward)}</b><small>${CURRENCY}${m.reward>=500?" · bonus 1ʳᵉ victoire":""}</small></div></div>
+    <div class="rk-tl">${m.moments.map((x,i)=>{ const e=(m.events||[])[i]; return `<i class="${x.side} ${i===m.step?"cur":""} ${e?(e.goal?"goal":"miss"):""}" style="left:${x.m/90*100}%" title="${x.m}'"></i>`; }).join("")}<u style="width:${(m.step<n?m.moments[m.step].m:90)/90*100}%"></u></div>
+    <div class="rk-mm">${rkTeamCol(m.my_cards||rk.team,"me")}<div class="rk-stage" id="rk-stage">${m.done?"":rkMoment(m)}</div>${rkTeamCol(m.opp_cards,"op")}</div>
+    <div id="rk-res">${m.done&&m.fin?rkResult(m):""}${!m.done?`<div class="rk-act c"><button class="ghost rk-ff" onclick="rkForfeit()">Abandonner (défaite)</button></div>`:""}</div></div>`; }
+function rkMoment(m){ const mo=m.moments[m.step]; if(!mo) return ""; const a=drCard(mo.actor), f=drCard(mo.foe), att=mo.side==="att";
+  const L=m.last;
+  return `${L?`<div class="rk-last ${L.goal?(L.side==="att"?"good":"bad"):(L.side==="att"?"bad":"good")}"><b>${L.side==="att"?(L.goal?"⚽ BUT !":"Raté…"):(L.goal?"But adverse…":"🧤 Bien défendu !")}</b><small>${L.side==="att"?`L'adversaire attendait ${RK_VERB[L.hid]}`:`Il a tenté ${RK_VERB[L.hid]}`}${L.choice===L.hid?" · bien lu":""}</small></div>`:""}
+    <div class="rk-mo ${att?"att":"def"}"><span class="rk-mk">${mo.m}' · ${att?"Occasion pour toi":"Attaque adverse"} · temps fort ${m.step+1}/${m.moments.length}</span>
+      <div class="rk-duel"><div>${a?tn(a,.62):""}<small>${att?"Ton joueur":"Attaquant adverse"}</small></div><b>VS</b><div>${f?tn(f,.62):""}<small>${att?"Défenseur adverse":"Ton défenseur"}</small></div></div>
+      <p>${att?`<b>${esc(a?dispName(a):"")}</b> se présente face à <b>${esc(f?dispName(f):"")}</b>. Que fais-tu ?`:`<b>${esc(a?dispName(a):"")}</b> fonce vers ton but. Qu'est-ce qu'il va faire ?`}</p>
+      <div class="rk-acts">${RK_ACT[mo.side].map(([k,t,s])=>`<button class="go" onclick="rkMove('${k}')"><b>${t}</b><small>${s}</small></button>`).join("")}</div></div>`; }
+async function rkMove(k){ const m=rk.m; if(!m||rk.busy||m.done) return; rk.busy=true; document.querySelectorAll(".rk-acts button").forEach(b=>b.disabled=true);
+  const r=await rpc("ranked_move",{p_match:m.id,p_choice:k}); rk.busy=false; if(!r){ document.querySelectorAll(".rk-acts button").forEach(b=>b.disabled=false); return; }
+  const d=r.data, mo=m.moments[m.step]; (m.events=m.events||[]).push({m:mo.m,side:mo.side==="att"?"me":"opp",card:mo.actor,goal:d.goal,choice:k,hid:d.hid});
+  m.last={side:mo.side,goal:d.goal,choice:k,hid:d.hid}; m.my_score=d.my_score; m.opp_score=d.opp_score; m.step=d.step;
+  if(d.goal&&mo.side==="att"){ try{ boum(); roar(1); }catch(e){} } else if(d.goal){ try{ thud(); }catch(e){} } else { try{ sGlove&&sGlove(); }catch(e){} }
+  /* petit temps pour voir l'action, puis le temps fort suivant */
+  const st=$("rk-stage"); if(st){ st.innerHTML=`<div class="rk-flash ${d.goal?(mo.side==="att"?"good":"bad"):(mo.side==="att"?"bad":"good")}"><b>${mo.side==="att"?(d.goal?"⚽ BUT !":"Raté…"):(d.goal?"But adverse…":"🧤 Arrêté !")}</b><small>${mo.side==="att"?`Le défenseur attendait ${RK_VERB[d.hid]}`:`Il a tenté ${RK_VERB[d.hid]}`}</small></div>`; }
+  const su=$("rk-su"), so=$("rk-so"); if(su) su.textContent=d.my_score; if(so) so.textContent=d.opp_score;
+  setTimeout(()=>{ if(rk.m!==m) return; if(d.done){ m.done=true; m.fin=d.final; Object.assign(m,d.final||{}); whistle&&whistle(); if(profile&&d.final){ profile.balloons=d.final.balloons; render(); } if(rk.st&&d.final) rk.st.elo=d.final.elo_after; }
+    rkMatchUI(); },1300); }
+async function rkForfeit(){ const m=rk.m; if(!m||m.done) return; if(!confirm("Abandonner ce match ? Il compte comme une défaite.")) return;
+  const r=await rpc("ranked_forfeit",{p_match:m.id}); m.done=true; m.fin=r&&r.data; Object.assign(m,m.fin||{}); m.opp_score=Math.max(m.opp_score,m.my_score+1); rkMatchUI(); }
+function rkEnd(){ const m=rk.m; if(m&&!m.done&&m.status==="live") rkForfeit(); }
+function rkResult(m){ const w=m.my_score>m.opp_score&&!(m.fin&&m.fin.forfeit), l=m.my_score<m.opp_score||(m.fin&&m.fin.forfeit), a=rkTier(m.elo_before), b=rkTier(m.elo_after??m.elo_before), up=b.i>a.i||(b.i===a.i&&b.d>a.d), down=b.i<a.i||(b.i===a.i&&b.d<a.d), dl=m.delta||0;
+  return `<div class="rk-res ${w?"w":l?"l":"d"}" style="--c:${b.col}"><h3>${m.fin&&m.fin.forfeit?"Abandon":w?"Victoire":l?"Défaite":"Match nul"}</h3>
+    <div class="rk-rr">${rkBadge(m.elo_after??m.elo_before,72)}<div><b>${b.name} ${b.div}</b><span class="rk-d ${dl>=0?"p":"n"}">${dl>=0?"+":""}${dl} Elo</span><small>${m.elo_after??m.elo_before} Elo${up?" · <b class=up>Promotion !</b>":down?" · Rétrogradation":""}</small></div>
+      <div class="rk-gain"><b>+${nf(m.reward||0)}</b><small>${CURRENCY}${(m.reward||0)>=500?" · bonus 1ʳᵉ victoire":""}</small></div></div>
     <div class="rk-act c"><button class="ghost" onclick="rk.view='home';rk.m=null;rkRender()">Retour</button><button class="go" onclick="rkPlay()">Rejouer</button></div></div>`; }
 
 /* ---------------- TIRS AU BUT ---------------- */
