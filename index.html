@@ -2749,6 +2749,53 @@ input,select,textarea{border-radius:12px!important}
 .bx .pills .pl div{display:flex!important;flex-direction:row!important;align-items:baseline!important;gap:6px!important}
 .bx .pills .pl{flex:0 0 auto!important;width:auto!important}
 @media(max-width:760px){.bx .pills{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;width:100%;padding-bottom:2px}.bx .pills::-webkit-scrollbar{display:none}}
+
+/* ===================== v15 : page Boosters « juste milieu » + illustration Ballon d'Or ===================== */
+.bx #hero{margin:0!important}
+/* quantité : numéros de maillot ronds */
+.bx-q{display:flex;align-items:center;gap:8px;margin:4px 0 2px}
+.bx-q span{font:800 11px/1 Outfit,Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#a49dab;margin-right:4px}
+.bx-q button{width:46px;height:46px;padding:0!important;border-radius:50%!important;font:italic 900 18px/1 Outfit,Arial,sans-serif!important;color:#e6dfe9;
+  background:radial-gradient(circle at 35% 30%,#2e2934,#17141b)!important;border:2px solid #ffffff22!important;box-shadow:0 3px 0 #08070a!important}
+.bx-q button.on{color:#fff;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--hc,#e5202e) 80%,#fff),var(--hc,#e5202e) 60%)!important;border-color:#ffffff66!important;box-shadow:0 3px 0 color-mix(in srgb,var(--hc,#e5202e) 50%,#000),0 0 18px color-mix(in srgb,var(--hc,#e5202e) 70%,transparent)!important}
+.bx-go{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+/* rail des boosters */
+.bx-pick{display:grid;gap:10px}
+.bx-rl span{font:800 11px/1 Outfit,Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#a49dab}
+.bx-rail{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:6px 2px 10px}
+.bx-rail::-webkit-scrollbar{display:none}
+.bx-rk{flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:10px 16px 10px 10px!important;border-radius:18px!important;text-align:left;
+  background:linear-gradient(180deg,#1b181f,#131116)!important;border:1px solid #ffffff14!important;box-shadow:0 3px 0 #08070a!important;transition:transform .2s,border-color .2s,box-shadow .2s}
+.bx-rk:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--bc) 60%,transparent)!important}
+.bx-rk.on{border-color:var(--bc)!important;box-shadow:0 3px 0 color-mix(in srgb,var(--bc) 45%,#000),0 0 26px -8px var(--bc)!important;background:linear-gradient(180deg,color-mix(in srgb,var(--bc) 18%,#1b181f),#131116)!important}
+.bx-rkp{width:52px;flex:0 0 52px;transform:rotate(-6deg);transition:transform .25s}
+.bx-rk:hover .bx-rkp,.bx-rk.on .bx-rkp{transform:rotate(0) scale(1.06)}
+.bx-rkp .bpk{width:100%;animation:none!important}
+.bx-rkt{display:grid;gap:3px}.bx-rkt b{font:italic 900 16px/1 Outfit,Arial,sans-serif;text-transform:uppercase;color:#fff}.bx-rkt small{font-size:12px;color:#bdb6c2;font-weight:600}
+.bx-rk.on .bx-rkt b{color:color-mix(in srgb,var(--bc) 45%,#fff)}
+.bx-act{justify-items:start!important}
+.bx-rates{width:100%!important}
+@media(max-width:760px){
+  .bx-q button{width:42px;height:42px;font-size:16px!important}
+  .bx-go .bigbtn{flex:1 1 100%!important}
+  .bx-rk{padding:8px 12px 8px 8px!important}.bx-rkp{width:42px;flex-basis:42px}.bx-rkt b{font-size:14px}
+}
+
+/* Ballon d'Or : le trophée en illustration à droite de l'en-tête */
+.bd-vis{position:relative;flex:0 0 min(420px,42%);aspect-ratio:850/570;border-radius:24px;overflow:hidden;border:1px solid #f5b80055;
+  box-shadow:0 30px 60px -26px #000,0 0 60px -20px #f5b800}
+.bd-img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block;animation:bdzoom 14s ease-in-out infinite alternate}
+@keyframes bdzoom{to{transform:scale(1.08)}}
+.bd-vis::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,#0b090cdd),radial-gradient(60% 50% at 50% 35%,transparent,#0b090c66);pointer-events:none}
+.bd-glint{position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,#fff5c066 48%,transparent 60%) 0 0/250% 100%;mix-blend-mode:screen;animation:bdglint 5s ease-in-out infinite;pointer-events:none;z-index:1}
+@keyframes bdglint{0%,60%{background-position:120% 0}100%{background-position:-60% 0}}
+.bd-spk{position:absolute;inset:0;pointer-events:none;z-index:1;background:radial-gradient(circle at 30% 30%,#fff 0 1.2px,transparent 2px),radial-gradient(circle at 68% 22%,#fff 0 1px,transparent 2px),radial-gradient(circle at 58% 48%,#ffe9a0 0 1.4px,transparent 2.4px),radial-gradient(circle at 40% 55%,#fff 0 1px,transparent 2px);animation:twinkle 2.2s ease-in-out infinite}
+.bd-vis .bdc{position:absolute!important;left:16px;bottom:14px;z-index:2;margin:0!important;padding:10px 16px!important;min-width:0!important;border-radius:14px!important;background:#0b090ccc!important;border:1px solid #f5b80066!important;backdrop-filter:blur(6px)}
+.bd-vis .bdc b{font-size:28px!important;color:#ffd75e}
+@media(max-width:860px){.bdh{flex-direction:column}.bd-vis{flex-basis:auto;width:100%;order:-1}}
+/* aucun débordement horizontal sur téléphone (les halos décoratifs dépassaient de quelques pixels) */
+html{overflow-x:hidden}
+#app,.content{overflow-x:clip}
 @media(max-width:760px){.bx-row{height:300px}.bx-pk{width:150px;transform:translate(-50%,-50%) translateX(calc(var(--d)*112px)) translateZ(calc(var(--a)*-120px)) rotateY(calc(var(--d)*-16deg)) scale(calc(1 - var(--a)*.1))}
   .bx-ar{top:176px;width:38px;height:38px;margin-top:-19px;font-size:22px!important}.bx-ar.l{left:6px}.bx-ar.r{right:6px}.bx-head{align-items:flex-start}.bx .pills{gap:6px}.bx .pills .pl{padding:6px 10px!important}.bx .pills .pl span{font-size:11px!important}
   .bx-btns button{flex-basis:100%}}
@@ -2841,7 +2888,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
       <div class="bx-head"><div><span class="bx-kick">Le vestiaire</span><h2 class="disp">Boosters</h2></div><div class="pills" id="pills"></div></div>
       <div class="hero hidden" id="hero"></div>
       <div class="gifts hidden" id="gifts"></div>
-      <div class="bx-stage" id="packs"></div>
+      <div class="bx-pick" id="packs"></div>
       <div class="bx-act" id="panel"></div>
       <div class="ticker hidden" id="ticker"><div class="tklab"><i></i><span>Gros tirages</span><small>en direct</small></div><div class="tkw"><div class="tk" id="tk"></div></div></div>
       <div class="home hidden" id="home" style="padding:0"><h3 class="disp">Ta collection</h3><div class="rb" id="rb"></div>
@@ -3210,6 +3257,18 @@ function packHTML(b,cls,sty){
   <div class="bp-band"><div class="bp-name"><span>${esc(b.name)}</span></div><div class="bp-chips"><b>${b.cards_count} cartes</b><span>${PACK_SUB[b.id]||""}</span></div></div>
   <div class="bp-sheen"></div></div>`;
 }
+/* bannière du booster choisi : texte + quantité (numéros de maillot) + ouverture, et les joueurs en éventail à droite */
+function heroBx(b){
+  const h=heroOf(b), P=h.photos, freeOk=!!b.free_ok, freeN=freeOk?freeNow().n:0, pr=(b.price*qty).toLocaleString("fr-FR"); let c="";
+  const card=(p,x,r,z,f)=>`<div class="hc ${f?"f":""}" style="--x:${x}px;--r:${r}deg;--z:${z}">${IMG["h-"+p[0]]?`<img src="${IMG["h-"+p[0]]}" alt="">`:`<div class="sil">${SIL}</div>`}<span>${p[1]}</span></div>`;
+  const back=(x,r)=>`<div class="hc bk" style="--x:${x}px;--r:${r}deg;--z:1"><img src="logo.png" alt="" onerror="this.style.display='none'"></div>`;
+  if(P.length===1) c=back(-150,-9)+back(150,9)+card(P[0],0,-3,3,true);
+  else if(P.length===3) c=card(P[0],-190,-7,1)+card(P[2],190,7,1)+card(P[1],0,-1,3,true);
+  return `<div class="hl"><div class="htag">${h.tag}</div><h1 class="disp" style="--n:${b.name.length}">${esc(b.name)}</h1><p>${esc(h.txt)}</p>
+    <div class="bx-q"><span>Combien ?</span>${[1,5,10].map(n=>`<button class="${n===qty?"on":""}" onclick="setQty(${n})">${n}</button>`).join("")}</div>
+    <div class="bx-go">${freeOk?`<button class="go bigbtn btn-free" data-q="${qty}" ${freeN<qty?"disabled":""} onclick="openN('${b.id}',true)">Ouvrir ${qty>1?"×"+qty+" ":""}gratuitement</button>`:""}
+      <button class="${freeOk?"ghost":"go"} bigbtn" ${profile.balloons<b.price*qty?"disabled":""} onclick="openN('${b.id}',false)">${freeOk?"":"Ouvrir · "}${pr} ${CURRENCY}</button></div></div>
+  <div class="hr">${c}</div>`; }
 function heroHTML(b){
   const h=heroOf(b), free=!!b.free_ok&&freeNow().n>=qty, P=h.photos; let c="";
   const card=(p,x,r,z,f)=>`<div class="hc ${f?"f":""}" style="--x:${x}px;--r:${r}deg;--z:${z}">${IMG["h-"+p[0]]?`<img src="${IMG["h-"+p[0]]}" alt="">`:`<div class="sil">${SIL}</div>`}<span>${p[1]}</span></div>`;
@@ -3260,28 +3319,19 @@ function quick(id){ const b=boosters.find(x=>x.id===id); if(b) openN(id,!!b.free
 function render(){
   animBalloons(profile.balloons);
   const b=boosters.find(x=>x.id===sel)||boosters[0]; if(!b) return;
-  /* page Boosters épurée : un seul point d'attention, le booster choisi au centre du terrain */
-  $("hero").classList.toggle("hidden",!heroPromo);
-  if(heroPromo){ $("hero").style.setProperty("--hc","#ff7a00"); $("hero").innerHTML=promoHeroHTML(); requestAnimationFrame(promoBarAnim); } else $("hero").innerHTML="";
+  /* page Boosters : la bannière du booster choisi (joueurs en éventail qui se soulèvent au survol, quantité et ouverture),
+     puis un rail pour changer de booster, et les chances repliées */
   const si=Math.max(0,boosters.indexOf(b)), col=PACK_THEME[b.id]||"#d21f2e";
-  $("packs").style.setProperty("--sel",col);
-  $("packs").innerHTML=`<div class="bx-pitch"><i></i><i></i><i></i></div>
-    <button class="bx-ar l" ${si<=0?"disabled":""} onclick="pick('${(boosters[si-1]||b).id}')" aria-label="Booster précédent">‹</button>
-    <div class="bx-row">${boosters.map((x,i)=>{ const d=i-si, a=Math.abs(d); return `<div class="bx-pk ${d===0?"on":""}" role="button" tabindex="0" style="--d:${d};--a:${a};--bc:${PACK_THEME[x.id]||"#d21f2e"}" onclick="pick('${x.id}')" aria-label="${esc(x.name)}" ${a>3?"hidden":""}>${packHTML(x,"")}</div>`; }).join("")}</div>
-    <button class="bx-ar r" ${si>=boosters.length-1?"disabled":""} onclick="pick('${(boosters[si+1]||b).id}')" aria-label="Booster suivant">›</button>
-    <div class="bx-name" style="--bc:${col}"><b>${esc(b.name)}</b><span>${b.cards_count} cartes · ${esc(PACK_SUB[b.id]||RARITY[b.min_rarity]+"+")}${b.free_ok?" · gratuit toutes les 10 min":""}</span></div>
-    <div class="bx-dots">${boosters.map((x,i)=>`<i class="${i===si?"on":""}" onclick="pick('${x.id}')"></i>`).join("")}<button class="bx-promo ${heroPromo?"on":""}" onclick="heroPromo=!heroPromo;render()">⭐ PROMO</button></div>`;
-  const n=b.cards_count*qty, rt=b.rates||{};
-  const mi=ORDER.indexOf(b.min_rarity||"commune"), mult=qty, g=mi>0;
+  const n=b.cards_count*qty, rt=b.rates||{}, mi=ORDER.indexOf(b.min_rarity||"commune"), mult=qty, g=mi>0;
   const rates=ORDER.map((r,ri)=>{ if(r==="promo") return ""; const p=+rt[r]||0; let h=hit(p,n); if(g&&ri<mi) h=hit(p,(b.cards_count-1)*mult); const full=g&&ri===mi; if(full) h=100; return `<div class="rt" style="--c:${COLOR[r]}"><span>${RARITY[r]}</span><i><u style="width:${p?Math.max(2,Math.sqrt(h)*10):0}%"></u></i><span>${full?"100":p?fmt(h):0} %</span></div>`; }).join("");
   const lbl=`Chance d’avoir au moins une carte de la rareté, sur ${qty} booster${qty>1?"s":""} (${n} cartes)`;
-  /* barre d'ouverture : quantité + bouton(s), les chances sont repliées */
-  const pr=(b.price*qty).toLocaleString("fr-FR");
-  $("panel").style.setProperty("--bc",col);
-  $("panel").innerHTML=`<div class="bx-qty">${[1,5,10].map(n=>`<button class="${n===qty?"on":""}" onclick="setQty(${n})">×${n}</button>`).join("")}</div>
-  <div class="bx-btns">${b.free_ok?`<button class="go bx-open btn-free" data-q="${qty}" onclick="openN('${b.id}',true)"><b>Ouvrir ×${qty}</b><em>Gratuit</em></button>`:""}
-    <button class="${b.free_ok?"ghost bx-buy":"go bx-open"}" ${profile.balloons<b.price*qty?"disabled":""} onclick="openN('${b.id}',false)"><b>${b.free_ok?"Payer":"Ouvrir ×"+qty}</b><em>${pr} ${CURRENCY}</em></button></div>
-  <details class="bx-rates" ${window.bxRO?"open":""} ontoggle="window.bxRO=this.open"><summary>Chances par rareté${g?" · "+RARITY[b.min_rarity]+"+ garantie ★":""}</summary><p>${lbl}</p><div class="rates">${rates}</div>${b.description?`<p class="bx-desc">${esc(b.description)}</p>`:""}</details>`;
+  $("hero").classList.remove("hidden");
+  if(heroPromo){ $("hero").style.setProperty("--hc","#ff7a00"); $("hero").innerHTML=promoHeroHTML(); requestAnimationFrame(promoBarAnim); }
+  else { $("hero").style.setProperty("--hc",heroOf(b).accent); $("hero").innerHTML=heroBx(b); }
+  $("packs").style.setProperty("--sel",col);
+  $("packs").innerHTML=`<div class="bx-rl"><span>Choisis ton booster</span></div><div class="bx-rail">${boosters.map(x=>`<button class="bx-rk ${!heroPromo&&x.id===b.id?"on":""}" style="--bc:${PACK_THEME[x.id]||"#d21f2e"}" onclick="pick('${x.id}')"><span class="bx-rkp">${packHTML(x,"")}</span><span class="bx-rkt"><b>${esc(x.name)}</b><small>${x.free_ok?"Gratuit · ":""}${x.price.toLocaleString("fr-FR")} ${CURRENCY}</small></span></button>`).join("")}
+    <button class="bx-rk promo ${heroPromo?"on":""}" style="--bc:#ff7a00" onclick="heroPromo=true;render()"><span class="bx-rkp">${packHTML(PROMO_B,"","--bc:#ff7a00")}</span><span class="bx-rkt"><b>PROMO</b><small>Parrainage</small></span></button></div>`;
+  $("panel").innerHTML=heroPromo?"":`<details class="bx-rates" ${window.bxRO?"open":""} ontoggle="window.bxRO=this.open"><summary>Chances par rareté · ${esc(b.name)}${g?" · "+RARITY[b.min_rarity]+"+ garantie ★":""}</summary><p>${lbl}</p><div class="rates">${rates}</div>${b.description?`<p class="bx-desc">${esc(b.description)}</p>`:""}</details>`;
   renderPills();
 }
 function askConfirm(title,txt,ok){ return new Promise(res=>{ window.__ask=v=>{ closeGm(); res(v); };
@@ -4802,7 +4852,7 @@ function renderBallon(){
     :`<div class="mypl"><div class="eyb">TA PLACE</div><div class="mnone">${isGuest?"Les invités ne sont pas classés : sauvegarde ton compte avec Discord pour participer.":"Tu n’as pas encore ouvert de booster sur cette période."}</div></div>`;
   $("bd-body").innerHTML=`<div class="bdh"><div><div class="eyb">LE SOMMET DU CLASSEMENT</div><h2 class="bdt">Le Ballon d’Or.<br><em>Tout repart de zéro chaque lundi.</em></h2>
     <p class="bdp">Chaque booster ouvert rapporte des points selon la rareté de tes cartes : Commune 1, Rare 3, Élite 10, Légende 50, Mythique 500, Prime 10 000, GOAT 100 000. Les 10 premiers touchent des ballons : ${nf(5000)} pour le 1er, ${nf(3000)} pour le 2e, ${nf(2000)} pour le 3e, ${nf(500)} du 4e au 10e.</p></div>
-    <div class="bdc"><b>${d.players||0}</b><small>joueur${(d.players||0)>1?"s":""} classé${(d.players||0)>1?"s":""}</small></div></div>
+    <div class="bd-vis"><img class="bd-img" src="img/ballon-or.webp" alt="Le trophée du Ballon d’Or"><i class="bd-glint"></i><i class="bd-spk"></i><div class="bdc"><b>${d.players||0}</b><small>joueur${(d.players||0)>1?"s":""} classé${(d.players||0)>1?"s":""}</small></div></div></div>
   <div class="bdbar"><div><div class="eyb">CLASSEMENT HEBDOMADAIRE · TOP 50</div><div class="bdw">Du ${f(d.week_start)} au ${f(end)}${left}</div></div>
     <div class="seg"><button class="${now?"on":""}" onclick="bdWeek(0)">Cette semaine</button><button class="${bd.off===1?"on":""}" onclick="bdWeek(1)">Semaine dernière</button></div></div>
   ${rw}
