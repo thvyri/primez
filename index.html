@@ -1962,6 +1962,80 @@ canvas.dust.pre{background:#7d725f}
 .card.card.pk-on .front::before{background:repeating-linear-gradient(115deg,var(--p1) 0%,var(--p2) 7%,var(--p3) 14%,#fff 18%,var(--p4) 22%,var(--p5) 29%,var(--p1) 36%) calc((50% - var(--background-x))*5 + 50%) calc((50% - var(--background-y))*5 + 50%)/300% 300%!important}
 .card.pk-on .top2 span:first-child,.card.pk-on .gem{background:repeating-linear-gradient(115deg,var(--p1) 0%,var(--p2) 12%,var(--p3) 24%,var(--p4) 36%,var(--p1) 48%) calc((50% - var(--background-x))*5 + 50%) 50%/300% 300%!important}
 @media (prefers-reduced-motion:reduce){.card.flip.pk-on .in{transform:rotateY(180deg)}}
+
+/* ===================== REFONTE v4 : fond, interface, collection ===================== */
+:root{--bg:#0b0a0d;--panel:#151318;--line:#ffffff17;--mute:#a49dab;--glass:linear-gradient(180deg,#1b181f,#131116)}
+/* fond : nuit de stade, deux lueurs (rouge / violet), un halo de projecteur et le terrain en filigrane, sans grain */
+html{background:#0b0a0d}
+body::before{background:
+  radial-gradient(1200px 720px at 102% -12%,#e5202e30,transparent 60%),
+  radial-gradient(1000px 720px at -12% 112%,#5b3a8a30,transparent 60%),
+  conic-gradient(from 168deg at 50% -40%,transparent 0deg,#ffffff07 8deg,transparent 16deg,transparent 22deg,#ffffff05 28deg,transparent 34deg),
+  radial-gradient(800px 380px at 50% -6%,#ffffff0c,transparent 70%),
+  linear-gradient(180deg,#131116 0%,#0d0c10 55%,#09080b 100%)!important}
+body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:62vh;z-index:-1;pointer-events:none;
+  background:var(--pitch) 50% 100%/min(1500px,140vw) auto no-repeat;opacity:.55;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 70%);mask-image:linear-gradient(180deg,transparent,#000 70%)}
+/* barre du haut + menu : verre sombre, fine ligne lumineuse */
+.nav2{background:linear-gradient(180deg,#16131af2,#110f14eb)!important;box-shadow:0 1px 0 #ffffff0a}
+.sb{background:#110f14e6!important;border-top:1px solid #ffffff08!important;border-bottom:1px solid #ffffff0f!important;box-shadow:0 12px 30px -20px #000}
+.sb .sbi.on{box-shadow:inset 0 -2px var(--ac)!important;text-shadow:0 0 18px #e5202e88}
+.sb .sbi.on .sbic{filter:drop-shadow(0 0 6px #e5202e)}
+/* blocs : verre sombre avec un reflet en haut */
+.panel,.panelx,.set,.mz-box,.lc-box,.gx-tile,.pfh,.btab,.frow,.trw,.st,.stt,.how div,.rb div,.sy-five,.sy-n,.cr-q,.cr-new,.gate,.form,.arow,.pd,.pdc,.bdc,.refx,.phlog,.vfxp,.sy2-n{
+  background:var(--glass)!important;border-color:var(--line)!important;box-shadow:inset 0 1px 0 #ffffff0d,0 14px 34px -22px #000}
+.pill{background:#151318cc;border-color:var(--line);box-shadow:inset 0 1px 0 #ffffff0a}
+.ghost{background:#19161d;border:1px solid var(--line);box-shadow:inset 0 1px 0 #ffffff0a}
+.ghost:hover:not(:disabled){border-color:color-mix(in srgb,var(--ac) 70%,transparent);background:#201b24}
+input,select,textarea{background:#110f14;border-color:var(--line);transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:color-mix(in srgb,var(--ac) 70%,transparent);box-shadow:0 0 0 3px #e5202e22}
+/* onglets et filtres en pastilles */
+.seg{background:#120f15;border:1px solid var(--line);border-radius:12px;padding:4px;display:inline-flex;gap:2px}
+.seg button{border-radius:9px}
+.chip{background:#141217;border:1px solid var(--line);border-radius:999px;padding:8px 15px;color:#d6d0db;transition:.15s}
+.chip:hover{border-color:color-mix(in srgb,var(--c) 60%,transparent);color:#fff}
+.chip.on{background:color-mix(in srgb,var(--c) 24%,#141217)!important;border-color:color-mix(in srgb,var(--c) 75%,transparent)!important;color:#fff!important;box-shadow:0 0 20px -6px var(--c)}
+.chip small{color:color-mix(in srgb,var(--c) 45%,#bbb);opacity:1}
+
+/* ----- collection : titres de section ----- */
+.csh{position:relative;border-bottom:0!important;padding-bottom:16px;margin-bottom:28px}
+.csh::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 25%,transparent) 30%,#ffffff10 60%,transparent)}
+.csh i{width:5px;height:34px;border-radius:3px;box-shadow:0 0 16px var(--c)}
+.csh h3{text-shadow:0 0 28px color-mix(in srgb,var(--c) 45%,transparent)}
+.csh .cn{padding:4px 10px;border:1px solid color-mix(in srgb,var(--c) 35%,transparent);background:color-mix(in srgb,var(--c) 10%,transparent);border-radius:999px;color:color-mix(in srgb,var(--c) 40%,#fff)}
+.cbar{height:6px;border-radius:99px;background:#ffffff0d;overflow:hidden}
+.cbar b{border-radius:99px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 60%,#000),var(--c));box-shadow:0 0 12px var(--c)}
+
+/* ----- collection : cartes plus grandes (zoom = redessinées à la vraie taille, donc nettes) ----- */
+.csec{--cz:1.36}
+.csec .grid{grid-template-columns:repeat(auto-fill,minmax(calc(158px*var(--cz)),1fr))!important;gap:38px 26px!important;justify-items:center}
+.csec .grid .card,.csec .grid .slot{zoom:var(--cz)}
+.csec .grid .card::after{content:"";position:absolute;left:12%;right:12%;bottom:-14px;height:18px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--c) 45%,#000),transparent);opacity:.55;filter:blur(4px);pointer-events:none;z-index:-1}
+@media(max-width:1100px){.csec{--cz:1.18}}
+@media(max-width:700px){.csec{--cz:1}.csec .grid{gap:22px 12px!important;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))!important}}
+
+/* ----- carte pas encore débloquée ----- */
+.slot{position:relative;width:158px;height:228px;border:0!important;border-radius:12px;overflow:hidden;isolation:isolate;
+  display:flex!important;flex-direction:column;align-items:center;justify-content:flex-end;gap:5px;padding:0 10px 16px;
+  background:radial-gradient(130% 75% at 50% -5%,color-mix(in srgb,var(--c) 20%,#141217),#0e0c11 72%)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 26%,#ffffff0d),0 12px 24px -12px #000;transition:transform .3s cubic-bezier(.2,1.2,.3,1),box-shadow .3s}
+/* silhouette de joueur teintée */
+.slot::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,color-mix(in srgb,var(--c) 70%,#fff),var(--c));opacity:.13;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'%3E%3Ccircle cx='50' cy='33' r='19'/%3E%3Cpath d='M6 120c0-34 19-54 44-54s44 20 44 54z'/%3E%3C/svg%3E") 50% 26%/70% auto no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'%3E%3Ccircle cx='50' cy='33' r='19'/%3E%3Cpath d='M6 120c0-34 19-54 44-54s44 20 44 54z'/%3E%3C/svg%3E") 50% 26%/70% auto no-repeat}
+/* cadre intérieur en pointillés + fines hachures */
+.slot::after{content:"";position:absolute;inset:6px;z-index:-1;border-radius:8px;border:1px dashed color-mix(in srgb,var(--c) 32%,transparent);
+  background:repeating-linear-gradient(135deg,#ffffff05 0 1px,transparent 1px 8px),linear-gradient(180deg,transparent 45%,#000a)}
+.slot b{display:none}
+.slot .sl-ic{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  color:color-mix(in srgb,var(--c) 65%,#fff);background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--c) 30%,#17141b),#0e0c11);
+  border:1px solid color-mix(in srgb,var(--c) 55%,transparent);box-shadow:0 0 22px -4px color-mix(in srgb,var(--c) 60%,transparent),inset 0 1px 0 #ffffff1a;transition:.3s}
+.slot .sl-ic svg{width:19px;height:19px}
+.slot small{font:600 11px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;color:#8f8896}
+.slot em{font:800 10px/1 Outfit,Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--c);text-shadow:0 0 12px color-mix(in srgb,var(--c) 60%,transparent)}
+.slot .hint{margin-top:3px;max-width:132px;padding:4px 10px;border-radius:999px;border:1px solid color-mix(in srgb,var(--c) 30%,#ffffff10)!important;background:#0009!important;color:#d4ced9!important;font:600 10.5px/1.25 Outfit,Arial,sans-serif}
+.slot:hover{transform:translateY(-6px);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 55%,transparent),0 0 26px -8px var(--c),0 16px 28px -14px #000}
+.slot:hover .sl-ic{transform:translate(-50%,-50%) scale(1.08);box-shadow:0 0 30px -2px color-mix(in srgb,var(--c) 80%,transparent),inset 0 1px 0 #ffffff26}
 </style>
 <script>
 (function(){ try{ const base=location.href.split("#")[0].split("?")[0].replace(/[^\/]*$/,"");
@@ -2770,7 +2844,7 @@ function renderCollection(){
   const SORTS={"rar-asc":byRar,"rar-desc":(x,y)=>ORDER.indexOf(y.rarity)-ORDER.indexOf(x.rarity)||x.name.localeCompare(y.name),"num-asc":(x,y)=>numOf(x)-numOf(y),"num-desc":(x,y)=>numOf(y)-numOf(x),"az":(x,y)=>x.name.localeCompare(y.name),"za":(x,y)=>y.name.localeCompare(x.name),
     "qty-desc":(x,y)=>qn(y)-qn(x)||byRar(x,y),"own-first":(x,y)=>(qn(y)>0)-(qn(x)>0)||byRar(x,y),"miss-first":(x,y)=>(qn(x)>0)-(qn(y)>0)||byRar(x,y)};
   const list=[...allCards].sort(SORTS[$("c-sort").value]||byRar).filter(c=>(filter==="all"||c[key]===filter)&&(!q||(owned[c.id]?c.name.toLowerCase().includes(q):cardHint(c).toLowerCase().includes(q)))&&(own==="all"||(own==="own"?owned[c.id]:!owned[c.id])));
-  const slot=c=>`<div class="slot" data-cid="${c.id}" style="--c:${COLOR[c.rarity]}"><b>?</b><small>N°${String(numOf(c)).padStart(3,"0")}</small><em>${RARITY[c.rarity]}</em>${(h=>h?`<span class="hint">${esc(h)}</span>`:"")(cardHint(c))}</div>`;
+  const slot=c=>`<div class="slot" data-cid="${c.id}" style="--c:${COLOR[c.rarity]}"><i class="sl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></i><small>N°${String(numOf(c)).padStart(3,"0")}</small><em>${RARITY[c.rarity]}</em>${(h=>h?`<span class="hint">${esc(h)}</span>`:"")(cardHint(c))}</div>`;
   const sortV=$("c-sort").value, asc=sortV==="rar-asc";
   let order=defs.map(d=>d[0]); if(groupBy==="rarete"&&!asc) order=order.reverse();
   const meta=Object.fromEntries(defs.map(d=>[d[0],d]));
