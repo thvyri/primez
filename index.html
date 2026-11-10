@@ -2653,6 +2653,11 @@ input,select,textarea{border-radius:12px!important}
 .tb-btn.off{filter:saturate(.4) brightness(.8)}
 .tb-ghost{padding:15px 22px!important;border-radius:999px!important;background:transparent!important;border:2px solid #ffffff33!important;font-weight:800!important;box-shadow:none!important}
 .tb-note{color:var(--mute);font-size:12px}
+/* « Free Congo » : petite mention discrète en bas à droite de la tribune */
+.tb-hero{position:relative}
+.tb-fc{position:absolute;right:4px;bottom:0;display:inline-flex;align-items:center;gap:8px;font:800 10px/1 Outfit,Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#ffffff66}
+.tb-fc i{width:16px;height:10px;border-radius:2px;background:linear-gradient(155deg,#007fff 0 36%,#f7d618 36% 42%,#ce1021 42% 58%,#f7d618 58% 64%,#007fff 64%);opacity:.85}
+@media(max-width:900px){.tb-fc{position:static;justify-self:end;margin-top:-6px}}
 .tb-rules{padding:26px;border-radius:24px;background:repeating-linear-gradient(0deg,#1a1d16 0 44px,#1d2119 44px 88px);border:2px solid #ffffff14;box-shadow:inset 0 0 0 6px #0f120d}
 .tb-rules h3{font:italic 900 24px/1 Outfit,Arial,sans-serif;text-transform:uppercase;margin:0 0 16px;color:#fff}
 .tb-rules ol{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -5067,7 +5072,7 @@ function renderCagnotte(){ const B=$("cg-body"); if(!B) return; const U=CAGNOTTE
         <h2>Le 12<sup>e</sup> homme,<br><em>c'est toi.</em></h2>
         <p>Chez nous, personne ne paie pour jouer et ça ne changera pas. Mais si tu veux pousser le club un peu plus haut, la buvette est ouverte : une pièce dans la caisse et on s'occupe du reste.</p>
         <div class="tb-cta">${supLink(U,"tb-btn","Mettre une pièce dans la caisse")}<button class="tb-ghost" onclick="supCopy(CAGNOTTE_URL)">Copier le lien</button></div>
-        <small class="tb-note">Montant libre · aucune contrepartie en jeu</small></div></section>
+        <small class="tb-note">Montant libre · aucune contrepartie en jeu</small></div><span class="tb-fc"><i></i>Free Congo</span></section>
     <section class="tb-rules"><h3>Le règlement de la tribune</h3><ol>
       ${rule(1,"y","Le terrain est le même pour tous","Donner ne débloque rien : ni carte, ni booster, ni raccourci. Tes légendes, tu les sors des boosters comme tout le monde.")}
       ${rule(2,"y","La caisse paie les projecteurs","L'argent part dans l'hébergement, la base de données et les outils qui nous servent à sortir les nouveaux modes.")}
