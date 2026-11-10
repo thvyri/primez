@@ -1558,6 +1558,8 @@ canvas.dust.pre{background:#7d725f}
 .card .plate::before{display:none!important}
 /* « Les cartes à gagner » : la lueur n'est plus coupée */
 .show{padding:34px 18px 40px!important;margin:-14px -10px 0!important}
+/* « show » sert aussi d'état ouvert aux fenêtres plein écran : elles ne doivent pas être décalées */
+.cv.show,.mdl.show,#gm.show,#overlay.show,#banner.show{margin:0!important}
 /* boosters offerts : boutons ×1 ×5 ×10 */
 .gift-b{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .ph-have{align-self:center;color:#ffb066;font:600 13px Outfit,Arial,sans-serif;margin-left:6px}
@@ -2402,6 +2404,20 @@ input,select,textarea{border-radius:12px!important}
 .mz2-m .mz2-bar{width:100%}
 .mz2-mf{width:100%;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--mute)}.mz2-mf em{font-style:normal;font-weight:800;color:#4ade80}.mz2-mf em.rw{color:#ffd166}.mz2-mf .go{padding:6px 12px;font-size:12px}
 @media(max-width:900px){.mz2-cols{grid-template-columns:1fr}.mz2-n i{width:42px;height:42px;font-size:15px}.mz2-line{top:23px}.mz2-n span{font-size:10px}}
+/* missions sur téléphone : rien ne doit élargir la page */
+.mu,.mu-mid,.mz2,.mz2>*{min-width:0}
+/* panneau admin : replié en un petit bouton sur téléphone */
+.adk-tg{display:none}
+@media(max-width:760px){
+  .adk-tg{display:block;padding:8px 12px!important;border-radius:10px!important;font:800 12px/1 Outfit,Arial,sans-serif!important;background:#2a1f24!important;border:1px solid #c9999966!important;color:#ffd0d0!important;box-shadow:0 4px 12px #0008!important}
+  .adock{width:min(240px,calc(100vw - 16px))!important;max-height:calc(100vh - 170px);overflow:auto}
+  .adock.fold{width:auto!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
+  .adock.fold>:not(.adk-tg){display:none!important}
+}
+/* missions sur téléphone : les missions d'abord, le musée en petite frise en dessous */
+@media(max-width:900px){.mu{display:flex!important;flex-direction:column}.mu-mid{order:-1}.mu-wall{gap:16px!important;padding:24px 4px 6px!important}.mu-wall .mu-cv{width:82px!important;padding:6px!important}.mu-wall .mu-cv img{border-width:4px!important}.mu-wall .mu-pl{padding:3px 8px!important}.mu-wall .mu-pl b{font-size:9px!important}.mu-lamp{display:none}}
+.mz2-track{grid-template-columns:repeat(7,minmax(0,1fr))}
+@media(max-width:520px){.mz2-box{padding:16px 14px}.mz2-n i{width:36px;height:36px;font-size:13px}.mz2-line{top:20px}.mz2-n span{font-size:9px}.mz2-n b{font-size:12px}.mz2-r{grid-template-columns:40px minmax(0,1fr) auto auto;gap:8px;padding:10px}.mz2-rw{font-size:12px}.mz2-r .go{padding:8px 10px!important;font-size:12px!important}.mz2-ic{width:40px;height:40px;font-size:20px}.mz2-h h3{font-size:21px}.mz2-ach{grid-template-columns:1fr 1fr}.mz2-m{padding:14px 10px}.mz2-md{width:52px;height:52px;font-size:24px}}
 
 /* ===================== v8 : ouverture Neymar (arc-en-ciel) + retournée de Cristiano ===================== */
 #op-slot{position:relative;z-index:3;transition:opacity .55s ease,transform .55s ease}
@@ -2867,6 +2883,41 @@ html{overflow-x:hidden}
 #balloons-pill.up{box-shadow:0 3px 0 #08070a,0 0 22px #22c55e88,inset 0 1px 0 #ffffff1f!important}
 @media(max-width:760px){#balloons-pill,#free-pill{padding:3px 10px 3px 3px!important;gap:6px;border-radius:12px!important}.pz-ic{width:26px;height:26px!important;flex-basis:26px;border-radius:9px}.pz-ic.ball svg{width:19px;height:19px}#balloons-pill .pz-v,#free-pill .pz-v{font-size:14px}#free-pill::after{left:36px;right:9px;bottom:3px}}
 @media(max-width:900px){.rk-cm .tn{zoom:.72}.rk-empty{width:50px;height:72px}.rk-code{font-size:9px}.rk-acts{grid-template-columns:1fr}.rk-duel .tn{zoom:.75}.rk-mm{grid-template-columns:1fr}}
+
+/* ===================== v17 : tout le site au format téléphone ===================== */
+@media(max-width:560px){
+  /* collection : recherche pleine largeur, les deux menus côte à côte */
+  #view-collection .filters{display:grid!important;grid-template-columns:1fr 1fr;gap:8px!important;margin-bottom:16px!important}
+  #view-collection .filters input{grid-column:1/-1;min-width:0;width:100%}
+  #view-collection .filters .fl{display:grid;gap:5px;min-width:0;font-size:10px}
+  #view-collection .filters .fl select{width:100%;min-width:0}
+  /* marché : deux annonces par ligne, carte au-dessus, prix sur une ligne */
+  .mgrid{grid-template-columns:1fr 1fr!important;gap:10px!important}
+  .lt{flex-direction:column;align-items:center;gap:10px!important;padding:12px 10px!important;text-align:center;border-left-width:1px!important;border-top:3px solid var(--c,var(--ac))}
+  .lt>.tn{zoom:.84}
+  .lt .li{display:grid;justify-items:center;gap:3px;min-width:0;width:100%}
+  .lt .li b{font-size:14px;overflow-wrap:anywhere}
+  .lt .pr{font-size:19px!important;white-space:nowrap;margin:4px 0}
+  .lt .li small{font-size:11px}
+  .lt button{width:100%;margin-top:6px}
+  /* amis : le pseudo garde sa ligne, les boutons passent dessous */
+  .frow{flex-wrap:wrap;gap:10px 12px!important;padding:12px!important}
+  .frow .fn{flex:1 1 calc(100% - 70px)}
+  .frow>button{flex:1 1 0;padding:10px 8px!important}
+  .addf input{min-width:0!important;flex:1 1 150px}
+  /* fiche carte : la croix ne mord plus sur la carte */
+  #cview{padding-top:64px!important}
+  .cv-x{top:max(10px,env(safe-area-inset-top))!important;right:12px!important;width:42px!important;height:42px!important;font-size:22px!important}
+  /* cagnotte : la photo laisse voir le titre dès l'arrivée */
+  .tb-photo{width:min(230px,66%)!important}
+  /* ranked : terrain plus haut et cartes un peu plus petites, plus aucun joueur ne se chevauche */
+  .rk-pitch{aspect-ratio:.62/1!important}
+  .rk-pitch .rk-cm .tn{zoom:.6!important}
+  /* penalty : but plus haut, zones de tir plus faciles à viser au pouce */
+  .pn-goal{aspect-ratio:1.9/1!important;border-width:6px!important}
+  /* ouverture : la rangée de cartes au-dessus de la barre de l'iPhone */
+  .bl-tray{bottom:calc(18px + env(safe-area-inset-bottom))!important}
+}
 </style>
 <script>
 (function(){ try{ const base=location.href.split("#")[0].split("?")[0].replace(/[^\/]*$/,"");
@@ -2928,7 +2979,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
     <button class="sbi" id="tab-profile" onclick="showTab('profile')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span><span class="sbt"><b>Profil</b><small>Ta vitrine &amp; tes cartes préférées</small></span></button>
     <button class="sbi" id="tab-settings" onclick="showTab('settings')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2" fill="#0d0d0d"/><circle cx="15" cy="12" r="2" fill="#0d0d0d"/><circle cx="8" cy="18" r="2" fill="#0d0d0d"/></svg></span><span class="sbt"><b>Paramètres</b><small>Compte, son &amp; application</small></span></button>
   </aside>
-<div class="adock hidden" id="adock"><div class="adk-in admin-only hidden"><span class="adk-k">Admin</span>    <button class="sbi adk" id="tab-admin-cards" onclick="showTab('admin-cards')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="7" width="12" height="14"/><path d="M8 3h13v14"/></svg></span><span class="sbt"><b>Cartes</b><small>Images, clubs, raretés</small></span></button>
+<div class="adock hidden" id="adock"><button class="adk-tg" onclick="this.parentNode.classList.toggle('fold')" aria-label="Ouvrir ou fermer le menu admin">⚙ Admin</button><div class="adk-in admin-only hidden"><span class="adk-k">Admin</span>    <button class="sbi adk" id="tab-admin-cards" onclick="showTab('admin-cards')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="7" width="12" height="14"/><path d="M8 3h13v14"/></svg></span><span class="sbt"><b>Cartes</b><small>Images, clubs, raretés</small></span></button>
     <button class="sbi adk" id="tab-admin-photos" onclick="showTab('admin-photos')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="5" width="18" height="14"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-7 7"/></svg></span><span class="sbt"><b>Photos</b><small>Assistant de recherche</small></span></button>
     <button class="sbi adk" id="tab-admin-players" onclick="showTab('admin-players')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="8" width="18" height="12"/><path d="M12 8v12M3 12h18M8 8C5 5 9 2 12 8c3-6 7-3 4 0"/></svg></span><span class="sbt"><b>Cadeaux</b><small>Messages &amp; récompenses</small></span></button><button class="sbi adk" onclick="lgPreview()"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M9 14h6"/></svg></span><span class="sbt"><b>Accueil</b><small>Écran de connexion</small></span></button><button class="sbi adk" onclick="inviteIntro(true)"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M19 8v6M16 11h6"/></svg></span><span class="sbt"><b>Invitation</b><small>Popup de parrainage</small></span></button><button class="sbi adk" id="adk-cag" onclick="cagToggle()"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.3 1 4.1 2.3h3C14.3 6 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z"/></svg></span><span class="sbt"><b>Cagnotte : cachée</b><small>Visible seulement par les admins</small></span></button></div>
   <div class="adk-v"><span class="adk-k">Voir comme</span><div class="adk-seg"><button data-v="modo" onclick="setView('modo')">Modo</button><button data-v="joueur" onclick="setView('joueur')">Joueur</button><button data-v="invite" onclick="setView('invite')">Invité</button></div></div></div>
@@ -2944,7 +2995,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
       <div class="bx-act" id="panel"></div>
       <div class="ticker hidden" id="ticker"><div class="tklab"><i></i><span>Gros tirages</span><small>en direct</small></div><div class="tkw"><div class="tk" id="tk"></div></div></div>
       <div class="home hidden" id="home" style="padding:0"><h3 class="disp">Ta collection</h3><div class="rb" id="rb"></div>
-        <h3 class="disp">Le saviez-vous ?</h3><div class="sub">Des histoires de foot que peu de gens connaissent. Clique sur une pour la lire en entier.</div><div class="sv" id="show"></div></div>
+        <h3 class="disp">Le saviez-vous ?</h3><div class="sub">Des histoires de foot que peu de gens connaissent. Ouvre-en une pour la lire en entier.</div><div class="sv" id="show"></div></div>
       <div class="foot">PrimeZ · projet fan non officiel, sans but lucratif</div>
     </div></section>
     <section id="view-collection" class="page hidden">
@@ -2956,7 +3007,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
       <div id="collection-grid"></div>
     </section>
 
-    <section id="view-messages" class="page hidden"><h2 class="disp">Messages</h2><p>Cadeaux et annonces. Clique sur « Récupérer » pour encaisser une récompense.</p><div id="msg-list"></div></section>
+    <section id="view-messages" class="page hidden"><h2 class="disp">Messages</h2><p>Cadeaux et annonces. Appuie sur « Récupérer » pour encaisser une récompense.</p><div id="msg-list"></div></section>
 
     <section id="view-missions" class="page hidden"><div class="mz-head"><div><h2 class="disp">Missions &amp; succès</h2><p class="pnote">Reviens chaque jour : la connexion, les missions du jour et de la semaine et les succès te rapportent des ballons.</p></div><button class="go hidden" id="mz-all" onclick="claimAllMissions()">Tout réclamer</button></div><div id="mz-body"></div></section>
 
@@ -2975,7 +3026,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
     <section id="view-profile" class="page hidden"><div id="pf-body"></div></section>
 
     <section id="view-settings" class="page hidden"><h2 class="disp">Paramètres</h2><p>Ton compte, le son et l’application.</p>
-      <div class="set"><div class="mb"><h4>Application ordinateur</h4><p id="inst-txt"></p></div><button class="go" id="inst-btn" onclick="installApp()">Installer PrimeZ</button></div>
+      <div class="set"><div class="mb"><h4 id="inst-h">Application</h4><p id="inst-txt"></p></div><button class="go" id="inst-btn" onclick="installApp()">Installer PrimeZ</button></div>
       <div class="set"><div class="mb"><h4>Son</h4><p>Sifflet, foule et effets pendant les ouvertures.</p></div><button class="ghost" id="snd-btn" onclick="toggleMute();renderSettings()"></button></div>
       <div class="set"><div class="mb"><h4>Compte</h4><p id="acc-txt"></p></div><button class="go hidden" id="acc-save" onclick="saveAccount()">Sauvegarder avec Discord</button><button class="ghost" onclick="logout()">Déconnexion</button></div>
     </section>
@@ -3042,6 +3093,9 @@ const dispName=c=>SIMPLE.includes(c.rarity)?String(c.name).replace(/\s+(\d{2}\/\
 let numMap={}; const numOf=c=>numMap[c.name]||c.id;
 /* téléphone ou tablette (pas de souris) : textes et effets adaptés */
 const TOUCH=matchMedia("(hover:none)").matches;
+const CK=TOUCH?"Touche":"Clique sur";
+const CK1=TOUCH?"Touche":"Clique";
+const IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const DUSTH=()=>TOUCH?"Gratte la poussière avec ton doigt · touche à côté pour tout enlever":"Gratte la poussière avec ta souris · clic à côté pour tout enlever";
 /* numéro affiché : « 1 » pour les deux GOAT, « ? » pour les autres en attendant la vraie numérotation */
 const numTxt=c=>c&&c.rarity==="goat"?"001":"?";
@@ -3321,7 +3375,7 @@ function heroBx(b){
     <div class="bx-seg" style="--qi:${window.bxQi??qi}" data-qi="${qi}" role="radiogroup" aria-label="Nombre de boosters"><i class="bx-thumb"></i>${[1,5,10].map(n=>`<button class="${n===qty?"on":""}" role="radio" aria-checked="${n===qty}" onclick="setQty(${n})"><b>×${n}</b><small>${freeOk&&freeN>=n?"gratuit":(b.price*n).toLocaleString("fr-FR")}</small></button>`).join("")}</div>
     <div class="bx-go">${freeOk?`<button class="go bx-cta btn-free" data-q="${qty}" ${freeN<qty?"disabled":""} onclick="openN('${b.id}',true)"><span>Ouvrir ${qty>1?"×"+qty:""}</span><em>Gratuit · ${freeN}/${cap()}</em></button>`:""}
       <button class="${freeOk?"ghost bx-alt":"go bx-cta"}" ${profile.balloons<b.price*qty?"disabled":""} onclick="openN('${b.id}',false)"><span>${freeOk?"Payer":"Ouvrir"+(qty>1?" ×"+qty:"")}</span><em>${pr} ${CURRENCY}</em></button></div></div>
-  <div class="hr">${c}<div class="bx-hpk" style="--bc:${PACK_THEME[b.id]||"#d21f2e"}">${packHTML(b,"")}</div></div>`; }
+  <div class="hr">${c}</div>`; }
 function heroHTML(b){
   const h=heroOf(b), free=!!b.free_ok&&freeNow().n>=qty, P=h.photos; let c="";
   const card=(p,x,r,z,f)=>`<div class="hc ${f?"f":""}" style="--x:${x}px;--r:${r}deg;--z:${z}">${IMG["h-"+p[0]]?`<img src="${IMG["h-"+p[0]]}" alt="">`:`<div class="sil">${SIL}</div>`}<span>${p[1]}</span></div>`;
@@ -3420,7 +3474,7 @@ const SUS_C="#c9a227";
 function cardHTML(c,flipped,qn,delay){
   const num=numTxt(c);
   return `<div class="card r-${c.rarity} ${flipped?"flip":""}" data-cid="${c.id}" style="${delay!=null?`animation-delay:${delay}ms`:""}" onclick="this.classList.add('flip')"><div class="in">
-  <div class="face back ${MYST(c)?"mx":""}" style="--bk:${MYST(c)?"#c9a227":COLOR[c.rarity]}">${MYST(c)?'<i class="mx-fx"></i><b class="mx-q">?</b>':""}${c.image_url&&!flipped&&!MYST(c)?`<img class="bk-art" src="${esc(c.image_url)}" alt="" loading="lazy" onerror="this.remove()">`:""}<i class="bk-tint"></i><i class="bk-pitch"></i><div class="bk-hd"><img src="logo.png" alt="" onerror="this.style.display='none'"><span>PrimeZ</span><i>?</i></div><div class="bk-side">PrimeZ · booster</div><div class="bk-band"><b class="bk-sig">PrimeZ</b><span>Clique pour retourner</span></div>${flipped?"":'<i class="bk-sheen"></i>'}</div>
+  <div class="face back ${MYST(c)?"mx":""}" style="--bk:${MYST(c)?"#c9a227":COLOR[c.rarity]}">${MYST(c)?'<i class="mx-fx"></i><b class="mx-q">?</b>':""}${c.image_url&&!flipped&&!MYST(c)?`<img class="bk-art" src="${esc(c.image_url)}" alt="" loading="lazy" onerror="this.remove()">`:""}<i class="bk-tint"></i><i class="bk-pitch"></i><div class="bk-hd"><img src="logo.png" alt="" onerror="this.style.display='none'"><span>PrimeZ</span><i>?</i></div><div class="bk-side">PrimeZ · booster</div><div class="bk-band"><b class="bk-sig">PrimeZ</b><span>${CK1} pour retourner</span></div>${flipped?"":'<i class="bk-sheen"></i>'}</div>
   <div class="face front">${art(c)}<i class="fx"></i><i class="pk-shine"></i><i class="gl"></i><i class="pk-glare"></i><div class="top2"><span>N°${num}</span><span>${TITLE[c.rarity]||""}</span></div>${qn>1?`<span class="qty">x${qn}</span>`:""}
   <div class="plate">${c.sig||c.rarity==="prime"||c.rarity==="promo"||c.rarity==="goat"?`<div class="nm sig">${esc(sigName(c))}${(m=>m?`<small>${m[1]}</small>`:"")(String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/))}</div>`:`<div class="nm">${esc(dispName(c))}</div>`}<div class="rl"><i class="gem"></i>${RARITY[c.rarity]||c.rarity}</div></div></div></div></div>`;
 }
@@ -3586,7 +3640,7 @@ function showSheet(pg){ if(seq.phase!=="sheet"){ dgClear(); stopVfx(); seq.phase
     <div class="sh-top"><div class="sh-recap"><div class="sh-chips">${chips}</div>
     ${LUCK[seq.best.rarity]?`<div class="sh-luck">${LUCK[seq.best.rarity]}</div>`:""}
     <div class="sh-stat"><b>${nNew}</b> nouvelle${nNew>1?"s":""}<i></i><b>${n-nNew}</b> doublon${n-nNew>1?"s":""}<i></i>Plus rares en premier</div></div>
-    <div class="sh-wait"><div>Clique sur tes cartes pour les retourner</div><div class="sh-wr"><span id="sh-cnt">${seq.rev.size} / ${n} retournées</span><button class="ghost" onclick="sheetAll()">Tout retourner</button></div></div></div>
+    <div class="sh-wait"><div>${CK} tes cartes pour les retourner</div><div class="sh-wr"><span id="sh-cnt">${seq.rev.size} / ${n} retournées</span><button class="ghost" onclick="sheetAll()">Tout retourner</button></div></div></div>
     <div class="sh-body">${hero}<div class="sh-grid" style="--cols:${sheetCols(restL.length)}">${rest}</div></div>
     ${pages>1?`<div class="sh-pg"><button class="ghost" ${pg===0?"disabled":""} onclick="showSheet(${pg-1})">Précédentes</button><span>${base+1}–${Math.min(n,base+SHEET_PAGE)} / ${n} cartes</span><button class="ghost" ${pg>=pages-1?"disabled":""} onclick="showSheet(${pg+1})">Suivantes</button></div>`:""}</div>`;
   r.querySelectorAll("[data-k]").forEach(w=>w.addEventListener("click",()=>sheetFlip(+w.dataset.k)));
@@ -3951,7 +4005,7 @@ function muPick(n){ const day=Math.floor(Date.now()/864e5), seen=new Set(), hs=k
 function muFrame(c,i){ const gold=ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique"), m=String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/);
   return `<button class="mu-fr ${gold?"g":"s"}" style="--r:${[-1.2,.8,-.5,1.1,-.9,.6][i%6]}deg" onclick="muOpen(${c.id})" title="Voir l’anecdote"><span class="mu-lamp"></span><span class="mu-cv"><img src="${esc(c.image_url)}" alt="" loading="lazy"></span><span class="mu-pl"><b>${esc(infoKey(c))}</b>${m?`<small>${m[1]}</small>`:""}</span></button>`; }
 function muWrap(inner){ const P=muPick(6); if(P.length<2) return inner; const h=Math.ceil(P.length/2);
-  return `<div class="mu"><div class="mu-wall"><span class="mu-k">Clique pour en savoir plus</span>${P.slice(0,h).map(muFrame).join("")}</div><div class="mu-mid">${inner}</div><div class="mu-wall"><span class="mu-k">Clique pour en savoir plus</span>${P.slice(h).map((c,i)=>muFrame(c,i+3)).join("")}</div></div>`; }
+  return `<div class="mu"><div class="mu-wall"><span class="mu-k">${CK1} pour en savoir plus</span>${P.slice(0,h).map(muFrame).join("")}</div><div class="mu-mid">${inner}</div><div class="mu-wall"><span class="mu-k">${CK1} pour en savoir plus</span>${P.slice(h).map((c,i)=>muFrame(c,i+3)).join("")}</div></div>`; }
 function muOpen(id){ const c=allCards.find(x=>x.id===id); if(!c) return; const k=infoKey(c), I=INFO[k]||[], m=String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/), gold=ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique");
   const d=document.createElement("div"); d.className="mu-pop"; d.onclick=e=>{ if(e.target===d||e.target.closest(".mu-x")) d.remove(); };
   d.innerHTML=`<div class="mu-box"><button class="mu-x" aria-label="Fermer">×</button><div class="mu-fr big ${gold?"g":"s"}"><span class="mu-cv"><img src="${esc(c.image_url)}" alt=""></span></div>
@@ -4302,11 +4356,12 @@ addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); dp=e; updInstall
 addEventListener("appinstalled",()=>{ dp=null; updInstall(); renderSettings(); toast("PrimeZ est installé !",true); });
 function closeInstall(){ instDismissed=true; try{ localStorage.setItem("pz_inst_x","1"); }catch(e){} updInstall(); toast("Tu peux l’installer plus tard dans Paramètres",true); }
 async function installApp(){
-  if(!dp){ toast("Utilise le menu ⋮ de Chrome/Edge → « Installer PrimeZ »"); return; }
+  if(!dp){ toast(IOS?"Touche le bouton Partager puis « Sur l’écran d’accueil »":TOUCH?"Ouvre le menu ⋮ du navigateur → « Ajouter à l’écran d’accueil »":"Utilise le menu ⋮ de Chrome/Edge → « Installer PrimeZ »"); return; }
   dp.prompt(); await dp.userChoice; dp=null; updInstall(); renderSettings();
 }
 function renderSettings(){
-  $("inst-txt").textContent=isApp()?"Tu utilises déjà l’application installée.":dp?"Installe PrimeZ en un clic : icône sur le bureau, fenêtre à part.":"Si le bouton ne marche pas, ouvre le menu ⋮ de Chrome ou Edge puis « Installer PrimeZ ».";
+  $("inst-h").textContent=TOUCH?"Application sur ton téléphone":"Application ordinateur";
+  $("inst-txt").textContent=isApp()?"Tu utilises déjà l’application installée.":IOS?"Dans Safari, touche le bouton Partager puis « Sur l’écran d’accueil » : PrimeZ s’ouvre en plein écran comme une vraie appli.":dp?(TOUCH?"Installe PrimeZ en un clic : icône sur ton écran d’accueil, plein écran.":"Installe PrimeZ en un clic : icône sur le bureau, fenêtre à part."):TOUCH?"Ouvre le menu ⋮ du navigateur puis « Ajouter à l’écran d’accueil ».":"Si le bouton ne marche pas, ouvre le menu ⋮ de Chrome ou Edge puis « Installer PrimeZ ».";
   $("inst-btn").classList.toggle("hidden",isApp());
   $("snd-btn").textContent=muted?"Son coupé":"Son activé";
   $("acc-txt").textContent=isGuest?"Tu joues en invité : sauvegarde avec Discord pour ne pas perdre ta collection (+400 ballons, +7 boosters).":"Connecté avec Discord"+(profile&&profile.username?" · "+profile.username:"");
@@ -4712,7 +4767,7 @@ function renderProfile(){
       <div class="xp"><i style="width:${pct.toFixed(1)}%"></i></div><div class="xpl">Score de collection ${nf(p.score)} · prochain niveau à ${nf(Math.ceil(nxt))}</div></div>
     <div class="pfa">${act}</div></div>
   <h3 class="sech disp sect">Cartes préférées</h3>
-  <div class="favs">${slots}</div>${me&&p.fav_auto&&p.fav.length?`<p class="pnote" style="margin-top:10px">Tes plus belles cartes sont affichées par défaut. Clique sur une carte pour choisir les tiennes.</p>`:""}
+  <div class="favs">${slots}</div>${me&&p.fav_auto&&p.fav.length?`<p class="pnote" style="margin-top:10px">Tes plus belles cartes sont affichées par défaut. ${CK} une carte pour choisir les tiennes.</p>`:""}
   ${me?refBox():""}
   <div class="stl"><div class="stt"><b>${p.owned} / ${p.total}</b><small>Cartes (${pc} %)</small></div><div class="stt"><b>${nf(p.duplicates)}</b><small>Doublons</small></div><div class="stt"><b>${nf(p.score)}</b><small>Score</small></div><div class="stt"><b>${p.joined?new Date(p.joined).toLocaleDateString("fr-FR",{month:"short",year:"numeric"}):"—"}</b><small>Membre depuis</small></div></div>
   <div class="rbar">${bar}</div><div class="rleg">${leg}</div>`;
@@ -4927,7 +4982,7 @@ let realAdmin=false, realGuest=false, viewMode="modo";
 function applyView(silent){ if(!realAdmin) viewMode="modo"; setTimeout(()=>{ try{ cagApply(); }catch(e){} },0);
   profile.is_admin=realAdmin&&viewMode==="modo"; isGuest=realGuest||(realAdmin&&viewMode==="invite");
   document.querySelectorAll(".admin-only").forEach(e=>e.classList.toggle("hidden",!profile.is_admin));
-  const dk=$("adock"); if(dk){ dk.classList.toggle("hidden",!realAdmin); dk.classList.toggle("mini",viewMode!=="modo"); dk.querySelectorAll(".adk-seg button").forEach(b=>b.classList.toggle("on",b.dataset.v===viewMode)); }
+  const dk=$("adock"); if(dk){ dk.classList.toggle("hidden",!realAdmin); if(innerWidth<=760&&!dk.dataset.f){ dk.dataset.f=1; dk.classList.add("fold"); } dk.classList.toggle("mini",viewMode!=="modo"); dk.querySelectorAll(".adk-seg button").forEach(b=>b.classList.toggle("on",b.dataset.v===viewMode)); }
   $("guest-banner").classList.toggle("hidden",!isGuest);
   if(!silent){ render(); renderFree(); const cur=TABS.find(t=>!$("view-"+t).classList.contains("hidden")); if(cur&&cur.startsWith("admin")&&!profile.is_admin) showTab("boosters"); else if(cur) showTab(cur); toast(viewMode==="modo"?"Vue modo":viewMode==="joueur"?"Vue joueur (comme un compte normal)":"Vue invité (comme un joueur pas connecté avec Discord)",true); } }
 /* côté serveur aussi : en Joueur / Invité, plus aucun droit admin (sauf repasser en Modo) */
@@ -5146,14 +5201,14 @@ function drRender(){
     const isSel=(t,i)=>sel&&sel.t===t&&sel.i===i;
     const slots=F.map(([p,x,y],i)=>{ const id=dr.squad[i], c=id&&drCard(id), code=drCode(i), cc=c?ch[i]:0, fit=c?drFit(code,c):2;
       return `<div class="dr-slot ${c?"ok":""} ${id===dr.cap?"cap":""} ${isSel("s",i)?"sel":""}" style="left:${x}%;top:${(5+(y-13)*89/76).toFixed(1)}%" onclick="${c?`drTap('s',${i})`:`drOpen(${i})`}">${c?`${drMini(c,drPitchS())}<i class="dr-pos ${fit===2?"ok":fit===1?"mid":"bad"}">${code}${fit<2?` · ${drPosD(c)}`:""}</i><i class="dr-ch">${"●".repeat(cc)}${"○".repeat(3-cc)}</i>${id===dr.cap?'<i class="dr-c">C</i>':""}`:`<div class="dr-empty"><b>+</b><span>${code}</span></div>`}</div>`; }).join("");
-    const bench=`<div class="dr-bench"><div class="dr-bh"><b>Banc</b><span>${dr.bench.filter(Boolean).length} / ${DR_BENCH.length} · les remplaçants entrent en jeu pendant le match. Clique sur deux joueurs pour les échanger.</span></div><div class="dr-brow">${DR_BENCH.map((code,i)=>{ const id=dr.bench[i], c=id&&drCard(id);
+    const bench=`<div class="dr-bench"><div class="dr-bh"><b>Banc</b><span>${dr.bench.filter(Boolean).length} / ${DR_BENCH.length} · les remplaçants entrent en jeu pendant le match. ${CK} deux joueurs pour les échanger.</span></div><div class="dr-brow">${DR_BENCH.map((code,i)=>{ const id=dr.bench[i], c=id&&drCard(id);
       return `<div class="dr-bs ${c?"ok":""} ${isSel("b",i)?"sel":""}" onclick="${c?`drTap('b',${i})`:`drOpenB(${i})`}">${c?`${drMini(c,.4)}<i class="dr-pos ok">${drPosD(c)}</i>`:`<div class="dr-empty sm"><b>+</b><span>${code}</span></div>`}</div>`; }).join("")}</div></div>`;
     const nx=st==="between"?`<button class="go" onclick="drPlay()">Jouer : ${DR_ROUNDS[dr.round]}</button>`:full?`<button class="go" onclick="drPlay()">${st==="prematch"?"Reprendre : ":"Jouer : "}${DR_ROUNDS[dr.round||0]}</button>`:`<button class="go" disabled>${dr.squad.filter(Boolean).length} / 11 joueurs</button>`;
     if(full&&(!dr.nextOpp||dr.nextOpp.forPw==null||Math.abs(dr.nextOpp.forPw-T.pw)>.8)){ dr.nextOpp=drOpp(); drSave(); } const NO=full&&dr.nextOpp, rel=NO?Math.max(8,Math.min(92,50+(T.pw-NO.pw)*4)):50;
     const opBox=NO?`<div class="dr-opp"><span class="dr-k">Prochain adversaire · ${DR_ROUNDS[dr.round||0]}</span><b>${esc(NO.name)}</b><div class="dr-vs"><span>${T.pw.toFixed(1)}</span><div><u style="width:${rel}%"></u></div><span>${NO.pw.toFixed(1)}</span></div>
       <div class="dr-oav">${NO.ids.map(drCard).filter(Boolean).sort((a,b)=>drRating(b)-drRating(a)).slice(0,5).map(c=>`<i title="${esc(dispName(c))} (${drRating(c)})" style="--c:${COLOR[c.rarity]}">${c.image_url?`<img src="${esc(c.image_url)}" alt="">`:""}<b>${drRating(c)}</b></i>`).join("")}</div>
       <small>${rel>58?"Tu pars favori":rel<42?"L'IA part favorite":"Match serré"}</small></div>`:"";
-    B.innerHTML=head(full?"Ton équipe est prête":"Complète ton équipe",full?"Clique sur deux joueurs pour les échanger (terrain ou banc).":"Clique sur un poste vide pour voir 5 joueurs.")+`<div class="dr-sq"><div><div class="dr-pitch">${slots}</div>${bench}</div>
+    B.innerHTML=head(full?"Ton équipe est prête":"Complète ton équipe",full?CK+" deux joueurs pour les échanger (terrain ou banc).":CK+" un poste vide pour voir 5 joueurs.")+`<div class="dr-sq"><div><div class="dr-pitch">${slots}</div>${bench}</div>
       <div class="dr-side"><div class="dr-stat"><span>Note</span><b>${T.rt?Math.round(T.rt):"–"}</b></div><div class="dr-stat"><span>Collectif</span><b>${T.ch} <small>/ 33</small></b><div class="dr-bar"><u style="width:${T.ch/33*100}%"></u></div></div>
       <div class="dr-stat"><span>Puissance</span><b>${T.pw?T.pw.toFixed(1):"–"}</b></div>
       <p class="dr-tip">Collectif (● ● ●) : 1 point si le joueur est à son vrai poste, plus des points s'il a des coéquipiers du même club ou du même championnat.</p>
@@ -5746,7 +5801,7 @@ function ldcSel(id){ const m=ldc.m; if(!m||m.busy||!m.want) return; const c=drCa
   m.pick=id; ldcMatchUI(); }
 function ldcAsk(myTurn){ const m=ldc.m;
   if(myTurn){ m.want="att"; const c=m.pick&&drCard(m.pick);
-    ldcSt(`<div class="lc-ask"><span class="dr-k">À toi d'attaquer</span><h4>${c?`${esc(dispName(c))} a le ballon`:"Choisis ton attaquant (clique sur un de tes joueurs)"}</h4>${c?lmVs(c,m.op.slice(1).filter(id=>id!==m.tired.dop).map(drCard),"Leur défense"):""}${c?`<div class="dr-btns">${DR_ACT.map(([k,t])=>{ const ds=m.op.slice(1).filter(id=>id!==m.tired.dop).map(drCard), mine=stA(c,k), their=Math.max(...ds.map(d=>stD(d,k,false))); return `<button class="dr-b ${mine>their?"adv":mine<their?"dis":""}" onclick="ldcAtt('${k}')"><b>${t}</b><small>${ST_NAME[ACT_A[k]]} ${stFmt(mine)}★ · eux ${stFmt(their)}★</small></button>`; }).join("")}</div>`:""}</div>`); }
+    ldcSt(`<div class="lc-ask"><span class="dr-k">À toi d'attaquer</span><h4>${c?`${esc(dispName(c))} a le ballon`:"Choisis ton attaquant ("+CK.toLowerCase()+" un de tes joueurs)"}</h4>${c?lmVs(c,m.op.slice(1).filter(id=>id!==m.tired.dop).map(drCard),"Leur défense"):""}${c?`<div class="dr-btns">${DR_ACT.map(([k,t])=>{ const ds=m.op.slice(1).filter(id=>id!==m.tired.dop).map(drCard), mine=stA(c,k), their=Math.max(...ds.map(d=>stD(d,k,false))); return `<button class="dr-b ${mine>their?"adv":mine<their?"dis":""}" onclick="ldcAtt('${k}')"><b>${t}</b><small>${ST_NAME[ACT_A[k]]} ${stFmt(mine)}★ · eux ${stFmt(their)}★</small></button>`; }).join("")}</div>`:""}</div>`); }
   else { if(!m.aiAtt){ const av=m.op.slice(1).filter(id=>id!==m.tired.op); m.aiAtt=pickOne(av.sort((a,b)=>drRating(drCard(b))-drRating(drCard(a))).slice(0,3)); const ac=drCard(m.aiAtt); m.aiAct=Math.random()<.65?drBestAct(ac):pickOne("FDVPL".split("")); }
     m.want="def"; const a=drCard(m.aiAtt), c=m.pick&&drCard(m.pick);
     ldcSt(`<div class="lc-ask def"><span class="dr-k">${esc(m.name)} attaque</span><h4>${esc(dispName(a))} fonce vers ton but</h4>${lmVs(a,c?[c]:[],c?"Ton défenseur":"")}<p>Qui envoies-tu au duel ? ${lmTip(a,m.me.slice(1).filter(id=>id!==m.tired.dme).map(drCard))}</p>${c?`<div class="dr-act"><button class="go" onclick="ldcDef()">Envoyer ${esc(dispName(c))}</button></div>`:""}</div>`); }
