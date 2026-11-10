@@ -209,14 +209,19 @@ begin
   me := rk_me();
   if me.today>=60 then raise exception 'Limite de 60 matchs classés par jour atteinte, reviens demain'; end if;
 
-  for i in 1..4 loop
+  pa := rk_team_power(me.cards);
+  -- Adversaire = le onze enregistré d'un autre joueur, piloté par l'IA (le joueur n'est pas là).
+  -- Seulement s'il est vraiment de ton niveau : Elo proche ET force d'équipe proche. Jamais un compte admin.
+  -- Sinon : une équipe IA taillée à ta mesure.
+  for i in 1..2 loop
     select rp.user_id, rp.elo, rp.cards, p.username into opp from ranked_players rp join profiles p on p.id=rp.user_id
-    where rp.user_id<>auth.uid() and array_length(rp.cards,1)=11 and abs(rp.elo-me.elo)<=100*i*i
+    where rp.user_id<>auth.uid() and array_length(rp.cards,1)=11 and abs(rp.elo-me.elo)<=150*i
+      and not coalesce(p.is_admin,false)
+      and abs(rk_team_power(rp.cards)-pa)<=4
       and rp.user_id is distinct from (select opp_user from ranked_matches where user_id=auth.uid() order by created_at desc limit 1)
     order by random() limit 1;
     exit when opp.user_id is not null;
   end loop;
-  pa := rk_team_power(me.cards);
   if opp.user_id is not null then
     v_opp_user:=opp.user_id; v_opp_elo:=opp.elo; v_opp_cards:=opp.cards; v_opp_name:=coalesce(opp.username,'Joueur');
   else

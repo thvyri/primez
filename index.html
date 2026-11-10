@@ -2948,6 +2948,26 @@ html{overflow-x:hidden}
 @media(max-width:760px){.lb-arr{display:none}.lb-rail{gap:12px;padding-bottom:18px}.lb-card{flex-basis:88vw;padding:16px 14px;border-radius:20px}.lb-ch h3{font-size:19px}.lb-ov{font-size:22px}.lb-p{font-size:14px}}
 @media(hover:none){.lb-card,.lb-r::before{animation:none}}
 
+/* admin : compteur de joueurs en ligne */
+.adk-on{display:flex;align-items:center;gap:8px;width:100%;padding:9px 10px!important;margin-bottom:4px;border-radius:10px!important;background:#0f1a14!important;border:1px solid #22c55e55!important;box-shadow:none!important;text-align:left}
+.adk-on i{width:9px;height:9px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 #22c55e99;animation:onlp 1.8s ease-out infinite;flex:0 0 auto}
+@keyframes onlp{to{box-shadow:0 0 0 9px #22c55e00}}
+.adk-on b{font:italic 900 18px/1 Outfit,Arial,sans-serif;color:#7ef0a8}
+.adk-on span{font-size:12px;color:#cfe9d8;font-weight:600;white-space:nowrap}
+.adk-on em{display:none;margin-left:auto;font:700 10px/1 Outfit,Arial,sans-serif;font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:#7ea08a}
+.adk-on:hover{border-color:#22c55e!important}
+.onl-st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.onl-st div{display:grid;gap:4px;justify-items:center;padding:12px 6px;border-radius:12px;background:#ffffff08;border:1px solid #ffffff12}
+.onl-st b{font:italic 900 24px/1 Outfit,Arial,sans-serif}.onl-st div:first-child b{color:#7ef0a8}
+.onl-st small{font-size:11px;color:#a9a2ae;text-align:center}
+.onl-list{display:grid;gap:4px;max-height:44vh;overflow:auto;margin-bottom:14px}
+.onl-r{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;background:#ffffff06;cursor:pointer}
+.onl-r:hover{background:#ffffff10}
+.onl-r i{width:8px;height:8px;border-radius:50%;background:#22c55e;flex:0 0 auto}
+.onl-r b{font-weight:700;font-size:14px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.onl-r em{font:700 10px/1 Outfit,Arial,sans-serif;font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:#a9a2ae;border:1px solid #ffffff1c;padding:3px 6px;border-radius:6px}
+.onl-r small{margin-left:auto;font-size:12px;color:#8f8894;white-space:nowrap}
+
 /* ===================== v17 : tout le site au format téléphone ===================== */
 @media(max-width:560px){
   /* collection : recherche pleine largeur, les deux menus côte à côte */
@@ -3070,7 +3090,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
     <button class="sbi" id="tab-profile" onclick="showTab('profile')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span><span class="sbt"><b>Profil</b><small>Ta vitrine &amp; tes cartes préférées</small></span></button>
     <button class="sbi" id="tab-settings" onclick="showTab('settings')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2" fill="#0d0d0d"/><circle cx="15" cy="12" r="2" fill="#0d0d0d"/><circle cx="8" cy="18" r="2" fill="#0d0d0d"/></svg></span><span class="sbt"><b>Paramètres</b><small>Compte, son &amp; application</small></span></button>
   </aside>
-<div class="adock hidden" id="adock"><button class="adk-tg" onclick="this.parentNode.classList.toggle('fold')" aria-label="Ouvrir ou fermer le menu admin">⚙ Admin</button><div class="adk-in admin-only hidden"><span class="adk-k">Admin</span>    <button class="sbi adk" id="tab-admin-cards" onclick="showTab('admin-cards')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="7" width="12" height="14"/><path d="M8 3h13v14"/></svg></span><span class="sbt"><b>Cartes</b><small>Images, clubs, raretés</small></span></button>
+<div class="adock hidden" id="adock"><button class="adk-tg" onclick="this.parentNode.classList.toggle('fold')" aria-label="Ouvrir ou fermer le menu admin">⚙ Admin</button><div class="adk-in admin-only hidden"><span class="adk-k">Admin</span><button class="adk-on hidden" id="adk-on" onclick="onlineOpen()" title="Joueurs actifs dans les 3 dernières minutes"><i></i><b id="adk-on-n">0</b><span>en ligne</span><em>voir</em></button>    <button class="sbi adk" id="tab-admin-cards" onclick="showTab('admin-cards')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="7" width="12" height="14"/><path d="M8 3h13v14"/></svg></span><span class="sbt"><b>Cartes</b><small>Images, clubs, raretés</small></span></button>
     <button class="sbi adk" id="tab-admin-photos" onclick="showTab('admin-photos')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="5" width="18" height="14"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-7 7"/></svg></span><span class="sbt"><b>Photos</b><small>Assistant de recherche</small></span></button>
     <button class="sbi adk" id="tab-admin-players" onclick="showTab('admin-players')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="8" width="18" height="12"/><path d="M12 8v12M3 12h18M8 8C5 5 9 2 12 8c3-6 7-3 4 0"/></svg></span><span class="sbt"><b>Cadeaux</b><small>Messages &amp; récompenses</small></span></button><button class="sbi adk" onclick="lgPreview()"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M9 14h6"/></svg></span><span class="sbt"><b>Accueil</b><small>Écran de connexion</small></span></button><button class="sbi adk" onclick="inviteIntro(true)"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M19 8v6M16 11h6"/></svg></span><span class="sbt"><b>Invitation</b><small>Popup de parrainage</small></span></button><button class="sbi adk" id="adk-cag" onclick="cagToggle()"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.3 1 4.1 2.3h3C14.3 6 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z"/></svg></span><span class="sbt"><b>Cagnotte : cachée</b><small>Visible seulement par les admins</small></span></button></div>
   <div class="adk-v"><span class="adk-k">Voir comme</span><div class="adk-seg"><button data-v="modo" onclick="setView('modo')">Modo</button><button data-v="joueur" onclick="setView('joueur')">Joueur</button><button data-v="invite" onclick="setView('invite')">Invité</button></div></div></div>
@@ -5133,7 +5153,19 @@ function applyView(silent){ if(!realAdmin) viewMode="modo"; setTimeout(()=>{ try
   $("guest-banner").classList.toggle("hidden",!isGuest);
   if(!silent){ render(); renderFree(); const cur=TABS.find(t=>!$("view-"+t).classList.contains("hidden")); if(cur&&cur.startsWith("admin")&&!profile.is_admin) showTab("boosters"); else if(cur) showTab(cur); toast(viewMode==="modo"?"Vue modo":viewMode==="joueur"?"Vue joueur (comme un compte normal)":"Vue invité (comme un joueur pas connecté avec Discord)",true); } }
 /* côté serveur aussi : en Joueur / Invité, plus aucun droit admin (sauf repasser en Modo) */
-function adminSync(){ if(realAdmin) sb.rpc("set_admin_mode",{p_off:viewMode!=="modo"}).then(r=>{ if(r&&r.error&&/set_admin_mode/.test(r.error.message||"")) console.warn("Lance 29-mode-joueur.sql"); },()=>{}); }
+function adminSync(){ setTimeout(onlinePoll,600); if(realAdmin) sb.rpc("set_admin_mode",{p_off:viewMode!=="modo"}).then(r=>{ if(r&&r.error&&/set_admin_mode/.test(r.error.message||"")) console.warn("Lance 29-mode-joueur.sql"); },()=>{}); }
+/* admin : nombre de joueurs en ligne (actifs dans les 3 dernières minutes), rafraîchi toutes les 30 s */
+let onl=null;
+async function onlinePoll(){ if(!realAdmin||document.hidden) return; let r=null; try{ r=await sb.rpc("admin_online"); }catch(e){} const b=$("adk-on"); if(!b) return;
+  if(!r||r.error||!r.data){ b.classList.add("hidden"); return; } onl=r.data; b.classList.remove("hidden"); $("adk-on-n").textContent=nf(onl.count||0);
+  const tg=document.querySelector(".adk-tg"); if(tg) tg.textContent="⚙ Admin · "+nf(onl.count||0)+" en ligne"; if($("onl-list")) onlineOpen(true); }
+function onlineOpen(keep){ if(!onl) return; const P=onl.players||[], ago=t=>{ const s=Math.max(0,Math.round((Date.now()-new Date(t))/1000)); return s<60?"à l’instant":"il y a "+Math.round(s/60)+" min"; };
+  const html=`<h3>Joueurs en ligne</h3><p>Actifs dans les 3 dernières minutes. Mise à jour toutes les 30 secondes.</p>
+  <div class="onl-st"><div><b>${nf(onl.count||0)}</b><small>en ligne</small></div><div><b>${nf(onl.today||0)}</b><small>passés aujourd’hui</small></div><div><b>${nf(onl.total||0)}</b><small>comptes Discord</small></div></div>
+  <div class="onl-list" id="onl-list">${P.map(p=>`<div class="onl-r" ${p.guest?"":`onclick="closeGm();openProfile('${p.id}')"`}><i></i><b>${esc(p.username)}</b>${p.guest?`<em>invité</em>`:""}<small>${ago(p.seen)}</small></div>`).join("")||`<div class="nothing">Personne en ligne pour l’instant.</div>`}</div>
+  <div class="row"><button class="ghost" onclick="closeGm()">Fermer</button></div>`;
+  if(keep&&$("onl-list")){ const m=$("onl-list").closest(".mbox"); if(m){ m.innerHTML=html; return; } } openGm(html); }
+setInterval(onlinePoll,30000);
 function setView(v){ viewMode=v; try{ localStorage.setItem("pz_view",v); }catch(e){} adminSync(); applyView(); }
 /* menu déroulant « Social » : posé sur la page (la barre défile et couperait le menu) */
 function socOpen(btn){ const old=$("socm"); if(old){ old.remove(); $("sb-grp").classList.remove("open"); return; }
@@ -5755,7 +5787,7 @@ function rkMatchUI(){ const m=rk.m, B=$("gx-body"), me=profile&&profile.username
   const cur=m.step<n?(m.moments[m.step].m+"'"):"Terminé";
   B.innerHTML=`<div class="rk-m"><div class="rk-sb"><div class="rk-tm"><span class="dr-k">${rkBadge(m.elo_before,22)} ${m.elo_before}</span><b>${esc(me)}</b><small>Force ${m.my_power}</small></div>
       <div class="rk-sc"><b id="rk-su">${m.my_score}</b><i>–</i><b id="rk-so">${m.opp_score}</b><span id="rk-min">${cur}</span></div>
-      <div class="rk-tm r"><span class="dr-k">${m.bot?"IA":"Joueur"} · ${m.opp_elo}</span><b>${esc(m.opp_name)}</b><small>Force ${m.opp_power}</small></div></div>
+      <div class="rk-tm r"><span class="dr-k">${m.bot?"IA":"Onze d’un joueur · piloté par l’IA"} · ${m.opp_elo}</span><b>${esc(m.opp_name)}</b><small>Force ${m.opp_power}</small></div></div>
     <div class="rk-tl">${m.moments.map((x,i)=>{ const e=(m.events||[])[i]; return `<i class="${x.side} ${i===m.step?"cur":""} ${e?(e.goal?"goal":"miss"):""}" style="left:${x.m/90*100}%" title="${x.m}'"></i>`; }).join("")}<u style="width:${(m.step<n?m.moments[m.step].m:90)/90*100}%"></u></div>
     <div class="rk-mm">${rkTeamCol(m.my_cards||rk.team,"me")}<div class="rk-stage" id="rk-stage">${m.done?"":rkMoment(m)}</div>${rkTeamCol(m.opp_cards,"op")}</div>
     <div id="rk-res">${m.done&&m.fin?rkResult(m):""}${!m.done?`<div class="rk-act c"><button class="ghost rk-ff" onclick="rkForfeit()">Abandonner (défaite)</button></div>`:""}</div></div>`; }
