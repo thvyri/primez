@@ -117,8 +117,11 @@ returns jsonb language plpgsql security definer set search_path=public as $$
 declare me public.ranked_players; v_rank int; v_total int;
 begin
   me := rk_me();
-  select count(*)+1 into v_rank from ranked_players where elo>me.elo and (wins+draws+losses)>0;
-  select count(*) into v_total from ranked_players where (wins+draws+losses)>0;
+  -- les comptes admin ne sont pas classés
+  select count(*)+1 into v_rank from ranked_players rp join profiles p on p.id=rp.user_id
+    where rp.elo>me.elo and (rp.wins+rp.draws+rp.losses)>0 and not coalesce(p.is_admin,false);
+  select count(*) into v_total from ranked_players rp join profiles p on p.id=rp.user_id
+    where (rp.wins+rp.draws+rp.losses)>0 and not coalesce(p.is_admin,false);
   return jsonb_build_object(
     'elo',me.elo,'best',me.best_elo,'wins',me.wins,'draws',me.draws,'losses',me.losses,'streak',me.streak,
     'today',me.today,'won_today',me.won_today,'formation',me.formation,'cards',to_jsonb(me.cards),
@@ -126,7 +129,7 @@ begin
     'top',coalesce((select jsonb_agg(t order by t.elo desc) from (
         select p.username, to_jsonb(p)->>'avatar_url' as avatar, rp.elo, rp.wins, rp.draws, rp.losses, rp.user_id=auth.uid() as me
         from ranked_players rp join profiles p on p.id=rp.user_id
-        where (rp.wins+rp.draws+rp.losses)>0 order by rp.elo desc, rp.wins desc limit 50) t),'[]'::jsonb),
+        where (rp.wins+rp.draws+rp.losses)>0 and not coalesce(p.is_admin,false) order by rp.elo desc, rp.wins desc limit 50) t),'[]'::jsonb),
     'recent',coalesce((select jsonb_agg(m order by m.created_at desc) from (
         select opp_name, opp_elo, my_score, opp_score, elo_after-elo_before as delta, reward, created_at
         from ranked_matches where user_id=auth.uid() and status='done' order by created_at desc limit 8) m),'[]'::jsonb)

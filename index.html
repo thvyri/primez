@@ -2616,7 +2616,7 @@ input,select,textarea{border-radius:12px!important}
 
 /* ===================== v12 : menu en pastilles de couleur + pages Cagnotte / Discord ===================== */
 #tab-boosters{--mc:#e5202e}#tab-collection{--mc:#3b82f6}#tab-missions{--mc:#22c55e}#tab-games{--mc:#a855f7}#tab-market{--mc:#f59e0b}
-#sb-grp .sbgh,#tab-friends{--mc:#ec4899}#tab-messages{--mc:#06b6d4}#tab-ballon{--mc:#f5b800}#tab-cagnotte{--mc:#ff4d8d}#tab-discord{--mc:#5865f2}
+#sb-grp .sbgh,#tab-friends{--mc:#ec4899}#tab-messages{--mc:#06b6d4}#tab-ballon{--mc:#f5b800}#tab-classement{--mc:#14b8a6}#tab-cagnotte{--mc:#ff4d8d}#tab-discord{--mc:#5865f2}
 #tab-profile{--mc:#14b8a6}#tab-settings{--mc:#64748b}.adk{--mc:#94a3b8}
 .sb .sbi .sbic{--mc2:var(--mc,#64748b);width:28px!important;height:28px!important;flex:0 0 28px;display:grid!important;place-items:center;border-radius:9px!important;color:#fff!important;
   background:linear-gradient(150deg,color-mix(in srgb,var(--mc2) 70%,#fff) 0%,var(--mc2) 45%,color-mix(in srgb,var(--mc2) 70%,#000) 100%)!important;border:0!important;
@@ -2889,6 +2889,65 @@ html{overflow-x:hidden}
 @media(max-width:760px){#balloons-pill,#free-pill{padding:3px 10px 3px 3px!important;gap:6px;border-radius:12px!important}.pz-ic{width:26px;height:26px!important;flex-basis:26px;border-radius:9px}.pz-ic.ball svg{width:19px;height:19px}#balloons-pill .pz-v,#free-pill .pz-v{font-size:14px}#free-pill::after{left:36px;right:9px;bottom:3px}}
 @media(max-width:900px){.rk-cm .tn{zoom:.72}.rk-empty{width:50px;height:72px}.rk-code{font-size:9px}.rk-acts{grid-template-columns:1fr}.rk-duel .tn{zoom:.75}.rk-mm{grid-template-columns:1fr}}
 
+/* ===================== v18 : onglet Classements (défilé de podiums) ===================== */
+.lb-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px}
+.lb-t{font:italic 900 clamp(36px,4.6vw,60px)/1 Outfit,Arial,sans-serif;text-transform:uppercase;margin:6px 0 0}
+.lb-p{color:#cfc8d3;margin-top:8px;font-size:15px}
+.lb-arr{display:flex;gap:8px}
+.lb-arr button{font-style:normal!important;width:46px;height:46px;padding:0!important;border-radius:50%!important;font-size:26px!important;line-height:1;background:#1c1920!important;border:1px solid #ffffff22!important;box-shadow:0 3px 0 #08070a!important}
+.lb-arr button:hover{border-color:#ffffff55!important;transform:translateY(-2px)}
+.lb-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 2px 12px;scroll-behavior:smooth}
+.lb-chips::-webkit-scrollbar{display:none}
+.lb-chips button{flex:0 0 auto;padding:9px 15px!important;border-radius:999px!important;font:800 13px/1 Outfit,Arial,sans-serif!important;color:#bdb6c2;background:#16131a!important;border:1px solid #ffffff14!important;box-shadow:none!important;transition:color .2s,border-color .2s,background .2s}
+.lb-chips button.on{color:#fff;border-color:var(--k)!important;background:color-mix(in srgb,var(--k) 22%,#16131a)!important;box-shadow:0 0 18px -6px var(--k)!important}
+.lb-rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:6px 2px 26px;margin:0 -2px;-webkit-overflow-scrolling:touch}
+.lb-rail::-webkit-scrollbar{display:none}
+.lb-card{position:relative;flex:0 0 min(400px,86vw);scroll-snap-align:center;display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:24px;overflow:hidden;
+  background:radial-gradient(420px 220px at 50% -40px,color-mix(in srgb,var(--k) 26%,transparent),transparent 70%),linear-gradient(180deg,#18151c,#110f14);
+  border:1px solid color-mix(in srgb,var(--k) 30%,#ffffff12);box-shadow:0 24px 50px -30px var(--k);animation:lbin .55s cubic-bezier(.2,.9,.3,1) both;animation-delay:calc(var(--i)*70ms)}
+@keyframes lbin{from{opacity:0;transform:translateY(22px) scale(.97)}}
+.lb-ch{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
+.lb-ic{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;color:#fff;background:linear-gradient(160deg,color-mix(in srgb,var(--k) 75%,#fff),var(--k) 55%,color-mix(in srgb,var(--k) 60%,#000));box-shadow:0 3px 0 color-mix(in srgb,var(--k) 45%,#000),0 10px 22px -8px var(--k)}
+.lb-ic svg{width:24px;height:24px}
+.lb-ch h3{font:italic 900 21px/1 Outfit,Arial,sans-serif;text-transform:uppercase;color:#fff}
+.lb-ch p{font-size:12.5px;line-height:1.3;color:#a9a2ae;margin-top:4px}
+.lb-ct{display:grid;justify-items:end;font:italic 900 19px/1 Outfit,Arial,sans-serif;color:color-mix(in srgb,var(--k) 45%,#fff)}
+.lb-ct small{font:700 10px/1 Outfit,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8f8894;margin-top:4px}
+/* le numéro 1, en grand */
+.lb-one{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:16px 14px 14px;border-radius:18px;cursor:pointer;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--k) 30%,#1a171e),#15121a 70%);border:1px solid color-mix(in srgb,var(--k) 55%,transparent);transition:transform .25s}
+.lb-one:hover{transform:translateY(-3px)}
+.lb-one .av{border:3px solid var(--k);box-shadow:0 0 22px -4px var(--k)}
+.lb-crown{position:absolute;left:12px;top:-9px;padding:4px 9px;border-radius:8px;font:italic 900 11px/1 Outfit,Arial,sans-serif;letter-spacing:.08em;color:#141117;background:linear-gradient(180deg,#ffe07a,#f5b800);box-shadow:0 2px 0 #9a7400}
+.lb-on{display:grid;gap:3px;min-width:0}
+.lb-on b{font:italic 900 19px/1.1 Outfit,Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-on small{font-size:12px;color:#bdb6c2}
+.lb-ov{font:italic 900 26px/1 Outfit,Arial,sans-serif;color:#fff;text-shadow:0 0 24px var(--k);white-space:nowrap}
+.lb-ov small,.lb-r b small,.lb-me small{font:700 .52em/1 Outfit,Arial,sans-serif;color:#a9a2ae;font-style:normal}
+/* les suivants : une jauge discrète montre l'écart avec le premier */
+.lb-rows{display:grid;gap:5px}
+.lb-r{position:relative;display:grid;grid-template-columns:22px 30px 1fr auto;gap:10px;align-items:center;padding:7px 10px;border-radius:12px;overflow:hidden;cursor:pointer;background:#ffffff06;border:1px solid transparent;transition:background .2s,border-color .2s}
+.lb-r::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);background:linear-gradient(90deg,color-mix(in srgb,var(--k) 20%,transparent),transparent);transform-origin:left;animation:lbbar .9s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--i)*70ms + .25s);pointer-events:none}
+@keyframes lbbar{from{transform:scaleX(0)}}
+.lb-r>*{position:relative}
+.lb-r:hover{background:#ffffff0d;border-color:#ffffff1a}
+.lb-r.me,.lb-one.me{border-color:var(--k)}
+.lb-n{font:italic 900 14px/1 Outfit,Arial,sans-serif;color:#8f8894;text-align:center}
+.lb-r:nth-child(1) .lb-n{color:#cbd5e1}.lb-r:nth-child(2) .lb-n{color:#d98b6a}
+.lb-u{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.lb-r b{font:italic 900 15px/1 Outfit,Arial,sans-serif;white-space:nowrap}
+.lb-none,.lb-empty{padding:18px 10px;text-align:center;color:#8f8894;font-size:13px;line-height:1.5}
+.lb-empty{padding:44px 10px;border:1px dashed #ffffff1a;border-radius:16px}
+.lb-me{margin-top:auto;display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:baseline;padding:12px 14px;border-radius:14px;background:#0d0b10;border:1px solid #ffffff14}
+.lb-me span{font:800 10px/1 Outfit,Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#a9a2ae}
+.lb-me b{font:italic 900 22px/1 Outfit,Arial,sans-serif;color:color-mix(in srgb,var(--k) 40%,#fff)}
+.lb-me em{font:italic 800 14px/1 Outfit,Arial,sans-serif;color:#e6dfe9}
+.lb-me.off{display:block;text-align:center;font-size:12.5px;color:#8f8894}
+.lb-go{padding:10px!important;border-radius:12px!important;font-size:13px!important;background:none!important;border:1px solid #ffffff1c!important;box-shadow:none!important;color:#cfc8d3}
+.lb-go:hover{border-color:var(--k)!important;color:#fff}
+@media(max-width:760px){.lb-arr{display:none}.lb-rail{gap:12px;padding-bottom:18px}.lb-card{flex-basis:88vw;padding:16px 14px;border-radius:20px}.lb-ch h3{font-size:19px}.lb-ov{font-size:22px}.lb-p{font-size:14px}}
+@media(hover:none){.lb-card,.lb-r::before{animation:none}}
+
 /* ===================== v17 : tout le site au format téléphone ===================== */
 @media(max-width:560px){
   /* collection : recherche pleine largeur, les deux menus côte à côte */
@@ -3003,6 +3062,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
       </div>
     </div>
     <button class="sbi" id="tab-ballon" onclick="showTab('ballon')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 20h8"/></svg></span><span class="sbt"><b>Ballon d’Or</b><small>Classement de la semaine</small></span></button>
+    <button class="sbi" id="tab-classement" onclick="showTab('classement')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M4 20V10h5v10M9.5 20V4h5v16M15 20v-7h5v7M3 20h18"/></svg></span><span class="sbt"><b>Classements</b><small>Collection, ranked, raretés…</small></span></button>
     <div class="sbl">Soutien</div>
     <button class="sbi hidden" id="tab-cagnotte" onclick="showTab('cagnotte')"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.3 1 4.1 2.3h3C14.3 6 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z"/></svg></span><span class="sbt"><b>Cagnotte</b><small>Soutenir PrimeZ</small></span></button>
     <button class="sbi" id="tab-discord" onclick="showTab('discord')"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18 18 0 0 0-5.6 0L8.6 3a19.6 19.6 0 0 0-4.9 1.5C.6 9.1-.3 13.6.1 18a19.8 19.8 0 0 0 6 3l1.3-2a12.8 12.8 0 0 1-2-1l.5-.4a14 14 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.7 19.7 0 0 0 6-3c.5-5.1-.8-9.6-3.6-13.6ZM8.3 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm7.4 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg></span><span class="sbt"><b>Discord</b><small>La communauté</small></span></button>
@@ -3049,6 +3109,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
     <section id="view-friends" class="page hidden"><h2 class="disp">Amis &amp; échanges</h2><div id="fr-body"></div></section>
 
     <section id="view-ballon" class="page hidden"><div id="bd-body"></div></section>
+    <section id="view-classement" class="page hidden"><div id="lb-body"></div></section>
 
     <section id="view-cagnotte" class="page hidden"><div id="cg-body"></div></section>
 
@@ -4992,7 +5053,7 @@ function renderBallon(){
   const top=rows.slice(0,3), podHTML=top.length?`<div class="pods">${[1,0,2].filter(i=>top[i]).map(i=>pc(top[i],i)).join("")}</div>`:"";
   const row=r=>`<div class="brow ${r.id===myId?"me":""}" onclick="openProfile('${r.id}')"><span class="r">${String(r.rank).padStart(2,"0")}</span><span class="plx">${avatar(r.avatar,r.username,38)}<span class="nmx">${esc(r.username)}${r.id===myId?` <i class="toi">TOI</i>`:""}</span></span><span class="o t">${lvlTitle(r.level)} · niv. ${r.level}</span><span class="o">${r.openings} ouv.</span><b>${nf(r.points)} <small>PTS</small></b></div>`;
   const me=d.me?`<div class="mypl"><div class="eyb">TA PLACE</div><div class="mrow"><span class="r">${String(d.me.rank).padStart(2,"0")}</span><span class="plx">${avatar(profile.avatar_url,profile.username,42)}<span class="nmx">${esc(profile.username||"Toi")} <i class="toi">TOI</i></span></span><span class="o">${d.me.openings} ouv.</span><b>${nf(d.me.points)} <small>PTS</small></b></div></div>`
-    :`<div class="mypl"><div class="eyb">TA PLACE</div><div class="mnone">${isGuest?"Les invités ne sont pas classés : sauvegarde ton compte avec Discord pour participer.":"Tu n’as pas encore ouvert de booster sur cette période."}</div></div>`;
+    :`<div class="mypl"><div class="eyb">TA PLACE</div><div class="mnone">${d.hidden?"Ton compte admin n’apparaît pas dans le classement.":isGuest?"Les invités ne sont pas classés : sauvegarde ton compte avec Discord pour participer.":"Tu n’as pas encore ouvert de booster sur cette période."}</div></div>`;
   $("bd-body").innerHTML=`<div class="bdh"><div><div class="eyb">LE SOMMET DU CLASSEMENT</div><h2 class="bdt">Le Ballon d’Or.<br><em>Tout repart de zéro chaque lundi.</em></h2>
     <p class="bdp">Chaque booster ouvert rapporte des points selon la rareté de tes cartes : Commune 1, Rare 3, Élite 10, Légende 50, Mythique 500, Prime 10 000, GOAT 100 000. Les 10 premiers touchent des ballons : ${nf(5000)} pour le 1er, ${nf(3000)} pour le 2e, ${nf(2000)} pour le 3e, ${nf(500)} du 4e au 10e.</p></div>
     <div class="bd-vis"><img class="bd-img" src="img/ballon-or.webp" alt="Le trophée du Ballon d’Or"><i class="bd-glint"></i><i class="bd-spk"></i><div class="bdc"><b>${d.players||0}</b><small>joueur${(d.players||0)>1?"s":""} classé${(d.players||0)>1?"s":""}</small></div></div></div>
@@ -5007,8 +5068,62 @@ async function claimWeekly(){
   const r=await rpc("weekly_reward_claim"); if(!r) return;
   profile.balloons=r.data.balloons; renderPills(); toast(`+${nf(r.data.amount)} ${CURRENCY} (n°${r.data.rank})`,true); loadBallon();
 }
+/* ----- onglet Classements : un défilé de podiums (collection, raretés, niveau, classé, etc.) ----- */
+let lb={data:null,cur:0};
+const LB_ICO={
+  collection:'<path d="M5 4h10v14H5zM9 8h10v12H9"/>', rares:'<path d="M12 3l3 6 6 .8-4.5 4.2 1.2 6L12 17l-5.7 3 1.2-6L3 9.8 9 9z"/>', score:'<path d="M4 18l5-6 4 3 7-9M15 6h5v5"/>',
+  ranked:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>', opened:'<rect x="6" y="3" width="12" height="18" rx="1"/><path d="M6 8h12M12 12v4"/>', week:'<path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 20h8"/>',
+  ldc:'<path d="M12 3l2.2 4.8 5.3.600-3.9 3.6 1 5.200L12 14.7 7.4 17.200l1-5.200L4.5 8.400l5.3-.600z"/><path d="M8 21h8"/>', refs:'<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M19 8v6M16 11h6"/>', rich:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7l3 2.2-1.1 3.500h-3.800L9 9.200z"/>' };
+const LB=[
+  {k:"collection",t:"Collectionneurs",d:"Le plus de cartes différentes dans le classeur.",c:"#3b82f6",u:"cartes",f:(v,D)=>`${nf(v)}<small> / ${nf(D.total_cards||0)}</small>`},
+  {k:"rares",t:"Chasseurs de raretés",d:"Cartes Mythique, Promo, Prime et GOAT possédées.",c:"#ff4d8d",u:"cartes rares",f:v=>nf(v)},
+  {k:"score",t:"Niveau",d:"Le score de collection : plus tes cartes sont rares, plus tu montes.",c:"#a855f7",u:"score",f:v=>`<small>niv. </small>${1+Math.floor(3*Math.log(1+Math.max(0,v)))}`,s:v=>`${nf(v)} pts de collection`},
+  {k:"ranked",t:"Classé 11v11",d:"L’Elo des matchs classés.",c:"#e5202e",u:"Elo",f:v=>nf(v)},
+  {k:"week",t:"Ballon d’Or",d:"Les points de la semaine en cours. Remis à zéro chaque lundi.",c:"#f5b800",u:"points",f:v=>nf(v),go:"ballon"},
+  {k:"opened",t:"Ouvreurs",d:"Le plus de boosters ouverts depuis le début.",c:"#f97316",u:"boosters",f:v=>nf(v)},
+  {k:"ldc",t:"Ligue des Champions",d:"Les points de la saison en cours.",c:"#38bdf8",u:"points",f:v=>nf(v)},
+  {k:"refs",t:"Recruteurs",d:"Le plus de potes parrainés.",c:"#22c55e",u:"filleuls",f:v=>nf(v)},
+  {k:"rich",t:"Fortune",d:"Les plus gros comptes en ballons.",c:"#14b8a6",u:CURRENCY,f:v=>nf(v)}];
+async function loadBoards(){
+  const box=$("lb-body"); if(!box) return;
+  if(!lb.data) box.innerHTML=`<div class="lb-head"><div class="eyb">LE TABLEAU D’HONNEUR</div><h2 class="lb-t">Classements.</h2></div><div class="nothing">Chargement des classements…</div>`;
+  let r=null; try{ r=await sb.rpc("leaderboards"); }catch(e){}
+  if(!r||r.error||!r.data){ box.innerHTML=`<div class="lb-head"><div class="eyb">LE TABLEAU D’HONNEUR</div><h2 class="lb-t">Classements.</h2></div><div class="nothing">Les classements arrivent bientôt.</div>`; if(r&&r.error) console.warn("leaderboards :",r.error.message,"→ lance supabase/classements.sql"); return; }
+  lb.data=r.data; renderBoards();
+}
+function lbTierName(v){ try{ let i=0; RK_T.forEach((t,k)=>{ if(v>=t[2]) i=k; }); return RK_T[i][0]; }catch(e){ return "Elo"; } }
+function renderBoards(){
+  const D=lb.data, B=D.boards||{}, myId=profile.id, list=LB.filter(m=>B[m.k]||["collection","rares","score","ranked","week","opened"].includes(m.k));
+  const sub=(m,v)=>m.k==="ranked"?lbTierName(v):m.s?m.s(v):m.u;
+  const card=(m,i)=>{ const b=B[m.k]||{rows:[],players:0,me:null}, rows=(b.rows||[]).slice(0,10), top=rows[0], max=top?Math.max(1,+top.value):1;
+    const row=r=>`<div class="lb-r ${r.id===myId?"me":""}" style="--w:${Math.max(4,Math.round(+r.value/max*100))}%" onclick="openProfile('${r.id}')"><span class="lb-n">${r.rank}</span>${avatar(r.avatar,r.username,30)}<span class="lb-u">${esc(r.username||"Joueur")}${r.id===myId?` <i class="toi">TOI</i>`:""}</span><b>${m.f(+r.value,D)}</b></div>`;
+    const me=D.hidden?`<div class="lb-me off">Compte admin : hors classement</div>`
+      :b.me?`<div class="lb-me"><span>Ta place</span><b>${b.me.rank}<small>${b.me.rank===1?"er":"e"} / ${nf(b.players||0)}</small></b><em>${m.f(+b.me.value,D)} <small>${m.u}</small></em></div>`
+      :`<div class="lb-me off">${isGuest?"Les invités ne sont pas classés":"Tu n’es pas encore classé ici"}</div>`;
+    return `<article class="lb-card" id="lb-${m.k}" data-i="${i}" style="--k:${m.c};--i:${i}">
+      <header class="lb-ch"><span class="lb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${LB_ICO[m.k]||""}</svg></span><div><h3>${m.t}</h3><p>${m.d}</p></div><span class="lb-ct">${nf(b.players||0)}<small>joueur${(b.players||0)>1?"s":""}</small></span></header>
+      ${top?`<div class="lb-one ${top.id===myId?"me":""}" onclick="openProfile('${top.id}')"><span class="lb-crown">N°1</span>${avatar(top.avatar,top.username,58)}<div class="lb-on"><b>${esc(top.username||"Joueur")}</b><small>${sub(m,+top.value)}</small></div><div class="lb-ov">${m.f(+top.value,D)}</div></div>
+        <div class="lb-rows">${rows.slice(1).map(row).join("")||`<div class="lb-none">Seul en tête pour l’instant.</div>`}</div>`
+        :`<div class="lb-empty">Personne n’est encore classé ici.<br>La première place est à prendre.</div>`}
+      ${me}${m.go?`<button class="lb-go" onclick="showTab('${m.go}')">Voir le classement complet →</button>`:""}</article>`; };
+  $("lb-body").innerHTML=`<div class="lb-head"><div><div class="eyb">LE TABLEAU D’HONNEUR</div><h2 class="lb-t">Classements.</h2><p class="lb-p">${list.length} podiums, un seul vestiaire. Fais défiler pour tous les voir.</p></div>
+      <div class="lb-arr"><button onclick="lbMove(-1)" aria-label="Classement précédent">‹</button><button onclick="lbMove(1)" aria-label="Classement suivant">›</button></div></div>
+    <div class="lb-chips" id="lb-chips">${list.map((m,i)=>`<button class="${i===lb.cur?"on":""}" style="--k:${m.c}" onclick="lbGo(${i})">${m.t}</button>`).join("")}</div>
+    <div class="lb-rail" id="lb-rail">${list.map(card).join("")}</div>`;
+  /* la pastille active suit la carte la plus proche du centre du défilé */
+  const rail=$("lb-rail"); let tick=0;
+  rail.addEventListener("scroll",()=>{ if(tick) return; tick=setTimeout(()=>{ tick=0; const L=rail.scrollLeft, R=L+rail.clientWidth, mid=(L+R)/2, x=c=>c.offsetLeft-rail.offsetLeft;
+    /* tant que le classement choisi est entièrement visible, il reste actif (sur grand écran plusieurs cartes tiennent côte à côte) */
+    const cur=rail.children[lb.cur]; if(cur&&x(cur)>=L-6&&x(cur)+cur.offsetWidth<=R+6) return;
+    let bi=0, bd=1e9; [...rail.children].forEach((c,i)=>{ const d=Math.abs(x(c)+c.offsetWidth/2-mid); if(d<bd){ bd=d; bi=i; } });
+    if(bi!==lb.cur) lbMark(bi); },80); },{passive:true});
+  if(lb.cur){ const c=rail.children[lb.cur]; if(c) rail.scrollLeft=c.offsetLeft-rail.offsetLeft-(rail.clientWidth-c.offsetWidth)/2; }
+}
+function lbMark(i){ lb.cur=i; const ch=$("lb-chips"); if(!ch) return; [...ch.children].forEach((b,k)=>b.classList.toggle("on",k===i)); const on=ch.children[i]; if(on) ch.scrollTo({left:on.offsetLeft-ch.clientWidth/2+on.offsetWidth/2,behavior:"smooth"}); }
+function lbGo(i){ const rail=$("lb-rail"); if(!rail) return; const n=rail.children.length; i=Math.max(0,Math.min(n-1,i)); const c=rail.children[i]; rail.scrollTo({left:c.offsetLeft-rail.offsetLeft-(rail.clientWidth-c.offsetWidth)/2,behavior:"smooth"}); lbMark(i); }
+function lbMove(d){ lbGo(lb.cur+d); }
 /* ---------- navigation ---------- */
-const TABS=["boosters","collection","missions","games","market","friends","ballon","cagnotte","discord","messages","profile","settings","admin-cards","admin-photos","admin-players"];
+const TABS=["boosters","collection","missions","games","market","friends","ballon","classement","cagnotte","discord","messages","profile","settings","admin-cards","admin-photos","admin-players"];
 /* admin : basculer l'affichage entre modo, joueur normal et invité (rien ne change côté serveur) */
 let realAdmin=false, realGuest=false, viewMode="modo";
 function applyView(silent){ if(!realAdmin) viewMode="modo"; setTimeout(()=>{ try{ cagApply(); }catch(e){} },0);
@@ -5045,9 +5160,9 @@ function mtabSync(t){ const main=["boosters","collection","games"]; document.que
 function showTab(t,arg){ if(t!=="games"){ try{ crowdBed(false); crMusic(false); }catch(e){} } mtabSync(t); mOpen(0); closeSheet();
   TABS.forEach(x=>{ $("view-"+x).classList.toggle("hidden",x!==t); const b=$("tab-"+x); if(b) b.classList.toggle("on",x===t); });
   if(t==="collection") loadCollection(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings(); if(t==="cagnotte") renderCagnotte(); if(t==="discord") renderDiscord();
-  $("sb-grp").classList.remove("open"); const sg=$("sb-grp").querySelector(".sbgh"); if(sg) sg.classList.toggle("on",t==="friends"||t==="messages"); if(t==="profile") loadProfile(arg); if(t==="friends") loadFriends(); if(t==="market") loadMarket(); if(t==="ballon"){ bd.off=0; loadBallon(); }
+  $("sb-grp").classList.remove("open"); const sg=$("sb-grp").querySelector(".sbgh"); if(sg) sg.classList.toggle("on",t==="friends"||t==="messages"); if(t==="profile") loadProfile(arg); if(t==="friends") loadFriends(); if(t==="market") loadMarket(); if(t==="ballon"){ bd.off=0; loadBallon(); } if(t==="classement") loadBoards();
   closeGm(); closeCard(true); window.scrollTo(0,0);
-  const TT={boosters:"Boosters",collection:"Collection",missions:"Missions",games:"Jeux",market:"Marché",friends:"Amis",ballon:"Ballon d’Or",cagnotte:"Cagnotte",discord:"Discord",messages:"Messages",profile:"Profil",settings:"Paramètres"}; document.title=(TT[t]?TT[t]+" · ":"")+"PrimeZ";
+  const TT={boosters:"Boosters",collection:"Collection",missions:"Missions",games:"Jeux",market:"Marché",friends:"Amis",ballon:"Ballon d’Or",classement:"Classements",cagnotte:"Cagnotte",discord:"Discord",messages:"Messages",profile:"Profil",settings:"Paramètres"}; document.title=(TT[t]?TT[t]+" · ":"")+"PrimeZ";
   if(showTab.prev==="collection"&&t!=="collection"&&NEWC.size){ NEWC.clear(); newSave(); } showTab.prev=t;
   const v=$("view-"+t); if(v){ v.classList.remove("venter"); void v.offsetWidth; v.classList.add("venter"); }
 }
