@@ -1911,25 +1911,56 @@ canvas.dust.pre{background:#7d725f}
 @media (hover:none){.ho{transition:none}}
 
 
-/* ===== cartes holographiques (mouvement repris de pokemon-cards-css, Simon Goellner, GPL-3.0) =====
-   reflet doux, sans texture, toujours dans la couleur de la rareté */
-.card{--pointer-x:50%;--pointer-y:50%;--pointer-from-center:0;--card-opacity:0;--rotate-x:0deg;--rotate-y:0deg;--background-x:50%;--background-y:50%;--hmax:.5}
+/* ===== cartes holographiques v3 (technique inspirée de pokemon-cards-css, Simon Goellner, GPL-3.0) =====
+   foil texturé teinté dans la couleur de la rareté, qui suit la lumière de la souris ; contours fins et sobres */
+.card{--pointer-x:50%;--pointer-y:50%;--pointer-from-center:0;--card-opacity:0;--rotate-x:0deg;--rotate-y:0deg;--background-x:50%;--background-y:50%;--hmax:.5;
+  --glitter:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 9 0 0 0 -4.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --tex:none;--ts:auto;
+  --frame:linear-gradient(160deg,color-mix(in srgb,var(--c) 45%,#fff) 0%,color-mix(in srgb,var(--c) 80%,#000) 30%,color-mix(in srgb,var(--c) 55%,#000) 62%,color-mix(in srgb,var(--c) 75%,#fff) 100%)}
 .card.flip.pk-on .in{transform:rotateY(var(--rotate-x)) rotateX(var(--rotate-y)) rotateY(180deg);transition:none}
 .card.pk-on .gl{opacity:0!important}
-.pk-shine,.pk-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;overflow:hidden}
-/* bande de lumière teintée qui glisse avec la souris */
+
+/* --- contours épurés : cadre fin et fixe, plus de lumière qui tourne ni de halo qui respire --- */
+.card.card .front::before{padding:2.5px!important;background:var(--frame)!important;animation:none!important}
+.card.card .front::after{background:none!important;box-shadow:inset 0 0 0 1px #ffffff1c,inset 0 0 22px #0009!important}
+/* netteté : les cartes agrandies sont zoomées (re-dessinées à la vraie taille) au lieu d'être étirées comme une image */
+.tn .card,.tn .card:hover{transform:none!important;zoom:var(--s)}
+.hbox .card{transform:none;zoom:1.5}
+@media(min-width:1400px) and (min-height:860px){.hbox .card{transform:none;zoom:1.8}}
+.lg-c .card{transform:translate(-50%,-50%);zoom:var(--s)}
+.card .art img{image-rendering:auto;backface-visibility:hidden}
+.card.card .front{animation:none!important;box-shadow:0 10px 22px -8px #000d,0 0 0 .5px #0008!important}
+.card.r-legende .front,.card.r-mythique .front,.card.r-promo .front,.card.r-prime .front,.card.r-goat .front{box-shadow:0 0 14px -2px color-mix(in srgb,var(--c) 35%,transparent),0 10px 22px -8px #000d!important}
+.card.card.pk-on .front{box-shadow:0 0 22px -4px color-mix(in srgb,var(--c) 55%,transparent),0 16px 30px -10px #000!important}
+.card.card .fx{display:none!important}
+.card .top2 span:first-child,.card .gem{background:var(--frame)!important}
+.card .top2 span:first-child{color:#fff!important;text-shadow:0 1px 2px #0009!important}
+
+/* --- foil : dégradé dans la couleur de la rareté + texture, qui glisse avec la souris --- */
+.pk-shine,.pk-glare{position:absolute;inset:3.5px;border-radius:9px;pointer-events:none;overflow:hidden}
+/* palette « arc-en-ciel » propre à chaque rareté (5 teintes voisines de sa couleur) */
+.card{--p1:#cbd5e1;--p2:#94a3b8;--p3:#e2e8f0;--p4:#a5b4fc;--p5:#bae6fd}
+.r-rare{--p1:#67e8f9;--p2:#60a5fa;--p3:#a78bfa;--p4:#93c5fd;--p5:#22d3ee}
+.r-elite{--p1:#f0abfc;--p2:#c084fc;--p3:#818cf8;--p4:#e879f9;--p5:#a5b4fc}
+.r-legende{--p1:#fff1a8;--p2:#ffd34d;--p3:#ffb347;--p4:#fde68a;--p5:#fbbf24}
+.r-mythique{--p1:#ff9ecb;--p2:#ff4d8d;--p3:#f0abfc;--p4:#fda4af;--p5:#c084fc}
+.r-promo{--p1:#ffd3a1;--p2:#ff9a3c;--p3:#ffcc66;--p4:#ff7a00;--p5:#fca5a5}
+.r-prime{--p1:#6ee7b7;--p2:#34d399;--p3:#5eead4;--p4:#a7f3d0;--p5:#22d3ee}
+.r-goat{--p1:#ff5c7a;--p2:#ff0a3c;--p3:#ffb4c1;--p4:#ff7a59;--p5:#ffd166}
+/* Rien n'est posé en texture sur la photo : elle reste intacte. Pas de color-dodge, de filtre ni de masque
+   (ce sont eux qui faisaient des carrés noirs pendant la rotation 3D). Uniquement du « screen », qui ne peut qu'éclaircir. */
+/* bande de lumière irisée, dans les teintes de la rareté, qui traverse la carte avec la souris */
 .pk-shine{z-index:6;mix-blend-mode:screen;opacity:calc(var(--card-opacity)*var(--hmax));
-  background-image:
-    linear-gradient(115deg,transparent 30%,color-mix(in srgb,var(--c) 55%,transparent) 42%,color-mix(in srgb,var(--c) 35%,#fff) 50%,color-mix(in srgb,var(--c) 55%,transparent) 58%,transparent 70%),
-    linear-gradient(115deg,transparent 0%,color-mix(in srgb,var(--c) 22%,transparent) 25%,transparent 45%,color-mix(in srgb,var(--c) 18%,transparent) 65%,transparent 90%);
-  background-size:300% 300%,220% 220%;
-  background-position:calc((50% - var(--background-x))*6 + 50%) calc((50% - var(--background-y))*6 + 50%),calc((var(--background-x) - 50%)*3 + 50%) calc((var(--background-y) - 50%)*3 + 50%)}
-/* reflet de lumière doux là où est la souris */
-.pk-glare{z-index:9;mix-blend-mode:soft-light;opacity:calc(var(--card-opacity)*.75);
-  background-image:radial-gradient(farthest-corner circle at var(--pointer-x) var(--pointer-y),rgba(255,255,255,.75) 0%,rgba(255,255,255,.2) 28%,rgba(0,0,0,.25) 90%)}
-.card.pk-on .front{box-shadow:0 0 0 1px color-mix(in srgb,var(--c) 70%,#fff),0 0 18px color-mix(in srgb,var(--c) 55%,transparent),0 12px 26px -6px #000!important}
-.r-commune .pk-shine{display:none}
-.r-rare{--hmax:.32}.r-elite{--hmax:.36}.r-legende{--hmax:.42}.r-mythique{--hmax:.46}.r-promo{--hmax:.46}.r-prime{--hmax:.48}.r-goat{--hmax:.52}
+  background-image:linear-gradient(115deg,transparent 32%,color-mix(in srgb,var(--p1) 45%,transparent) 39%,color-mix(in srgb,var(--p3) 55%,transparent) 44%,rgba(255,255,255,.55) 50%,color-mix(in srgb,var(--p4) 55%,transparent) 56%,color-mix(in srgb,var(--p5) 45%,transparent) 61%,transparent 68%);
+  background-size:260% 260%;
+  background-position:calc((50% - var(--background-x))*3 + 50%) calc((50% - var(--background-y))*3 + 50%)}
+.r-commune{--hmax:.3}.r-rare{--hmax:.42}.r-elite{--hmax:.48}.r-legende{--hmax:.55}.r-mythique,.r-promo{--hmax:.58}.r-prime{--hmax:.6}.r-goat{--hmax:.62}
+/* reflet doux à l'endroit de la souris (aucun assombrissement) */
+.pk-glare{z-index:9;mix-blend-mode:screen;opacity:calc(var(--card-opacity)*.5);
+  background-image:radial-gradient(farthest-corner circle at var(--pointer-x) var(--pointer-y),rgba(255,255,255,.4) 0%,rgba(255,255,255,.1) 25%,transparent 55%)}
+/* le holo est sur le contour : au survol, le cadre devient un foil irisé qui bouge avec la souris */
+.card.card.pk-on .front::before{background:repeating-linear-gradient(115deg,var(--p1) 0%,var(--p2) 7%,var(--p3) 14%,#fff 18%,var(--p4) 22%,var(--p5) 29%,var(--p1) 36%) calc((50% - var(--background-x))*5 + 50%) calc((50% - var(--background-y))*5 + 50%)/300% 300%!important}
+.card.pk-on .top2 span:first-child,.card.pk-on .gem{background:repeating-linear-gradient(115deg,var(--p1) 0%,var(--p2) 12%,var(--p3) 24%,var(--p4) 36%,var(--p1) 48%) calc((50% - var(--background-x))*5 + 50%) 50%/300% 300%!important}
 @media (prefers-reduced-motion:reduce){.card.flip.pk-on .in{transform:rotateY(180deg)}}
 </style>
 <script>
