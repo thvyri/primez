@@ -124,9 +124,9 @@ begin
     'today',me.today,'won_today',me.won_today,'formation',me.formation,'cards',to_jsonb(me.cards),
     'rank',v_rank,'players',v_total,'cohesion',case when array_length(me.cards,1)=11 then rk_cohesion(me.cards) else 0 end,
     'top',coalesce((select jsonb_agg(t order by t.elo desc) from (
-        select p.username, rp.elo, rp.wins, rp.draws, rp.losses, rp.user_id=auth.uid() as me
+        select p.username, to_jsonb(p)->>'avatar_url' as avatar, rp.elo, rp.wins, rp.draws, rp.losses, rp.user_id=auth.uid() as me
         from ranked_players rp join profiles p on p.id=rp.user_id
-        where (rp.wins+rp.draws+rp.losses)>0 order by rp.elo desc, rp.wins desc limit 10) t),'[]'::jsonb),
+        where (rp.wins+rp.draws+rp.losses)>0 order by rp.elo desc, rp.wins desc limit 50) t),'[]'::jsonb),
     'recent',coalesce((select jsonb_agg(m order by m.created_at desc) from (
         select opp_name, opp_elo, my_score, opp_score, elo_after-elo_before as delta, reward, created_at
         from ranked_matches where user_id=auth.uid() order by created_at desc limit 8) m),'[]'::jsonb)
