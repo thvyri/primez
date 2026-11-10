@@ -2611,56 +2611,147 @@ input,select,textarea{border-radius:12px!important}
 .sb .sbi.on{box-shadow:inset 0 -2px var(--mc,#e5202e)!important;text-shadow:0 0 18px color-mix(in srgb,var(--mc,#e5202e) 70%,transparent)}
 .sb .sbi.on .sbic{filter:none}
 
-/* pages Cagnotte / Discord */
-.sp{display:grid;gap:16px;margin-top:6px;--a:#ff4d8d;--a2:#e5202e}
-.sp-dc{--a:#7c86ff;--a2:#5865f2}
-.sp-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:20px;padding:34px 36px;border-radius:26px;
-  background:radial-gradient(700px 360px at 0 0,color-mix(in srgb,var(--a) 26%,transparent),transparent 70%),repeating-linear-gradient(115deg,#ffffff05 0 1px,transparent 1px 26px),linear-gradient(180deg,#1d1922,#121015);
-  border:1px solid color-mix(in srgb,var(--a) 45%,#ffffff12);box-shadow:inset 0 1px 0 #ffffff12,0 24px 50px -30px #000}
-.sp-hero::before{content:"";position:absolute;right:-60px;bottom:-120px;width:520px;height:520px;border-radius:50%;border:1px solid #ffffff10;box-shadow:inset 0 0 0 60px #ffffff04,inset 0 0 0 61px #ffffff10;pointer-events:none}
-.sp-txt{position:relative;display:grid;gap:14px;justify-items:start}
-.sp-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--a) 18%,transparent);border:1px solid color-mix(in srgb,var(--a) 55%,transparent);
-  font:800 11px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:color-mix(in srgb,var(--a) 45%,#fff)}
-.sp-pill i{font-style:normal}
-.sp-hero h2{font:italic 900 clamp(34px,4.4vw,56px)/1.02 Outfit,Arial,sans-serif;margin:0;text-transform:none}
-.sp-hero h2::before{display:none!important}
-.sp-hero h2{display:block!important}
-.sp-hero h2 em{font-style:inherit;background:linear-gradient(90deg,color-mix(in srgb,var(--a) 50%,#fff),var(--a));-webkit-background-clip:text;background-clip:text;color:transparent}
-.sp-txt p{margin:0;max-width:560px;color:#d6cfd9;font-size:15px;line-height:1.6}
-.sp-cta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.sp-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:14px;font:800 15px/1 Outfit,Arial,sans-serif;color:#fff;text-decoration:none;border:0;cursor:pointer;
-  background:linear-gradient(150deg,color-mix(in srgb,var(--a) 75%,#fff),var(--a) 40%,var(--a2));box-shadow:0 4px 0 color-mix(in srgb,var(--a2) 55%,#000),0 14px 30px -10px var(--a);transition:transform .12s,box-shadow .12s,filter .15s}
-.sp-btn i{font-style:normal;font-size:18px}
-.sp-btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
-.sp-btn:active{transform:translateY(2px);box-shadow:0 1px 0 color-mix(in srgb,var(--a2) 55%,#000)}
-.sp-btn.off{filter:saturate(.5) brightness(.85)}
-.sp-copy{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 14px;border-radius:14px;background:#0f0d12;border:1px solid var(--line)}
-.sp-copy code{font:600 13px ui-monospace,Menlo,Consolas,monospace;color:#d6cfd9}
-.sp-copy button{padding:7px 12px!important;border-radius:10px!important;font-size:12px!important;background:#ffffff12!important;border:1px solid #ffffff22!important;box-shadow:none!important}
-.sp-vis{position:relative;display:grid;place-items:center;min-height:240px}
-.sp-jersey{width:min(220px,80%);filter:drop-shadow(0 20px 30px #000a) drop-shadow(0 0 40px color-mix(in srgb,var(--a) 45%,transparent));animation:spfloat 5s ease-in-out infinite;transform-origin:50% 80%}
-@keyframes spfloat{50%{transform:translateY(-10px) rotate(-3deg)}}
-.sp-heart{position:absolute;right:18%;top:8%;font-size:44px;color:#fff;text-shadow:0 0 24px var(--a);animation:spbeat 1.4s ease-in-out infinite}
-@keyframes spbeat{20%{transform:scale(1.2)}40%{transform:scale(1)}}
-.sp-wm{position:absolute;right:-6px;bottom:-4px;font:italic 900 64px/1 Outfit,Arial,sans-serif;letter-spacing:-.02em;color:#ffffff08;pointer-events:none;white-space:nowrap}
-.sp-grid{display:grid;gap:12px}.sp-grid.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.sp-grid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.sp-tile{display:grid;gap:8px;align-content:start;padding:18px;border-radius:20px;background:radial-gradient(260px 120px at 0 0,color-mix(in srgb,var(--k) 16%,transparent),transparent 70%),linear-gradient(180deg,#1a171e,#121015);border:1px solid color-mix(in srgb,var(--k) 30%,#ffffff10);box-shadow:inset 0 1px 0 #ffffff0d;transition:transform .2s,border-color .2s}
-.sp-tile:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--k) 65%,transparent)}
-.sp-tile i{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-style:normal;font-size:21px;background:linear-gradient(150deg,color-mix(in srgb,var(--k) 70%,#fff),var(--k) 45%,color-mix(in srgb,var(--k) 70%,#000));box-shadow:0 3px 0 color-mix(in srgb,var(--k) 45%,#000),0 8px 18px -6px var(--k)}
-.sp-tile b{font-size:16px;font-weight:800;color:color-mix(in srgb,var(--k) 45%,#fff)}
-.sp-tile p{margin:0;color:#bdb6c2;font-size:13px;line-height:1.5}
-.sp-msg{position:relative;padding:26px 30px;border-radius:24px;background:linear-gradient(180deg,#1a171e,#121015);border:1px solid var(--line);border-left:4px solid var(--a);display:grid;gap:12px}
-.sp-mh{display:flex;gap:14px;align-items:center;margin-bottom:6px}
-.sp-mh i{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-style:normal;font-size:22px;background:linear-gradient(150deg,color-mix(in srgb,var(--a) 70%,#fff),var(--a));box-shadow:0 3px 0 color-mix(in srgb,var(--a2) 55%,#000)}
-.sp-k{font:800 11px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:color-mix(in srgb,var(--a) 50%,#fff)}
-.sp-mh h3{font:italic 900 26px/1.1 Outfit,Arial,sans-serif;margin:4px 0 0}
-.sp-msg p{margin:0;max-width:780px;color:#ddd6e0;font-size:15px;line-height:1.7}
-.sp-u{font-weight:800;color:#fff;text-decoration:underline;text-decoration-color:var(--a);text-decoration-thickness:2px;text-underline-offset:3px}
-.sp-sign{font-weight:800;color:color-mix(in srgb,var(--a) 45%,#fff)!important}
-.sp-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 24px;border-radius:22px;background:linear-gradient(90deg,color-mix(in srgb,var(--a) 14%,#151217),#121015);border:1px solid color-mix(in srgb,var(--a) 35%,#ffffff10)}
-.sp-bar b{display:block;font-size:18px;font-weight:800}.sp-bar small{color:var(--mute);font-size:12.5px}
-@media(max-width:900px){.sp-hero{grid-template-columns:1fr;padding:24px 20px}.sp-vis{min-height:180px;order:-1}.sp-jersey{width:150px}.sp-grid.g4,.sp-grid.g3{grid-template-columns:1fr 1fr}.sp-msg{padding:20px}.sp-wm{font-size:44px}}
-@media(max-width:520px){.sp-grid.g4,.sp-grid.g3{grid-template-columns:1fr}.sp-btn{width:100%;justify-content:center}.sp-copy{width:100%;justify-content:space-between}}
+/* ---------- page Cagnotte : « tribune des supporters » (photo de Lumumba, règlement, lettre, tableau d'affichage) ---------- */
+.cg-hid .sbt b::after{content:" · cachée";font-size:.8em;opacity:.6}
+.tb{display:grid;gap:22px;margin-top:6px}
+.tb-adm{padding:10px 14px;border-radius:12px;background:#f5b8001a;border:1px dashed #f5b80088;color:#ffe08a;font-size:13px;font-weight:700}
+.tb-adm button{margin-left:6px;padding:5px 10px!important;border-radius:8px!important;font-size:12px!important;background:#f5b800!important;color:#1a1300!important;border:0!important}
+.tb-hero{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:center;padding:10px 0}
+.tb-photo{position:relative;justify-self:center;width:min(360px,100%);aspect-ratio:4/5;transform:rotate(-3deg)}
+.tb-flag{position:absolute;inset:-18px -26px -18px -18px;border-radius:30px;transform:rotate(6deg);
+  background:linear-gradient(135deg,#1e88e5 0 38%,#f5d000 38% 42%,#e5202e 42% 58%,#f5d000 58% 62%,#1e88e5 62%);opacity:.85;box-shadow:0 30px 60px -20px #000}
+.tb-flag::after{content:"★";position:absolute;left:14%;top:8%;font-size:46px;color:#f5d000;text-shadow:0 2px 6px #0006}
+.tb-photo img{position:relative;width:100%;height:100%;object-fit:cover;object-position:50% 20%;border-radius:22px;border:5px solid #fff;box-shadow:0 26px 50px -16px #000}
+.tb-tag{position:absolute;left:50%;bottom:-16px;transform:translateX(-50%) rotate(3deg);white-space:nowrap;padding:8px 14px;border-radius:999px;background:#e5202e;color:#fff;font:800 12px/1 Outfit,Arial,sans-serif;letter-spacing:.06em;box-shadow:0 4px 0 #8f0f1a,0 10px 20px -6px #e5202e}
+.tb-txt{display:grid;gap:14px;justify-items:start}
+.tb-kick{font:800 11px/1 Outfit,Arial,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#ff8f99}
+.tb-txt h2{font:italic 900 clamp(40px,5.4vw,72px)/.95 Outfit,Arial,sans-serif;margin:0;text-transform:uppercase;display:block!important}
+.tb-txt h2::before{display:none!important}
+.tb-txt h2 sup{font-size:.45em;vertical-align:top;margin-left:2px}
+.tb-txt h2 em{font-style:inherit;color:#e5202e;text-shadow:0 0 40px #e5202e66}
+.tb-txt p{margin:0;max-width:520px;font-size:16px;line-height:1.6;color:#ddd6e0}
+.tb-cta{display:flex;flex-wrap:wrap;gap:10px}
+.tb-btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:999px;border:0;cursor:pointer;text-decoration:none;font:900 15px/1 Outfit,Arial,sans-serif;color:#1a1300;
+  background:linear-gradient(180deg,#ffe066,#f5b800);box-shadow:0 5px 0 #a67c00,0 14px 30px -10px #f5b800;transition:transform .12s,box-shadow .12s}
+.tb-btn:hover{transform:translateY(-2px)}.tb-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #a67c00}
+.tb-btn.off{filter:saturate(.4) brightness(.8)}
+.tb-ghost{padding:15px 22px!important;border-radius:999px!important;background:transparent!important;border:2px solid #ffffff33!important;font-weight:800!important;box-shadow:none!important}
+.tb-note{color:var(--mute);font-size:12px}
+.tb-rules{padding:26px;border-radius:24px;background:repeating-linear-gradient(0deg,#1a1d16 0 44px,#1d2119 44px 88px);border:2px solid #ffffff14;box-shadow:inset 0 0 0 6px #0f120d}
+.tb-rules h3{font:italic 900 24px/1 Outfit,Arial,sans-serif;text-transform:uppercase;margin:0 0 16px;color:#fff}
+.tb-rules ol{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tb-rule{display:grid;grid-template-columns:auto auto 1fr;gap:12px;align-items:start;padding:14px;border-radius:16px;background:#0f0d12cc;border:1px solid #ffffff12}
+.tb-n{font:800 11px/1 ui-monospace,Menlo,Consolas,monospace;color:#9ae6b4;padding-top:4px}
+.tb-card{width:22px;height:30px;border-radius:4px;box-shadow:0 3px 8px #0008;transform:rotate(-8deg)}
+.tb-card.y{background:linear-gradient(160deg,#ffe066,#f5b800)}.tb-card.r{background:linear-gradient(160deg,#ff6b78,#c81e2c)}
+.tb-rule b{display:block;font-size:15px;font-weight:800;margin-bottom:4px}.tb-rule p{margin:0;color:#c9c2cd;font-size:13.5px;line-height:1.5}
+.tb-letter{position:relative;padding:30px 34px 26px 64px;border-radius:24px;background:linear-gradient(180deg,#1b171f,#121015);border:1px solid var(--line)}
+.tb-q{position:absolute;left:18px;top:4px;font:900 90px/1 Georgia,serif;color:#e5202e}
+.tb-letter p{margin:12px 0 0;max-width:760px;font-size:15.5px;line-height:1.75;color:#ddd6e0}
+.tb-sign{font-weight:800;color:#ffb3b9!important;font-style:italic}
+.tb-board{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding:18px 22px;border-radius:20px;background:#08070a;border:2px solid #2a2530;box-shadow:inset 0 0 30px #000}
+.tb-score{display:flex;align-items:center;gap:12px;font:800 13px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.14em;color:#fbbf24}
+.tb-score b{font-size:34px;color:#fde68a;text-shadow:0 0 12px #f59e0b;padding:4px 10px;background:#141018;border-radius:6px}.tb-score i{font-style:normal;color:#666}
+.tb-bt{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.tb-bt p{margin:0;color:#ddd6e0;font-weight:700}
+@media(max-width:860px){.tb-hero{grid-template-columns:1fr}.tb-photo{width:min(280px,80%)}.tb-rules ol{grid-template-columns:1fr}.tb-letter{padding:26px 20px 22px 44px}.tb-q{left:10px;font-size:70px}}
+
+/* ---------- page Discord : « le vestiaire » (mascotte Discord + aperçu du serveur) ---------- */
+.dv{display:grid;gap:26px;margin-top:6px}
+.dv-hero{position:relative;display:grid;justify-items:center;text-align:center;gap:14px;padding:40px 20px 34px;border-radius:30px;overflow:hidden;
+  background:radial-gradient(500px 300px at 50% 20%,#5865f255,transparent 70%),radial-gradient(900px 400px at 50% 120%,#eb459e33,transparent 70%),linear-gradient(180deg,#1b1d3a,#111226);border:1px solid #5865f255}
+.dv-wump{width:min(230px,52vw);filter:drop-shadow(0 26px 30px #000a) drop-shadow(0 0 40px #5865f2aa);animation:dvfloat 4.5s ease-in-out infinite}
+@keyframes dvfloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-14px) rotate(3deg)}}
+.dv-kick{padding:6px 14px;border-radius:999px;background:#ffffff14;border:1px solid #ffffff26;font:800 11px/1 Outfit,Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#c7cbff}
+.dv-hero h2{font:900 clamp(38px,5vw,64px)/1 Outfit,Arial,sans-serif;margin:0;display:block!important}
+.dv-hero h2::before{display:none!important}
+.dv-hero h2 em{font-style:normal;color:#8c95ff;text-shadow:0 0 30px #5865f2}
+.dv-hero p{margin:0;max-width:580px;color:#d5d8ff;font-size:16px;line-height:1.6}
+.dv-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:6px}
+.dv-btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:16px;border:0;cursor:pointer;text-decoration:none;font:800 16px/1 Outfit,Arial,sans-serif;color:#fff;
+  background:linear-gradient(180deg,#7983f5,#5865f2);box-shadow:0 5px 0 #3c45a5,0 16px 34px -10px #5865f2;transition:transform .12s,box-shadow .12s}
+.dv-btn:hover{transform:translateY(-2px)}.dv-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #3c45a5}.dv-btn.off{filter:saturate(.5) brightness(.85)}
+.dv-link{display:inline-flex;align-items:center;gap:10px;padding:12px 14px!important;border-radius:16px!important;background:#ffffff10!important;border:1px solid #ffffff22!important;box-shadow:none!important}
+.dv-link code{font:600 13px ui-monospace,Menlo,Consolas,monospace;color:#d5d8ff}.dv-link span{font-size:12px;font-weight:800;color:#8c95ff}
+.dv-app{display:grid;grid-template-columns:240px 1fr;min-height:340px;border-radius:18px;overflow:hidden;border:1px solid #ffffff14;box-shadow:0 30px 60px -30px #000;font-family:Outfit,Arial,sans-serif}
+.dv-side{background:#2b2d31;padding:12px 8px;display:grid;align-content:start;gap:2px}
+.dv-srv{display:flex;align-items:center;gap:10px;padding:6px 8px 12px;margin-bottom:6px;border-bottom:1px solid #1e1f22}.dv-srv img{width:28px;height:28px;border-radius:8px}.dv-srv b{font-size:15px}
+.dv-cat{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#949ba4;padding:8px 8px 4px}
+.dv-ch{display:flex;align-items:center;gap:6px;text-align:left;padding:7px 8px!important;border-radius:6px!important;background:none!important;border:0!important;box-shadow:none!important;color:#949ba4!important;font-weight:600!important;font-size:14px!important;font-style:normal!important}
+.dv-ch i{font-style:normal;font-size:18px;color:#80848e}
+.dv-ch:hover{background:#35373c!important;color:#dbdee1!important}.dv-ch.on{background:#404249!important;color:#fff!important}
+.dv-chat{background:#313338;display:grid;grid-template-rows:auto 1fr 1fr auto;gap:0}
+.dv-head{display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid #26272b;font-weight:800;color:#f2f3f5}.dv-head i{font-style:normal;color:#80848e;font-size:20px}
+.dv-msg{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:14px 16px;align-content:start}
+.dv-msg img,.dv-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#5865f2;font-size:20px}
+.dv-msg b{display:flex;align-items:center;gap:6px;font-size:15px;color:#f2f3f5}.dv-msg b em{font-style:normal;font-size:10px;padding:1px 5px;border-radius:4px;background:#5865f2;color:#fff}
+.dv-msg small{font-size:11.5px;color:#949ba4;font-weight:500}.dv-msg p{margin:4px 0 0;color:#dbdee1;font-size:14.5px;line-height:1.45}
+.dv-type{margin:10px 16px 16px;padding:12px 14px;border-radius:8px;background:#383a40;color:#80848e;font-size:14px}
+@media(max-width:760px){.dv-app{grid-template-columns:1fr}.dv-side{grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;align-items:center}.dv-srv,.dv-cat{display:none}.dv-chat{grid-template-rows:auto auto auto auto}}
+
+/* ===================== v14 : page Boosters épurée (un seul point d'attention) ===================== */
+.bx{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;padding-top:18px!important}
+.bx>*,.bx-head>*{min-width:0}
+.bx-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.bx-kick{font:800 11px/1 Outfit,Arial,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:#ff8f99}
+.bx-head h2{font:italic 900 clamp(34px,4vw,52px)/1 Outfit,Arial,sans-serif;margin:4px 0 0;text-transform:uppercase}
+.bx-head h2::before{display:none!important}
+/* pastilles d'info, petites et discrètes */
+.bx .pills{display:flex!important;flex-wrap:wrap;gap:8px;margin:0!important;grid-template-columns:none!important}
+.bx .pills .pl{display:flex;align-items:center;gap:8px;padding:7px 12px!important;border-radius:999px!important;min-height:0!important;background:#16131a!important;border:1px solid color-mix(in srgb,var(--c) 35%,#ffffff12)!important;box-shadow:none!important}
+.bx .pills .pl::before,.bx .pills .pl::after{display:none!important}
+.bx .pills .pl i{display:none}
+.bx .pills .pl div{display:flex;align-items:baseline;gap:6px}
+.bx .pills .pl b{font:italic 900 15px/1 Outfit,Arial,sans-serif!important;color:var(--c)!important}
+.bx .pills .pl span{font-size:12px!important;color:#bdb6c2!important;white-space:nowrap}
+/* scène : un terrain, le booster choisi au centre, les autres qui reculent */
+.bx-stage{position:relative;display:grid;justify-items:center;padding:26px 0 8px;overflow:hidden;border-radius:28px;
+  background:radial-gradient(520px 300px at 50% 46%,color-mix(in srgb,var(--sel) 28%,transparent),transparent 70%),linear-gradient(180deg,#141218,#0e0c11);border:1px solid #ffffff10}
+.bx-pitch{position:absolute;inset:0;pointer-events:none;opacity:.55}
+.bx-pitch i{position:absolute;border:2px solid #ffffff10}
+.bx-pitch i:nth-child(1){left:50%;top:52%;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%}
+.bx-pitch i:nth-child(2){left:0;right:0;top:52%;height:0;border-width:2px 0 0}
+.bx-pitch i:nth-child(3){left:50%;top:52%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#ffffff18;border:0}
+.bx-row{position:relative;width:100%;height:clamp(300px,40vh,400px);perspective:1200px}
+.bx-pk{position:absolute;left:50%;top:50%;width:clamp(170px,17vw,230px);padding:0!important;border:0!important;background:none!important;box-shadow:none!important;cursor:pointer;
+  transform:translate(-50%,-50%) translateX(calc(var(--d)*clamp(140px,15vw,210px))) translateZ(calc(var(--a)*-120px)) rotateY(calc(var(--d)*-16deg)) scale(calc(1 - var(--a)*.08));
+  z-index:calc(10 - var(--a));opacity:calc(1 - var(--a)*.28);filter:saturate(calc(1 - var(--a)*.35)) brightness(calc(1 - var(--a)*.18));transition:transform .5s cubic-bezier(.2,1,.3,1),opacity .4s,filter .4s}
+.bx-pk .bpk{width:100%;animation:none}
+.bx-pk.on{filter:drop-shadow(0 30px 40px #000c) drop-shadow(0 0 40px color-mix(in srgb,var(--bc) 60%,transparent));animation:bxfloat 4s ease-in-out infinite}
+@keyframes bxfloat{50%{translate:0 -10px}}
+.bx-pk:not(.on):hover{opacity:calc(1 - var(--a)*.15);filter:none}
+.bx-ar{position:absolute;top:calc(26px + clamp(300px,40vh,400px)/2);z-index:20;width:46px;height:46px;margin-top:-23px;padding:0!important;border-radius:50%!important;font-size:28px!important;line-height:1;
+  background:#1c1920!important;border:1px solid #ffffff22!important;box-shadow:0 4px 0 #08070a!important}
+.bx-ar.l{left:18px}.bx-ar.r{right:18px}.bx-ar:disabled{opacity:.25}
+.bx-name{position:relative;display:grid;justify-items:center;gap:4px;margin-top:6px;text-align:center}
+.bx-name b{font:italic 900 clamp(26px,3vw,36px)/1 Outfit,Arial,sans-serif;text-transform:uppercase;text-shadow:0 0 30px color-mix(in srgb,var(--bc) 55%,transparent)}
+.bx-name span{color:#cfc8d3;font-size:14px}
+.bx-dots{position:relative;display:flex;align-items:center;gap:8px;margin:14px 0 6px}
+.bx-dots i{width:22px;height:5px;border-radius:5px;background:#ffffff22;cursor:pointer;transition:.2s}.bx-dots i.on{width:34px;background:var(--sel)}
+.bx-promo{margin-left:8px;padding:6px 12px!important;border-radius:999px!important;font-size:12px!important;background:#ff7a0018!important;border:1px solid #ff7a0066!important;color:#ffb066!important;box-shadow:none!important}
+.bx-promo.on{background:#ff7a00!important;color:#fff!important}
+/* barre d'ouverture */
+.bx-act{display:grid;justify-items:center;gap:12px;padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
+.bx-qty{display:inline-flex;gap:4px;padding:4px;border-radius:14px;background:#120f15;border:1px solid var(--line)}
+.bx-qty button{min-width:74px;padding:10px 16px!important;border-radius:10px!important;background:none!important;border:0!important;box-shadow:none!important;color:#bdb6c2;font-weight:800}
+.bx-qty button.on{background:#fff!important;color:#141117!important}
+.bx-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:min(520px,100%)}
+.bx-btns button{flex:1 1 220px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px!important;border-radius:16px!important}
+.bx-btns b{font:italic 900 19px/1 Outfit,Arial,sans-serif;text-transform:uppercase}
+.bx-btns em{font-style:normal;font-weight:800;font-size:13px;padding:6px 10px;border-radius:9px;background:#0004}
+.bx-open{background:linear-gradient(150deg,#ff6b76,#e5202e 45%,#a3121d)!important}
+.bx-rates{width:min(620px,100%);border-radius:14px;border:1px solid var(--line);background:#121015}
+.bx-rates summary{cursor:pointer;padding:12px 16px;font-weight:800;font-size:13px;color:#cfc8d3;list-style:none;display:flex;justify-content:space-between}
+.bx-rates summary::after{content:"+";font-size:18px;line-height:1}.bx-rates[open] summary::after{content:"–"}
+.bx-rates>p,.bx-rates .rates{padding:0 16px;margin:0 0 12px}.bx-rates>p{color:var(--mute);font-size:12.5px}
+.bx-desc{color:#cfc8d3!important}
+.bx .home{margin-top:20px;padding-top:24px!important;border-top:1px solid var(--line)}
+.bx #hero.hidden,.bx .hero.hidden{display:none!important}
+.bx .pills .pl div{display:flex!important;flex-direction:row!important;align-items:baseline!important;gap:6px!important}
+.bx .pills .pl{flex:0 0 auto!important;width:auto!important}
+@media(max-width:760px){.bx .pills{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;width:100%;padding-bottom:2px}.bx .pills::-webkit-scrollbar{display:none}}
+@media(max-width:760px){.bx-row{height:300px}.bx-pk{width:150px;transform:translate(-50%,-50%) translateX(calc(var(--d)*112px)) translateZ(calc(var(--a)*-120px)) rotateY(calc(var(--d)*-16deg)) scale(calc(1 - var(--a)*.1))}
+  .bx-ar{top:176px;width:38px;height:38px;margin-top:-19px;font-size:22px!important}.bx-ar.l{left:6px}.bx-ar.r{right:6px}.bx-head{align-items:flex-start}.bx .pills{gap:6px}.bx .pills .pl{padding:6px 10px!important}.bx .pills .pl span{font-size:11px!important}
+  .bx-btns button{flex-basis:100%}}
 /* compteurs du haut : pastilles en relief */
 #balloons-pill,#free-pill{height:auto!important;min-height:0!important;line-height:1!important;display:inline-flex!important;align-items:center;gap:8px;padding:4px 14px 4px 4px!important;border-radius:14px!important;position:relative;overflow:hidden;font-style:normal;cursor:default;
   background:linear-gradient(180deg,#2a2430,#17141b)!important;border:1px solid #ffffff1f!important;box-shadow:0 3px 0 #08070a,0 10px 20px -10px #000,inset 0 1px 0 #ffffff1f!important;transition:transform .15s}
@@ -2732,7 +2823,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
     </div>
     <button class="sbi" id="tab-ballon" onclick="showTab('ballon')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 20h8"/></svg></span><span class="sbt"><b>Ballon d’Or</b><small>Classement de la semaine</small></span></button>
     <div class="sbl">Soutien</div>
-    <button class="sbi" id="tab-cagnotte" onclick="showTab('cagnotte')"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.3 1 4.1 2.3h3C14.3 6 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z"/></svg></span><span class="sbt"><b>Cagnotte</b><small>Soutenir PrimeZ</small></span></button>
+    <button class="sbi hidden" id="tab-cagnotte" onclick="showTab('cagnotte')"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.3 1 4.1 2.3h3C14.3 6 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z"/></svg></span><span class="sbt"><b>Cagnotte</b><small>Soutenir PrimeZ</small></span></button>
     <button class="sbi" id="tab-discord" onclick="showTab('discord')"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18 18 0 0 0-5.6 0L8.6 3a19.6 19.6 0 0 0-4.9 1.5C.6 9.1-.3 13.6.1 18a19.8 19.8 0 0 0 6 3l1.3-2a12.8 12.8 0 0 1-2-1l.5-.4a14 14 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.7 19.7 0 0 0 6-3c.5-5.1-.8-9.6-3.6-13.6ZM8.3 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm7.4 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg></span><span class="sbt"><b>Discord</b><small>La communauté</small></span></button>
     <div class="sbl">Compte</div>
     <button class="sbi" id="tab-profile" onclick="showTab('profile')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span><span class="sbt"><b>Profil</b><small>Ta vitrine &amp; tes cartes préférées</small></span></button>
@@ -2740,23 +2831,23 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
   </aside>
 <div class="adock hidden" id="adock"><div class="adk-in admin-only hidden"><span class="adk-k">Admin</span>    <button class="sbi adk" id="tab-admin-cards" onclick="showTab('admin-cards')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="7" width="12" height="14"/><path d="M8 3h13v14"/></svg></span><span class="sbt"><b>Cartes</b><small>Images, clubs, raretés</small></span></button>
     <button class="sbi adk" id="tab-admin-photos" onclick="showTab('admin-photos')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="5" width="18" height="14"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-7 7"/></svg></span><span class="sbt"><b>Photos</b><small>Assistant de recherche</small></span></button>
-    <button class="sbi adk" id="tab-admin-players" onclick="showTab('admin-players')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="8" width="18" height="12"/><path d="M12 8v12M3 12h18M8 8C5 5 9 2 12 8c3-6 7-3 4 0"/></svg></span><span class="sbt"><b>Cadeaux</b><small>Messages &amp; récompenses</small></span></button><button class="sbi adk" onclick="lgPreview()"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M9 14h6"/></svg></span><span class="sbt"><b>Accueil</b><small>Écran de connexion</small></span></button><button class="sbi adk" onclick="inviteIntro(true)"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M19 8v6M16 11h6"/></svg></span><span class="sbt"><b>Invitation</b><small>Popup de parrainage</small></span></button></div>
+    <button class="sbi adk" id="tab-admin-players" onclick="showTab('admin-players')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="8" width="18" height="12"/><path d="M12 8v12M3 12h18M8 8C5 5 9 2 12 8c3-6 7-3 4 0"/></svg></span><span class="sbt"><b>Cadeaux</b><small>Messages &amp; récompenses</small></span></button><button class="sbi adk" onclick="lgPreview()"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M9 14h6"/></svg></span><span class="sbt"><b>Accueil</b><small>Écran de connexion</small></span></button><button class="sbi adk" onclick="inviteIntro(true)"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M19 8v6M16 11h6"/></svg></span><span class="sbt"><b>Invitation</b><small>Popup de parrainage</small></span></button><button class="sbi adk" id="adk-cag" onclick="cagToggle()"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.3 1 4.1 2.3h3C14.3 6 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z"/></svg></span><span class="sbt"><b>Cagnotte : cachée</b><small>Visible seulement par les admins</small></span></button></div>
   <div class="adk-v"><span class="adk-k">Voir comme</span><div class="adk-seg"><button data-v="modo" onclick="setView('modo')">Modo</button><button data-v="joueur" onclick="setView('joueur')">Joueur</button><button data-v="invite" onclick="setView('invite')">Invité</button></div></div></div>
   <div class="content">
     <div class="install hidden" id="install-bar"><span> <b>Installe PrimeZ</b> sur ton ordinateur, il s’ouvre comme une vraie application.</span><span class="sp"></span><button class="go" onclick="installApp()">Installer</button><button class="x" title="Fermer" onclick="closeInstall()">✕</button></div>
     <div class="banner hidden" id="guest-banner"><span><b>Tu joues en invité.</b> Si tu vides ton navigateur, ta collection est perdue.</span><button class="go" onclick="saveAccount()">Sauvegarder avec Discord (+400 ballons, +7 boosters)</button></div>
 
-    <section id="view-boosters"><div class="wrap">
-      <div class="hero" id="hero"></div>
-      <div class="pills" id="pills"></div>
-      <div class="ticker hidden" id="ticker"><div class="tklab"><i></i><span>Gros tirages</span><small>en direct</small></div><div class="tkw"><div class="tk" id="tk"></div></div></div>
+    <section id="view-boosters"><div class="wrap bx">
+      <div class="bx-head"><div><span class="bx-kick">Le vestiaire</span><h2 class="disp">Boosters</h2></div><div class="pills" id="pills"></div></div>
+      <div class="hero hidden" id="hero"></div>
       <div class="gifts hidden" id="gifts"></div>
-      <div class="choose"><div><h2 class="sech disp">Choisis ton booster</h2><div class="packs" id="packs"></div>
-        <div class="home hidden" id="home" style="padding:0"><h3 class="disp">Ta collection</h3><div class="rb" id="rb"></div>
-        <h3 class="disp">Le saviez-vous ?</h3><div class="sub">Des histoires de foot que peu de gens connaissent. Clique sur une pour la lire en entier.</div><div class="sv" id="show"></div></div></div><aside class="panel" id="panel"></aside></div>
-            <div class="foot">PrimeZ · projet fan non officiel, sans but lucratif</div>
+      <div class="bx-stage" id="packs"></div>
+      <div class="bx-act" id="panel"></div>
+      <div class="ticker hidden" id="ticker"><div class="tklab"><i></i><span>Gros tirages</span><small>en direct</small></div><div class="tkw"><div class="tk" id="tk"></div></div></div>
+      <div class="home hidden" id="home" style="padding:0"><h3 class="disp">Ta collection</h3><div class="rb" id="rb"></div>
+        <h3 class="disp">Le saviez-vous ?</h3><div class="sub">Des histoires de foot que peu de gens connaissent. Clique sur une pour la lire en entier.</div><div class="sv" id="show"></div></div>
+      <div class="foot">PrimeZ · projet fan non officiel, sans but lucratif</div>
     </div></section>
-
     <section id="view-collection" class="page hidden">
       <div class="collhead"><h2 class="disp">Ma collection <span id="coll-count" style="color:var(--mute);font-size:22px"></span></h2><button class="ghost" onclick="openRecycle()">Recycler mes doublons</button></div>
       <div class="seg" id="gseg" style="margin:14px 0 4px"></div>
@@ -3075,7 +3166,7 @@ async function start(){
   sel=boosters.length?boosters[0].id:null;
   $("login").classList.add("hidden"); $("app").classList.remove("hidden");
   $("guest-banner").classList.toggle("hidden",!isGuest);
-  realAdmin=!!profile.is_admin; realGuest=isGuest; try{ viewMode=localStorage.getItem("pz_view")||"modo"; }catch(e){} applyView(true); adminSync();
+  realAdmin=!!profile.is_admin; realGuest=isGuest; try{ viewMode=localStorage.getItem("pz_view")||"modo"; }catch(e){} applyView(true); adminSync(); cagLoad();
   $("mute-btn").textContent=muted?"🔇":"🔊";
   render(); newSave(); setInterval(renderFree,1000); loadMessages(); loadFeed(); loadCollection(); refreshSocial(); setInterval(refreshSocial,60000); loadNotifs(); setInterval(loadNotifs,60000); refreshMissions(); setInterval(refreshMissions,120000);
   refClaim().then(refLoad).then(()=>setTimeout(()=>inviteIntro(),1500)); mavSet();
@@ -3169,21 +3260,28 @@ function quick(id){ const b=boosters.find(x=>x.id===id); if(b) openN(id,!!b.free
 function render(){
   animBalloons(profile.balloons);
   const b=boosters.find(x=>x.id===sel)||boosters[0]; if(!b) return;
-  if(heroPromo){ $("hero").style.setProperty("--hc","#ff7a00"); $("hero").innerHTML=promoHeroHTML(); requestAnimationFrame(promoBarAnim); }
-  else { $("hero").style.setProperty("--hc",heroOf(b).accent); $("hero").innerHTML=heroHTML(b); }
-  $("packs").style.setProperty("--sel",PACK_THEME[b.id]||"#d21f2e");
-  $("packs").innerHTML=`<div class="pstage"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>`+boosters.map(x=>`<div class="pk ${x.id===b.id?"on":""}" onclick="pick('${x.id}')"><div class="pkf">${packHTML(x,"")}</div><div class="pkn" style="--bc:${PACK_THEME[x.id]||"#d21f2e"}"><b>${esc(x.name)}</b><span>${x.free_ok?"Gratuit ou ":""}${x.price.toLocaleString("fr-FR")} ${CURRENCY}</span></div></div>`).join("");
+  /* page Boosters épurée : un seul point d'attention, le booster choisi au centre du terrain */
+  $("hero").classList.toggle("hidden",!heroPromo);
+  if(heroPromo){ $("hero").style.setProperty("--hc","#ff7a00"); $("hero").innerHTML=promoHeroHTML(); requestAnimationFrame(promoBarAnim); } else $("hero").innerHTML="";
+  const si=Math.max(0,boosters.indexOf(b)), col=PACK_THEME[b.id]||"#d21f2e";
+  $("packs").style.setProperty("--sel",col);
+  $("packs").innerHTML=`<div class="bx-pitch"><i></i><i></i><i></i></div>
+    <button class="bx-ar l" ${si<=0?"disabled":""} onclick="pick('${(boosters[si-1]||b).id}')" aria-label="Booster précédent">‹</button>
+    <div class="bx-row">${boosters.map((x,i)=>{ const d=i-si, a=Math.abs(d); return `<div class="bx-pk ${d===0?"on":""}" role="button" tabindex="0" style="--d:${d};--a:${a};--bc:${PACK_THEME[x.id]||"#d21f2e"}" onclick="pick('${x.id}')" aria-label="${esc(x.name)}" ${a>3?"hidden":""}>${packHTML(x,"")}</div>`; }).join("")}</div>
+    <button class="bx-ar r" ${si>=boosters.length-1?"disabled":""} onclick="pick('${(boosters[si+1]||b).id}')" aria-label="Booster suivant">›</button>
+    <div class="bx-name" style="--bc:${col}"><b>${esc(b.name)}</b><span>${b.cards_count} cartes · ${esc(PACK_SUB[b.id]||RARITY[b.min_rarity]+"+")}${b.free_ok?" · gratuit toutes les 10 min":""}</span></div>
+    <div class="bx-dots">${boosters.map((x,i)=>`<i class="${i===si?"on":""}" onclick="pick('${x.id}')"></i>`).join("")}<button class="bx-promo ${heroPromo?"on":""}" onclick="heroPromo=!heroPromo;render()">⭐ PROMO</button></div>`;
   const n=b.cards_count*qty, rt=b.rates||{};
   const mi=ORDER.indexOf(b.min_rarity||"commune"), mult=qty, g=mi>0;
   const rates=ORDER.map((r,ri)=>{ if(r==="promo") return ""; const p=+rt[r]||0; let h=hit(p,n); if(g&&ri<mi) h=hit(p,(b.cards_count-1)*mult); const full=g&&ri===mi; if(full) h=100; return `<div class="rt" style="--c:${COLOR[r]}"><span>${RARITY[r]}</span><i><u style="width:${p?Math.max(2,Math.sqrt(h)*10):0}%"></u></i><span>${full?"100":p?fmt(h):0} %</span></div>`; }).join("");
   const lbl=`Chance d’avoir au moins une carte de la rareté, sur ${qty} booster${qty>1?"s":""} (${n} cartes)`;
-  $("panel").innerHTML=`<div><h3 class="disp">${esc(b.name)}</h3><p>${esc(b.description||"")}</p><span class="tag">${BADGE[b.id]||"Booster"}</span></div>
-  <div class="tiles"><div class="tile"><b>${b.cards_count}</b><span>cartes par booster</span></div><div class="tile"><b>${RARITY[b.min_rarity]}+</b><span>minimum garanti</span></div>
-  <div class="tile"><b>${b.price.toLocaleString("fr-FR")}</b><span>${CURRENCY} le booster</span></div><div class="tile"><b>${b.free_ok?freeNow().n+"/"+cap():"—"}</b><span>${b.free_ok?"boosters gratuits":"pas de gratuit"}</span></div></div>
-  <div class="qr">${[1,5,10].map(n=>`<button class="${n===qty?"on":""}" onclick="setQty(${n})">×${n}</button>`).join("")}</div>
-  <div><p style="margin:0 0 10px">${lbl}${g?" · "+RARITY[b.min_rarity]+"+ garantie ★":""}</p><div class="rates">${rates}</div></div>
-  <div class="btns">${b.free_ok?`<button class="go btn-free" data-q="${qty}" onclick="openN('${b.id}',true)">Ouvrir ×${qty} gratuitement</button>`:""}
-  <button class="${b.free_ok?"ghost":"go"}" ${profile.balloons<b.price*qty?"disabled":""} onclick="openN('${b.id}',false)">Ouvrir ×${qty} · ${(b.price*qty).toLocaleString("fr-FR")} ${CURRENCY}</button></div>`;
+  /* barre d'ouverture : quantité + bouton(s), les chances sont repliées */
+  const pr=(b.price*qty).toLocaleString("fr-FR");
+  $("panel").style.setProperty("--bc",col);
+  $("panel").innerHTML=`<div class="bx-qty">${[1,5,10].map(n=>`<button class="${n===qty?"on":""}" onclick="setQty(${n})">×${n}</button>`).join("")}</div>
+  <div class="bx-btns">${b.free_ok?`<button class="go bx-open btn-free" data-q="${qty}" onclick="openN('${b.id}',true)"><b>Ouvrir ×${qty}</b><em>Gratuit</em></button>`:""}
+    <button class="${b.free_ok?"ghost bx-buy":"go bx-open"}" ${profile.balloons<b.price*qty?"disabled":""} onclick="openN('${b.id}',false)"><b>${b.free_ok?"Payer":"Ouvrir ×"+qty}</b><em>${pr} ${CURRENCY}</em></button></div>
+  <details class="bx-rates" ${window.bxRO?"open":""} ontoggle="window.bxRO=this.open"><summary>Chances par rareté${g?" · "+RARITY[b.min_rarity]+"+ garantie ★":""}</summary><p>${lbl}</p><div class="rates">${rates}</div>${b.description?`<p class="bx-desc">${esc(b.description)}</p>`:""}</details>`;
   renderPills();
 }
 function askConfirm(title,txt,ok){ return new Promise(res=>{ window.__ask=v=>{ closeGm(); res(v); };
@@ -4720,7 +4818,7 @@ async function claimWeekly(){
 const TABS=["boosters","collection","missions","games","market","friends","ballon","cagnotte","discord","messages","profile","settings","admin-cards","admin-photos","admin-players"];
 /* admin : basculer l'affichage entre modo, joueur normal et invité (rien ne change côté serveur) */
 let realAdmin=false, realGuest=false, viewMode="modo";
-function applyView(silent){ if(!realAdmin) viewMode="modo";
+function applyView(silent){ if(!realAdmin) viewMode="modo"; setTimeout(()=>{ try{ cagApply(); }catch(e){} },0);
   profile.is_admin=realAdmin&&viewMode==="modo"; isGuest=realGuest||(realAdmin&&viewMode==="invite");
   document.querySelectorAll(".admin-only").forEach(e=>e.classList.toggle("hidden",!profile.is_admin));
   const dk=$("adock"); if(dk){ dk.classList.toggle("hidden",!realAdmin); dk.classList.toggle("mini",viewMode!=="modo"); dk.querySelectorAll(".adk-seg button").forEach(b=>b.classList.toggle("on",b.dataset.v===viewMode)); }
@@ -4760,57 +4858,67 @@ function showTab(t,arg){ if(t!=="games"){ try{ crowdBed(false); crMusic(false); 
   if(showTab.prev==="collection"&&t!=="collection"&&NEWC.size){ NEWC.clear(); newSave(); } showTab.prev=t;
   const v=$("view-"+t); if(v){ v.classList.remove("venter"); void v.offsetWidth; v.classList.add("venter"); }
 }
-/* ===================== CAGNOTTE & DISCORD ===================== */
+/* ===================== CAGNOTTE (tribune des supporters) & DISCORD (le vestiaire) ===================== */
 function supCopy(u){ if(!u){ toast("Lien bientôt disponible"); return; } try{ navigator.clipboard.writeText(u).then(()=>toast("Lien copié",true),()=>toast(u,true)); }catch(e){ toast(u,true); } }
 const supLink=(u,cls,html)=>u?`<a class="${cls}" href="${esc(u)}" target="_blank" rel="noopener">${html}</a>`:`<button class="${cls} off" onclick="toast('Lien bientôt disponible')">${html}</button>`;
 const supShort=u=>u?u.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""):"bientôt disponible";
-const supTile=(e,t,p,c)=>`<div class="sp-tile" style="--k:${c}"><i>${e}</i><b>${t}</b><p>${p}</p></div>`;
-/* maillot stylisé (visuel des deux pages) */
-const supJersey=(c1,c2,txt,num)=>`<svg class="sp-jersey" viewBox="0 0 200 210" aria-hidden="true"><defs><linearGradient id="spj${num}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
-  <path d="M62 14l20-8c4 10 12 15 18 15s14-5 18-15l20 8 46 28-18 42-24-12v124H58V72L34 84 16 42z" fill="url(#spj${num})" stroke="#ffffff40" stroke-width="2"/>
-  <path d="M82 6c4 10 12 15 18 15s14-5 18-15" fill="none" stroke="#ffffffaa" stroke-width="4"/>
-  <text x="100" y="92" text-anchor="middle" font-family="Outfit,Arial" font-weight="900" font-size="14" letter-spacing="3" fill="#ffffffcc">${txt}</text>
-  <text x="100" y="168" text-anchor="middle" font-family="Outfit,Arial" font-style="italic" font-weight="900" font-size="74" fill="#fff">${num}</text></svg>`;
-function renderCagnotte(){ const B=$("cg-body"); if(!B) return; const U=CAGNOTTE_URL;
-  B.innerHTML=`<div class="sp sp-cg">
-    <section class="sp-hero"><div class="sp-txt"><span class="sp-pill"><i>♥</i>Soutenir PrimeZ</span>
-        <h2>Fais vivre <em>le vestiaire</em>.</h2>
-        <p>PrimeZ est un projet de passionnés de foot : gratuit, sans pub, sans abonnement. Une petite cagnotte nous aide à payer les serveurs et à sortir de nouveaux modes plus vite. Totalement libre.</p>
-        <div class="sp-cta">${supLink(U,"sp-btn",`<i>♥</i>Participer à la cagnotte`)}<div class="sp-copy"><code>${esc(supShort(U))}</code><button onclick="supCopy(CAGNOTTE_URL)">Copier</button></div></div></div>
-      <div class="sp-vis">${supJersey("#ff5a78","#a3121d","SUPPORTER","12")}<span class="sp-heart">♥</span><span class="sp-wm">SUPPORTERS</span></div></section>
-    <div class="sp-grid g4">
-      ${supTile("⚽","100 % pour le site","Chaque euro sert à faire tourner PrimeZ : serveurs, base de données et outils pour développer.","#22c55e")}
-      ${supTile("🤝","Jamais obligatoire","Tu ne donnes rien ? Aucun souci. Jouer, collectionner et partager, c'est déjà nous soutenir.","#3b82f6")}
-      ${supTile("⚖️","Zéro pay-to-win","Pas de mercato payant : aucune carte, aucun booster ni avantage ne s'achète avec de l'argent réel.","#f5b800")}
-      ${supTile("📋","Transparence","On vous dira à quoi sert la cagnotte : pas de surprise, pas de petites lignes.","#a855f7")}
-    </div>
-    <section class="sp-msg"><div class="sp-mh"><i>📣</i><div><span class="sp-k">Le mot du vestiaire</span><h3>Pourquoi une cagnotte ?</h3></div></div>
-      <p><b>Salut à tous !</b></p>
-      <p>PrimeZ, c'est un petit club : quelques passionnés qui codent le soir pour que vous puissiez ouvrir des boosters, compléter votre album de légendes et défier vos potes.</p>
-      <p>Faire tourner le site a un coût : l'hébergement, la base de données, et tous les outils qui nous aident à corriger les bugs et à ajouter des modes comme le Classé ou la Ligue des Champions.</p>
-      <p>C'est pour ça qu'on ouvre une cagnotte. <span class="sp-u">L'argent sert uniquement au site.</span> Et surtout : <span class="sp-u">personne n'est obligé de participer.</span> Le jeu reste gratuit et le restera.</p>
-      <p>Notre règle, c'est <span class="sp-u">pas de pay-to-win</span> : un joueur qui donne n'aura jamais de meilleures cartes qu'un autre. Sur le terrain, tout le monde part à égalité.</p>
-      <p>Merci à tous ceux qui jouent, partagent et nous font remonter les bugs. C'est vous, le douzième homme.</p>
-      <p class="sp-sign">— L'équipe PrimeZ</p></section>
-    <section class="sp-bar"><div><b>Un coup de pouce, si tu le souhaites</b><small>Montant libre · 100 % pour le site · sans engagement</small></div>${supLink(U,"sp-btn",`<i>♥</i>Ouvrir la cagnotte`)}</section>
+/* la cagnotte se montre ou se cache depuis le menu admin (réglage partagé dans Supabase : site_settings) */
+let CAG_PUBLIC=false;
+async function cagLoad(){ try{ const {data}=await sb.from("site_settings").select("value").eq("key","cagnotte_public").maybeSingle(); CAG_PUBLIC=!!(data&&data.value===true); }catch(e){ CAG_PUBLIC=false; } cagApply(); }
+function cagApply(){ const adm=!!(profile&&profile.is_admin), show=CAG_PUBLIC||adm, b=$("tab-cagnotte"); if(b){ b.classList.toggle("hidden",!show); b.classList.toggle("cg-hid",!CAG_PUBLIC&&adm); }
+  const t=$("adk-cag"); if(t){ t.querySelector("b").textContent=CAG_PUBLIC?"Cagnotte : publique":"Cagnotte : cachée"; t.querySelector("small").textContent=CAG_PUBLIC?"Visible par tout le monde":"Visible seulement par les admins"; t.classList.toggle("on",CAG_PUBLIC); }
+  if(!show&&!$("view-cagnotte").classList.contains("hidden")) showTab("boosters"); }
+async function cagToggle(){ const v=!CAG_PUBLIC; const r=await rpc("set_site_setting",{p_key:"cagnotte_public",p_value:v}); if(!r) return; CAG_PUBLIC=v; cagApply(); if($("view-cagnotte")&&!$("view-cagnotte").classList.contains("hidden")) renderCagnotte(); toast(v?"Cagnotte visible par tout le monde":"Cagnotte cachée",true); }
+
+function renderCagnotte(){ const B=$("cg-body"); if(!B) return; const U=CAGNOTTE_URL, adm=profile&&profile.is_admin;
+  const rule=(n,card,t,p)=>`<li class="tb-rule"><span class="tb-n">Art. ${n}</span><i class="tb-card ${card}"></i><div><b>${t}</b><p>${p}</p></div></li>`;
+  B.innerHTML=`<div class="tb">${adm&&!CAG_PUBLIC?`<div class="tb-adm">👁 Page cachée aux joueurs · <button onclick="cagToggle()">La rendre publique</button></div>`:""}
+    <section class="tb-hero">
+      <div class="tb-photo"><i class="tb-flag"></i><img src="img/lumumba.webp" alt="Supporter debout en tribune, costume bleu ciel et pantalon rouge, bras levé" loading="lazy"><span class="tb-tag">🏟️ L'esprit tribune</span></div>
+      <div class="tb-txt"><span class="tb-kick">Tribune des supporters</span>
+        <h2>Le 12<sup>e</sup> homme,<br><em>c'est toi.</em></h2>
+        <p>Chez nous, personne ne paie pour jouer et ça ne changera pas. Mais si tu veux pousser le club un peu plus haut, la buvette est ouverte : une pièce dans la caisse et on s'occupe du reste.</p>
+        <div class="tb-cta">${supLink(U,"tb-btn","Mettre une pièce dans la caisse")}<button class="tb-ghost" onclick="supCopy(CAGNOTTE_URL)">Copier le lien</button></div>
+        <small class="tb-note">Montant libre · aucune contrepartie en jeu</small></div></section>
+    <section class="tb-rules"><h3>Le règlement de la tribune</h3><ol>
+      ${rule(1,"y","Le terrain est le même pour tous","Donner ne débloque rien : ni carte, ni booster, ni raccourci. Tes légendes, tu les sors des boosters comme tout le monde.")}
+      ${rule(2,"y","La caisse paie les projecteurs","L'argent part dans l'hébergement, la base de données et les outils qui nous servent à sortir les nouveaux modes.")}
+      ${rule(3,"r","Zéro pression, carton rouge à la culpabilité","Tu ne mets rien ? Tu restes un supporter à 100 %. Jouer, inviter tes potes et nous remonter les bugs, ça vaut de l'or.")}
+      ${rule(4,"y","On montre les comptes","Ce que la cagnotte finance, on l'annonce sur le Discord. Pas de petites lignes.")}
+    </ol></section>
+    <section class="tb-letter"><span class="tb-q">“</span>
+      <span class="tb-kick">Le mot du capitaine</span>
+      <p>PrimeZ est né d'une envie simple : ouvrir des boosters de légendes quand on veut, compléter son album et chambrer ses potes. Vous êtes chaque semaine plus nombreux à venir déchirer des paquets, et franchement, ça nous fait quelque chose.</p>
+      <p>Derrière l'écran, il y a des factures. Les serveurs, la base de données, les outils : pour l'instant, tout sort de notre poche. La cagnotte est là pour que le projet tienne sur la durée, rien d'autre.</p>
+      <p>Et on préfère le dire clairement : celui qui met 0 € et celui qui met 20 € jouent exactement au même jeu. Sur le terrain, c'est le talent… et la chance au tirage qui comptent.</p>
+      <p>Si tu ne peux pas donner, partage le site autour de toi : un nouveau joueur dans la tribune, c'est déjà une victoire.</p>
+      <p class="tb-sign">On lâche rien. — L'équipe PrimeZ</p></section>
+    <section class="tb-board"><div class="tb-score"><span>PRIMEZ</span><b>1</b><i>–</i><b>0</b><span>FACTURES</span></div>
+      <div class="tb-bt"><p>Aide-nous à garder le score.</p>${supLink(U,"tb-btn","Ouvrir la cagnotte")}</div></section>
   </div>`; }
+
 function renderDiscord(){ const B=$("dc-body"); if(!B) return; const U=DISCORD_URL;
-  B.innerHTML=`<div class="sp sp-dc">
-    <section class="sp-hero"><div class="sp-txt"><span class="sp-pill"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18 18 0 0 0-5.6 0L8.6 3a19.6 19.6 0 0 0-4.9 1.5C.6 9.1-.3 13.6.1 18a19.8 19.8 0 0 0 6 3l1.3-2a12.8 12.8 0 0 1-2-1l.5-.4a14 14 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.7 19.7 0 0 0 6-3c.5-5.1-.8-9.6-3.6-13.6Z"/></svg>Serveur officiel</span>
-        <h2>Le kop <em>PrimeZ</em><br>t'attend sur Discord.</h2>
-        <p>Annonces en avant-première, nouvelles cartes en exclu, tournois et échanges entre collectionneurs : toute la tribune se retrouve sur le serveur.</p>
-        <div class="sp-cta">${supLink(U,"sp-btn",`Rejoindre le Discord`)}<div class="sp-copy"><code>${esc(supShort(U))}</code><button onclick="supCopy(DISCORD_URL)">Copier</button></div></div></div>
-      <div class="sp-vis">${supJersey("#7c86ff","#3b3fb8","KOP","10")}<span class="sp-wm">TRIBUNE</span></div></section>
-    <div class="sp-grid g3">
-      ${supTile("📣","Les annonces d'abord","Chaque mise à jour est présentée sur le Discord avant d'arriver sur le site.","#5865f2")}
-      ${supTile("👀","Avant-premières","Les nouvelles cartes, raretés et modes de jeu en exclusivité, avant tout le monde.","#ff4d8d")}
-      ${supTile("🏆","Tournois & concours","Défis de la communauté, tournois entre membres et récompenses à gagner.","#f5b800")}
-      ${supTile("🔁","Échanges de cartes","Trouve la légende qui te manque et organise tes échanges avec les autres collectionneurs.","#22c55e")}
-      ${supTile("🗳️","Ton avis compte","Sondages et idées : la communauté choisit les prochaines nouveautés.","#22d3ee")}
-      ${supTile("🛠️","Aide & bugs","Un souci ? L'équipe répond directement sur le serveur.","#a855f7")}
-    </div>
-    <section class="sp-bar"><div><b>Rejoins la tribune en un clic</b><small>Gratuit · ouvert à tous les joueurs PrimeZ</small></div>${supLink(U,"sp-btn",`Ouvrir ${esc(supShort(U))}`)}</section>
-  </div>`; }
+  const CH=[["📣","annonces","Les patchs tombent ici avant d'arriver sur le site, avec la liste des nouveautés."],["👀","avant-premières","Nouvelles cartes, nouvelles raretés : tu les vois avant tout le monde. Le prochain GOAT, c'est qui ?"],
+    ["🏆","tournois","Défis de la semaine et tournois Classé entre membres, avec des ballons à la clé."],["🔁","échanges","Il te manque une légende pour finir une page ? Propose ton échange ici."],
+    ["🗳️","sondages","Tu votes, on développe. Les prochains modes, c'est la commu qui les choisit."],["🛠️","aide-et-bugs","Un souci ? Tague l'équipe, on répond directement."]];
+  const now=new Date(), hh=String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
+  B.innerHTML=`<div class="dv">
+    <section class="dv-hero"><img class="dv-wump" src="img/wumpus.png" alt="Mascotte de Discord" loading="lazy">
+      <span class="dv-kick">Serveur officiel PrimeZ</span>
+      <h2>Le vestiaire<br>est sur <em>Discord</em>.</h2>
+      <p>C'est là qu'on se retrouve après le match : les annonces, les exclus, les échanges et les débats sur le meilleur onze de tous les temps.</p>
+      <div class="dv-cta">${supLink(U,"dv-btn",`<svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18 18 0 0 0-5.6 0L8.6 3a19.6 19.6 0 0 0-4.9 1.5C.6 9.1-.3 13.6.1 18a19.8 19.8 0 0 0 6 3l1.3-2a12.8 12.8 0 0 1-2-1l.5-.4a14 14 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.7 19.7 0 0 0 6-3c.5-5.1-.8-9.6-3.6-13.6ZM8.3 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Zm7.4 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg>Entrer dans le vestiaire`)}
+        <button class="dv-link" onclick="supCopy(DISCORD_URL)"><code>${esc(supShort(U))}</code><span>Copier</span></button></div></section>
+    <section class="dv-app" aria-label="Aperçu du serveur">
+      <aside class="dv-side"><div class="dv-srv"><img src="logo.png" alt="" onerror="this.style.display='none'"><b>PrimeZ</b></div>
+        <span class="dv-cat">Salons</span>${CH.map(([e,n],i)=>`<button class="dv-ch ${i===0?"on":""}" onclick="dvPick(${i})"><i>#</i>${e} ${n}</button>`).join("")}</aside>
+      <div class="dv-chat" id="dv-chat">${dvMsgs(CH,0,hh)}</div></section>
+  </div>`; renderDiscord.CH=CH; renderDiscord.hh=hh; }
+const dvMsgs=(CH,i,hh)=>{ const c=CH[i]; return `<div class="dv-head"><i>#</i>${c[0]} ${c[1]}</div>
+  <div class="dv-msg"><img src="logo.png" alt="" onerror="this.style.visibility='hidden'"><div><b>PrimeZ <em>BOT</em> <small>Aujourd'hui à ${hh}</small></b><p>${c[2]}</p></div></div>
+  <div class="dv-msg"><span class="dv-av">⚽</span><div><b>Un collectionneur <small>Aujourd'hui à ${hh}</small></b><p>${["J'attends le patch de ce soir 👀","Quelqu'un a déjà sorti la GOAT ?","Tournoi ce week-end, qui est chaud ?","J'échange un Kaká contre un Pirlo !","Je vote pour un mode Coupe du monde 🏆","Merci pour le fix, ça marche 🙏"][i]}</p></div></div>
+  <div class="dv-type">Envoyer un message dans #${c[1]}</div>`; };
+function dvPick(i){ const ch=$("dv-chat"); if(!ch) return; ch.innerHTML=dvMsgs(renderDiscord.CH,i,renderDiscord.hh); document.querySelectorAll(".dv-ch").forEach((b,k)=>b.classList.toggle("on",k===i)); }
 /* ===================== JEUX : DRAFT contre l'IA ===================== */
 const DR_FEE=300, DR_REW=[100,350,800,1600,3500], DR_ROUNDS=["Huitièmes","Quarts","Demi-finale","Finale"];
 const DR_POSN={G:"GB",D:"DEF",M:"MIL",A:"ATT"};
