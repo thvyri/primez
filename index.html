@@ -2948,6 +2948,28 @@ html{overflow-x:hidden}
 @media(max-width:760px){.lb-arr{display:none}.lb-rail{gap:12px;padding-bottom:18px}.lb-card{flex-basis:88vw;padding:16px 14px;border-radius:20px}.lb-ch h3{font-size:19px}.lb-ov{font-size:22px}.lb-p{font-size:14px}}
 @media(hover:none){.lb-card,.lb-r::before{animation:none}}
 
+/* ouverture au ballon : la carte se dévoile par paliers, le joueur entre dans le cadre, son nom s'écrit dessous */
+.bl-bm{position:absolute;left:0;right:0;top:0;height:100%;z-index:6;background:linear-gradient(180deg,#000,#070707);pointer-events:none;animation:blbm .6s linear .5s both}
+.bl-card.bld2 .bl-bm{animation-duration:1.05s}
+.bl-bm i{position:absolute;left:-6%;right:-6%;bottom:-1px;height:2px;background:#fff;box-shadow:0 0 8px 2px var(--sc),0 0 22px 6px var(--sc)}
+@keyframes blbm{0%,18%{height:100%}26%,44%{height:66%}52%,70%{height:33%}80%,100%{height:0}}
+.bl-card.rv .art img{animation:blpunch .9s cubic-bezier(.2,.9,.3,1) .55s both}
+@keyframes blpunch{from{scale:1.2;filter:brightness(1.7) saturate(1.25)}}
+.bl-card.bld2.rv .card{animation:blshake .5s ease-out 1.35s}
+@keyframes blshake{20%{translate:-2px 1px}40%{translate:2px -1px}60%{translate:-1px 0}80%{translate:1px 0}}
+.bl-nm{position:absolute;left:50%;top:100%;width:max-content;max-width:170%;transform:translateX(-50%);display:grid;justify-items:center;gap:3px;margin-top:9px;text-align:center;pointer-events:none;opacity:0;translate:0 6px;transition:opacity .35s,translate .35s}
+.bl-card.nmon .bl-nm{opacity:1;translate:0 0}
+.bl-nm span{font:800 5.5px/1 Outfit,Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;padding:2.5px 6px;border-radius:99px;color:color-mix(in srgb,var(--sc) 55%,#fff);background:color-mix(in srgb,var(--sc) 22%,transparent);border:.5px solid color-mix(in srgb,var(--sc) 60%,transparent)}
+.bl-nm b{font:italic 900 12.5px/1 Outfit,Arial,sans-serif;text-transform:uppercase;color:#fff;text-shadow:0 0 10px color-mix(in srgb,var(--sc) 65%,transparent);white-space:nowrap}
+.bl-card.nmon .bl-nm b{animation:blnm .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes blnm{from{clip-path:inset(0 100% 0 0);letter-spacing:.12em}to{clip-path:inset(0 0 0 0)}}
+.bl-nm small{font:600 6px/1 Outfit,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#bdb6c2}
+.bl-card.tray .bl-nm{display:none}
+
+/* écran de connexion : message quand Discord refuse la connexion */
+.lg-err{margin:0 0 12px;padding:12px 14px;border-radius:12px;background:#3a1418;border:1px solid #ff6b76aa;color:#ffd9dc;font-size:14px;line-height:1.4;text-align:left}
+.lg-err b{display:block;margin-bottom:4px;color:#fff}
+
 /* admin : compteur de joueurs en ligne */
 .adk-on{display:flex;align-items:center;gap:8px;width:100%;padding:9px 10px!important;margin-bottom:4px;border-radius:10px!important;background:#0f1a14!important;border:1px solid #22c55e55!important;box-shadow:none!important;text-align:left}
 .adk-on i{width:9px;height:9px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 #22c55e99;animation:onlp 1.8s ease-out infinite;flex:0 0 auto}
@@ -3040,8 +3062,8 @@ html{overflow-x:hidden}
 <script>
 const SUPABASE_URL = "https://rvqjtymzquicdmzxxnij.supabase.co";
 /* liens de la page Cagnotte et de la page Discord : colle ici tes liens (laisser vide = « Lien bientôt disponible ») */
-const CAGNOTTE_URL = "";
-const DISCORD_URL = "";
+const CAGNOTTE_URL = "https://www.leetchi.com/fr/c/primez-2985615471";
+const DISCORD_URL = "https://discord.gg/bMT7EfgZ9a";
 const SUPABASE_KEY = "sb_publishable_U-eAR__gGmDxFXQB8R3DAw_zaydeeTj";
 const CURRENCY = "ballons";
 const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
@@ -3333,7 +3355,7 @@ function fx(c){
 }
 
 /* ---------- connexion ---------- */
-function loginDiscord(){ sb.auth.signInWithOAuth({provider:"discord", options:{redirectTo: location.origin + location.pathname}}); }
+function loginDiscord(){ try{ sessionStorage.setItem("pz_oauth",String(Date.now())); }catch(e){} sb.auth.signInWithOAuth({provider:"discord", options:{redirectTo: location.origin + location.pathname}}); }
 async function loginGuest(){ const {error}=await sb.auth.signInAnonymously(); if(error) toast("Impossible de jouer en invité : "+error.message); }
 function saveAccount(){ sb.auth.linkIdentity({provider:"discord", options:{redirectTo: location.origin + location.pathname}}); }
 async function logout(){
@@ -3409,6 +3431,22 @@ function refBox(){ if(isGuest) return `<div class="refx"><div class="refh"><span
     <div class="refl"><input readonly value="${esc(refLink())}" onclick="this.select()"><button class="go" onclick="refCopy()">Copier</button><button class="ghost" onclick="refShare()">Partager</button></div></div>
     <div class="refs"><div><b>${s.invited}</b><small>invités</small></div><div><b>${s.rewarded}</b><small>récompensés</small></div><div><b>${s.month}/30</b><small>ce mois-ci</small></div><div class="pr"><b>${s.to_promo??10}</b><small>avant PROMO</small></div></div>
     ${s.list&&s.list.length?`<div class="refli">${s.list.map(x=>`<div><span>${esc(x.username||"Joueur")}</span><em class="${x.rewarded?"ok":""}">${x.rewarded?"+5 boosters chacun":`${x.opened}/15 boosters ouverts`}</em></div>`).join("")}</div>`:""}</div>`; }
+/* retour de Discord sans être connecté : on dit pourquoi, au lieu de retomber en silence sur l'écran de connexion */
+function lgError(code,desc){ const t=String(desc||"").replace(/\+/g," ").trim(), k=(code||"")+" "+t; let m;
+  if(/email/i.test(k)&&/unverified|verif|confirm|external provider/i.test(k)) m="Discord ne nous a pas donné d’adresse e-mail vérifiée pour ton compte. Dans Discord : Paramètres → Mon compte → vérifie ton e-mail, puis réessaie.";
+  else if(/access_denied/i.test(k)&&!/email/i.test(k)) m="Tu as annulé l’autorisation sur Discord. Réessaie et touche « Autoriser ».";
+  else if(/timeout|expired|flow_state|bad_oauth/i.test(k)) m="La connexion a mis trop de temps ou a été interrompue. Réessaie depuis cette page.";
+  else if(/silent/i.test(k)) m="La connexion n’a pas abouti. Réessaie ; si tu es en navigation privée ou dans le navigateur d’une autre appli (Discord, Instagram, Snapchat…), ouvre plutôt le site dans Safari ou Chrome.";
+  else m="La connexion n’a pas abouti. Réessaie dans une minute.";
+  const old=$("lg-err"); if(old) old.remove(); const b=document.querySelector("#login .lg-btns"); if(!b) return;
+  b.insertAdjacentHTML("beforebegin",`<div class="lg-err" id="lg-err" role="alert"><b>Connexion Discord impossible</b>${esc(m)}${t&&!/silent/.test(code)?`<br><small style="opacity:.7">Détail : ${esc(t)}</small>`:""}<br><small style="opacity:.85">En attendant, tu peux jouer en invité et sauvegarder ton compte plus tard.</small></div>`);
+  console.warn("Connexion Discord :",code,t); }
+(function(){ const q=new URLSearchParams(location.search), h=new URLSearchParams(location.hash.replace(/^#/,""));
+  const code=q.get("error_code")||h.get("error_code")||q.get("error")||h.get("error"), d=q.get("error_description")||h.get("error_description")||"";
+  let back=0; try{ back=+sessionStorage.getItem("pz_oauth")||0; sessionStorage.removeItem("pz_oauth"); }catch(e){}
+  if(code){ if(/identity_already_exists/.test(code+d)) return; try{ history.replaceState(null,"",location.pathname); }catch(e){} setTimeout(()=>lgError(code,d),0); return; }
+  /* revenu de Discord il y a moins de 2 minutes, sans erreur affichée et toujours pas connecté au bout de 7 s */
+  if(back&&Date.now()-back<120000) setTimeout(()=>{ if(!profile&&!starting) lgError("silent",""); },7000); })();
 /* invité qui clique « Sauvegarder avec Discord » alors que ce Discord a déjà un compte :
    on ferme la session invitée et on le connecte directement à son vrai compte */
 (async function(){ const q=location.search+location.hash; if(!/identity_already_exists/.test(q)) return;
@@ -3421,9 +3459,9 @@ sb.auth.getSession().then(({data})=>{ if(data.session) start(); });
 
 async function start(){
   if(profile||starting) return; starting=true;
-  const {data:{user}}=await sb.auth.getUser();
+  let user=null; try{ user=(await sb.auth.getUser()).data.user; }catch(e){} if(!user){ starting=false; lgError("silent",""); return; }
   const {data,error}=await sb.from("profiles").select("*").eq("id",user.id).single();
-  if(error){ starting=false; toast("Erreur profil : "+error.message); return; }
+  if(error){ starting=false; toast("Erreur profil : "+error.message); lgError("profil",error.message); return; }
   profile=data; isGuest=!!user.is_anonymous;
   try{ const m=user.user_metadata||{}, av=m.avatar_url||m.picture; if(!isGuest&&av){ profile.avatar_url=av; sb.rpc("set_avatar",{p_url:av}); } }catch(e){}
   const b=await sb.from("boosters").select("*").eq("active",true).order("price"); boosters=b.data||[];
@@ -3432,7 +3470,7 @@ async function start(){
   $("guest-banner").classList.toggle("hidden",!isGuest);
   realAdmin=!!profile.is_admin; realGuest=isGuest; try{ viewMode=localStorage.getItem("pz_view")||"modo"; }catch(e){} applyView(true); adminSync(); cagLoad();
   $("mute-btn").textContent=muted?"🔇":"🔊";
-  render(); newSave(); setInterval(renderFree,1000); loadMessages(); loadFeed(); loadCollection(); refreshSocial(); setInterval(refreshSocial,60000); loadNotifs(); setInterval(loadNotifs,60000); refreshMissions(); setInterval(refreshMissions,120000);
+  render(); newSave(); setInterval(renderFree,1000); loadMessages(); loadFeed(); loadCollection(); refreshSocial(); setInterval(refreshSocial,60000); loadNotifs(); setInterval(loadNotifs,60000); refreshMissions(); setInterval(refreshMissions,120000); setTimeout(()=>syncAccount(true),5000); setInterval(syncAccount,60000);
   refClaim().then(refLoad).then(()=>setTimeout(()=>inviteIntro(),1500)); mavSet();
 }
 
@@ -3650,20 +3688,25 @@ function ballStart(){ const r=$("reveal"), L=seq.list; glow(null); seq.mode="bal
   setTimeout(()=>{ try{ thud(); }catch(e){} },560); }
 function ballStep(){ const s=bl; if(!s||s.busy) return; if(s.shown) return ballTray();
   const L=seq.list; if(s.i>=L.length) return;
-  const idx=s.i, c=L[idx], g=s.groups[idx], rare=ORDER.indexOf(c.rarity)>=3, big=ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique"), last=idx===L.length-1; s.busy=true; s.i++;
+  const idx=s.i, c=L[idx], g=s.groups[idx], rare=ORDER.indexOf(c.rarity)>=3, big=ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique")||!!c.sfx_url /* une carte avec un VFX a droit à la grande révélation, quelle que soit sa rareté */, last=idx===L.length-1; s.busy=true; s.i++;
   s.bw.style.setProperty("--glow",COLOR[c.rarity]); s.bw.querySelector(".bl-skin").style.opacity="0";
   const peel=()=>{ g.forEach((e,k)=>setTimeout(()=>{ const dir=(+e.dataset.cx<s.bw.clientWidth/2)?-1:1; e.style.transform=`translateZ(60px) rotateY(${dir*-170}deg) translate(${dir*80}px,-30px)`; e.classList.add("gone"); },k*70));
     try{ boum(); }catch(e){}
     setTimeout(()=>{ if(!s.bw.isConnected) return; if(last){ s.bw.querySelector(".bl-shine").style.opacity="0"; }
       const w=document.createElement("div"); w.className="bl-card"; w.dataset.i=idx; { /* la carte est centrée entre le haut (badge « Nouveau », « Tout passer ») et le texte du bas */
-        const fb=innerWidth<=700?150:180, ft=innerWidth<=700?70:64, z=Math.max(1.1,Math.min(3.2,innerHeight*.66/228,(innerHeight-fb-ft-30)/228,innerWidth*.8/158));
+        const fb=innerWidth<=700?205:240 /* place pour le nom du joueur sous la carte */, ft=innerWidth<=700?70:64, z=Math.max(1.1,Math.min(3.2,innerHeight*.66/228,(innerHeight-fb-ft-30)/228,innerWidth*.8/158));
         w.style.zoom=z.toFixed(2); w.style.top=(ft/z).toFixed(1)+"px"; w.style.bottom=(fb/z).toFixed(1)+"px"; } w.innerHTML=cardHTML(c,false,0); w.querySelector(".card").removeAttribute("onclick");
       if(seq.isNew&&seq.isNew.get(c)) w.insertAdjacentHTML("beforeend",'<span class="bl-new">Nouveau</span>');
       s.bw.parentNode.appendChild(w); requestAnimationFrame(()=>requestAnimationFrame(()=>w.classList.add("up")));
       const done=()=>{ seq.seen.add(idx); s.shown=w; s.busy=false; if(last) s.bw.classList.add("empty"); const h=$("bl-hint"); if(h) h.textContent=(TOUCH?"Touche":"Clique")+(last?" pour voir ta feuille de match":" pour continuer"); };
       if(big){ /* grande révélation plein écran (poussière, vidéo…), puis la carte est retournée au centre */
         setTimeout(()=>spotReveal(c,w.querySelector(".card"),()=>{ w.querySelector(".card").classList.add("flip"); glow(c); done(); setTimeout(()=>{ if(s.shown===w) ballTray(); },350); }),380); }
-      else { setTimeout(()=>{ w.querySelector(".card").classList.add("flip"); if(rare){ glow(c); fx(c); } else revealSfx(c); if(c.sfx_url) sfxPlay(c); },420); setTimeout(done,900); }
+      else { /* la carte se dévoile par paliers de bas en haut, le joueur « entre » dans le cadre, puis son nom s'écrit dessous */
+        const cd=w.querySelector(".card"), fr=cd.querySelector(".face.front"), D=rare?1500:1050; w.style.setProperty("--sc",COLOR[c.rarity]); w.classList.add(rare?"bld2":"bld1");
+        if(fr) fr.insertAdjacentHTML("beforeend",'<div class="bl-bm"><i></i></div>');
+        w.insertAdjacentHTML("beforeend",`<div class="bl-nm"><span>${RARITY[c.rarity]}</span><b>${esc(dispName(c))}</b>${c.club?`<small>${esc(c.club)}</small>`:""}</div>`);
+        setTimeout(()=>{ cd.classList.add("flip"); w.classList.add("rv"); if(rare){ glow(c); fx(c); } else revealSfx(c); },420);
+        setTimeout(()=>{ w.querySelectorAll(".bl-bm").forEach(e=>e.remove()); w.classList.add("nmon"); done(); },D); }
     },g.length*70+260); };
   if(rare){ g.forEach(e=>e.classList.add("glow")); s.bw.classList.remove("shake"); void s.bw.offsetWidth; s.bw.classList.add("shake"); setTimeout(peel,560); } else peel(); }
 function ballTray(){ const s=bl, w=s.shown, k=+w.dataset.i, slot=$("bl-tray")&&$("bl-tray").children[k]; s.shown=null; if(!slot) return;
@@ -3801,7 +3844,7 @@ function spotReveal(c,src,done){ const old=document.querySelector(".spx"); if(ol
   const bs=Math.max(1.2,Math.min(2.4,(innerHeight*.56)/228,(innerWidth*.8)/158)); big.style.setProperty("zoom",bs.toFixed(3)); big.style.setProperty("transform","none"); big.style.setProperty("margin","0","important");
   if(vint){ d.classList.remove("bld"); d.querySelectorAll(".bm,.bfx").forEach(e=>e.remove()); d.querySelector(".spx-h").textContent=DUSTH(); }
   if(src&&big.animate){ const a=src.getBoundingClientRect(), b=big.getBoundingClientRect(); big.animate([{transform:`translate(${((a.left+a.width/2-(b.left+b.width/2))/bs).toFixed(1)}px,${((a.top+a.height/2-(b.top+b.height/2))/bs).toFixed(1)}px) scale(${(a.width/b.width).toFixed(3)})`,opacity:.6},{transform:"none",opacity:1}],{duration:520,easing:"cubic-bezier(.2,.8,.2,1)"}); }
-  requestAnimationFrame(()=>d.classList.add("in")); thud(); if(c.sfx_url) sfxPlay(c);
+  requestAnimationFrame(()=>d.classList.add("in")); thud(); if(c.sfx_url){ sfxPlay(c); /* sfxStop() retire « bld » : on le remet, sinon plus de traînées ni de flash */ if(!vint) d.classList.add("bld"); }
   let st=0; const T=[]; const built=()=>{ if(st) return; if(dust){ const x=dust; dust=null; x.clear(); return; } st=1; T.forEach(clearTimeout); d.classList.remove("bld"); d.querySelectorAll(".bm,.bfx").forEach(e=>e.remove()); d.classList.add("done"); d.style.setProperty("--sc",COLOR[c.rarity]); thud(); rareFx(c); if(c.rarity==="promo"){ d.classList.add("hit"); setTimeout(thud,180); setTimeout(thud,360); } const h=d.querySelector(".spx-h"); if(h) h.textContent=(TOUCH?"Touche":"Clique")+" pour continuer"; };
   const close=()=>{ if(st<1){ built(); return; } if(st>1) return; st=2; d.classList.add("out"); setTimeout(()=>d.remove(),320); done&&done(); };
   if(vint) dust=dustCover(card,()=>{ dust=null; built(); }); else T.push(setTimeout(built,SFX_D));
@@ -4038,6 +4081,16 @@ function renderMessages(){
     <button class="${x.claimed?"ghost":"go"}" ${x.claimed?"disabled":""} onclick="claimMsg(${x.id})">${x.claimed?"Récupéré":rw.length?"Récupérer":"Marquer comme lu"}</button></div>`;
   }).join("")||"<p style='color:var(--mute)'>Aucun message pour l’instant.</p>";
 }
+/* cadeaux de l'admin : le joueur les voit arriver sans recharger la page (toutes les 60 s et au retour sur l'onglet).
+   Les ballons et boosters donnés directement sont aussi remis à jour. */
+async function syncAccount(first){ if(!profile||busy||document.hidden) return; const ov=$("overlay"); if(ov&&ov.classList.contains("show")) return;
+  try{ const r=await sb.from("profiles").select("balloons,free_boosters,free_updated_at").eq("id",profile.id).single();
+    if(r.data&&!busy){ const ch=r.data.balloons!==profile.balloons||r.data.free_boosters!==profile.free_boosters; Object.assign(profile,r.data); if(ch){ renderPills(); renderFree(); } } }catch(e){}
+  const before=new Set(msgs.filter(x=>!x.claimed).map(x=>x.id)); try{ await loadMessages(); }catch(e){ return; }
+  const wait=msgs.filter(x=>!x.claimed), fresh=wait.filter(x=>!before.has(x.id));
+  if(first){ if(wait.length) toast(wait.length>1?`Tu as ${wait.length} cadeaux à récupérer : menu Social › Messages`:`Tu as un cadeau à récupérer : menu Social › Messages`,true); }
+  else if(fresh.length) toast(`Nouveau cadeau : ${fresh[0].title}. Menu Social › Messages`,true); }
+document.addEventListener("visibilitychange",()=>{ if(!document.hidden) syncAccount(); });
 async function claimMsg(id){
   const {data,error}=await sb.rpc("claim_message",{p_id:id}); if(error){ toast(error.message); return; }
   profile.balloons=data.balloons; profile.free_boosters=data.free_boosters; render(); await loadMessages();
@@ -4437,7 +4490,7 @@ async function initPlayers(){
 }
 async function findPlayers(){
   const {data,error}=await sb.rpc("admin_find_players",{p_q:$("p-q").value.trim()}); if(error){ toast(error.message); return; }
-  $("p-results").innerHTML=(data||[]).map(p=>`<button class="ghost" data-id="${p.id}" data-name="${esc(p.username)}" onclick="setTarget(this.dataset.id,this.dataset.name)">${esc(p.username)} · ${p.balloons}</button>`).join("")||"<span style='color:var(--mute)'>Aucun joueur trouvé</span>";
+  $("p-results").innerHTML=(data||[]).map(p=>`<button class="ghost" data-id="${p.id}" data-name="${esc(p.username)}" onclick="setTarget(this.dataset.id,this.dataset.name)" title="${p.id}">${esc(p.username)}${p.guest?" (invité)":""} · ${p.balloons} ballons · ${p.last_seen?"vu le "+new Date(p.last_seen).toLocaleDateString("fr-FR",{day:"numeric",month:"short"})+" à "+new Date(p.last_seen).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}):"inscrit le "+new Date(p.created_at).toLocaleDateString("fr-FR",{day:"numeric",month:"short"})}</button>`).join("")||"<span style='color:var(--mute)'>Aucun joueur trouvé</span>";
 }
 function setTarget(id,name){ target={id,name}; renderTarget(); }
 function setTargetMe(){ target={id:profile.id,name:"Moi ("+(profile.username||"admin")+")"}; renderTarget(); }

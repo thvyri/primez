@@ -210,26 +210,12 @@ begin
   if me.today>=60 then raise exception 'Limite de 60 matchs classés par jour atteinte, reviens demain'; end if;
 
   pa := rk_team_power(me.cards);
-  -- Adversaire = le onze enregistré d'un autre joueur, piloté par l'IA (le joueur n'est pas là).
-  -- Seulement s'il est vraiment de ton niveau : Elo proche ET force d'équipe proche. Jamais un compte admin.
-  -- Sinon : une équipe IA taillée à ta mesure.
-  for i in 1..2 loop
-    select rp.user_id, rp.elo, rp.cards, p.username into opp from ranked_players rp join profiles p on p.id=rp.user_id
-    where rp.user_id<>auth.uid() and array_length(rp.cards,1)=11 and abs(rp.elo-me.elo)<=150*i
-      and not coalesce(p.is_admin,false)
-      and abs(rk_team_power(rp.cards)-pa)<=4
-      and rp.user_id is distinct from (select opp_user from ranked_matches where user_id=auth.uid() order by created_at desc limit 1)
-    order by random() limit 1;
-    exit when opp.user_id is not null;
-  end loop;
-  if opp.user_id is not null then
-    v_opp_user:=opp.user_id; v_opp_elo:=opp.elo; v_opp_cards:=opp.cards; v_opp_name:=coalesce(opp.username,'Joueur');
-  else
-    v_opp_user:=null; v_opp_elo:=greatest(600, me.elo + (floor(random()*121)-60)::int); v_opp_name:=bots[1+floor(random()*array_length(bots,1))::int];
-    select array_agg(id) into v_opp_cards from (select id from cards where coalesce(active,true) and rk_card_rating(rarity,name) between pa-6 and pa+5 order by random() limit 11) z;
-    if coalesce(array_length(v_opp_cards,1),0)<11 then
-      select array_agg(id) into v_opp_cards from (select id from cards order by abs(rk_card_rating(rarity,name)-pa), random() limit 11) z;
-    end if;
+  -- Adversaire : toujours un club IA taillé à ta mesure. On ne fait plus jouer le onze d'un autre
+  -- joueur à sa place (personne ne « perd » ou ne « gagne » sans avoir lancé le match).
+  v_opp_user:=null; v_opp_elo:=greatest(600, me.elo + (floor(random()*121)-60)::int); v_opp_name:=bots[1+floor(random()*array_length(bots,1))::int];
+  select array_agg(id) into v_opp_cards from (select id from cards where coalesce(active,true) and rk_card_rating(rarity,name) between pa-6 and pa+5 order by random() limit 11) z;
+  if coalesce(array_length(v_opp_cards,1),0)<11 then
+    select array_agg(id) into v_opp_cards from (select id from cards order by abs(rk_card_rating(rarity,name)-pa), random() limit 11) z;
   end if;
   pb := rk_team_power(v_opp_cards);
 
