@@ -2796,6 +2796,58 @@ input,select,textarea{border-radius:12px!important}
 /* aucun débordement horizontal sur téléphone (les halos décoratifs dépassaient de quelques pixels) */
 html{overflow-x:hidden}
 #app,.content{overflow-x:clip}
+
+/* ===================== v16 : boosters en vedette, étagère animée, quantité à curseur ===================== */
+/* le booster choisi, en grand et au premier plan devant les joueurs */
+.bx .hr{position:relative}
+.bx-hpk{position:absolute;right:3%;bottom:-8px;width:clamp(120px,12vw,165px);z-index:8;transform:rotate(8deg);cursor:default;
+  filter:drop-shadow(0 26px 30px #000c) drop-shadow(0 0 34px color-mix(in srgb,var(--bc) 60%,transparent));animation:bxhp 4.6s ease-in-out infinite;transition:transform .4s cubic-bezier(.2,1.2,.3,1)}
+.bx-hpk:hover{transform:rotate(0deg) scale(1.07)}
+@keyframes bxhp{50%{translate:0 -12px}}
+.bx-hpk .bpk{width:100%}
+/* sélecteur de quantité : un curseur qui glisse, le prix sous chaque option */
+.bx-seg{position:relative;display:grid;grid-template-columns:repeat(3,1fr);width:min(360px,100%);padding:5px;margin-top:8px;border-radius:16px;background:#0f0d12;border:1px solid #ffffff16;box-shadow:inset 0 2px 6px #0008}
+.bx-thumb{position:absolute;top:5px;bottom:5px;left:5px;width:calc((100% - 10px)/3);border-radius:12px;pointer-events:none;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--hc,#e5202e) 72%,#fff),var(--hc,#e5202e) 55%,color-mix(in srgb,var(--hc,#e5202e) 70%,#000));
+  box-shadow:0 3px 0 color-mix(in srgb,var(--hc,#e5202e) 45%,#000),0 8px 22px -6px var(--hc,#e5202e),inset 0 1px 0 #ffffff66;transform:translateX(calc(var(--qi,0)*100%));transition:transform .38s cubic-bezier(.3,1.35,.4,1)}
+.bx-seg button{position:relative;z-index:1;display:grid;justify-items:center;gap:3px;padding:9px 4px!important;border:0!important;border-radius:12px!important;background:none!important;box-shadow:none!important;color:#bdb6c2;transition:color .25s}
+.bx-seg button:hover{color:#fff}
+.bx-seg b{font:italic 900 19px/1 Outfit,Arial,sans-serif}.bx-seg small{font-size:11px;font-weight:700;opacity:.85;white-space:nowrap}
+.bx-seg button.on{color:#fff;text-shadow:0 1px 2px #0007}
+/* boutons d'ouverture : couleur du booster, reflet qui passe */
+.bx-go{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;width:min(470px,100%)}
+.bx-cta,.bx-alt{flex:1 1 200px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px!important;border-radius:16px!important}
+.bx-cta span,.bx-alt span{font:italic 900 17px/1 Outfit,Arial,sans-serif;text-transform:uppercase;white-space:nowrap}
+.bx-cta em,.bx-alt em{font-style:normal;font-weight:800;font-size:12px;padding:6px 10px;border-radius:9px;background:#0004;white-space:nowrap}
+.bx .hero .bx-cta,.bx-cta{background:linear-gradient(150deg,color-mix(in srgb,var(--hc,#e5202e) 70%,#fff),var(--hc,#e5202e) 45%,color-mix(in srgb,var(--hc,#e5202e) 60%,#000))!important;
+  box-shadow:0 4px 0 color-mix(in srgb,var(--hc,#e5202e) 45%,#000),0 14px 30px -10px var(--hc,#e5202e)!important}
+.bx-cta::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,#ffffff45 50%,transparent 65%) 0 0/250% 100%;animation:bxsh 3.4s ease-in-out infinite}
+@keyframes bxsh{0%,55%{background-position:130% 0}100%{background-position:-60% 0}}
+.bx-cta:disabled::after{display:none}
+/* étagère : tous les boosters à la même taille */
+.bx-shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;padding:8px 2px 6px}
+.bx-sp{position:relative;display:grid;justify-items:center;align-content:start;gap:8px;padding:20px 10px 16px!important;border-radius:22px!important;text-align:center;
+  background:radial-gradient(200px 150px at 50% 70%,color-mix(in srgb,var(--bc) 16%,transparent),transparent 70%),linear-gradient(180deg,#18151c,#110f14)!important;
+  border:1px solid #ffffff10!important;box-shadow:none!important;transition:transform .3s,border-color .3s,box-shadow .3s}
+.bx-spk{display:block;width:min(150px,82%);animation:bxsp 4.2s ease-in-out infinite;animation-delay:calc(var(--i)*-1.05s);transition:transform .4s cubic-bezier(.2,1.2,.3,1),filter .3s;filter:brightness(.8) saturate(.85)}
+@keyframes bxsp{50%{translate:0 -8px}}
+.bx-spk .bpk,.bx-hpk .bpk,.bx-rkp .bpk{container-type:inline-size}
+.bx-spk .bpk{width:100%}
+.bx-sp:hover{border-color:color-mix(in srgb,var(--bc) 45%,transparent)!important}
+.bx-sp:hover .bx-spk{transform:translateY(-6px) rotate(-3deg) scale(1.04);filter:none}
+.bx-sp.on{border-color:color-mix(in srgb,var(--bc) 75%,transparent)!important;box-shadow:0 0 0 1px color-mix(in srgb,var(--bc) 35%,transparent),0 20px 44px -20px var(--bc)!important}
+.bx-sp.on .bx-spk{filter:drop-shadow(0 18px 22px #000b) drop-shadow(0 0 26px color-mix(in srgb,var(--bc) 60%,transparent));transform:scale(1.07)}
+.bx-sp>b{font:italic 900 17px/1 Outfit,Arial,sans-serif;text-transform:uppercase;color:#fff}
+.bx-sp.on>b{color:color-mix(in srgb,var(--bc) 40%,#fff)}
+.bx-sp>small{font-size:12px;color:#bdb6c2;font-weight:600}
+@media(max-width:760px){
+  .bx-hpk{width:92px;right:2%;bottom:-4px}
+  .bx-seg{width:100%}
+  .bx-go{width:100%}.bx-cta,.bx-alt{flex-basis:100%}
+  .bx-shelf{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:12px;padding:8px 2px 10px}
+  .bx-shelf::-webkit-scrollbar{display:none}
+  .bx-sp{flex:0 0 44%;scroll-snap-align:center;padding:16px 8px 12px!important}
+}
 @media(max-width:760px){.bx-row{height:300px}.bx-pk{width:150px;transform:translate(-50%,-50%) translateX(calc(var(--d)*112px)) translateZ(calc(var(--a)*-120px)) rotateY(calc(var(--d)*-16deg)) scale(calc(1 - var(--a)*.1))}
   .bx-ar{top:176px;width:38px;height:38px;margin-top:-19px;font-size:22px!important}.bx-ar.l{left:6px}.bx-ar.r{right:6px}.bx-head{align-items:flex-start}.bx .pills{gap:6px}.bx .pills .pl{padding:6px 10px!important}.bx .pills .pl span{font-size:11px!important}
   .bx-btns button{flex-basis:100%}}
@@ -3264,11 +3316,12 @@ function heroBx(b){
   const back=(x,r)=>`<div class="hc bk" style="--x:${x}px;--r:${r}deg;--z:1"><img src="logo.png" alt="" onerror="this.style.display='none'"></div>`;
   if(P.length===1) c=back(-150,-9)+back(150,9)+card(P[0],0,-3,3,true);
   else if(P.length===3) c=card(P[0],-190,-7,1)+card(P[2],190,7,1)+card(P[1],0,-1,3,true);
+  const qi=Math.max(0,[1,5,10].indexOf(qty));
   return `<div class="hl"><div class="htag">${h.tag}</div><h1 class="disp" style="--n:${b.name.length}">${esc(b.name)}</h1><p>${esc(h.txt)}</p>
-    <div class="bx-q"><span>Combien ?</span>${[1,5,10].map(n=>`<button class="${n===qty?"on":""}" onclick="setQty(${n})">${n}</button>`).join("")}</div>
-    <div class="bx-go">${freeOk?`<button class="go bigbtn btn-free" data-q="${qty}" ${freeN<qty?"disabled":""} onclick="openN('${b.id}',true)">Ouvrir ${qty>1?"×"+qty+" ":""}gratuitement</button>`:""}
-      <button class="${freeOk?"ghost":"go"} bigbtn" ${profile.balloons<b.price*qty?"disabled":""} onclick="openN('${b.id}',false)">${freeOk?"":"Ouvrir · "}${pr} ${CURRENCY}</button></div></div>
-  <div class="hr">${c}</div>`; }
+    <div class="bx-seg" style="--qi:${window.bxQi??qi}" data-qi="${qi}" role="radiogroup" aria-label="Nombre de boosters"><i class="bx-thumb"></i>${[1,5,10].map(n=>`<button class="${n===qty?"on":""}" role="radio" aria-checked="${n===qty}" onclick="setQty(${n})"><b>×${n}</b><small>${freeOk&&freeN>=n?"gratuit":(b.price*n).toLocaleString("fr-FR")}</small></button>`).join("")}</div>
+    <div class="bx-go">${freeOk?`<button class="go bx-cta btn-free" data-q="${qty}" ${freeN<qty?"disabled":""} onclick="openN('${b.id}',true)"><span>Ouvrir ${qty>1?"×"+qty:""}</span><em>Gratuit · ${freeN}/${cap()}</em></button>`:""}
+      <button class="${freeOk?"ghost bx-alt":"go bx-cta"}" ${profile.balloons<b.price*qty?"disabled":""} onclick="openN('${b.id}',false)"><span>${freeOk?"Payer":"Ouvrir"+(qty>1?" ×"+qty:"")}</span><em>${pr} ${CURRENCY}</em></button></div></div>
+  <div class="hr">${c}<div class="bx-hpk" style="--bc:${PACK_THEME[b.id]||"#d21f2e"}">${packHTML(b,"")}</div></div>`; }
 function heroHTML(b){
   const h=heroOf(b), free=!!b.free_ok&&freeNow().n>=qty, P=h.photos; let c="";
   const card=(p,x,r,z,f)=>`<div class="hc ${f?"f":""}" style="--x:${x}px;--r:${r}deg;--z:${z}">${IMG["h-"+p[0]]?`<img src="${IMG["h-"+p[0]]}" alt="">`:`<div class="sil">${SIL}</div>`}<span>${p[1]}</span></div>`;
@@ -3327,10 +3380,13 @@ function render(){
   const lbl=`Chance d’avoir au moins une carte de la rareté, sur ${qty} booster${qty>1?"s":""} (${n} cartes)`;
   $("hero").classList.remove("hidden");
   if(heroPromo){ $("hero").style.setProperty("--hc","#ff7a00"); $("hero").innerHTML=promoHeroHTML(); requestAnimationFrame(promoBarAnim); }
-  else { $("hero").style.setProperty("--hc",heroOf(b).accent); $("hero").innerHTML=heroBx(b); }
+  else { $("hero").style.setProperty("--hc",heroOf(b).accent); $("hero").innerHTML=heroBx(b); requestAnimationFrame(()=>requestAnimationFrame(()=>{ const s=document.querySelector(".bx-seg"); if(s){ s.style.setProperty("--qi",s.dataset.qi); window.bxQi=+s.dataset.qi; } })); }
   $("packs").style.setProperty("--sel",col);
-  $("packs").innerHTML=`<div class="bx-rl"><span>Choisis ton booster</span></div><div class="bx-rail">${boosters.map(x=>`<button class="bx-rk ${!heroPromo&&x.id===b.id?"on":""}" style="--bc:${PACK_THEME[x.id]||"#d21f2e"}" onclick="pick('${x.id}')"><span class="bx-rkp">${packHTML(x,"")}</span><span class="bx-rkt"><b>${esc(x.name)}</b><small>${x.free_ok?"Gratuit · ":""}${x.price.toLocaleString("fr-FR")} ${CURRENCY}</small></span></button>`).join("")}
-    <button class="bx-rk promo ${heroPromo?"on":""}" style="--bc:#ff7a00" onclick="heroPromo=true;render()"><span class="bx-rkp">${packHTML(PROMO_B,"","--bc:#ff7a00")}</span><span class="bx-rkt"><b>PROMO</b><small>Parrainage</small></span></button></div>`;
+  /* étagère : tous les boosters à la même taille (PROMO compris), qui flottent et brillent ; celui choisi est soulevé et éclairé */
+  const SH=[...boosters.map(x=>({id:x.id,b:x,on:!heroPromo&&x.id===b.id,go:`pick('${x.id}')`,c:PACK_THEME[x.id]||"#d21f2e",sub:(x.free_ok?"Gratuit · ":"")+x.price.toLocaleString("fr-FR")+" "+CURRENCY})),
+    {id:"promo",b:PROMO_B,on:heroPromo,go:"heroPromo=true;render()",c:"#ff7a00",sub:"Offert par le parrainage"}];
+  $("packs").innerHTML=`<div class="bx-rl"><span>Choisis ton booster</span></div><div class="bx-shelf">${SH.map((o,i)=>`<button class="bx-sp ${o.on?"on":""}" style="--bc:${o.c};--i:${i}" onclick="${o.go}" aria-pressed="${o.on}">
+      <span class="bx-spk">${packHTML(o.b,"",`--bc:${o.c}`)}</span><b>${esc(o.b.name)}</b><small>${o.sub}</small></button>`).join("")}</div>`;
   $("panel").innerHTML=heroPromo?"":`<details class="bx-rates" ${window.bxRO?"open":""} ontoggle="window.bxRO=this.open"><summary>Chances par rareté · ${esc(b.name)}${g?" · "+RARITY[b.min_rarity]+"+ garantie ★":""}</summary><p>${lbl}</p><div class="rates">${rates}</div>${b.description?`<p class="bx-desc">${esc(b.description)}</p>`:""}</details>`;
   renderPills();
 }
