@@ -3102,7 +3102,8 @@ html{overflow-x:hidden}
 @media(hover:none){.bl-patch.glow{filter:none!important}}
 /* la carte qui sort du ballon : elle grandit, se redresse, puis s'allume de sa couleur */
 .bl-card{transition:transform .75s cubic-bezier(.17,1.25,.32,1),opacity .3s}
-.bl-card.lit .card{box-shadow:0 0 0 1px color-mix(in srgb,var(--sc) 70%,#fff),0 0 22px 2px color-mix(in srgb,var(--sc) 75%,transparent),0 0 60px 6px color-mix(in srgb,var(--sc) 40%,transparent);transition:box-shadow .5s}
+.bl-card .card,.wo-cz .card{border-radius:12px}
+.bl-card.lit .card{box-shadow:0 0 22px 2px color-mix(in srgb,var(--sc) 75%,transparent),0 0 60px 6px color-mix(in srgb,var(--sc) 40%,transparent);transition:box-shadow .5s}
 .bl-card.emerge .art img{animation:blpunch .8s cubic-bezier(.2,.9,.3,1) .15s both}
 /* halo plein fond de la couleur de la carte (un simple dégradé : il se voit aussi sur téléphone) */
 .bl-aura{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;background:radial-gradient(60% 46% at 50% 42%,color-mix(in srgb,var(--ac) 46%,transparent),color-mix(in srgb,var(--ac) 14%,transparent) 55%,transparent 78%)}
@@ -3118,6 +3119,7 @@ html{overflow-x:hidden}
 .wo-bg{position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 50%,color-mix(in srgb,var(--sc) 30%,transparent),transparent 70%)}
 .wo-bg i{position:absolute;left:50%;top:50%;width:150vmax;height:150vmax;margin:-75vmax 0 0 -75vmax;background:conic-gradient(from 0deg,transparent 0 8%,color-mix(in srgb,var(--sc) 22%,transparent) 10% 12%,transparent 14% 33%,color-mix(in srgb,var(--sc) 22%,transparent) 35% 37%,transparent 39% 58%,color-mix(in srgb,var(--sc) 22%,transparent) 60% 62%,transparent 64% 83%,color-mix(in srgb,var(--sc) 22%,transparent) 85% 87%,transparent 89%);animation:wospin 14s linear infinite;opacity:.6}
 @keyframes wospin{to{transform:rotate(360deg)}}
+.wo-beams{position:absolute;inset:0;pointer-events:none}
 .wo-beams i{position:absolute;bottom:-10%;width:18vw;height:120%;background:linear-gradient(0deg,color-mix(in srgb,var(--sc) 45%,transparent),transparent 70%);opacity:0;transform-origin:50% 100%}
 .wo-beams i:nth-child(1){left:6%;--r:14deg}.wo-beams i:nth-child(2){left:28%;--r:6deg}.wo-beams i:nth-child(3){right:28%;--r:-6deg}.wo-beams i:nth-child(4){right:6%;--r:-14deg}
 .wo.st0 .wo-beams i,.wo.wcard .wo-beams i{animation:wobeam 1.2s ease-out both}
@@ -3132,9 +3134,12 @@ html{overflow-x:hidden}
 .wo-card{position:relative;display:grid;justify-items:center;gap:14px;opacity:0;pointer-events:none}
 .wo.wcard .wo-card{opacity:1;pointer-events:auto;animation:wocard .9s cubic-bezier(.17,1.3,.3,1) both}
 @keyframes wocard{0%{opacity:0;transform:scale(.3) rotate(-14deg)}100%{opacity:1;transform:none}}
-.wo.wcard .wo-cz .card{box-shadow:0 0 0 1px color-mix(in srgb,var(--sc) 70%,#fff),0 0 30px 4px color-mix(in srgb,var(--sc) 80%,transparent),0 0 90px 14px color-mix(in srgb,var(--sc) 45%,transparent)}
+.wo.wcard .wo-cz .card{box-shadow:0 0 30px 4px color-mix(in srgb,var(--sc) 80%,transparent),0 0 90px 14px color-mix(in srgb,var(--sc) 45%,transparent)}
 .wo-nm b{font:italic 900 clamp(28px,6vw,52px)/1 Outfit,Arial,sans-serif;text-transform:uppercase;padding:0 .15em;text-shadow:0 0 30px color-mix(in srgb,var(--sc) 70%,transparent)}
-.wo.wcard .wo-nm{animation:blnm2 .6s cubic-bezier(.2,.8,.2,1) .45s both}
+/* la carte pile au centre de l'écran ; le nom se place dessous, et n'apparaît qu'une fois la carte dévoilée (pas de spoil pendant le grattage) */
+.wo-card{display:block}
+.wo-nm{position:absolute;top:100%;left:50%;translate:-50% 0;margin-top:18px;white-space:nowrap;opacity:0}
+.wo.named .wo-nm{animation:blnm2 .6s cubic-bezier(.2,.8,.2,1) .35s both}
 .wo-flash{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle,#fff,color-mix(in srgb,var(--sc) 60%,transparent) 40%,transparent 70%);opacity:0}
 .wo.wcard .wo-flash{animation:woflash .7s ease-out both}
 @keyframes woflash{0%{opacity:0}15%{opacity:1}100%{opacity:0}}
@@ -3280,6 +3285,10 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
         <div class="r2"><label>Ballons<input id="p-bal" type="number" min="0" value="0"></label><label>Boosters gratuits<input id="p-free" type="number" min="0" value="0"></label><label>Expire dans (jours, 0 = jamais)<input id="p-days" type="number" min="0" value="0"></label></div>
         <label>Carte offerte (nom exact, optionnel)<input id="p-card" list="dl-cards" placeholder="L.MESSI 14/15"></label><datalist id="dl-cards"></datalist>
         <div class="filters" style="margin:0"><button class="go" onclick="adminSend()">Envoyer le message</button><button class="ghost" onclick="adminGrant()">Donner directement (sans message)</button></div>
+      </div>
+      <div class="form adm-bx"><h4>Donner des boosters à ouvrir</h4><p>N’importe quel booster, PROMO compris, à la cible choisie au-dessus (ou à toi avec « Moi »). Ils arrivent dans « Boosters offerts ».</p>
+        <div class="r2"><label>Booster<select id="p-bx"></select></label><label>Combien<input id="p-bxn" type="number" min="1" max="100" value="1"></label></div>
+        <div class="filters" style="margin:0"><button class="go" onclick="adminGiveBx()">Donner ces boosters</button></div>
       </div></section>
   </div>
 </div>
@@ -3362,8 +3371,27 @@ function sBar(v){ if(muted) return; const a=actx(); if(!a) return; const t=a.cur
 /* le ballon qui fouette le filet */
 function sNet(v){ if(muted) return; const a=actx(); if(!a) return; const t=a.currentTime+.02, n=sNoise(a,.45), bp=a.createBiquadFilter(); bp.type="bandpass"; bp.frequency.setValueAtTime(3200,t); bp.frequency.exponentialRampToValueAtTime(900,t+.4); bp.Q.value=.8;
   const g=a.createGain(); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.45*(v||1),t+.03); g.gain.exponentialRampToValueAtTime(.0001,t+.42); n.connect(bp); bp.connect(g); g.connect(a.destination); n.start(t); }
-/* la foule : clameur qui monte puis retombe (k de 0 à 1 = intensité) */
-function sCrowd(k,ooh){ if(muted) return; const a=actx(); if(!a) return; k=Math.max(.2,Math.min(1,k||.5)); const t=a.currentTime, D=ooh?1.4:1.2+k*1.6, n=sNoise(a,D+.1);
+/* la foule : une tribune de supporters (voix qui crient + applaudissements), plus de souffle façon « vent » */
+function sCrowd(k,ooh){ k=Math.max(.2,Math.min(1,k||.5)); sFans(k,ooh?1.4:1.1+k*1.3,!ooh); }
+function sFans(k,dur,claps){ if(muted) return; const a=actx(); if(!a) return; k=Math.max(.2,Math.min(1,k||.6)); dur=dur||2.2; const t=a.currentTime, out=a.createGain(); out.gain.value=.55*k; out.connect(a.destination);
+  /* deux formants de voyelle (« aaah / ooooh ») partagés par toutes les voix */
+  const f1=a.createBiquadFilter(); f1.type="bandpass"; f1.frequency.value=720; f1.Q.value=4; const f2=a.createBiquadFilter(); f2.type="bandpass"; f2.frequency.value=1150; f2.Q.value=5;
+  const mix=a.createGain(); mix.gain.setValueAtTime(.0001,t); mix.gain.exponentialRampToValueAtTime(1,t+.3); mix.gain.setValueAtTime(1,t+dur*.55); mix.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  mix.connect(f1); mix.connect(f2); f1.connect(out); f2.connect(out);
+  /* une douzaine de voix un peu désaccordées, chacune avec son vibrato : la tribune qui crie */
+  for(let i=0;i<(TOUCH?9:14);i++){ const o=a.createOscillator(), g=a.createGain(), v=a.createOscillator(), vg=a.createGain(), f=150+Math.random()*230, st=t+Math.random()*.15;
+    o.type="sawtooth"; o.frequency.setValueAtTime(f*.93,st); o.frequency.linearRampToValueAtTime(f*1.06,t+dur*.4); o.frequency.linearRampToValueAtTime(f*.96,t+dur);
+    v.frequency.value=4+Math.random()*3; vg.gain.value=f*.02; v.connect(vg); vg.connect(o.frequency); g.gain.value=.055; o.connect(g); g.connect(mix); o.start(st); v.start(st); o.stop(t+dur+.1); v.stop(t+dur+.1); }
+  /* applaudissements : petits claquements secs, en rafale */
+  if(claps){ for(let i=0,N=Math.round(dur*(TOUCH?14:22));i<N;i++){ const st=t+.08+Math.random()*Math.max(.2,dur-.35), c=sNoise(a,.03), hp=a.createBiquadFilter(), cg=a.createGain();
+    hp.type="highpass"; hp.frequency.value=1400+Math.random()*1600; cg.gain.setValueAtTime(.0001,st); cg.gain.exponentialRampToValueAtTime(.16+Math.random()*.14,st+.002); cg.gain.exponentialRampToValueAtTime(.0001,st+.03); c.connect(hp); hp.connect(cg); cg.connect(out); c.start(st); } } }
+/* ballon d'un booster qui cache une Mythique ou mieux : trois battements graves, une note qui monte, puis un accord brillant */
+function sMyst(){ if(muted) return; const a=actx(); if(!a) return; const t=a.currentTime, out=a.createGain(); out.gain.value=.7; out.connect(a.destination);
+  [0,.5,.92].forEach((st,i)=>{ const o=a.createOscillator(), g=a.createGain(); o.type="sine"; o.frequency.setValueAtTime(92,t+st); o.frequency.exponentialRampToValueAtTime(38,t+st+.35); g.gain.setValueAtTime(.0001,t+st); g.gain.exponentialRampToValueAtTime(.45+i*.25,t+st+.01); g.gain.exponentialRampToValueAtTime(.0001,t+st+.45); o.connect(g); g.connect(out); o.start(t+st); o.stop(t+st+.5); });
+  const o=a.createOscillator(), g=a.createGain(); o.type="triangle"; o.frequency.setValueAtTime(220,t+.2); o.frequency.exponentialRampToValueAtTime(880,t+1.25); g.gain.setValueAtTime(.0001,t+.2); g.gain.exponentialRampToValueAtTime(.11,t+1.05); g.gain.exponentialRampToValueAtTime(.0001,t+1.4); o.connect(g); g.connect(out); o.start(t+.2); o.stop(t+1.45);
+  [880,1108.7,1318.5,1760].forEach((f,i)=>{ const x=a.createOscillator(), xg=a.createGain(), st=t+1.25+i*.04; x.type="sine"; x.frequency.value=f; xg.gain.setValueAtTime(.0001,st); xg.gain.exponentialRampToValueAtTime(.13,st+.02); xg.gain.exponentialRampToValueAtTime(.0001,st+1.6); x.connect(xg); xg.connect(out); x.start(st); x.stop(st+1.7); }); }
+/* ancienne clameur (souffle filtré), gardée sous un autre nom au cas où */
+function sCrowdOld(k,ooh){ if(muted) return; const a=actx(); if(!a) return; k=Math.max(.2,Math.min(1,k||.5)); const t=a.currentTime, D=ooh?1.4:1.2+k*1.6, n=sNoise(a,D+.1);
   const bp=a.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=ooh?450:700; bp.Q.value=.6; const lp=a.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=2600;
   const g=a.createGain(); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.32*k,t+(ooh?.25:.35)); g.gain.setValueAtTime(.32*k,t+D*.45); g.gain.exponentialRampToValueAtTime(.0001,t+D);
   n.connect(bp); bp.connect(lp); lp.connect(g); g.connect(a.destination); n.start(t);
@@ -3431,11 +3459,11 @@ function rareSfx(lvl){ if(muted) return; const a=actx(); if(!a) return; const t=
   const whoosh=(st,dur,vol)=>{ const len=Math.floor(a.sampleRate*dur), buf=a.createBuffer(1,len,a.sampleRate), d=buf.getChannelData(0); for(let i=0;i<len;i++) d[i]=Math.random()*2-1;
     const s=a.createBufferSource(), bp=a.createBiquadFilter(), gn=a.createGain(); s.buffer=buf; bp.type="bandpass"; bp.Q.value=1.2; bp.frequency.setValueAtTime(400,t+st); bp.frequency.exponentialRampToValueAtTime(4200,t+st+dur*.8);
     gn.gain.setValueAtTime(.0001,t+st); gn.gain.exponentialRampToValueAtTime(vol,t+st+dur*.35); gn.gain.exponentialRampToValueAtTime(.0001,t+st+dur); s.connect(bp); bp.connect(gn); gn.connect(out); s.start(t+st); };
-  whoosh(0,.9,.35+lvl*.08);
+  /* plus de souffle (« bruit de vent ») : seulement le carillon, la grosse caisse et l'accord */
   [1046.5,1318.5,1568,2093,2637].forEach((f,i)=>tone(f,.08+i*.07,.7,"sine",.16));
   if(lvl>=2){ const o=a.createOscillator(), gn=a.createGain(); o.type="sine"; o.frequency.setValueAtTime(120,t); o.frequency.exponentialRampToValueAtTime(42,t+.5); gn.gain.setValueAtTime(.0001,t); gn.gain.exponentialRampToValueAtTime(.9,t+.01); gn.gain.exponentialRampToValueAtTime(.0001,t+.6); o.connect(gn); gn.connect(out); o.start(t); o.stop(t+.65);
     [523.25,659.25,783.99].forEach(f=>tone(f,.02,1.2,"triangle",.12)); }
-  if(lvl>=3){ [1046.5,1318.5,1568,2093].forEach(f=>tone(f*1.5,.45,1.4,"sine",.09)); whoosh(.35,1.2,.25); }
+  if(lvl>=3){ [1046.5,1318.5,1568,2093].forEach(f=>tone(f*1.5,.45,1.4,"sine",.09)); }
   if(lvl>=4){ [261.63,329.63,392,523.25].forEach((f,i)=>tone(f,.6+i*.05,1.8,"sawtooth",.05)); }
 }
 function fx(c){
@@ -3781,7 +3809,10 @@ function ballStart(){ const r=$("reveal"), L=seq.list; glow(null); seq.mode="bal
   const groups=L.map(()=>[]); els.forEach((e,i)=>groups[Math.min(L.length-1,Math.floor(i*L.length/els.length))].push(e));
   bl={bw,groups,i:0,busy:false,shown:null}; bw.addEventListener("click",e=>{ e.stopPropagation(); ballStep(); });
   r.querySelector(".bl-st").addEventListener("click",e=>{ if(e.target.closest("button,.bl-ball")) return; ballStep(); });
-  setTimeout(()=>{ try{ thud(); }catch(e){} },560); }
+  /* les supporters accueillent le booster ; si le ballon cache une Mythique ou mieux, il a son propre son en touchant le sol */
+  try{ sFans(.7,2.4,true); }catch(e){}
+  { const best=seq.best||L[0], myst=ORDER.indexOf(best.rarity)>=ORDER.indexOf("mythique"); if(myst) bw.classList.add("myst");
+    setTimeout(()=>{ try{ thud(); if(myst) sMyst(); }catch(e){} },560); } }
 function ballStep(){ const s=bl; if(!s||s.busy) return; if(s.shown) return ballTray();
   const L=seq.list; if(s.i>=L.length) return;
   const idx=s.i, c=L[idx], g=s.groups[idx], rare=ORDER.indexOf(c.rarity)>=3, big=ORDER.indexOf(c.rarity)>=ORDER.indexOf("mythique")||!!c.sfx_url /* une carte avec un VFX a droit à la grande révélation, quelle que soit sa rareté */, last=idx===L.length-1, col=COLOR[c.rarity]; s.busy=true; s.i++;
@@ -3833,16 +3864,18 @@ function walkout(c,done){ document.querySelector(".wo")?.remove(); const col=COL
     <div class="wo-card"><div class="wo-cz">${cardHTML(c,true,0)}</div><div class="wo-nm"><b>${esc(dispName(c))}</b></div></div>
     <div class="wo-flash"></div><div class="wo-h">${TOUCH?"Touche":"Clique"} pour accélérer</div>`;
   document.body.appendChild(d); const cz=d.querySelector(".wo-cz"); cz.querySelector(".card").removeAttribute("onclick");
-  cz.style.zoom=Math.max(1.1,Math.min(2.6,innerHeight*.55/228,innerWidth*.72/158)).toFixed(2);
-  let k=-1, T=null, fin=false, dust=null; try{ crowdBed&&crowdBed(true); }catch(e){}
+  cz.style.zoom=Math.max(1.1,Math.min(2.4,innerHeight*.5/228,innerWidth*.7/158)).toFixed(2);
+  let k=-1, T=null, fin=false, dust=null;
   const show=()=>{ clearTimeout(T); k++; d.querySelectorAll(".wo-s").forEach(e=>e.classList.toggle("on",+e.dataset.k===k));
     if(k<steps.length){ d.classList.add("st"+k); try{ thud(); }catch(e){} T=setTimeout(show,1250); return; }
     /* la carte */
     d.classList.add("wcard"); try{ rareFx(c); }catch(e){} if(c.sfx_url){ try{ sfxPlay(c); }catch(e){} }
     const h=d.querySelector(".wo-h"); if(h) h.textContent=(TOUCH?"Touche":"Clique")+" pour continuer";
-    if(vint){ const cd=cz.querySelector(".card"); if(h) h.textContent=DUSTH(); dust=dustCover(cd,()=>{ dust=null; if(h) h.textContent=(TOUCH?"Touche":"Clique")+" pour continuer"; }); }
+    if(vint){ const cd=cz.querySelector(".card"); if(h) h.textContent=DUSTH(); dust=dustCover(cd,()=>{ dust=null; d.classList.add("named"); if(h) h.textContent=(TOUCH?"Touche":"Clique")+" pour continuer"; }); }
+    else d.classList.add("named");
     fin=true; };
-  const close=()=>{ if(!fin){ show(); return; } if(dust) return; d.classList.add("out"); try{ crowdBed&&crowdBed(false); }catch(e){} setTimeout(()=>d.remove(),360); done&&done(); };
+  const close=()=>{ if(!fin){ show(); return; } if(dust){ const x=dust; x.clear(); return; }   /* clic à côté : toute la poussière part, le nom arrive */
+    d.classList.add("out"); setTimeout(()=>d.remove(),360); done&&done(); };
   d.addEventListener("click",close); requestAnimationFrame(()=>{ d.classList.add("in"); T=setTimeout(show,steps.length?650:300); }); }
 function ballTray(){ const s=bl, w=s.shown, k=+w.dataset.i, slot=$("bl-tray")&&$("bl-tray").children[k]; s.shown=null; if(!slot) return;
   /* la carte est zoomée : le déplacement se compte en pixels « non zoomés » */
@@ -4627,7 +4660,16 @@ document.addEventListener("keydown",e=>{
 async function initPlayers(){
   if(!adminCards.length){ const {data}=await sb.from("cards").select("*").order("name"); adminCards=data||[]; }
   $("dl-cards").innerHTML=adminCards.map(c=>`<option value="${esc(c.name)}">`).join(""); renderTarget();
+  /* tous les boosters, même ceux qu'on ne peut pas acheter (PROMO…) */
+  try{ const r=await sb.from("boosters").select("id,name,active").order("price"); const L=(r.data&&r.data.length?r.data:boosters).slice(); if(!L.find(b=>b.id==="promo")) L.push(PROMO_B);
+    const sel=$("p-bx"); if(sel){ const was=sel.value; sel.innerHTML=L.map(b=>`<option value="${esc(b.id)}">${esc(b.name)}${b.active===false&&b.id!=="promo"?" (inactif)":""}</option>`).join(""); if(was) sel.value=was; } }catch(e){}
 }
+async function adminGiveBx(){ if(!target||target.id===null){ toast("Choisis un joueur précis (ou « Moi »)"); return; }
+  const b=$("p-bx").value, n=Math.round(+$("p-bxn").value||0); if(!b||n<1||n>100){ toast("Entre 1 et 100 boosters"); return; }
+  const {data,error}=await sb.rpc("admin_give_boosters",{p_user:target.id,p_booster:b,p_n:n});
+  if(error){ toast(/admin_give_boosters|schema cache|could not find/i.test(error.message)?"Lance d’abord penalty-taux-cadeaux.sql dans Supabase":error.message); return; }
+  toast(`${n} booster${n>1?"s":""} ${$("p-bx").selectedOptions[0].textContent} donné${n>1?"s":""} à ${target.name}`,true);
+  if(target.id===profile.id){ try{ await refLoad(); render(); renderFree(); }catch(e){} } }
 async function findPlayers(){
   const {data,error}=await sb.rpc("admin_find_players",{p_q:$("p-q").value.trim()}); if(error){ toast(error.message); return; }
   $("p-results").innerHTML=(data||[]).map(p=>`<button class="ghost" data-id="${p.id}" data-name="${esc(p.username)}" onclick="setTarget(this.dataset.id,this.dataset.name)" title="${p.id}">${esc(p.username)}${p.guest?" (invité)":""} · ${p.balloons} ballons · ${p.last_seen?"vu le "+new Date(p.last_seen).toLocaleDateString("fr-FR",{day:"numeric",month:"short"})+" à "+new Date(p.last_seen).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}):"inscrit le "+new Date(p.created_at).toLocaleDateString("fr-FR",{day:"numeric",month:"short"})}</button>`).join("")||"<span style='color:var(--mute)'>Aucun joueur trouvé</span>";
@@ -6085,13 +6127,13 @@ async function penRender(load){
   if(load!==false){ const r=await rpc("pen_state"); if(!r){ B.innerHTML=gxBack; return; } pen.state=r.data; pen.ses=r.data.session; }
   const s=pen.ses, left=pen.state?pen.state.left:0;
   if(!s){ B.innerHTML=`${gxBack}<div class="pn-lobby"><span class="dr-k">Tirs au but · ${left} séance${left>1?"s":""} restante${left>1?"s":""} aujourd'hui</span><h3>Séance de tirs au but</h3>
-      <p>Chaque niveau réussi rapporte <b>8 ballons</b>. Plus tu montes, plus le gardien te lit bien. Après chaque but : <b>Encaisser</b> pour tout garder, ou <b>Continuer</b>. Un raté et tu perds toute la cagnotte de la séance.</p>
+      <p>Chaque niveau réussi rapporte <b>5 ballons</b>. Plus tu montes, plus le gardien te lit bien. Frappe dans le rouge et le ballon peut partir à côté. Après chaque but : <b>Encaisser</b> pour tout garder, ou <b>Continuer</b>. Un raté et tu perds toute la cagnotte de la séance.</p>
       ${pen.last?`<div class="pn-last">${pen.last}</div>`:""}
       <div class="dr-act"><button class="go" ${left?"":"disabled"} onclick="penStart()">${left?"Commencer une séance":"Reviens demain"}</button></div></div>`; return; }
-  const lv=s.level, nx=8;
+  const lv=s.level, nx=5;
   B.innerHTML=`${gxBack}<div class="pn"><div class="pn-top"><div><span class="dr-k">Niveau</span><b>${lv+1}<small> / 100</small></b></div><div><span class="dr-k">Cagnotte</span><b id="pn-bank">${nf(s.bank)}</b></div><div><span class="dr-k">Ce tir rapporte</span><b>+${nf(nx)}</b></div></div>
     <div class="pn-goal" id="pn-goal"><div class="pn-net"></div>${PEN_Z.map((z,i)=>`<button class="pn-z ${pen.zone===i?"on":""}" style="left:${z[1]}%;top:${z[2]}%" onclick="penZone(${i})" title="${z[0]}"></button>`).join("")}<div class="pn-gk" id="pn-gk"><i></i></div><div class="pn-ball" id="pn-ball"></div><div class="an-msg" id="pn-msg"></div></div>
-    <div class="pn-ctl" id="pn-ctl">${pen.zone==null?`<p class="pn-h">Choisis où tirer dans le but.</p>`:`<div class="pn-gauge"><i class="ok"></i><u id="pn-cur"></u></div><button class="go" id="pn-shoot" onclick="penShoot()">Frapper (Espace)</button><p class="pn-h">Arrête le curseur dans la zone verte.</p>`}</div></div>`;
+    <div class="pn-ctl" id="pn-ctl">${pen.zone==null?`<p class="pn-h">Choisis où tirer dans le but.</p>`:`<div class="pn-gauge"><i class="ok"></i><u id="pn-cur"></u></div><button class="go" id="pn-shoot" onclick="penShoot()">Frapper (Espace)</button><p class="pn-h">Arrête le curseur dans la zone verte. Dans le rouge, tu risques de tirer à côté.</p>`}</div></div>`;
   if(pen.zone!=null) penGauge(lv+1);
 }
 function penZone(i){ if(pen.busy) return; pen.zone=i; penRender(false); }
@@ -6104,11 +6146,12 @@ async function penShoot(){ if(pen.busy||pen.zone==null||!pen.ses) return; pen.bu
   const ball=$("pn-ball"), gk=$("pn-gk"), Z=PEN_Z[zone], K=PEN_Z[d.keeper]; boum();
   if(gk) gk.style.cssText=`left:${K[1]}%;top:${Math.min(66,K[2])}%;transform:translate(-50%,-50%) rotate(${K[1]<40?-35:K[1]>60?35:0}deg)`;
   let tx=Z[1], ty=Z[2]; if(d.outcome==="poteau"){ tx=Z[1]<50?2:98; } if(d.outcome==="transversale"){ ty=2; }
+  if(d.outcome==="dehors"){ if(Z[1]<40) tx=-12; else if(Z[1]>60) tx=112; else ty=-18; if(Z[2]<40) ty=-18; }   /* frappe non cadrée */
   if(ball) ball.style.cssText=`left:${tx}%;top:${ty}%;width:18px;height:18px`;
   await new Promise(r=>setTimeout(r,520));
   const msg=$("pn-msg"); profile.balloons=d.balloons; render();
   if(d.goal){ if(msg){ msg.style.setProperty("--c","#4ade80"); msg.className="an-msg show"; msg.textContent="But !"; } roar(1); const g=$("pn-goal"); if(g){ g.classList.remove("hit"); void g.offsetWidth; g.classList.add("hit"); } }
-  else if(msg){ msg.style.setProperty("--c","#e5e5e5"); msg.className="an-msg show miss"; msg.textContent=d.outcome==="arret"?"Arrêt !":d.outcome==="poteau"?"Poteau !":"Transversale !"; }
+  else if(msg){ msg.style.setProperty("--c","#e5e5e5"); msg.className="an-msg show miss"; msg.textContent=d.outcome==="arret"?"Arrêt !":d.outcome==="poteau"?"Poteau !":d.outcome==="dehors"?"À côté !":"Transversale !"; }
   await new Promise(r=>setTimeout(r,900)); pen.busy=false;
   if(d.status==="open"){ pen.ses.level=d.level; pen.ses.bank=d.bank; pen.zone=null;
     $("pn-ctl").innerHTML=`<div class="pn-choice"><p>Niveau ${d.level} réussi · cagnotte <b>${nf(d.bank)}</b> ${CURRENCY}</p><button class="ghost" onclick="penCash()">Encaisser ${nf(d.bank)}</button><button class="go" onclick="penNext()">Continuer · +${nf(d.next)}</button></div>`; $("pn-bank").textContent=nf(d.bank); }
