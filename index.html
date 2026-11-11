@@ -3146,6 +3146,23 @@ html{overflow-x:hidden}
 .wo-h{position:absolute;bottom:max(26px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;font-size:13px;color:#bdb6c2}
 .wo.promo .wo-s b{color:#ffb15c}
 @media(hover:none){.wo-bg i{animation-duration:20s}}
+/* noms en italique coupés : la boîte coupe ce qui dépasse, donc la dernière lettre penchée était rognée.
+   Un peu de marge intérieure de chaque côté laisse la place à la pente, « … » marche toujours si le nom est trop long. */
+.pdn,.pd .nm2,.sy2-n b,.cst h4,.cst-g b,.lb-on b,.rk-tm b{padding-left:.12em;padding-right:.22em}
+.pdn{box-sizing:border-box}
+/* collection : carte pas encore obtenue = le vrai joueur, visible mais éteint (noir et blanc, assombri), badge « À obtenir ».
+   Au survol (ou au doigt), un peu de couleur revient : ça donne envie de la décrocher. */
+.card.lk2{cursor:pointer}
+.card.lk2 .art img{filter:grayscale(1) brightness(.5) contrast(1.1);transition:filter .35s}
+.card.lk2 .face.front{filter:saturate(.15);transition:filter .35s}
+.card.lk2 .face.front::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,#0000 40%,#0008);pointer-events:none;z-index:3}
+.card.lk2 .pk-shine,.card.lk2 .pk-glare,.card.lk2 .qty,.card.lk2 .fx,.card.lk2 .gl{display:none!important}
+.card.lk2 .plate .nm,.card.lk2 .rl{opacity:.75}
+.lk2-b{position:absolute;left:50%;top:44%;z-index:6;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;
+  background:#0c0b0ecc;border:1px solid #ffffff2a;color:#e6dfe9;font:800 10px/1 Outfit,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;pointer-events:none;box-shadow:0 4px 14px #0009}
+.lk2-b svg{width:12px;height:12px;flex:0 0 auto}
+@media(hover:hover){.grid .card.lk2:hover .art img{filter:grayscale(.35) brightness(.8)}.grid .card.lk2:hover .face.front{filter:saturate(.6)}.grid .card.lk2:hover .lk2-b{opacity:.85}}
+.grid .card.lk2:active .art img{filter:grayscale(.35) brightness(.8)}
 </style>
 <script>
 (function(){ try{ const base=location.href.split("#")[0].split("?")[0].replace(/[^\/]*$/,"");
@@ -4194,7 +4211,9 @@ function renderHome(){
 }
 let groupBy="rarete";
 /* carte pas encore débloquée : la vraie carte, grisée, photo floutée et nom caché ; un clic l'ouvre en grand */
-function lockedCard(c){ return cardHTML(c,true).replace('class="card r-','class="card lk r-').replace(' onclick="this.classList.add(\'flip\')"','').replace(/<div class="nm( sig)?">[\s\S]*?<\/div>/,'<div class="nm">?</div>'); }
+/* carte pas encore obtenue : on montre le vrai joueur (ça donne envie de l'avoir), en noir et blanc assombri, avec un badge « À obtenir » */
+function lockedCard(c){ return cardHTML(c,true).replace('class="card r-','class="card lk2 r-').replace(' onclick="this.classList.add(\'flip\')"','')
+  .replace('<div class="face front">','<div class="face front"><span class="lk2-b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>À obtenir</span>'); }
 function setFilter(f){ filter=decodeURIComponent(f); renderCollection(); }
 function setGroup(g){ groupBy=g; filter="all"; renderCollection(); }
 function renderCollection(){
