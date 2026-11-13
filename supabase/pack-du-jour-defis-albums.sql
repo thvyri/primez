@@ -222,7 +222,6 @@ end $$;
 insert into public.cards (name, rarity, category, club, league, active)
 select v.name, v.rarity, v.cat, v.club, v.league, true from (values
   -- les jeunes cracks
-  ('L.YAMAL 24/25',       'legende', 'Légende', 'Barcelone',        'La Liga'),
   ('P.CUBARSÍ 24/25',     'elite',   'Élite',   'Barcelone',        'La Liga'),
   ('S.MAYULU 24/25',      'rare',    'Rare',    'Paris SG',         'Ligue 1'),
   ('N.PAZ 24/25',         'elite',   'Élite',   'Côme',             'Serie A'),
@@ -261,10 +260,11 @@ create or replace function public._card_ids(p text[]) returns int[] language sql
     where c.name = any(p) and c.active order by c.name, c.id) s
 $$;
 
--- les albums : « accessibles » (sans Prime) puis « légendaires » (avec des Prime) ; le site les range tout seul
+-- les albums de départ : « accessibles » (sans Prime) puis « légendaires » (avec des Prime) ; le site les range tout seul.
+-- Pour les modifier ensuite : menu admin > Albums.
 insert into public.albums (id, title, descr, card_ids, reward_balloons, reward_booster, reward_qty, sort) values
   ('nouvelle-vague', 'La nouvelle vague', 'Les cracks de moins de 20 ans',
-     _card_ids(array['L.YAMAL 24/25','P.CUBARSÍ 24/25','D.DOUÉ 24/25','W.ZAÏRE-EMERY 24/25','S.MAYULU 24/25','N.PAZ 24/25','I.MAZA 25/26','ESTÊVÃO 25/26','F.MASTANTUONO 25/26','ENDRICK 24/25','A.GÜLER 24/25','K.YILDIZ 24/25']), 1000, 'prolongation', 1, 10),
+     _card_ids(array['L.YAMAL 25/26','P.CUBARSÍ 24/25','D.DOUÉ 24/25','W.ZAÏRE-EMERY 24/25','S.MAYULU 24/25','N.PAZ 24/25','I.MAZA 25/26','ESTÊVÃO 25/26','F.MASTANTUONO 25/26','ENDRICK 24/25','A.GÜLER 24/25','K.YILDIZ 24/25']), 1000, 'prolongation', 1, 10),
   ('psg-2017', 'PSG 2017', 'Cavani, Di María, Draxler et la bande',
      _card_ids(array['E.CAVANI 17/18','Á.DI MARÍA 17/18','J.DRAXLER 17/18','M.VERRATTI 17/18','B.MATUIDI 17/18','A.RABIOT 17/18','T.SILVA 19/20','T.MEUNIER 17/18','L.KURZAWA 17/18']), 800, 'prolongation', 1, 20),
   ('om-93', 'OM 93', 'Les premiers champions d’Europe français',
@@ -287,8 +287,8 @@ insert into public.albums (id, title, descr, card_ids, reward_balloons, reward_b
      _card_ids(array['L.MATTHÄUS 89/90','J.P.PAPIN 90/91','M.VAN BASTEN 88/89','R.BAGGIO 92/93','H.STOICHKOV 93/94','G.WEAH 94/95','M.SAMMER 95/96','R9 96/97','Z.ZIDANE 97/98','RIVALDO 98/99']), 5000, 'pantheon', 1, 150),
   ('bdo-2000', 'Ballons d’Or · années 2000', 'Un lauréat par année, de 2000 à 2009',
      _card_ids(array['L.FIGO 00/01','M.OWEN 00/01','R9 01/02','P.NEDVĚD 02/03','A.SHEVCHENKO 03/04','RONALDINHO 04/05','F.CANNAVARO 05/06','KAKÁ 06/07','C.RONALDO 07/08','L.MESSI 08/09']), 5000, 'pantheon', 1, 160)
-on conflict (id) do update set title = excluded.title, descr = excluded.descr, card_ids = excluded.card_ids,
-  reward_balloons = excluded.reward_balloons, reward_booster = excluded.reward_booster, reward_qty = excluded.reward_qty, sort = excluded.sort, active = true;
+-- un album déjà là n'est pas touché : ce que tu changes dans l'admin (onglet Albums) est gardé si tu relances ce fichier
+on conflict (id) do nothing;
 -- l'ancienne version du PSG (remplacée par « PSG 2017 » et « Le PSG de la MNM »)
 delete from public.albums where id = 'psg-qatar';
 revoke all on function public._card_ids(text[]) from public, anon, authenticated;

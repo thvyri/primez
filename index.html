@@ -3183,6 +3183,23 @@ html{overflow-x:hidden}
 .al-th.no{border-color:#ffffff22;background:#111}.al-th.no img{filter:grayscale(1) brightness(.45)}
 .al-strip em{flex:0 0 auto;margin-left:8px;font-style:normal;font-size:12px;font-weight:800;color:var(--mute);white-space:nowrap}
 .al-cards{margin:16px 0 4px!important}
+/* admin : albums */
+.aa{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:18px;align-items:start}
+@media(max-width:900px){.aa{grid-template-columns:1fr}}
+.aa-list{display:grid;gap:6px}.aa-lh{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}.aa-lh h4{margin:0}
+.aa-row{display:flex;align-items:center;gap:10px;justify-content:space-between;background:#171519;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.aa-row.on{border-color:#e5202e}.aa-row.off{opacity:.55}.aa-row div{display:grid;gap:2px;min-width:0}.aa-row small{color:var(--mute);font-size:11px}
+.aa-ed{max-width:none!important}.aa-ed h4{margin:0}
+.aa-cards-h{display:flex;gap:10px;align-items:baseline}.aa-k{color:var(--mute);font-size:12px}
+.aa-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px}
+.aa-c,.aa-res button{display:flex;align-items:center;gap:8px;background:#121014;border:1px solid var(--line);border-left:3px solid var(--rc);border-radius:10px;padding:6px 8px;text-align:left;color:inherit}
+.aa-c.off{opacity:.5}.aa-c>div{flex:1;display:grid;min-width:0}.aa-c b,.aa-res b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.aa-c small,.aa-res small{color:var(--mute);font-size:11px}
+.aa-c .al-th,.aa-res .al-th{flex:0 0 30px;height:42px;border-width:1px}
+.aa-ac{display:flex;gap:3px}.aa-ac button{padding:4px 7px;font-size:11px;background:#ffffff10;color:#fff;border:0;border-radius:6px}.aa-ac button:disabled{opacity:.25}.aa-ac .x{background:#e5202e33;color:#ff8a93}
+.aa-res{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px}.aa-res button{cursor:pointer}.aa-res button>span:nth-child(2){flex:1;display:grid;min-width:0}.aa-res em{font-style:normal;font-size:11px;font-weight:800;color:#4ade80;white-space:nowrap}
+.aa-res button:hover{border-color:#4ade80}
+.aa-chk{display:flex!important;align-items:center;gap:8px;flex-direction:row!important}
+.aa-del{margin-left:auto;color:#ff8a93!important}
 @media(max-width:700px){.al-pg{width:100%}.al-act{width:100%}.al-act .go{width:100%}.al-th{flex-basis:32px;height:46px}.al-strip{flex-wrap:wrap}.al-strip em{width:100%;margin:4px 0 0}}
 /* missions : booster offert en plus des ballons */
 .mz2-pk{display:block;font-style:normal;font-size:11px;color:#4ade80;font-weight:800}
@@ -3257,7 +3274,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
   </aside>
 <div class="adock hidden" id="adock"><button class="adk-tg" onclick="this.parentNode.classList.toggle('fold')" aria-label="Ouvrir ou fermer le menu admin">⚙ Admin</button><div class="adk-in admin-only hidden"><span class="adk-k">Admin</span><button class="adk-on hidden" id="adk-on" onclick="onlineOpen()" title="Joueurs actifs dans les 3 dernières minutes"><i></i><b id="adk-on-n">0</b><span>en ligne</span><em>voir</em></button>    <button class="sbi adk" id="tab-admin-cards" onclick="showTab('admin-cards')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="7" width="12" height="14"/><path d="M8 3h13v14"/></svg></span><span class="sbt"><b>Cartes</b><small>Images, clubs, raretés</small></span></button>
     <button class="sbi adk" id="tab-admin-photos" onclick="showTab('admin-photos')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="5" width="18" height="14"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-7 7"/></svg></span><span class="sbt"><b>Photos</b><small>Assistant de recherche</small></span></button>
-    <button class="sbi adk" id="tab-admin-players" onclick="showTab('admin-players')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="8" width="18" height="12"/><path d="M12 8v12M3 12h18M8 8C5 5 9 2 12 8c3-6 7-3 4 0"/></svg></span><span class="sbt"><b>Cadeaux</b><small>Messages &amp; récompenses</small></span></button><button class="sbi adk" onclick="lgPreview()"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M9 14h6"/></svg></span><span class="sbt"><b>Accueil</b><small>Écran de connexion</small></span></button><button class="sbi adk" onclick="inviteIntro(true)"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M19 8v6M16 11h6"/></svg></span><span class="sbt"><b>Invitation</b><small>Popup de parrainage</small></span></button><button class="sbi adk" id="adk-cag" onclick="cagToggle()"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.3 1 4.1 2.3h3C14.3 6 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z"/></svg></span><span class="sbt"><b>Cagnotte : cachée</b><small>Visible seulement par les admins</small></span></button></div>
+    <button class="sbi adk" id="tab-admin-players" onclick="showTab('admin-players')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="8" width="18" height="12"/><path d="M12 8v12M3 12h18M8 8C5 5 9 2 12 8c3-6 7-3 4 0"/></svg></span><span class="sbt"><b>Cadeaux</b><small>Messages &amp; récompenses</small></span></button><button class="sbi adk" id="tab-admin-albums" onclick="showTab('admin-albums')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M4 4h7v16H4zM13 4h7v16h-7z"/><path d="M6.5 8h2M15.5 8h2"/></svg></span><span class="sbt"><b>Albums</b><small>Cartes &amp; récompenses</small></span></button><button class="sbi adk" onclick="lgPreview()"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M9 14h6"/></svg></span><span class="sbt"><b>Accueil</b><small>Écran de connexion</small></span></button><button class="sbi adk" onclick="inviteIntro(true)"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M19 8v6M16 11h6"/></svg></span><span class="sbt"><b>Invitation</b><small>Popup de parrainage</small></span></button><button class="sbi adk" id="adk-cag" onclick="cagToggle()"><span class="sbic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.3 1 4.1 2.3h3C14.3 6 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z"/></svg></span><span class="sbt"><b>Cagnotte : cachée</b><small>Visible seulement par les admins</small></span></button></div>
   <div class="adk-v"><span class="adk-k">Voir comme</span><div class="adk-seg"><button data-v="modo" onclick="setView('modo')">Modo</button><button data-v="joueur" onclick="setView('joueur')">Joueur</button><button data-v="invite" onclick="setView('invite')">Invité</button></div></div></div>
   <div class="content">
     <div class="install hidden" id="install-bar"><span> <b>Installe PrimeZ</b> sur ton ordinateur, il s’ouvre comme une vraie application.</span><span class="sp"></span><button class="go" onclick="installApp()">Installer</button><button class="x" title="Fermer" onclick="closeInstall()">✕</button></div>
@@ -3341,6 +3358,10 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
         <div class="r2"><label>Booster<select id="p-bx"></select></label><label>Combien<input id="p-bxn" type="number" min="1" max="100" value="1"></label></div>
         <div class="filters" style="margin:0"><button class="go" onclick="adminGiveBx()">Donner ces boosters</button></div>
       </div></section>
+
+    <section id="view-admin-albums" class="page hidden"><h2 class="disp">Albums (admin)</h2>
+      <p class="pnote">Choisis les cartes de chaque album et sa récompense. Un album sans carte Prime est rangé dans « Accessibles », avec des Prime dans « Légendaires ». Les joueurs voient les changements tout de suite.</p>
+      <div id="aa-body"></div></section>
   </div>
 </div>
 
@@ -4505,7 +4526,7 @@ function renderAlbums(){ const box=$("al-body"); if(!box||!ALB) return;
   $("al-count").textContent=`${ALB.filter(a=>ALBC.has(a.id)).length}/${ALB.length} albums`;
   if(!ALB.length){ box.innerHTML=`<p class="nothing">Aucun album pour l’instant.</p>`; alBadge(); return; }
   const st=ALB.map(a=>[a,alState(a)]).sort((x,y)=>(y[1].full&&!y[1].done)-(x[1].full&&!x[1].done)||x[1].done-y[1].done);
-  const leg=s=>s.cs.some(c=>["prime","promo","goat"].includes(c.rarity));
+  const leg=s=>s.cs.some(c=>["prime","goat"].includes(c.rarity));
   const one=([a,s])=>{ const n=s.cs.length, pct=n?Math.round(s.have/n*100):0, col=s.done?"#4ade80":s.full?"#facc15":"#f75562", open=alOpen.has(a.id);
     const act=s.done?`<span class="al-ok">✓ Complété</span>`:s.full?(isGuest?`<span class="al-miss">Connecte-toi pour réclamer</span>`:`<button class="go" onclick="claimAlbum('${a.id}')">🎁 Réclamer</button>`):"";
     return `<section class="al ${s.done?"done":""} ${s.full&&!s.done?"rdy":""}" style="--c:${col}"><div class="al-top">
@@ -4520,6 +4541,52 @@ function renderAlbums(){ const box=$("al-body"); if(!box||!ALB) return;
 async function claimAlbum(id){ const d=await rpd("album_claim",{p_id:id}); if(!d) return; ALBC.add(id); if(d.balloons!=null) profile.balloons=d.balloons; render();
   const a=ALB.find(x=>x.id===id); toast(`Album complété ! ${alReward(a).join(" + ")}${d.booster?" (dans Boosters)":""}`,true);
   if(d.booster) await refLoad(); if(d.card) await loadCollection(); renderAlbums(); }
+
+/* ---------- admin : albums (choisir les cartes, la récompense, l'ordre, masquer ou supprimer) ---------- */
+const AA={list:[],ed:null};
+const aaNorm=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const aaCard=id=>adminCards.find(c=>c.id===id);
+async function loadAdminAlbums(){ const box=$("aa-body"); if(!box) return;
+  if(!adminCards.length){ const {data}=await sb.from("cards").select("*").order("id"); adminCards=data||[]; }
+  const {data,error}=await sb.from("albums").select("*").order("sort"); if(error){ box.innerHTML=`<p class="nothing">Lance d’abord pack-du-jour-defis-albums.sql puis admin-albums.sql dans Supabase.</p>`; return; }
+  AA.list=data||[]; renderAA(); }
+function renderAA(){ const box=$("aa-body"); if(!box) return; const e=AA.ed;
+  const legOf=a=>(a.card_ids||[]).some(id=>{ const c=aaCard(id); return c&&["prime","goat"].includes(c.rarity); });
+  const rows=AA.list.map(a=>`<div class="aa-row ${a.active?"":"off"} ${e&&e.id===a.id?"on":""}"><div><b>${esc(a.title)}</b><small>${(a.card_ids||[]).length} cartes · ${legOf(a)?"Légendaire":"Accessible"}${a.active?"":" · masqué"} · ${esc(alReward(a).join(" + ")||"pas de récompense")}</small></div><button class="ghost" onclick="aaEdit('${a.id}')">Modifier</button></div>`).join("");
+  box.innerHTML=`<div class="aa"><div class="aa-list"><div class="aa-lh"><h4>${AA.list.length} album${AA.list.length>1?"s":""}</h4><button class="go" onclick="aaEdit('')">+ Nouvel album</button></div>${rows||'<p class="nothing">Aucun album.</p>'}</div>${e?aaEditor(e):""}</div>`;
+  if(e) aaCardsDraw(); }
+function aaEdit(id){ const a=AA.list.find(x=>x.id===id), mx=Math.max(0,...AA.list.map(x=>x.sort||0));
+  AA.ed=a?JSON.parse(JSON.stringify(a)):{id:"",title:"",descr:"",card_ids:[],reward_balloons:800,reward_booster:"prolongation",reward_qty:1,reward_card:null,sort:mx+10,active:true};
+  renderAA(); const f=$("aa-q"); if(f&&!a) $("aa-title").focus(); }
+function aaEditor(e){ const bx=[{id:"",name:"Aucun"},...boosters.filter(b=>b.id!=="promo"),PROMO_B];
+  const rc=e.reward_card?aaCard(e.reward_card):null;
+  return `<div class="aa-ed form"><h4>${e.id?"Modifier l’album":"Nouvel album"}</h4>
+    <div class="r2"><label>Titre<input id="aa-title" value="${esc(e.title)}" oninput="AA.ed.title=this.value" placeholder="PSG 2017"></label><label>Description<input value="${esc(e.descr||"")}" oninput="AA.ed.descr=this.value" placeholder="Cavani, Di María et la bande"></label></div>
+    <div class="aa-cards-h"><b id="aa-n"></b><span class="aa-k" id="aa-cat"></span></div><div class="aa-cards" id="aa-cards"></div>
+    <label>Ajouter une carte<input id="aa-q" placeholder="Tape un nom : yamal, draxler, messi 08…" oninput="aaSearch(this.value)" onkeydown="if(event.key==='Enter'){ const b=document.querySelector('#aa-res button'); if(b) b.click(); }" autocomplete="off"></label><div class="aa-res" id="aa-res"></div>
+    <div class="r2"><label>Ballons offerts<input type="number" min="0" value="${+e.reward_balloons||0}" oninput="AA.ed.reward_balloons=+this.value||0"></label>
+      <label>Booster offert<select onchange="AA.ed.reward_booster=this.value">${bx.map(b=>`<option value="${b.id}" ${(e.reward_booster||"")===b.id?"selected":""}>${esc(b.name)}</option>`).join("")}</select></label>
+      <label>Nombre de boosters<input type="number" min="1" max="20" value="${+e.reward_qty||1}" oninput="AA.ed.reward_qty=+this.value||1"></label></div>
+    <div class="r2"><label>Carte exclusive offerte (optionnel)<input list="aa-dl" value="${rc?esc(rc.name):""}" placeholder="Nom exact de la carte" onchange="const c=adminCards.find(x=>x.name===this.value.trim()); AA.ed.reward_card=c?c.id:null; if(this.value.trim()&&!c) toast('Carte introuvable : vérifie le nom exact');"></label>
+      <label>Ordre (petit = en haut)<input type="number" value="${+e.sort||0}" oninput="AA.ed.sort=+this.value||0"></label>
+      <label class="aa-chk"><input type="checkbox" ${e.active?"checked":""} onchange="AA.ed.active=this.checked"> Visible par les joueurs</label></div>
+    <datalist id="aa-dl">${adminCards.map(c=>`<option value="${esc(c.name)}">`).join("")}</datalist>
+    <div class="filters" style="margin:0"><button class="go" onclick="aaSave()">Enregistrer</button><button class="ghost" onclick="AA.ed=null;renderAA()">Annuler</button>${e.id?`<button class="ghost aa-del" onclick="aaRemove()">Supprimer l’album</button>`:""}</div></div>`; }
+function aaCardsDraw(){ const e=AA.ed, box=$("aa-cards"); if(!e||!box) return;
+  const cs=e.card_ids.map(aaCard).filter(Boolean), leg=cs.some(c=>["prime","goat"].includes(c.rarity));
+  $("aa-n").textContent=`${cs.length} carte${cs.length>1?"s":""}`; $("aa-cat").textContent=cs.length?(leg?"→ rangé dans Légendaires":"→ rangé dans Accessibles"):"";
+  box.innerHTML=cs.map((c,i)=>`<div class="aa-c ${c.active?"":"off"}" style="--rc:${COLOR[c.rarity]}"><span class="al-th">${c.image_url?`<img src="${esc(c.image_url)}" alt="" loading="lazy" onerror="this.remove()">`:""}</span><div><b>${esc(c.name)}</b><small>${RARITY[c.rarity]||c.rarity}${c.active?"":" · inactive"}</small></div>
+    <span class="aa-ac"><button title="Avancer" onclick="aaMove(${c.id},-1)" ${i?"":"disabled"}>◀</button><button title="Reculer" onclick="aaMove(${c.id},1)" ${i<cs.length-1?"":"disabled"}>▶</button><button class="x" title="Retirer" onclick="aaDel(${c.id})">✕</button></span></div>`).join("")||'<p class="nothing">Aucune carte : ajoute-en avec la recherche en dessous.</p>'; }
+function aaSearch(q){ const box=$("aa-res"); if(!box) return; q=aaNorm(q).trim(); if(q.length<2){ box.innerHTML=""; return; }
+  const ws=q.split(/\s+/), L=adminCards.filter(c=>c.active&&!AA.ed.card_ids.includes(c.id)&&ws.every(w=>aaNorm(c.name+" "+(c.club||"")).includes(w))).slice(0,12);
+  box.innerHTML=L.map(c=>`<button style="--rc:${COLOR[c.rarity]}" onclick="aaAdd(${c.id})"><span class="al-th">${c.image_url?`<img src="${esc(c.image_url)}" alt="" loading="lazy" onerror="this.remove()">`:""}</span><span><b>${esc(c.name)}</b><small>${RARITY[c.rarity]||c.rarity}${c.club?" · "+esc(c.club):""}</small></span><em>+ Ajouter</em></button>`).join("")||'<p class="nothing">Aucune carte trouvée.</p>'; }
+function aaAdd(id){ if(!AA.ed.card_ids.includes(id)) AA.ed.card_ids.push(id); aaCardsDraw(); const q=$("aa-q"); if(q){ q.value=""; q.focus(); } $("aa-res").innerHTML=""; }
+function aaDel(id){ AA.ed.card_ids=AA.ed.card_ids.filter(x=>x!==id); aaCardsDraw(); }
+function aaMove(id,d){ const a=AA.ed.card_ids, i=a.indexOf(id), j=i+d; if(i<0||j<0||j>=a.length) return; [a[i],a[j]]=[a[j],a[i]]; aaCardsDraw(); }
+async function aaSave(){ const e=AA.ed; if(!e) return; if(!String(e.title||"").trim()){ toast("Donne un titre à l’album"); return; } if(e.card_ids.length<2){ toast("Mets au moins 2 cartes"); return; }
+  const r=await rpc("admin_album_save",{p:e}); if(!r) return; toast("Album enregistré",true); AA.ed=null; await loadAdminAlbums(); ALB=null; loadAlbums(); }
+async function aaRemove(){ const e=AA.ed; if(!e||!e.id) return; if(!confirm(`Supprimer l’album « ${e.title} » ? Les joueurs qui l’ont déjà complété gardent leur récompense.`)) return;
+  const r=await rpc("admin_album_delete",{p_id:e.id}); if(!r) return; toast("Album supprimé",true); AA.ed=null; await loadAdminAlbums(); ALB=null; loadAlbums(); }
 
 /* ---------- admin : cartes ---------- */
 async function loadAdmin(){
@@ -5545,7 +5612,7 @@ function lbMark(i){ lb.cur=i; const ch=$("lb-chips"); if(!ch) return; [...ch.chi
 function lbGo(i){ const rail=$("lb-rail"); if(!rail) return; const n=rail.children.length; i=Math.max(0,Math.min(n-1,i)); const c=rail.children[i]; rail.scrollTo({left:c.offsetLeft-rail.offsetLeft-(rail.clientWidth-c.offsetWidth)/2,behavior:"smooth"}); lbMark(i); }
 function lbMove(d){ lbGo(lb.cur+d); }
 /* ---------- navigation ---------- */
-const TABS=["boosters","collection","albums","missions","games","market","friends","ballon","classement","cagnotte","discord","messages","profile","settings","admin-cards","admin-photos","admin-players"];
+const TABS=["boosters","collection","albums","missions","games","market","friends","ballon","classement","cagnotte","discord","messages","profile","settings","admin-cards","admin-photos","admin-players","admin-albums"];
 /* admin : basculer l'affichage entre modo, joueur normal et invité (rien ne change côté serveur) */
 let realAdmin=false, realGuest=false, viewMode="modo";
 function applyView(silent){ if(!realAdmin) viewMode="modo"; setTimeout(()=>{ try{ cagApply(); }catch(e){} },0);
@@ -5595,7 +5662,7 @@ function showTab(t,arg){ if(t!=="games"){ try{ crowdBed(false); crMusic(false); 
   TABS.forEach(x=>{ $("view-"+x).classList.toggle("hidden",x!==t); const b=$("tab-"+x); if(b) b.classList.toggle("on",x===t); });
   /* les albums font partie de la Collection : même entrée de menu, et un sélecteur « Mes cartes / Albums » en haut */
   if(t==="albums") $("tab-collection").classList.add("on"); document.querySelectorAll(".cmode button").forEach(b=>b.classList.toggle("on",b.dataset.m===t));
-  if(t==="collection") loadCollection(); if(t==="albums") loadAlbums(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings(); if(t==="cagnotte") renderCagnotte(); if(t==="discord") renderDiscord();
+  if(t==="collection") loadCollection(); if(t==="albums") loadAlbums(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="admin-albums") loadAdminAlbums(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings(); if(t==="cagnotte") renderCagnotte(); if(t==="discord") renderDiscord();
   $("sb-grp").classList.remove("open"); const sg=$("sb-grp").querySelector(".sbgh"); if(sg) sg.classList.toggle("on",t==="friends"||t==="messages"); if(t==="profile") loadProfile(arg); if(t==="friends") loadFriends(); if(t==="market") loadMarket(); if(t==="ballon"){ bd.off=0; loadBallon(); } if(t==="classement") loadBoards();
   closeGm(); closeCard(true); window.scrollTo(0,0);
   const TT={boosters:"Boosters",collection:"Collection",albums:"Albums",missions:"Missions",games:"Jeux",market:"Marché",friends:"Amis",ballon:"Ballon d’Or",classement:"Classements",cagnotte:"Cagnotte",discord:"Discord",messages:"Messages",profile:"Profil",settings:"Paramètres"}; document.title=(TT[t]?TT[t]+" · ":"")+"PrimeZ";
