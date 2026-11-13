@@ -218,18 +218,80 @@ begin
     'qty', a.reward_qty, 'card', a.reward_card);
 end $$;
 
--- les albums de départ (les numéros sont ceux des cartes dans la table cards)
+-- les joueurs qui manquaient pour les albums (sans photo : ajoute-la depuis l'admin, onglet Photos, qui les liste)
+insert into public.cards (name, rarity, category, club, league, active)
+select v.name, v.rarity, v.cat, v.club, v.league, true from (values
+  -- les jeunes cracks
+  ('L.YAMAL 24/25',       'legende', 'Légende', 'Barcelone',        'La Liga'),
+  ('P.CUBARSÍ 24/25',     'elite',   'Élite',   'Barcelone',        'La Liga'),
+  ('S.MAYULU 24/25',      'rare',    'Rare',    'Paris SG',         'Ligue 1'),
+  ('N.PAZ 24/25',         'elite',   'Élite',   'Côme',             'Serie A'),
+  ('I.MAZA 25/26',        'rare',    'Rare',    'Bayer Leverkusen', 'Bundesliga'),
+  ('ESTÊVÃO 25/26',       'elite',   'Élite',   'Chelsea',          'Premier League'),
+  ('F.MASTANTUONO 25/26', 'rare',    'Rare',    'Real Madrid',      'La Liga'),
+  ('ENDRICK 24/25',       'rare',    'Rare',    'Real Madrid',      'La Liga'),
+  ('A.GÜLER 24/25',       'elite',   'Élite',   'Real Madrid',      'La Liga'),
+  ('K.YILDIZ 24/25',      'elite',   'Élite',   'Juventus',         'Serie A'),
+  -- le PSG 2017
+  ('J.DRAXLER 17/18',     'rare',    'Rare',    'Paris SG',         'Ligue 1'),
+  ('Á.DI MARÍA 17/18',    'elite',   'Élite',   'Paris SG',         'Ligue 1'),
+  ('A.RABIOT 17/18',      'commune', 'Commune', 'Paris SG',         'Ligue 1'),
+  ('T.MEUNIER 17/18',     'commune', 'Commune', 'Paris SG',         'Ligue 1'),
+  ('L.KURZAWA 17/18',     'commune', 'Commune', 'Paris SG',         'Ligue 1'),
+  -- l'OM 93
+  ('B.BOLI 92/93',        'elite',   'Élite',   'Marseille',        'Ligue 1'),
+  ('R.VÖLLER 92/93',      'elite',   'Élite',   'Marseille',        'Ligue 1'),
+  ('A.PELÉ 92/93',        'rare',    'Rare',    'Marseille',        'Ligue 1'),
+  ('A.BOKŠIĆ 92/93',      'rare',    'Rare',    'Marseille',        'Ligue 1'),
+  ('F.SAUZÉE 92/93',      'rare',    'Rare',    'Marseille',        'Ligue 1'),
+  -- le Chelsea de Mourinho
+  ('R.CARVALHO 04/05',    'rare',    'Rare',    'Chelsea',          'Premier League'),
+  ('C.MAKÉLÉLÉ 05/06',    'elite',   'Élite',   'Chelsea',          'Premier League'),
+  ('J.COLE 04/05',        'rare',    'Rare',    'Chelsea',          'Premier League'),
+  -- le Bayern 2013
+  ('J.MARTÍNEZ 12/13',    'rare',    'Rare',    'Bayern Munich',    'Bundesliga'),
+  ('M.MANDŽUKIĆ 12/13',   'rare',    'Rare',    'Bayern Munich',    'Bundesliga')
+) v(name, rarity, cat, club, league)
+where not exists (select 1 from public.cards c where c.name = v.name);
+
+-- numéros des cartes à partir de leurs noms (dans l'ordre donné)
+create or replace function public._card_ids(p text[]) returns int[] language sql stable as $$
+  select coalesce(array_agg(s.id order by s.o), '{}') from (
+    select distinct on (c.name) c.id, array_position(p, c.name) o from public.cards c
+    where c.name = any(p) and c.active order by c.name, c.id) s
+$$;
+
+-- les albums : « accessibles » (sans Prime) puis « légendaires » (avec des Prime) ; le site les range tout seul
 insert into public.albums (id, title, descr, card_ids, reward_balloons, reward_booster, reward_qty, sort) values
-  ('nouvelle-vague', 'La nouvelle vague',        'Les jeunes qui vont tout casser',            array[414,308,381,380,322,430,166,397,313], 500, 'prolongation', 1, 10),
-  ('bdo-90',         'Ballons d’Or · années 90', 'Un lauréat par année, de 1990 à 1999',       array[58,258,24,56,100,99,256,13,15,71],       3000, 'pantheon',     1, 20),
-  ('bdo-2000',       'Ballons d’Or · années 2000','Les lauréats de 2000 à 2009',               array[72,103,14,69,19,84,48,1,53],             3000, 'pantheon',     1, 30),
-  ('france-98',      'France 98',                'Les champions du monde',                      array[15,123,296,297,292,298,107,352,367],     1500, 'prolongation', 2, 40),
-  ('psg-qatar',      'PSG 2017',                 'Neymar, Mbappé, Cavani et la bande',         array[3,66,151,376,377,148],           2000, 'prolongation', 2, 50),
-  ('barca-2009',     'Barça 2009',               'Le sextuplé de Guardiola',                    array[53,140,142,30,29,132,133,284],      3000, 'pantheon',     1, 60),
-  ('manu-2008',      'Manchester United 2008',   'Les champions d’Europe de Ferguson',         array[1,289,129,130,345,343,344,79],           2000, 'prolongation', 2, 70),
-  ('arsenal-wenger', 'L’Arsenal de Wenger',      'Les Invincibles et leurs aînés',              array[25,107,97,352,351,350,283,400],          1500, 'prolongation', 2, 80)
+  ('nouvelle-vague', 'La nouvelle vague', 'Les cracks de moins de 20 ans',
+     _card_ids(array['L.YAMAL 24/25','P.CUBARSÍ 24/25','D.DOUÉ 24/25','W.ZAÏRE-EMERY 24/25','S.MAYULU 24/25','N.PAZ 24/25','I.MAZA 25/26','ESTÊVÃO 25/26','F.MASTANTUONO 25/26','ENDRICK 24/25','A.GÜLER 24/25','K.YILDIZ 24/25']), 1000, 'prolongation', 1, 10),
+  ('psg-2017', 'PSG 2017', 'Cavani, Di María, Draxler et la bande',
+     _card_ids(array['E.CAVANI 17/18','Á.DI MARÍA 17/18','J.DRAXLER 17/18','M.VERRATTI 17/18','B.MATUIDI 17/18','A.RABIOT 17/18','T.SILVA 19/20','T.MEUNIER 17/18','L.KURZAWA 17/18']), 800, 'prolongation', 1, 20),
+  ('om-93', 'OM 93', 'Les premiers champions d’Europe français',
+     _card_ids(array['F.BARTHEZ 92/93','B.BOLI 92/93','D.DESCHAMPS 92/93','F.SAUZÉE 92/93','A.PELÉ 92/93','R.VÖLLER 92/93','A.BOKŠIĆ 92/93','J.P.PAPIN 90/91']), 800, 'prolongation', 1, 30),
+  ('chelsea-mourinho', 'Le Chelsea de Mourinho', 'Le Special One et ses guerriers',
+     _card_ids(array['P.ČECH 04/05','J.TERRY 04/05','R.CARVALHO 04/05','A.COLE 11/12','C.MAKÉLÉLÉ 05/06','M.ESSIEN 05/06','F.LAMPARD 09/10','J.COLE 04/05','D.DROGBA 09/10']), 800, 'prolongation', 1, 40),
+  ('bayern-2013', 'Bayern 2013', 'Le triplé de Heynckes',
+     _card_ids(array['M.NEUER 13/14','P.LAHM 12/13','J.BOATENG 13/14','J.MARTÍNEZ 12/13','B.SCHWEINSTEIGER 13/14','T.MÜLLER 12/13','F.RIBÉRY 12/13','A.ROBBEN 13/14','M.MANDŽUKIĆ 12/13']), 800, 'prolongation', 1, 50),
+  ('arsenal-wenger', 'L’Arsenal de Wenger', 'Les Invincibles et leurs aînés',
+     _card_ids(array['T.HENRY 02/03','P.VIEIRA 03/04','D.BERGKAMP 97/98','R.PIRÈS 01/02','S.CAMPBELL 03/04','M.OVERMARS 97/98','C.FÀBREGAS 09/10','I.WRIGHT 96/97']), 800, 'prolongation', 1, 60),
+  ('psg-mnm', 'Le PSG de la MNM', 'Messi, Neymar, Mbappé',
+     _card_ids(array['L.MESSI 22/23','NEYMAR JR 17/18','K.MBAPPÉ 22/23','A.HAKIMI 24/25','MARQUINHOS 24/25','M.VERRATTI 17/18','G.DONNARUMMA 24/25']), 3000, 'pantheon', 1, 110),
+  ('france-98', 'France 98', 'Les champions du monde',
+     _card_ids(array['Z.ZIDANE 97/98','F.BARTHEZ 92/93','L.THURAM 97/98','M.DESAILLY 93/94','B.LIZARAZU 00/01','D.DESCHAMPS 92/93','P.VIEIRA 03/04','Y.DJORKAEFF 96/97','R.PIRÈS 01/02','T.HENRY 02/03','D.TREZEGUET 05/06']), 3000, 'pantheon', 1, 120),
+  ('barca-2009', 'Barça 2009', 'Le sextuplé de Guardiola',
+     _card_ids(array['L.MESSI 08/09','C.PUYOL 08/09','D.ALVES 08/09','XAVI 10/11','A.INIESTA 11/12','S.BUSQUETS 10/11','G.PIQUÉ 10/11','PEDRO 10/11']), 3000, 'pantheon', 1, 130),
+  ('manu-2008', 'Manchester United 2008', 'Les champions d’Europe de Ferguson',
+     _card_ids(array['C.RONALDO 07/08','E.VAN DER SAR 07/08','R.FERDINAND 07/08','N.VIDIĆ 08/09','P.EVRA 07/08','M.CARRICK 07/08','P.SCHOLES 02/03','R.GIGGS 98/99','C.TÉVEZ 07/08','W.ROONEY 09/10']), 3000, 'pantheon', 1, 140),
+  ('bdo-90', 'Ballons d’Or · années 90', 'Un lauréat par année, de 1990 à 1999',
+     _card_ids(array['L.MATTHÄUS 89/90','J.P.PAPIN 90/91','M.VAN BASTEN 88/89','R.BAGGIO 92/93','H.STOICHKOV 93/94','G.WEAH 94/95','M.SAMMER 95/96','R9 96/97','Z.ZIDANE 97/98','RIVALDO 98/99']), 5000, 'pantheon', 1, 150),
+  ('bdo-2000', 'Ballons d’Or · années 2000', 'Un lauréat par année, de 2000 à 2009',
+     _card_ids(array['L.FIGO 00/01','M.OWEN 00/01','R9 01/02','P.NEDVĚD 02/03','A.SHEVCHENKO 03/04','RONALDINHO 04/05','F.CANNAVARO 05/06','KAKÁ 06/07','C.RONALDO 07/08','L.MESSI 08/09']), 5000, 'pantheon', 1, 160)
 on conflict (id) do update set title = excluded.title, descr = excluded.descr, card_ids = excluded.card_ids,
-  reward_balloons = excluded.reward_balloons, reward_booster = excluded.reward_booster, reward_qty = excluded.reward_qty, sort = excluded.sort;
+  reward_balloons = excluded.reward_balloons, reward_booster = excluded.reward_booster, reward_qty = excluded.reward_qty, sort = excluded.sort, active = true;
+-- l'ancienne version du PSG (remplacée par « PSG 2017 » et « Le PSG de la MNM »)
+delete from public.albums where id = 'psg-qatar';
+revoke all on function public._card_ids(text[]) from public, anon, authenticated;
 
 -- ============ 4. Droits ============
 revoke all on function public._streak_pack(int), public._mission_pack(text) from public, anon, authenticated;

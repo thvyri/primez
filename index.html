@@ -3164,17 +3164,26 @@ html{overflow-x:hidden}
 @media(hover:hover){.grid .card.lk2:hover .art img{filter:grayscale(.35) brightness(.8)}.grid .card.lk2:hover .face.front{filter:saturate(.6)}.grid .card.lk2:hover .lk2-b{opacity:.85}}
 .grid .card.lk2:active .art img{filter:grayscale(.35) brightness(.8)}
 /* ---------- albums ---------- */
-.al-head{margin-bottom:22px}.al-head .pnote{margin:6px 0 0;color:var(--mute)}
-.csec.al{background:#171519;border:1px solid var(--line);border-left:4px solid var(--c);border-radius:18px;padding:20px 22px 26px;margin-bottom:28px}
-.csec.al.rdy{box-shadow:0 0 0 1px #facc1555,0 10px 40px -18px #facc15}
-.al-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:12px}
-.al-tt{flex:1 1 220px;display:grid;gap:4px}.al-tt h3{margin:0;font:italic 900 26px/1.1 Outfit,Arial,sans-serif;text-transform:uppercase}.al-tt small{color:var(--mute);font-size:13px}
-.al-r{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.al-r .al-k{font:800 10px/1 Outfit,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-right:2px}
-.al-r b{background:#ffd16614;border:1px solid #ffd16640;color:#ffd166;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800}
-.al-act .al-ok{color:#4ade80;font-weight:900}.al-act .al-miss{color:var(--mute);font-size:13px;font-weight:700}
-.csec.al .csh h3{font-size:15px}
-.csec.al.done .grid .card{filter:saturate(1.05)}
-@media(max-width:700px){.csec.al{padding:14px 12px 18px}.al-tt h3{font-size:21px}.al-act{width:100%}.al-act .go{width:100%}}
+.cmode{display:inline-flex;gap:4px;padding:4px;margin:10px 0 18px;background:#171519;border:1px solid var(--line);border-radius:999px}
+.cmode button{position:relative;display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:999px;background:transparent;color:var(--mute);font-weight:800;font-size:14px;border:0}
+.cmode button.on{background:#e5202e;color:#fff}.cmode .badge{position:static;margin-left:2px}
+.al-note{margin:0 0 14px;color:var(--mute)}
+.al-cat{display:flex;align-items:baseline;gap:10px;margin:22px 0 10px;font:italic 900 20px/1.1 Outfit,Arial,sans-serif;text-transform:uppercase}.al-cat small{font:600 12px Outfit,Arial,sans-serif;text-transform:none;color:var(--mute)}
+.al-cat.leg{color:#f1cf74}
+.al{background:#171519;border:1px solid var(--line);border-left:4px solid var(--c);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.al.rdy{box-shadow:0 0 0 1px #facc1555,0 10px 30px -18px #facc15}
+.al-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.al-tt{flex:1 1 200px;display:grid;gap:2px;min-width:0}.al-tt h3{margin:0;font:italic 900 19px/1.1 Outfit,Arial,sans-serif;text-transform:uppercase}.al-tt small{color:var(--mute);font-size:12px}
+.al-pg{display:grid;gap:4px;width:120px}.al-pg b{font-size:13px;color:var(--c)}.al-pg i{display:block;height:5px;border-radius:9px;background:#ffffff14;overflow:hidden}.al-pg u{display:block;height:100%;background:var(--c)}
+.al-r{font-size:12px;font-weight:800;color:#ffd166}
+.al-act .al-ok{color:#4ade80;font-weight:900;font-size:13px}.al-act .al-miss{color:var(--mute);font-size:12px}.al-act .go{padding:8px 14px}
+.al-strip{display:flex;align-items:center;gap:5px;width:100%;margin-top:10px;padding:0;background:none;border:0;overflow-x:auto;scrollbar-width:none;cursor:pointer}.al-strip::-webkit-scrollbar{display:none}
+.al-th{position:relative;flex:0 0 38px;height:54px;border-radius:6px;overflow:hidden;background:color-mix(in srgb,var(--rc) 35%,#0c0b0e);border:2px solid var(--rc)}
+.al-th img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.al-th.no{border-color:#ffffff22;background:#111}.al-th.no img{filter:grayscale(1) brightness(.45)}
+.al-strip em{flex:0 0 auto;margin-left:8px;font-style:normal;font-size:12px;font-weight:800;color:var(--mute);white-space:nowrap}
+.al-cards{margin:16px 0 4px!important}
+@media(max-width:700px){.al-pg{width:100%}.al-act{width:100%}.al-act .go{width:100%}.al-th{flex-basis:32px;height:46px}.al-strip{flex-wrap:wrap}.al-strip em{width:100%;margin:4px 0 0}}
 /* missions : booster offert en plus des ballons */
 .mz2-pk{display:block;font-style:normal;font-size:11px;color:#4ade80;font-weight:800}
 /* pack du jour sur la page Boosters */
@@ -3225,8 +3234,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
 <aside class="sb" id="sb">
     <div class="sbl">Jouer</div>
     <button class="sbi" id="tab-boosters" onclick="showTab('boosters')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="4" y="8" width="16" height="12"/><path d="M4 12h16M9 8V4h6v4"/></svg></span><span class="sbt"><b>Boosters</b><small>Gratuits toutes les 10 min</small></span></button>
-    <button class="sbi" id="tab-collection" onclick="showTab('collection')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="7" width="12" height="14"/><path d="M8 3h13v14"/></svg></span><span class="sbt"><b>Collection</b><small>Cartes &amp; index</small></span></button>
-    <button class="sbi" id="tab-albums" onclick="showTab('albums')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M4 4h7v16H4zM13 4h7v16h-7z"/><path d="M6.5 8h2M15.5 8h2"/></svg></span><span class="sbt"><b>Albums</b><small>Complète-les, gagne des boosters</small></span><span class="badge hidden" id="al-badge"></span></button>
+    <button class="sbi" id="tab-collection" onclick="showTab('collection')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="7" width="12" height="14"/><path d="M8 3h13v14"/></svg></span><span class="sbt"><b>Collection</b><small>Cartes, index &amp; albums</small></span><span class="badge hidden al-badge"></span></button>
     <button class="sbi" id="tab-missions" onclick="showTab('missions')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M6 21V4M6 5h12l-2.5 4L18 13H6"/></svg></span><span class="sbt"><b>Missions</b><small>Jour, semaine &amp; succès</small></span><span class="badge hidden" id="mz-badge"></span></button>
     <button class="sbi" id="tab-games" onclick="showTab('games')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="8" width="18" height="10"/><path d="M8 11v4M6 13h4M16 12h.01M18 14h.01"/></svg></span><span class="sbt"><b>Jeux</b><small>LDC, draft, penalty, quiz</small></span></button>
     <div class="sbl">Communauté</div>
@@ -3268,13 +3276,16 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
     </div></section>
     <section id="view-collection" class="page hidden">
       <div class="collhead"><h2 class="disp">Ma collection <span id="coll-count" style="color:var(--mute);font-size:22px"></span></h2><button class="ghost" onclick="openRecycle()">Recycler mes doublons</button></div>
+      <div class="cmode"><button data-m="collection" onclick="showTab('collection')">Mes cartes</button><button data-m="albums" onclick="showTab('albums')">Albums<span class="badge hidden al-badge"></span></button></div>
       <div class="seg" id="gseg" style="margin:14px 0 4px"></div>
       <div class="chips" id="chips"></div>
       <div class="filters"><input id="c-search" placeholder="Rechercher un joueur…" oninput="renderCollection()"><label class="fl">Cartes<select id="c-own" onchange="renderCollection()"><option value="all">Toutes</option><option value="own">Obtenues</option><option value="miss">Manquantes</option></select></label><label class="fl">Tri<select id="c-sort" onchange="renderCollection()"><option value="rar-desc">Rareté : GOAT → Commune</option><option value="rar-asc">Rareté : Commune → GOAT</option><option value="num-asc">N° croissant</option><option value="num-desc">N° décroissant</option><option value="az">Nom A → Z</option><option value="za">Nom Z → A</option><option value="qty-desc">Doublons d'abord</option><option value="own-first">Obtenues d'abord</option><option value="miss-first">Manquantes d'abord</option></select></label></div>
       <div class="ccount" id="coll-n"></div>
       <div id="collection-grid"></div>
     </section>
-    <section id="view-albums" class="page hidden"><div class="al-head"><h2 class="disp">Albums <span id="al-count" style="color:var(--mute);font-size:22px"></span></h2><p class="pnote">Réunis toutes les cartes d’un album pour le compléter et réclamer sa récompense. Tu gardes tes cartes.</p></div><div id="al-body"></div></section>
+    <section id="view-albums" class="page hidden"><div class="collhead"><h2 class="disp">Ma collection <span id="al-count" style="color:var(--mute);font-size:22px"></span></h2></div>
+      <div class="cmode"><button data-m="collection" onclick="showTab('collection')">Mes cartes</button><button data-m="albums" onclick="showTab('albums')">Albums<span class="badge hidden al-badge"></span></button></div>
+      <p class="pnote al-note">Réunis toutes les cartes d’un album pour réclamer sa récompense. Tu gardes tes cartes.</p><div id="al-body"></div></section>
 
     <section id="view-messages" class="page hidden"><h2 class="disp">Messages</h2><p>Cadeaux et annonces. Appuie sur « Récupérer » pour encaisser une récompense.</p><div id="msg-list"></div></section>
 
@@ -4486,17 +4497,25 @@ async function loadAlbums(){ const box=$("al-body"); if(!box) return;
   if(a.error){ box.innerHTML=`<p class="nothing">Les albums arrivent très bientôt.</p>`; return; }
   ALB=a.data||[]; ALBC=new Set(((c&&c.data)||[]).map(x=>x.album_id)); renderAlbums(); }
 function alState(a){ const cs=(a.card_ids||[]).map(id=>allCards.find(c=>c.id===id)).filter(Boolean), have=cs.filter(c=>owned[c.id]).length; return {cs,have,full:!!cs.length&&have===cs.length,done:ALBC.has(a.id)}; }
-function alBadge(){ if(!ALB) return; const n=ALB.filter(a=>{ const s=alState(a); return s.full&&!s.done; }).length, b=$("al-badge"); if(b){ b.textContent=n; b.classList.toggle("hidden",!n); } }
+function alBadge(){ if(!ALB) return; const n=ALB.filter(a=>{ const s=alState(a); return s.full&&!s.done; }).length; document.querySelectorAll(".al-badge").forEach(b=>{ b.textContent=n; b.classList.toggle("hidden",!n); }); }
+/* un album par ligne : titre, progression, récompense et une bande de vignettes ; un clic sur la bande déplie les vraies cartes */
+const alOpen=new Set();
+function alToggle(id){ alOpen.has(id)?alOpen.delete(id):alOpen.add(id); renderAlbums(); }
 function renderAlbums(){ const box=$("al-body"); if(!box||!ALB) return;
-  $("al-count").textContent=`${ALB.filter(a=>ALBC.has(a.id)).length}/${ALB.length}`;
+  $("al-count").textContent=`${ALB.filter(a=>ALBC.has(a.id)).length}/${ALB.length} albums`;
   if(!ALB.length){ box.innerHTML=`<p class="nothing">Aucun album pour l’instant.</p>`; alBadge(); return; }
   const st=ALB.map(a=>[a,alState(a)]).sort((x,y)=>(y[1].full&&!y[1].done)-(x[1].full&&!x[1].done)||x[1].done-y[1].done);
-  box.innerHTML=st.map(([a,s])=>{ const n=s.cs.length, pct=n?Math.round(s.have/n*100):0, col=s.done?"#4ade80":s.full?"#facc15":"#f75562";
-    const act=s.done?`<span class="al-ok">✓ Complété</span>`:s.full?(isGuest?`<span class="al-miss">Connecte-toi avec Discord pour réclamer</span>`:`<button class="go" onclick="claimAlbum('${a.id}')">🎁 Réclamer</button>`):`<span class="al-miss">Il manque ${n-s.have} carte${n-s.have>1?"s":""}</span>`;
-    return `<section class="csec al ${s.done?"done":""} ${s.full&&!s.done?"rdy":""}" style="--c:${col}"><div class="al-top"><div class="al-tt"><h3>${esc(a.title)}</h3>${a.descr?`<small>${esc(a.descr)}</small>`:""}</div>
-      <div class="al-r"><span class="al-k">Récompense</span>${alReward(a).map(x=>`<b>${esc(x)}</b>`).join("")}</div><div class="al-act">${act}</div></div>
-      <div class="csh"><i></i><h3>${s.have}/${n} cartes</h3><span class="cn">${pct}%</span><div class="cbar"><b style="width:${pct}%"></b></div></div>
-      <div class="grid">${s.cs.map(c=>owned[c.id]?cardHTML(c,true,owned[c.id]):lockedCard(c)).join("")}</div></section>`; }).join("");
+  const leg=s=>s.cs.some(c=>["prime","promo","goat"].includes(c.rarity));
+  const one=([a,s])=>{ const n=s.cs.length, pct=n?Math.round(s.have/n*100):0, col=s.done?"#4ade80":s.full?"#facc15":"#f75562", open=alOpen.has(a.id);
+    const act=s.done?`<span class="al-ok">✓ Complété</span>`:s.full?(isGuest?`<span class="al-miss">Connecte-toi pour réclamer</span>`:`<button class="go" onclick="claimAlbum('${a.id}')">🎁 Réclamer</button>`):"";
+    return `<section class="al ${s.done?"done":""} ${s.full&&!s.done?"rdy":""}" style="--c:${col}"><div class="al-top">
+      <div class="al-tt"><h3>${esc(a.title)}</h3>${a.descr?`<small>${esc(a.descr)}</small>`:""}</div>
+      <div class="al-pg"><b>${s.have}/${n}</b><i><u style="width:${pct}%"></u></i></div>
+      <div class="al-r">🎁 ${alReward(a).map(esc).join(" · ")}</div>${act?`<div class="al-act">${act}</div>`:""}</div>
+      <button class="al-strip" onclick="alToggle('${a.id}')" aria-expanded="${open}">${s.cs.map(c=>`<span class="al-th ${owned[c.id]?"":"no"}" style="--rc:${COLOR[c.rarity]}" title="${esc(owned[c.id]?dispName(c):"À obtenir")}">${c.image_url?`<img src="${esc(c.image_url)}" alt="" loading="lazy" onerror="this.remove()">`:""}</span>`).join("")}<em>${open?"Masquer ▲":"Voir les cartes ▼"}</em></button>
+      ${open?`<div class="csec al-cards"><div class="grid">${s.cs.map(c=>owned[c.id]?cardHTML(c,true,owned[c.id]):lockedCard(c)).join("")}</div></div>`:""}</section>`; };
+  const A=st.filter(x=>!leg(x[1])), B=st.filter(x=>leg(x[1]));
+  box.innerHTML=(A.length?`<h3 class="al-cat">Accessibles <small>sans carte Prime</small></h3>${A.map(one).join("")}`:"")+(B.length?`<h3 class="al-cat leg">Légendaires <small>avec des Prime · grosse récompense</small></h3>${B.map(one).join("")}`:"");
   alBadge(); }
 async function claimAlbum(id){ const d=await rpd("album_claim",{p_id:id}); if(!d) return; ALBC.add(id); if(d.balloons!=null) profile.balloons=d.balloons; render();
   const a=ALB.find(x=>x.id===id); toast(`Album complété ! ${alReward(a).join(" + ")}${d.booster?" (dans Boosters)":""}`,true);
@@ -5571,9 +5590,11 @@ function openSheet(){ closeSheet(); mOpen(0); const f=freeNow(), g=(refSt&&refSt
   document.body.appendChild(d); requestAnimationFrame(()=>d.classList.add("on")); document.querySelector('.mobn').classList.add("on"); }
 function closeSheet(){ const d=$("osh"); if(d) d.remove(); const b=document.querySelector('.mobn'); if(b) b.classList.remove("on"); }
 function mOpen(v){ document.body.classList.toggle("mopen",v===undefined?!document.body.classList.contains("mopen"):!!v); }
-function mtabSync(t){ const main=["boosters","collection","games"]; document.querySelectorAll("#mtab button").forEach(b=>b.classList.toggle("on",b.dataset.t===t||(b.dataset.t==="more"&&!main.includes(t)))); }
+function mtabSync(t){ if(t==="albums") t="collection"; const main=["boosters","collection","games"]; document.querySelectorAll("#mtab button").forEach(b=>b.classList.toggle("on",b.dataset.t===t||(b.dataset.t==="more"&&!main.includes(t)))); }
 function showTab(t,arg){ if(t!=="games"){ try{ crowdBed(false); crMusic(false); }catch(e){} } mtabSync(t); mOpen(0); closeSheet();
   TABS.forEach(x=>{ $("view-"+x).classList.toggle("hidden",x!==t); const b=$("tab-"+x); if(b) b.classList.toggle("on",x===t); });
+  /* les albums font partie de la Collection : même entrée de menu, et un sélecteur « Mes cartes / Albums » en haut */
+  if(t==="albums") $("tab-collection").classList.add("on"); document.querySelectorAll(".cmode button").forEach(b=>b.classList.toggle("on",b.dataset.m===t));
   if(t==="collection") loadCollection(); if(t==="albums") loadAlbums(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings(); if(t==="cagnotte") renderCagnotte(); if(t==="discord") renderDiscord();
   $("sb-grp").classList.remove("open"); const sg=$("sb-grp").querySelector(".sbgh"); if(sg) sg.classList.toggle("on",t==="friends"||t==="messages"); if(t==="profile") loadProfile(arg); if(t==="friends") loadFriends(); if(t==="market") loadMarket(); if(t==="ballon"){ bd.off=0; loadBallon(); } if(t==="classement") loadBoards();
   closeGm(); closeCard(true); window.scrollTo(0,0);
