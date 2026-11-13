@@ -3163,6 +3163,27 @@ html{overflow-x:hidden}
 .lk2-b svg{width:12px;height:12px;flex:0 0 auto}
 @media(hover:hover){.grid .card.lk2:hover .art img{filter:grayscale(.35) brightness(.8)}.grid .card.lk2:hover .face.front{filter:saturate(.6)}.grid .card.lk2:hover .lk2-b{opacity:.85}}
 .grid .card.lk2:active .art img{filter:grayscale(.35) brightness(.8)}
+/* ---------- albums ---------- */
+.al-head{margin-bottom:22px}.al-head .pnote{margin:6px 0 0;color:var(--mute)}
+.csec.al{background:#171519;border:1px solid var(--line);border-left:4px solid var(--c);border-radius:18px;padding:20px 22px 26px;margin-bottom:28px}
+.csec.al.rdy{box-shadow:0 0 0 1px #facc1555,0 10px 40px -18px #facc15}
+.al-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:12px}
+.al-tt{flex:1 1 220px;display:grid;gap:4px}.al-tt h3{margin:0;font:italic 900 26px/1.1 Outfit,Arial,sans-serif;text-transform:uppercase}.al-tt small{color:var(--mute);font-size:13px}
+.al-r{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.al-r .al-k{font:800 10px/1 Outfit,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-right:2px}
+.al-r b{background:#ffd16614;border:1px solid #ffd16640;color:#ffd166;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800}
+.al-act .al-ok{color:#4ade80;font-weight:900}.al-act .al-miss{color:var(--mute);font-size:13px;font-weight:700}
+.csec.al .csh h3{font-size:15px}
+.csec.al.done .grid .card{filter:saturate(1.05)}
+@media(max-width:700px){.csec.al{padding:14px 12px 18px}.al-tt h3{font-size:21px}.al-act{width:100%}.al-act .go{width:100%}}
+/* missions : booster offert en plus des ballons */
+.mz2-pk{display:block;font-style:normal;font-size:11px;color:#4ade80;font-weight:800}
+/* pack du jour sur la page Boosters */
+.gift.daily{background:linear-gradient(90deg,color-mix(in srgb,#4ade80 18%,#1c1a1e),#1c1a1e 70%)!important;border-color:#4ade8055!important}
+.gift.daily .dr-k{color:#4ade80}
+/* partage du pull */
+.shp{display:grid;gap:14px;justify-items:center}.shp img{width:min(300px,70vw);border-radius:14px;box-shadow:0 18px 50px -20px #000}
+.shp-b{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.shp-dl{display:inline-flex;align-items:center;text-decoration:none;padding:10px 16px}
+.shp-load{color:var(--mute)}
 </style>
 <script>
 (function(){ try{ const base=location.href.split("#")[0].split("?")[0].replace(/[^\/]*$/,"");
@@ -3205,6 +3226,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
     <div class="sbl">Jouer</div>
     <button class="sbi" id="tab-boosters" onclick="showTab('boosters')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="4" y="8" width="16" height="12"/><path d="M4 12h16M9 8V4h6v4"/></svg></span><span class="sbt"><b>Boosters</b><small>Gratuits toutes les 10 min</small></span></button>
     <button class="sbi" id="tab-collection" onclick="showTab('collection')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="7" width="12" height="14"/><path d="M8 3h13v14"/></svg></span><span class="sbt"><b>Collection</b><small>Cartes &amp; index</small></span></button>
+    <button class="sbi" id="tab-albums" onclick="showTab('albums')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M4 4h7v16H4zM13 4h7v16h-7z"/><path d="M6.5 8h2M15.5 8h2"/></svg></span><span class="sbt"><b>Albums</b><small>Complète-les, gagne des boosters</small></span><span class="badge hidden" id="al-badge"></span></button>
     <button class="sbi" id="tab-missions" onclick="showTab('missions')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M6 21V4M6 5h12l-2.5 4L18 13H6"/></svg></span><span class="sbt"><b>Missions</b><small>Jour, semaine &amp; succès</small></span><span class="badge hidden" id="mz-badge"></span></button>
     <button class="sbi" id="tab-games" onclick="showTab('games')"><span class="sbic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><rect x="3" y="8" width="18" height="10"/><path d="M8 11v4M6 13h4M16 12h.01M18 14h.01"/></svg></span><span class="sbt"><b>Jeux</b><small>LDC, draft, penalty, quiz</small></span></button>
     <div class="sbl">Communauté</div>
@@ -3252,10 +3274,11 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
       <div class="ccount" id="coll-n"></div>
       <div id="collection-grid"></div>
     </section>
+    <section id="view-albums" class="page hidden"><div class="al-head"><h2 class="disp">Albums <span id="al-count" style="color:var(--mute);font-size:22px"></span></h2><p class="pnote">Réunis toutes les cartes d’un album pour le compléter et réclamer sa récompense. Tu gardes tes cartes.</p></div><div id="al-body"></div></section>
 
     <section id="view-messages" class="page hidden"><h2 class="disp">Messages</h2><p>Cadeaux et annonces. Appuie sur « Récupérer » pour encaisser une récompense.</p><div id="msg-list"></div></section>
 
-    <section id="view-missions" class="page hidden"><div class="mz-head"><div><h2 class="disp">Missions &amp; succès</h2><p class="pnote">Reviens chaque jour : la connexion, les missions du jour et de la semaine et les succès te rapportent des ballons.</p></div><button class="go hidden" id="mz-all" onclick="claimAllMissions()">Tout réclamer</button></div><div id="mz-body"></div></section>
+    <section id="view-missions" class="page hidden"><div class="mz-head"><div><h2 class="disp">Missions &amp; succès</h2><p class="pnote">Reviens chaque jour : ton pack du jour t’attend, et les missions du jour, de la semaine et les succès te rapportent des ballons et des boosters.</p></div><button class="go hidden" id="mz-all" onclick="claimAllMissions()">Tout réclamer</button></div><div id="mz-body"></div></section>
 
     <section id="view-games" class="page hidden"><h2 class="disp">Jeux</h2><button id="gx-x" class="gx-x hidden" onclick="gxQuit()" title="Quitter et revenir aux jeux" aria-label="Quitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div id="gx-body"><div class="gx-empty"><h3 class="disp">Bientôt</h3><p>Cette page accueillera les jeux de PrimeZ. Il n’y en a pas encore.</p></div></div></section>
 
@@ -3521,8 +3544,11 @@ async function refLoad(){ if(isGuest) return; const {data,error}=await sb.rpc("r
 const PROMO_B={id:"promo",name:"PROMO",cards_count:3,price:0,description:"3 cartes PROMO · 15 % de chance d’avoir L.YAMAL PROMO"};
 const giftB=k=>boosters.find(b=>b.id===k)||(k==="promo"?PROMO_B:null);
 function renderGifts(){ const box=$("gifts"); if(!box) return; const g=(refSt&&refSt.gifts)||{}, ks=Object.keys(g).filter(k=>g[k]>0&&giftB(k)).sort((a,b)=>(b==="promo")-(a==="promo"));
-  box.classList.toggle("hidden",!ks.length);
-  box.innerHTML=ks.map(k=>{ const b=giftB(k); return `<div class="gift ${k==="promo"?"promo":""}"><div class="gift-pk">${packHTML(b,"",`--bc:${PACK_THEME[b.id]||"#d21f2e"}`)}</div><div class="gift-t"><span class="dr-k">Boosters offerts</span><b>${esc(b.name)} × ${g[k]}</b><small>${k==="promo"?"3 cartes PROMO · 15 % de chance d’avoir L.YAMAL PROMO":"Cadeau de parrainage, gratuit"}</small></div><div class="gift-b">${giftBtns(k,g[k])}</div></div>`; }).join(""); }
+  /* le pack du jour à récupérer s'affiche en tête, avant les boosters déjà offerts */
+  const sk=typeof mzData!=="undefined"&&mzData&&mzData.streak, dk=sk&&sk.packs&&sk.can_claim?sk.packs[sk.next-1]:null, db=dk?giftB(dk):null;
+  box.classList.toggle("hidden",!ks.length&&!db);
+  box.innerHTML=(db?`<div class="gift daily"><div class="gift-pk">${packHTML(db,"",`--bc:${PACK_THEME[db.id]||"#d21f2e"}`)}</div><div class="gift-t"><span class="dr-k">Pack du jour · jour ${sk.next}/7</span><b>${esc(db.name)} offert</b><small>${sk.next===7?"Le 7e jour : une Élite ou mieux garantie":`Reviens chaque jour : le 7e jour d’affilée, un ${esc(bName(sk.packs[6]))} avec une Élite garantie`}</small></div><div class="gift-b"><button class="go" onclick="claimStreak()">🎁 Ouvrir</button></div></div>`:"")
+   +ks.map(k=>{ const b=giftB(k); return `<div class="gift ${k==="promo"?"promo":""}"><div class="gift-pk">${packHTML(b,"",`--bc:${PACK_THEME[b.id]||"#d21f2e"}`)}</div><div class="gift-t"><span class="dr-k">Boosters offerts</span><b>${esc(b.name)} × ${g[k]}</b><small>${k==="promo"?"3 cartes PROMO · 15 % de chance d’avoir L.YAMAL PROMO":"Offert, gratuit"}</small></div><div class="gift-b">${giftBtns(k,g[k])}</div></div>`; }).join(""); }
 async function openGift(id,n){ if(busy) return; n=Math.max(1,Math.min(n||1,(refSt&&refSt.gifts&&refSt.gifts[id])||1)); busy=true; const had=new Set(allCards.filter(c=>owned[c.id]).map(c=>c.id)); const cs=[]; let data=null, err=null;
   for(let i=0;i<n;i++){ const r=await sb.rpc("open_gift",{p_booster:id}); if(r.error){ err=r.error; break; } data=r.data; cs.push(...(data.cards||[])); } busy=false;
   if(err&&!cs.length){ toast(err.message); return; } if(data&&refSt&&refSt.gifts) refSt.gifts[id]=data.gift_left; renderGifts();
@@ -3965,6 +3991,71 @@ document.addEventListener("keydown",e=>{
 const SHEET_PAGE=10, LUCK={legende:"Beau tirage",mythique:"Tirage de folie",prime:"Tirage d'exception",promo:"Tirage PROMO",goat:"Tirage de légende"};
 const sheetCols=n=>n<=5?Math.max(n,1):n%5===0?5:n%4===0?4:n%3===0?3:4;
 function sheetCard(c,k,i){ const nw=seq.isNew.get(c), rv=seq.rev.has(k); return `<div class="sc ${rv?"rv":""}" data-k="${k}" style="--d:${i*45}ms"><span class="tg2 ${nw?"new":""}">${nw?"Nouveau":"Doublon"}</span>${cardHTML(c,rv,0)}</div>`; }
+/* ---------- « Partager mon pull » : une image au format story (1080×1920) avec la meilleure carte du booster ---------- */
+const SH_SIG=["prime","promo","goat"];
+/* photo dessinable dans un canvas : en direct si l'hébergeur l'autorise, sinon via un relais d'images public (wsrv.nl), sinon rien */
+function shImg(u){ return new Promise(res=>{ if(!u){ res(null); return; } const t=setTimeout(()=>res(null),9000);
+  const tryL=(src,next)=>{ const i=new Image(); i.crossOrigin="anonymous"; i.onload=()=>{ clearTimeout(t); res(i); }; i.onerror=next; i.src=src; };
+  tryL(u,()=>/^https?:/.test(u)?tryL("https://wsrv.nl/?url="+encodeURIComponent(u),()=>{ clearTimeout(t); res(null); }):(clearTimeout(t),res(null))); }); }
+function shRR(g,x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+function shT(g,t,x,y,size,o){ o=o||{}; g.save(); g.font=`${o.it===false?"":"italic "}${o.w||900} ${size}px ${o.f||"Outfit, Arial, sans-serif"}`; g.textAlign=o.al||"center"; g.textBaseline="middle";
+  if(o.ls) g.letterSpacing=o.ls+"px"; if(o.max){ let s=size; while(g.measureText(t).width>o.max&&s>10){ s-=2; g.font=`${o.it===false?"":"italic "}${o.w||900} ${s}px ${o.f||"Outfit, Arial, sans-serif"}`; } }
+  if(o.glow){ g.shadowColor=o.glow; g.shadowBlur=o.gb||30; } if(o.stroke){ g.lineJoin="round"; g.lineWidth=o.stroke; g.strokeStyle=o.sc||"#000"; g.strokeText(t,x,y); }
+  g.fillStyle=o.c||"#fff"; g.fillText(t,x,y); g.restore(); }
+/* le nom en signature dorée des Prime / PROMO / GOAT, comme sur les cartes du site */
+function shSig(g,t,x,y,size,rar,max){ g.save(); g.translate(x,y); g.rotate(-4*Math.PI/180); let s=size; g.font=`400 ${s}px "Mr Dafoe", cursive`; while(max&&g.measureText(t).width>max&&s>10){ s-=2; g.font=`400 ${s}px "Mr Dafoe", cursive`; }
+  g.textAlign="center"; g.textBaseline="middle"; const C=rar==="goat"?["#ffffff","#ffd1d9","#ff5a78"]:rar==="promo"?["#ffffff","#ffd3a1","#ff7a00"]:["#fff7d6","#f1cf74","#b88a2c"];
+  const gr=g.createLinearGradient(0,-s*.45,0,s*.45); gr.addColorStop(.1,C[0]); gr.addColorStop(.55,C[1]); gr.addColorStop(.95,C[2]);
+  g.shadowColor="#000c"; g.shadowBlur=s*.06; g.shadowOffsetY=s*.05; g.fillStyle=gr; g.fillText(t,0,0); g.restore(); }
+function shCard(g,c,img,cx,cy,w,big){ const h=w*228/158, r=w*.075, col=COLOR[c.rarity]||"#888";
+  g.save(); g.translate(cx,cy);
+  if(big){ g.save(); g.shadowColor=col; g.shadowBlur=w*.3; shRR(g,-w/2,-h/2,w,h,r); g.fillStyle=col; g.fill(); g.restore(); }
+  g.save(); shRR(g,-w/2,-h/2,w,h,r); g.clip(); g.fillStyle="#111"; g.fillRect(-w/2,-h/2,w,h);
+  if(img){ const iw=img.naturalWidth, ih=img.naturalHeight, s=Math.max(w/iw,h/ih), dw=iw*s, dh=ih*s; g.drawImage(img,-dw/2,-h/2+(h-dh)*.2,dw,dh); }
+  else { const gr=g.createLinearGradient(0,-h/2,0,h/2); gr.addColorStop(0,col); gr.addColorStop(1,"#0b0a0d"); g.fillStyle=gr; g.fillRect(-w/2,-h/2,w,h); shT(g,"PZ",0,-h*.12,w*.35,{c:"#ffffff22"}); }
+  const gr=g.createLinearGradient(0,h*.02,0,h/2); gr.addColorStop(0,"#0000"); gr.addColorStop(1,"#000e"); g.fillStyle=gr; g.fillRect(-w/2,-h/2,w,h);
+  if(big){ g.fillStyle=col; g.beginPath(); g.moveTo(-w/2,-h/2); g.lineTo(-w/2+w*.3,-h/2); g.lineTo(-w/2+w*.25,-h/2+h*.085); g.lineTo(-w/2,-h/2+h*.085); g.fill();
+    shT(g,"N°"+numTxt(c),-w/2+w*.12,-h/2+h*.045,w*.06,{}); shT(g,(TITLE[c.rarity]||"").toUpperCase(),w/2-w*.05,-h/2+h*.045,w*.05,{al:"right",ls:1}); }
+  if(SH_SIG.includes(c.rarity)){ shSig(g,sigName(c),0,h/2-h*.17,w*.2,c.rarity,w*.8); const m=String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/); if(m&&big) shT(g,m[1],0,h/2-h*.113,w*.05,{it:false,w:800,ls:2,c:"#ffffffd9"}); }
+  else shT(g,dispName(c),0,h/2-h*.15,w*.11,{max:w*.86,glow:"#000",gb:10});
+  shT(g,"◆ "+(RARITY[c.rarity]||"").toUpperCase(),0,h/2-h*.07,w*.065,{c:col,ls:3});
+  g.restore();
+  g.lineWidth=w*.022; g.strokeStyle=col; shRR(g,-w/2,-h/2,w,h,r); g.stroke(); g.restore(); }
+let shFile=null;
+async function sharePull(){ const L=seq.L||[]; if(!L.length) return; const c=L[0], col=COLOR[c.rarity]||"#e5202e";
+  const others=L.slice(1).filter(x=>ORDER.indexOf(x.rarity)>=ORDER.indexOf("legende")).slice(0,4);
+  openGm(`<h3>Partager mon pull</h3><div class="shp"><p class="shp-load">Création de l’image…</p></div>`);
+  try{ await Promise.all([document.fonts.load('400 80px "Mr Dafoe"'),document.fonts.load("italic 900 80px Outfit"),document.fonts.load("800 40px Outfit")]); }catch(e){}
+  const [im,logo,...oi]=await Promise.all([shImg(c.image_url),shImg("logo.png"),...others.map(o=>shImg(o.image_url))]);
+  const W=1080,H=1920, cv=document.createElement("canvas"); cv.width=W; cv.height=H; const g=cv.getContext("2d");
+  /* fond : nuit de stade teintée de la couleur de la rareté, faisceaux et poussière */
+  let gr=g.createRadialGradient(W/2,880,40,W/2,880,1250); gr.addColorStop(0,col+"cc"); gr.addColorStop(.45,"#140f16"); gr.addColorStop(1,"#050406"); g.fillStyle=gr; g.fillRect(0,0,W,H);
+  g.save(); g.translate(W/2,880); g.globalCompositeOperation="lighter"; for(let i=0;i<12;i++){ g.rotate(Math.PI/6); g.fillStyle=col; g.globalAlpha=.07+.04*(i%3); g.beginPath(); g.moveTo(0,0); g.lineTo(-70,-1500); g.lineTo(70,-1500); g.closePath(); g.fill(); } g.restore();
+  for(let i=0;i<70;i++){ const x=(Math.sin(i*127.1)*43758.5453%1+1)%1*W, y=(Math.sin(i*311.7)*24634.6345%1+1)%1*H, s=1.5+(i%5); g.fillStyle=`rgba(255,255,255,${.06+(i%7)*.025})`; g.beginPath(); g.arc(x,y,s,0,7); g.fill(); }
+  g.save(); g.globalAlpha=.08; g.strokeStyle="#fff"; g.lineWidth=5; g.beginPath(); g.arc(W/2,1500,300,0,7); g.moveTo(0,1500); g.lineTo(W,1500); g.stroke(); g.restore();
+  /* en haut : le logo PrimeZ */
+  { g.save(); g.font="italic 900 92px Outfit, Arial, sans-serif"; const w1=g.measureText("PRIME").width, w2=g.measureText("Z").width, L0=logo?110:0, tot=L0+(logo?24:0)+w1+w2, x0=(W-tot)/2; g.restore();
+    if(logo){ g.save(); shRR(g,x0,92,110,110,26); g.clip(); g.drawImage(logo,x0,92,110,110); g.restore(); }
+    const tx=x0+L0+(logo?24:0); shT(g,"PRIME",tx,150,92,{al:"left"}); shT(g,"Z",tx+w1,150,92,{al:"left",c:"#ff3b47",glow:"#e5202e",gb:30}); }
+  shT(g,(profile&&profile.username?profile.username+" vient de tirer":"Je viens de tirer").toUpperCase(),W/2,300,40,{it:false,w:800,ls:8,c:"#ffffffcc",max:W-120});
+  /* la carte, en grand */
+  shCard(g,c,im,W/2,880,640,true);
+  /* son nom et sa rareté */
+  const m=String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/);
+  if(SH_SIG.includes(c.rarity)) shSig(g,sigName(c),W/2,1405,120,c.rarity,W-220); else shT(g,dispName(c),W/2,1405,80,{stroke:8,glow:col,gb:36,max:W-160});
+  shT(g,`${m?m[1]+"  ·  ":""}◆ ${(RARITY[c.rarity]||"").toUpperCase()}`,W/2,1505,40,{it:false,w:800,ls:10,c:col});
+  /* les autres grosses cartes du même booster */
+  if(others.length){ shT(g,"AUSSI DANS MON BOOSTER",W/2,1578,28,{it:false,w:800,ls:6,c:"#ffffff99"}); const cw=134, gap=24, x0=W/2-(others.length*cw+(others.length-1)*gap)/2+cw/2;
+    others.forEach((o,i)=>shCard(g,o,oi[i],x0+i*(cw+gap),1712,cw,false)); }
+  /* en bas : l'adresse du site */
+  g.save(); shRR(g,W/2-300,1832,600,72,36); g.fillStyle="#e5202e33"; g.fill(); g.lineWidth=3; g.strokeStyle="#e5202e"; g.stroke(); g.restore();
+  shT(g,"primez.fr · ouvre tes boosters",W/2,1868,34,{it:false,w:800});
+  const blob=await new Promise(r=>{ try{ cv.toBlob(r,"image/png"); }catch(e){ r(null); } }); const box=$("gm-box").querySelector(".shp"); if(!box) return;
+  if(!blob){ box.innerHTML=`<p>Impossible de créer l’image.</p>`; return; }
+  const name=`PrimeZ-${dispName(c).replace(/[^A-Za-z0-9]+/g,"-")}.png`, url=URL.createObjectURL(blob); shFile=new File([blob],name,{type:"image/png"});
+  const canShare=!!(navigator.canShare&&navigator.canShare({files:[shFile]}));
+  box.innerHTML=`<img src="${url}" alt="Mon pull PrimeZ"><div class="shp-b">${canShare?`<button class="go" onclick="sharePullGo()">Partager</button>`:""}<a class="${canShare?"ghost":"go"} shp-dl" href="${url}" download="${name}">Télécharger l’image</a><button class="ghost" onclick="closeGm()">Fermer</button></div>`; }
+function sharePullGo(){ if(!shFile) return; navigator.share({files:[shFile],text:"Regarde ce que je viens de tirer sur PrimeZ ! primez.fr"}).catch(()=>{}); }
 function showSheet(pg){ if(seq.phase!=="sheet"){ dgClear(); stopVfx(); seq.phase="sheet"; }
   seq.mode="sheet"; seq.page=pg; const L=[...seq.list].reverse(), n=L.length, pages=Math.ceil(n/SHEET_PAGE), r=$("reveal");
   if(!seq.rev) seq.rev=new Set([...(seq.seen||[])].map(j=>n-1-j));
@@ -3977,7 +4068,7 @@ function showSheet(pg){ if(seq.phase!=="sheet"){ dgClear(); stopVfx(); seq.phase
   const rest=restL.map((c,i)=>sheetCard(c,base+off+i,i)).join("");
   r.className="sheetv";
   r.innerHTML=`<div class="sheet ${all?"alldone":""}"><div class="sh-head"><div class="sh-hl"><div class="sh-cap">Feuille de match <span>· ${seq.q} booster${seq.q>1?"s":""} · ${n} cartes</span></div><h2 class="sh-t">${esc(seq.b?seq.b.name:"Booster")}</h2></div>
-    <div class="sh-act">${seq.b&&!seq.test&&!seq.gift?`<button class="go" onclick="reopen()">Rouvrir ×${seq.q||1}</button>`:""}<button class="ghost" onclick="closeOverlay();showTab('collection')">Voir ma collection</button><button class="ghost" onclick="closeOverlay()">Continuer</button></div></div>
+    <div class="sh-act">${seq.b&&!seq.test&&!seq.gift?`<button class="go" onclick="reopen()">Rouvrir ×${seq.q||1}</button>`:""}<button class="ghost sh-share" onclick="sharePull()">📸 Partager mon pull</button><button class="ghost" onclick="closeOverlay();showTab('collection')">Voir ma collection</button><button class="ghost" onclick="closeOverlay()">Continuer</button></div></div>
     <div class="sh-top"><div class="sh-recap"><div class="sh-chips">${chips}</div>
     ${LUCK[seq.best.rarity]?`<div class="sh-luck">${LUCK[seq.best.rarity]}</div>`:""}
     <div class="sh-stat"><b>${nNew}</b> nouvelle${nNew>1?"s":""}<i></i><b>${n-nNew}</b> doublon${n-nNew>1?"s":""}<i></i>Plus rares en premier</div></div>
@@ -4194,6 +4285,8 @@ async function loadCollection(){
   const [a,m]=await Promise.all([sb.from("cards").select("*").eq("active",true),sb.from("user_cards").select("card_id,quantity")]);
   owned=Object.fromEntries((m.data||[]).map(r=>[r.card_id,r.quantity]));
   allCards=(a.data||[]).sort((x,y)=>ORDER.indexOf(y.rarity)-ORDER.indexOf(x.rarity)||x.name.localeCompare(y.name)); buildNums(); renderCollection(); renderHome();
+  /* albums : chargés une fois en fond (pour la pastille « à réclamer »), puis tenus à jour à chaque nouvelle carte */
+  if(ALB) renderAlbums(); else if(!loadCollection.al){ loadCollection.al=1; loadAlbums(); }
 }
 let showIds=null;
 /* anecdote en grand (sans montrer la carte : pas de spoil) */
@@ -4306,13 +4399,13 @@ async function readAllNotifs(){ await sb.rpc("notif_read_all"); loadNotifs(); }
 let mzData=null, mzFilter="all";
 const rpd=async(n,a)=>{ const r=await rpc(n,a); return r?r.data:null; };
 function mzBadge(d){ const n=(d.claimable||0)+(d.streak.can_claim?1:0), b=$("mz-badge"); b.textContent=n; b.classList.toggle("hidden",!n); const m=$("mtab-mz"); if(m) m.classList.toggle("on",!!n); const mm=$("mtab-more"); if(mm) mm.classList.toggle("on",!!n); }
-async function refreshMissions(){ if(isGuest||!profile) return; const r=await sb.rpc("missions_get"); if(r.error||!r.data) return; mzData=r.data; mzBadge(r.data); if(!$("view-missions").classList.contains("hidden")) renderMissions(); }
+async function refreshMissions(){ if(isGuest||!profile) return; const r=await sb.rpc("missions_get"); if(r.error||!r.data) return; mzData=r.data; mzBadge(r.data); renderGifts(); if(!$("view-missions").classList.contains("hidden")) renderMissions(); }
 async function loadMissions(){
   if(gate("mz-body","Les missions sont réservées aux joueurs connectés avec Discord")){ $("mz-all").classList.add("hidden"); return; }
-  const d=await rpd("missions_get"); if(!d) return; mzData=d; mzBadge(d); renderMissions();
+  const d=await rpd("missions_get"); if(!d) return; mzData=d; mzBadge(d); renderGifts(); renderMissions();
 }
 function mzRemain(iso){ const m=Math.max(0,Math.floor((new Date(iso)-Date.now())/60000)), d=Math.floor(m/1440), h=Math.floor(m%1440/60); return d?`${d} j ${h} h`:`${h} h ${String(m%60).padStart(2,"0")} min`; }
-function mzEmoji(id){ return /goat/.test(id)?"🐐":/prime/.test(id)?"💎":/myth/.test(id)?"🔥":/leg/.test(id)?"👑":/elite/.test(id)?"⭐":/open|boost/.test(id)?"📦":/sell|buy|market/.test(id)?"🏷️":/trade/.test(id)?"🔁":/lvl/.test(id)?"🚀":/cards/.test(id)?"🃏":/fr/.test(id)?"🤝":/log/.test(id)?"📅":"🎯"; }
+function mzEmoji(id){ return /_rk/.test(id)?"⚔️":/_l1/.test(id)?"🇫🇷":/goat/.test(id)?"🐐":/prime/.test(id)?"💎":/myth/.test(id)?"🔥":/leg/.test(id)?"👑":/elite/.test(id)?"⭐":/open|boost/.test(id)?"📦":/sell|buy|market/.test(id)?"🏷️":/trade/.test(id)?"🔁":/lvl/.test(id)?"🚀":/cards/.test(id)?"🃏":/fr/.test(id)?"🤝":/log/.test(id)?"📅":"🎯"; }
 function mzItem(m,ach){
   const ready=m.progress>=m.target&&!m.claimed, pct=Math.min(100,Math.round(m.progress/m.target*100));
   const st=m.claimed?`<span>✅ Réclamée</span>`:ready?`<button class="go" onclick="claimMission('${m.id}')">🎁 Réclamer</button>`:`<span>${pct}%</span>`;
@@ -4323,6 +4416,8 @@ function mzGo(id){ const e=$(id); if(e) e.scrollIntoView({behavior:"smooth",bloc
 function renderMissions(){
   const d=mzData; if(!d) return; const sk=d.streak, day=d.missions.filter(m=>m.period==="day"), wk=d.missions.filter(m=>m.period==="week");
   const keep={}; document.querySelectorAll("#mz-body .mz-trk").forEach(e=>keep[e.id]=e.scrollLeft);
+  /* pack du jour : chaque jour de la série donne un booster (Prolongation le 7e jour) */
+  const skP=i=>sk.packs?sk.packs[i-1]:null, skL=i=>skP(i)?bName(skP(i)):"+"+sk.rewards[i-1];
   const tiles=[1,2,3,4,5,6,7].map(i=>{ const done=i<=sk.claimed, now=!done&&i===sk.next&&sk.can_claim;
     return `<div class="mz-d ${done?"done":""} ${now?"now":""} ${i===7?"last":""}"><span>Jour ${i}</span><i>${done?"✅":i===7?"🎁":now?"🔥":"🎈"}</i><b>+${sk.rewards[i-1]}</b></div>`; }).join("");
   const cnt=a=>`${a.filter(m=>m.claimed).length}/${a.length}`, ach=d.ach.filter(a=>mzFilter==="all"||(mzFilter==="todo"?!a.claimed:a.claimed));
@@ -4330,19 +4425,19 @@ function renderMissions(){
   const ctl=id=>`<div class="mz-ctl"><button class="mz-ar" onclick="mzScroll('${id}',-1)" aria-label="Précédent">‹</button><button class="mz-ar" onclick="mzScroll('${id}',1)" aria-label="Suivant">›</button></div>`;
   const pill=(e,l,v,id,c)=>`<button class="mz-pill" style="--c:${c}" onclick="mzGo('${id}')"><span>${e}</span><b>${l}</b><em>${v}</em></button>`;
   /* nouvelle mise en page : série en piste, missions du jour / de la semaine en listes côte à côte, succès en médailles */
-  const node=(i)=>{ const done=i<=sk.claimed, now=!done&&i===sk.next&&sk.can_claim, next=!done&&i===sk.next; return `<div class="mz2-n ${done?"done":""} ${now?"now":""} ${next?"next":""} ${i===7?"last":""}"><i>${done?"✓":i===7?"🎁":now?"🔥":i}</i><span>Jour ${i}</span><b>+${sk.rewards[i-1]}</b></div>`; };
+  const node=(i)=>{ const done=i<=sk.claimed, now=!done&&i===sk.next&&sk.can_claim, next=!done&&i===sk.next; return `<div class="mz2-n ${done?"done":""} ${now?"now":""} ${next?"next":""} ${i===7?"last":""}"><i>${done?"✓":i===7?"🎁":now?"🔥":i}</i><span>Jour ${i}</span><b>${esc(skL(i))}</b></div>`; };
   const row=m=>{ const ready=m.progress>=m.target&&!m.claimed, pct=Math.min(100,Math.round(m.progress/m.target*100));
     return `<div class="mz2-r ${ready?"rdy":""} ${m.claimed?"ok":""}"><span class="mz2-ic">${mzEmoji(m.id)}</span><div class="mz2-mid"><b>${esc(m.title)}</b><div class="mz2-bar"><u style="width:${pct}%"></u></div><small>${nf(Math.min(m.progress,m.target))} / ${nf(m.target)}</small></div>
-      <span class="mz2-rw">+${nf(m.reward)}</span>${m.claimed?`<span class="mz2-ok">✓</span>`:ready?`<button class="go" onclick="claimMission('${m.id}')">Réclamer</button>`:`<span class="mz2-pct">${pct}%</span>`}</div>`; };
+      <span class="mz2-rw">+${nf(m.reward)}${m.pack?`<em class="mz2-pk">+ 1 ${esc(bName(m.pack))}</em>`:""}</span>${m.claimed?`<span class="mz2-ok">✓</span>`:ready?`<button class="go" onclick="claimMission('${m.id}')">Réclamer</button>`:`<span class="mz2-pct">${pct}%</span>`}</div>`; };
   const medal=a=>{ const ready=a.progress>=a.target&&!a.claimed, pct=Math.min(100,Math.round(a.progress/a.target*100));
     return `<div class="mz2-m ${ready?"rdy":""} ${a.claimed?"ok":""}"><span class="mz2-md">${mzEmoji(a.id)}</span><b>${esc(a.title)}</b><small>${esc(a.descr||"")}</small><div class="mz2-bar"><u style="width:${pct}%"></u></div>
       <div class="mz2-mf"><span>${nf(Math.min(a.progress,a.target))} / ${nf(a.target)}</span>${a.claimed?`<em>✓ Obtenu</em>`:ready?`<button class="go" onclick="claimMission('${a.id}')">+${nf(a.reward)}</button>`:`<em class="rw">+${nf(a.reward)}</em>`}</div></div>`; };
   const pct7=Math.round(Math.max(0,sk.claimed-1)/6*100);
   $("mz-body").innerHTML=muWrap(`<div class="mz2">
     <div class="mz2-sum">${pill("📅","Série",`${sk.claimed}/7`,"mzs-streak","#4ade80")}${pill("☀️","Du jour",cnt(day),"mzs-day","#2dd4bf")}${pill("🗓️","Semaine",cnt(wk),"mzs-week","#fbbf24")}${pill("🏆","Succès",cnt(d.ach),"mzs-ach","#f472b6")}<span class="mz-tot">${all?`🎁 ${all} à réclamer`:"✅ Tout est à jour"}</span></div>
-    <section class="mz2-box mz2-streak" id="mzs-streak" style="--c:#4ade80"><div class="mz2-h"><div><span class="mz2-k">Connexion</span><h3>Série de 7 jours</h3></div>${sk.can_claim?`<button class="go" onclick="claimStreak()">🔥 Jour ${sk.next} · +${sk.rewards[sk.next-1]}</button>`:`<span class="mz2-tm">Reviens demain</span>`}</div>
+    <section class="mz2-box mz2-streak" id="mzs-streak" style="--c:#4ade80"><div class="mz2-h"><div><span class="mz2-k">${sk.packs?"Chaque jour":"Connexion"}</span><h3>${sk.packs?"Pack du jour · série de 7 jours":"Série de 7 jours"}</h3></div>${sk.can_claim?`<button class="go" onclick="claimStreak()">${sk.packs?`🎁 Jour ${sk.next} · ouvrir mon pack ${esc(skL(sk.next))}`:`🔥 Jour ${sk.next} · +${sk.rewards[sk.next-1]}`}</button>`:`<span class="mz2-tm">Reviens demain</span>`}</div>
       <div class="mz2-track"><div class="mz2-line"><u style="width:${pct7}%"></u></div>${[1,2,3,4,5,6,7].map(node).join("")}</div>
-      <p class="mz2-foot">${nf(sk.total)} connexion${sk.total>1?"s":""} au total · 1 jour manqué toléré, au-delà la série repart du jour 1</p></section>
+      <p class="mz2-foot">${nf(sk.total)} connexion${sk.total>1?"s":""} au total${sk.packs?" · le 7e jour d’affilée, une Élite ou mieux garantie · un jour manqué et la série repart du jour 1":" · 1 jour manqué toléré, au-delà la série repart du jour 1"}</p></section>
     <div class="mz2-cols">
       <section class="mz2-box" id="mzs-day" style="--c:#2dd4bf"><div class="mz2-h"><div><span class="mz2-k">Du jour</span><h3>Missions du jour</h3></div><span class="mz2-tm">⏳ ${mzRemain(d.day_end)}</span></div><div class="mz2-list">${day.map(row).join("")}</div></section>
       <section class="mz2-box" id="mzs-week" style="--c:#fbbf24"><div class="mz2-h"><div><span class="mz2-k">De la semaine</span><h3>Missions de la semaine</h3></div><span class="mz2-tm">⏳ ${mzRemain(d.week_end)}</span></div><div class="mz2-list">${wk.map(row).join("")}</div></section>
@@ -4365,13 +4460,47 @@ function muOpen(id){ const c=allCards.find(x=>x.id===id); if(!c) return; const k
     <div class="mu-txt"><span class="mu-k">Salle ${gold?"des Immortels":"des Légendes"}${m?` · ${m[1]}`:""}</span><h3>${esc(k)}</h3>${I[0]?`<small>${esc(I[0])}</small>`:""}<p>${esc(I[2]||"")}</p><button class="ghost" onclick="this.closest('.mu-pop').remove();openCard(${c.id},null,true)">Voir la carte</button></div></div>`;
   document.body.appendChild(d); requestAnimationFrame(()=>d.classList.add("on")); }
 async function mzDone(d,txt){ profile.balloons=d.balloons; render(); toast(txt,true); await loadMissions(); }
-async function claimStreak(){ const d=await rpd("streak_claim"); if(d) mzDone(d,`Jour ${d.day} : +${d.reward} ${CURRENCY}`); }
-async function claimMission(id){ const d=await rpd("mission_claim",{p_id:id}); if(d) mzDone(d,`+${d.reward} ${CURRENCY}`); }
+/* pack du jour : le booster arrive dans « Boosters offerts » et s'ouvre aussitôt */
+async function claimStreak(){ const d=await rpd("streak_claim"); if(!d) return;
+  if(!d.booster){ mzDone(d,`Jour ${d.day} : +${d.reward} ${CURRENCY}`); return; }
+  refSt=refSt||{gifts:{}}; refSt.gifts=refSt.gifts||{}; refSt.gifts[d.booster]=(refSt.gifts[d.booster]||0)+1;
+  toast(`Jour ${d.day} : ton pack ${bName(d.booster)} est là !`,true); refreshMissions(); openGift(d.booster,1); }
+async function claimMission(id){ const m=mzData&&mzData.missions.find(x=>x.id===id), d=await rpd("mission_claim",{p_id:id}); if(!d) return;
+  if(m&&m.pack) refLoad(); mzDone(d,`+${d.reward} ${CURRENCY}${m&&m.pack?` + 1 booster ${bName(m.pack)}`:""}`); }
 async function claimAllMissions(){
-  let tot=0, last=null; if(mzData&&mzData.streak.can_claim){ const s=await rpd("streak_claim"); if(s){ tot+=s.reward; last=s; } }
+  let tot=0, last=null, pk=null; if(mzData&&mzData.streak.can_claim){ const s=await rpd("streak_claim"); if(s){ tot+=s.reward; last=s; pk=s.booster; } }
   const m=await rpd("missions_claim_all"); if(m){ tot+=m.reward; last=m; }
-  if(last) mzDone(last,tot?`+${nf(tot)} ${CURRENCY} récupérés`:"Rien à réclamer pour l’instant");
+  if(pk||(mzData&&mzData.missions.some(x=>x.pack))) refLoad();
+  if(last) mzDone(last,tot||pk?`${tot?`+${nf(tot)} ${CURRENCY}`:""}${pk?`${tot?" + ":""}ton pack du jour (dans Boosters)`:""} récupérés`:"Rien à réclamer pour l’instant");
 }
+
+/* ---------- albums : des listes de cartes à réunir ; un album complet = une récompense (on garde ses cartes) ---------- */
+let ALB=null, ALBC=new Set();
+const bName=k=>{ const b=typeof giftB==="function"?giftB(k):null; return b?b.name:k==="coup-envoi"?"Coup d’envoi":k==="prolongation"?"Prolongation":k==="pantheon"?"Panthéon":k; };
+function alReward(a){ const r=[]; if(a.reward_booster) r.push(`${a.reward_qty>1?a.reward_qty+" boosters":"1 booster"} ${bName(a.reward_booster)}`);
+  if(a.reward_card){ const c=allCards.find(x=>x.id===a.reward_card); r.push(`la carte exclusive${c?" "+dispName(c):""}`); }
+  if(a.reward_balloons) r.push(`${nf(a.reward_balloons)} ${CURRENCY}`); return r; }
+async function loadAlbums(){ const box=$("al-body"); if(!box) return;
+  if(!allCards.length) await loadCollection();
+  const [a,c]=await Promise.all([sb.from("albums").select("*").eq("active",true).order("sort"), isGuest?Promise.resolve({data:[]}):sb.from("album_claims").select("album_id")]);
+  if(a.error){ box.innerHTML=`<p class="nothing">Les albums arrivent très bientôt.</p>`; return; }
+  ALB=a.data||[]; ALBC=new Set(((c&&c.data)||[]).map(x=>x.album_id)); renderAlbums(); }
+function alState(a){ const cs=(a.card_ids||[]).map(id=>allCards.find(c=>c.id===id)).filter(Boolean), have=cs.filter(c=>owned[c.id]).length; return {cs,have,full:!!cs.length&&have===cs.length,done:ALBC.has(a.id)}; }
+function alBadge(){ if(!ALB) return; const n=ALB.filter(a=>{ const s=alState(a); return s.full&&!s.done; }).length, b=$("al-badge"); if(b){ b.textContent=n; b.classList.toggle("hidden",!n); } }
+function renderAlbums(){ const box=$("al-body"); if(!box||!ALB) return;
+  $("al-count").textContent=`${ALB.filter(a=>ALBC.has(a.id)).length}/${ALB.length}`;
+  if(!ALB.length){ box.innerHTML=`<p class="nothing">Aucun album pour l’instant.</p>`; alBadge(); return; }
+  const st=ALB.map(a=>[a,alState(a)]).sort((x,y)=>(y[1].full&&!y[1].done)-(x[1].full&&!x[1].done)||x[1].done-y[1].done);
+  box.innerHTML=st.map(([a,s])=>{ const n=s.cs.length, pct=n?Math.round(s.have/n*100):0, col=s.done?"#4ade80":s.full?"#facc15":"#f75562";
+    const act=s.done?`<span class="al-ok">✓ Complété</span>`:s.full?(isGuest?`<span class="al-miss">Connecte-toi avec Discord pour réclamer</span>`:`<button class="go" onclick="claimAlbum('${a.id}')">🎁 Réclamer</button>`):`<span class="al-miss">Il manque ${n-s.have} carte${n-s.have>1?"s":""}</span>`;
+    return `<section class="csec al ${s.done?"done":""} ${s.full&&!s.done?"rdy":""}" style="--c:${col}"><div class="al-top"><div class="al-tt"><h3>${esc(a.title)}</h3>${a.descr?`<small>${esc(a.descr)}</small>`:""}</div>
+      <div class="al-r"><span class="al-k">Récompense</span>${alReward(a).map(x=>`<b>${esc(x)}</b>`).join("")}</div><div class="al-act">${act}</div></div>
+      <div class="csh"><i></i><h3>${s.have}/${n} cartes</h3><span class="cn">${pct}%</span><div class="cbar"><b style="width:${pct}%"></b></div></div>
+      <div class="grid">${s.cs.map(c=>owned[c.id]?cardHTML(c,true,owned[c.id]):lockedCard(c)).join("")}</div></section>`; }).join("");
+  alBadge(); }
+async function claimAlbum(id){ const d=await rpd("album_claim",{p_id:id}); if(!d) return; ALBC.add(id); if(d.balloons!=null) profile.balloons=d.balloons; render();
+  const a=ALB.find(x=>x.id===id); toast(`Album complété ! ${alReward(a).join(" + ")}${d.booster?" (dans Boosters)":""}`,true);
+  if(d.booster) await refLoad(); if(d.card) await loadCollection(); renderAlbums(); }
 
 /* ---------- admin : cartes ---------- */
 async function loadAdmin(){
@@ -5075,9 +5204,9 @@ function tiltify(el,max){ if(!el||el.dataset.tilt) return; el.dataset.tilt=1; ma
 
 document.addEventListener("click",e=>{
   const el=e.target.closest(".card[data-cid],.slot[data-cid]"); if(!el) return;
-  if(!el.closest("#collection-grid,#pf-body,#mk-list,#fr-body")||el.closest("#gm")||el.closest(".fv.ed")) return;
+  if(!el.closest("#collection-grid,#al-body,#pf-body,#mk-list,#fr-body")||el.closest("#gm")||el.closest(".fv.ed")) return;
   /* carte d'un autre joueur (marché, amis, profil) : on la montre en entier, sans « ? » ni flou */
-  openCard(+el.dataset.cid,el,el.closest("#collection-grid")?false:"seen");
+  openCard(+el.dataset.cid,el,el.closest("#collection-grid,#al-body")?false:"seen");
 });
 /* ---------- social : profil, amis, échanges, marché, classement ---------- */
 const LVL_T=[[31,"Ballon d’Or"],[26,"Légende vivante"],[21,"Capitaine"],[16,"International"],[11,"Titulaire"],[6,"Remplaçant"],[1,"Recrue"]];
@@ -5397,7 +5526,7 @@ function lbMark(i){ lb.cur=i; const ch=$("lb-chips"); if(!ch) return; [...ch.chi
 function lbGo(i){ const rail=$("lb-rail"); if(!rail) return; const n=rail.children.length; i=Math.max(0,Math.min(n-1,i)); const c=rail.children[i]; rail.scrollTo({left:c.offsetLeft-rail.offsetLeft-(rail.clientWidth-c.offsetWidth)/2,behavior:"smooth"}); lbMark(i); }
 function lbMove(d){ lbGo(lb.cur+d); }
 /* ---------- navigation ---------- */
-const TABS=["boosters","collection","missions","games","market","friends","ballon","classement","cagnotte","discord","messages","profile","settings","admin-cards","admin-photos","admin-players"];
+const TABS=["boosters","collection","albums","missions","games","market","friends","ballon","classement","cagnotte","discord","messages","profile","settings","admin-cards","admin-photos","admin-players"];
 /* admin : basculer l'affichage entre modo, joueur normal et invité (rien ne change côté serveur) */
 let realAdmin=false, realGuest=false, viewMode="modo";
 function applyView(silent){ if(!realAdmin) viewMode="modo"; setTimeout(()=>{ try{ cagApply(); }catch(e){} },0);
@@ -5445,10 +5574,10 @@ function mOpen(v){ document.body.classList.toggle("mopen",v===undefined?!documen
 function mtabSync(t){ const main=["boosters","collection","games"]; document.querySelectorAll("#mtab button").forEach(b=>b.classList.toggle("on",b.dataset.t===t||(b.dataset.t==="more"&&!main.includes(t)))); }
 function showTab(t,arg){ if(t!=="games"){ try{ crowdBed(false); crMusic(false); }catch(e){} } mtabSync(t); mOpen(0); closeSheet();
   TABS.forEach(x=>{ $("view-"+x).classList.toggle("hidden",x!==t); const b=$("tab-"+x); if(b) b.classList.toggle("on",x===t); });
-  if(t==="collection") loadCollection(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings(); if(t==="cagnotte") renderCagnotte(); if(t==="discord") renderDiscord();
+  if(t==="collection") loadCollection(); if(t==="albums") loadAlbums(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings(); if(t==="cagnotte") renderCagnotte(); if(t==="discord") renderDiscord();
   $("sb-grp").classList.remove("open"); const sg=$("sb-grp").querySelector(".sbgh"); if(sg) sg.classList.toggle("on",t==="friends"||t==="messages"); if(t==="profile") loadProfile(arg); if(t==="friends") loadFriends(); if(t==="market") loadMarket(); if(t==="ballon"){ bd.off=0; loadBallon(); } if(t==="classement") loadBoards();
   closeGm(); closeCard(true); window.scrollTo(0,0);
-  const TT={boosters:"Boosters",collection:"Collection",missions:"Missions",games:"Jeux",market:"Marché",friends:"Amis",ballon:"Ballon d’Or",classement:"Classements",cagnotte:"Cagnotte",discord:"Discord",messages:"Messages",profile:"Profil",settings:"Paramètres"}; document.title=(TT[t]?TT[t]+" · ":"")+"PrimeZ";
+  const TT={boosters:"Boosters",collection:"Collection",albums:"Albums",missions:"Missions",games:"Jeux",market:"Marché",friends:"Amis",ballon:"Ballon d’Or",classement:"Classements",cagnotte:"Cagnotte",discord:"Discord",messages:"Messages",profile:"Profil",settings:"Paramètres"}; document.title=(TT[t]?TT[t]+" · ":"")+"PrimeZ";
   if(showTab.prev==="collection"&&t!=="collection"&&NEWC.size){ NEWC.clear(); newSave(); } showTab.prev=t;
   const v=$("view-"+t); if(v){ v.classList.remove("venter"); void v.offsetWidth; v.classList.add("venter"); }
 }
