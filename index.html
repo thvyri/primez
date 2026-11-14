@@ -3183,6 +3183,11 @@ html{overflow-x:hidden}
 .al-th.no{border-color:#ffffff22;background:#111}.al-th.no img{filter:grayscale(1) brightness(.45)}
 .al-strip em{flex:0 0 auto;margin-left:8px;font-style:normal;font-size:12px;font-weight:800;color:var(--mute);white-space:nowrap}
 .al-cards{margin:16px 0 4px!important}
+/* bandeau « Active les notifications » */
+.ntb{display:flex;align-items:center;gap:14px;padding:12px 16px;margin-bottom:14px;border-radius:16px;background:linear-gradient(90deg,color-mix(in srgb,#facc15 14%,#1c1a1e),#1c1a1e 70%);border:1px solid #facc1544}
+.ntb-i{font-size:24px}.ntb-t{flex:1;display:grid;gap:2px}.ntb-t small{color:var(--mute);font-size:12px}
+.ntb-x{background:none;border:0;color:var(--mute);font-size:16px;padding:6px}
+@media(max-width:700px){.ntb{flex-wrap:wrap}.ntb .go{flex:1}}
 /* admin : albums */
 .aa{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:18px;align-items:start}
 @media(max-width:900px){.aa{grid-template-columns:1fr}}
@@ -3283,6 +3288,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
     <section id="view-boosters"><div class="wrap bx">
       <div class="bx-head"><div><span class="bx-kick">Le vestiaire</span><h2 class="disp">Boosters</h2></div><div class="pills" id="pills"></div></div>
       <div class="hero hidden" id="hero"></div>
+      <div class="ntb hidden" id="nt-bar"><span class="ntb-i">🔔</span><span class="ntb-t"><b>Active les notifications</b><small>Ne rate plus ton pack du jour, tes échanges, tes ventes et les annonces.</small></span><button class="go" onclick="pushOn()">Activer</button><button class="ntb-x" onclick="pushLater()" aria-label="Plus tard">✕</button></div>
       <div class="gifts hidden" id="gifts"></div>
       <div class="bx-pick" id="packs"></div>
       <div class="bx-act" id="panel"></div>
@@ -3325,6 +3331,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
 
     <section id="view-settings" class="page hidden"><h2 class="disp">Paramètres</h2><p>Ton compte, le son et l’application.</p>
       <div class="set"><div class="mb"><h4 id="inst-h">Application</h4><p id="inst-txt"></p></div><button class="go" id="inst-btn" onclick="installApp()">Installer PrimeZ</button></div>
+      <div class="set"><div class="mb"><h4>Notifications</h4><p id="nt-txt"></p></div><button class="go" id="nt-on" onclick="pushOn()">Activer</button><button class="ghost hidden" id="nt-test" onclick="pushTest()">Tester</button><button class="ghost hidden" id="nt-off" onclick="pushOff()">Désactiver</button></div>
       <div class="set"><div class="mb"><h4>Son</h4><p>Sifflet, foule et effets pendant les ouvertures.</p></div><button class="ghost" id="snd-btn" onclick="toggleMute();renderSettings()"></button></div>
       <div class="set"><div class="mb"><h4>Compte</h4><p id="acc-txt"></p></div><button class="go hidden" id="acc-save" onclick="saveAccount()">Sauvegarder avec Discord</button><button class="ghost" onclick="logout()">Déconnexion</button></div>
     </section>
@@ -3665,6 +3672,9 @@ async function start(){
   realAdmin=!!profile.is_admin; realGuest=isGuest; try{ viewMode=localStorage.getItem("pz_view")||"modo"; }catch(e){} applyView(true); adminSync(); cagLoad();
   $("mute-btn").textContent=muted?"🔇":"🔊";
   render(); newSave(); setInterval(renderFree,1000); loadMessages(); loadFeed(); loadCollection(); refreshSocial(); setInterval(refreshSocial,60000); loadNotifs(); setInterval(loadNotifs,60000); refreshMissions(); setInterval(refreshMissions,120000); setTimeout(()=>syncAccount(true),5000); setInterval(syncAccount,60000);
+  /* notifications : l'appareil déjà autorisé est rattaché au compte connecté ; arrivé par une notif (?tab=…) on ouvre le bon onglet */
+  pushUI(); if(pushOk()&&Notification.permission==="granted") pushSub(false).catch(()=>{});
+  { const qt=new URLSearchParams(location.search).get("tab"); if(qt&&TABS.includes(qt)){ try{ history.replaceState(null,"",location.pathname); }catch(e){} setTimeout(()=>showTab(qt),300); } }
   refClaim().then(refLoad).then(()=>setTimeout(()=>inviteIntro(),1500)); mavSet();
 }
 
@@ -4948,7 +4958,34 @@ function renderSettings(){
   $("snd-btn").textContent=muted?"Son coupé":"Son activé";
   $("acc-txt").textContent=isGuest?"Tu joues en invité : sauvegarde avec Discord pour ne pas perdre ta collection (+400 ballons, +7 boosters).":"Connecté avec Discord"+(profile&&profile.username?" · "+profile.username:"");
   $("acc-save").classList.toggle("hidden",!isGuest);
+  pushUI();
 }
+/* ---------- notifications (web push) : sw.js affiche les notifs, Supabase les envoie (notifications-PRIVE.sql + fonction « push ») ---------- */
+const VAPID_PUB="BKIH8oymoEvdjWe1VyICi0baXARy4y_wlk7rgnllqrmmIeqCRCTifqqw27aMDgQvdsakXfD1BqZf1nQlFxlEwGU";
+const pushOk=()=>"serviceWorker" in navigator&&"PushManager" in window&&"Notification" in window;
+if("serviceWorker" in navigator){ navigator.serviceWorker.register("/sw.js").catch(()=>{});
+  navigator.serviceWorker.addEventListener("message",e=>{ const d=e.data||{}; if(d.pz==="tab"&&TABS.includes(d.tab)&&profile) showTab(d.tab); }); }
+const b64u=s=>{ const b=atob((s+"=".repeat((4-s.length%4)%4)).replace(/-/g,"+").replace(/_/g,"/")); return Uint8Array.from(b,c=>c.charCodeAt(0)); };
+async function pushSub(ask){ if(!pushOk()) return null; const reg=await navigator.serviceWorker.ready; let s=await reg.pushManager.getSubscription();
+  if(!s){ if(!ask) return null; s=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(VAPID_PUB)}); }
+  const r=await sb.rpc("push_subscribe",{p_sub:s.toJSON()}); if(r.error){ console.warn("Notifications :",r.error.message); return null; } return s; }
+async function pushOn(){
+  if(!pushOk()){ toast(IOS&&!isApp()?"Sur iPhone : ajoute d’abord PrimeZ à ton écran d’accueil (Partager → Sur l’écran d’accueil), puis ouvre-le depuis l’icône.":"Ton navigateur ne gère pas les notifications."); return; }
+  const p=await Notification.requestPermission();
+  if(p!=="granted"){ toast(p==="denied"?"Notifications bloquées : autorise-les pour PrimeZ dans les réglages du navigateur.":"Notifications pas activées"); pushUI(); return; }
+  try{ const s=await pushSub(true); if(s){ toast("Notifications activées 🔔",true); sb.rpc("push_test").then(()=>{},()=>{}); } else toast("Impossible d’activer les notifications pour l’instant"); }
+  catch(e){ toast("Impossible d’activer les notifications : "+e.message); } pushUI(); }
+async function pushOff(){ try{ const reg=await navigator.serviceWorker.ready, s=await reg.pushManager.getSubscription(); if(s){ await sb.rpc("push_unsubscribe",{p_endpoint:s.endpoint}); await s.unsubscribe(); } toast("Notifications désactivées",true); }catch(e){} pushUI(); }
+async function pushTest(){ const r=await sb.rpc("push_test"); toast(r.error?r.error.message:"Notification de test envoyée : elle arrive dans quelques secondes",!r.error); }
+function pushLater(){ try{ localStorage.setItem("pz_nt_later",Date.now()); }catch(e){} pushUI(); }
+async function pushUI(){ const sup=pushOk(), perm=sup?Notification.permission:"x";
+  const s=sup&&perm==="granted"?await navigator.serviceWorker.ready.then(r=>r.pushManager.getSubscription()).catch(()=>null):null, on=!!s;
+  const t=$("nt-txt"); if(t) t.textContent=!sup?(IOS&&!isApp()?"Sur iPhone, ajoute d’abord PrimeZ à ton écran d’accueil, puis ouvre-le depuis l’icône pour activer les notifications.":"Ton navigateur ne gère pas les notifications.")
+    :perm==="denied"?"Bloquées : autorise les notifications pour PrimeZ dans les réglages de ton navigateur."
+    :on?"Activées sur cet appareil : pack du jour, échanges, ventes, cadeaux et annonces.":"Pack du jour, échanges, ventes, cadeaux et annonces, même quand le site est fermé.";
+  [["nt-on",!on&&(sup||IOS)&&perm!=="denied"],["nt-test",on],["nt-off",on]].forEach(([id,v])=>{ const e=$(id); if(e) e.classList.toggle("hidden",!v); });
+  let later=0; try{ later=+localStorage.getItem("pz_nt_later")||0; }catch(e){}
+  const bar=$("nt-bar"); if(bar) bar.classList.toggle("hidden",!(profile&&(sup||IOS)&&perm!=="denied"&&!on&&Date.now()-later>7*864e5)); }
 /* ---------- fiches joueurs : [poste · pays, palmarès séparé par |, anecdote] ---------- */
 const INFO={
 "L.YAMAL":["Ailier droit · Espagne","Euro 2024|Meilleur jeune de l’Euro 2024|2 Liga (2023, 2025)|Trophée Kopa 2024 et 2025","Après chaque but, il fait « 304 » avec ses doigts : ce sont les trois derniers chiffres du code postal de Rocafonda, son quartier de Mataró, près de Barcelone."],
