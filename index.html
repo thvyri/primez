@@ -3183,58 +3183,74 @@ html{overflow-x:hidden}
 .al-th.no{border-color:#ffffff22;background:#111}.al-th.no img{filter:grayscale(1) brightness(.45)}
 .al-strip em{flex:0 0 auto;margin-left:8px;font-style:normal;font-size:12px;font-weight:800;color:var(--mute);white-space:nowrap}
 .al-cards{margin:16px 0 4px!important}
-/* ---------- accueil : terrain + joueur du jour ---------- */
-.ac{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,400px);gap:22px;align-items:start;max-width:1320px;margin:0 auto}
+/* ---------- accueil : plein écran, le terrain à gauche, le défilé des cartes à droite ---------- */
+@media(min-width:761px){body.ac-mode .sb{display:none!important}}
+.ac-page{padding:14px 22px 18px}
+.ac{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,32vw);gap:20px;height:calc(100dvh - var(--hh,64px) - 32px);min-height:600px}
 .ac-k{font:800 10px/1 Outfit,Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
-.ac-main{display:grid;gap:14px;min-width:0;grid-column:1;grid-row:1}.ac-star{grid-column:2;grid-row:1}
+.ac-main{display:flex;flex-direction:column;gap:12px;min-width:0;min-height:0}.ac-main>.ac-pitch{flex:1 1 0}
 .ac-hi{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.ac-hi h2{margin:4px 0 0;font:italic 900 clamp(28px,4vw,46px)/1 Outfit,Arial,sans-serif;text-transform:uppercase}.ac-hi h2 b{color:#ff3b47}
+.ac-hi h2{margin:4px 0 0;font:italic 900 clamp(28px,3.4vw,52px)/1 Outfit,Arial,sans-serif;text-transform:uppercase}.ac-hi h2 b{color:#ff3b47}
 .ac-chips{display:flex;gap:6px;flex-wrap:wrap}.ac-chips span{background:#171519;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12px;color:var(--mute)}
 .ac-chips b{color:#fff}.ac-chips .ac-hot{border-color:#4ade8066;color:#4ade80}
-.ac-daily{display:flex;align-items:center;gap:12px;width:100%;padding:12px 16px;border-radius:16px;background:#171519;border:1px solid var(--line);color:inherit;text-align:left}
-.ac-daily>span{font-size:26px}.ac-daily div{flex:1;display:grid;gap:2px}.ac-daily small{color:var(--mute);font-size:12px}
+.ac-daily{display:flex;align-items:center;gap:12px;width:100%;padding:10px 16px;border-radius:16px;background:#171519;border:1px solid var(--line);color:inherit;text-align:left}
+.ac-daily>span{font-size:24px}.ac-daily div{flex:1;display:grid;gap:2px}.ac-daily small{color:var(--mute);font-size:12px}
 .ac-daily.ac-on{cursor:pointer;background:linear-gradient(90deg,color-mix(in srgb,#4ade80 20%,#171519),#171519 75%);border-color:#4ade8066}
 .ac-daily em{font-style:normal;font-weight:900;background:#4ade80;color:#0c1a10;padding:9px 16px;border-radius:999px}
-/* le terrain : bandes de pelouse, lignes, et les rubriques placées comme un onze */
-.ac-pitch{position:relative;display:grid;gap:18px;padding:26px 18px 22px;border-radius:24px;overflow:hidden;
-  background:repeating-linear-gradient(180deg,#0e1a12 0 64px,#112016 64px 128px);border:1px solid #ffffff14;box-shadow:inset 0 0 120px #000a}
+/* le terrain */
+.ac-pitch{position:relative;display:grid;grid-template-rows:1.2fr 1fr 1fr .9fr;gap:clamp(10px,1.6vh,18px);padding:clamp(16px,2.4vh,28px) clamp(14px,2vw,30px);border-radius:24px;overflow:hidden;min-height:0;
+  background:repeating-linear-gradient(180deg,#0e1a12 0 12.5%,#112016 12.5% 25%);border:1px solid #ffffff14;box-shadow:inset 0 0 140px #000a}
 .ac-ln{position:absolute;inset:12px;border:2px solid #ffffff1a;border-radius:14px;pointer-events:none}
 .ac-ln::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px solid #ffffff1a}
-.ac-ln::after{content:"";position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border:2px solid #ffffff1a;border-radius:50%}
-.ac-pitch::before,.ac-pitch::after{content:"";position:absolute;left:50%;width:46%;height:70px;transform:translateX(-50%);border:2px solid #ffffff1a;pointer-events:none}
+.ac-ln::after{content:"";position:absolute;left:50%;top:50%;width:min(22vh,180px);aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid #ffffff1a;border-radius:50%}
+.ac-pitch::before,.ac-pitch::after{content:"";position:absolute;left:50%;width:44%;height:11%;transform:translateX(-50%);border:2px solid #ffffff1a;pointer-events:none}
 .ac-pitch::before{top:12px;border-top:0}.ac-pitch::after{bottom:12px;border-bottom:0}
-.ac-row{position:relative;display:flex;justify-content:center;gap:12px;z-index:1}
-.ac-lab{position:absolute;left:8px;top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:left center;margin-top:28px;font:800 9px/1 Outfit,Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#ffffff40}
-.ac-t{position:relative;display:grid;align-content:end;gap:3px;width:clamp(120px,13vw,168px);min-height:104px;padding:12px 12px 11px;border-radius:16px;text-align:left;color:#fff;overflow:hidden;cursor:pointer;
-  background:linear-gradient(160deg,color-mix(in srgb,var(--c) 26%,#141118) 0%,#121014ee 60%);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);box-shadow:0 10px 24px -14px #000;transition:transform .18s,box-shadow .18s,border-color .18s}
+.ac-row{position:relative;display:flex;justify-content:center;align-items:stretch;gap:clamp(10px,1.2vw,18px);z-index:1;min-height:0}
+.ac-t{position:relative;flex:0 1 250px;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:clamp(10px,1.6vh,18px) 14px;border-radius:18px;text-align:left;color:#fff;overflow:hidden;cursor:pointer;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--c) 28%,#141118) 0%,#121014ee 62%);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);box-shadow:0 10px 24px -14px #000;transition:transform .18s,box-shadow .18s,border-color .18s}
 .ac-t:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 16px 34px -14px color-mix(in srgb,var(--c) 70%,#000)}
-.ac-t b{font:italic 900 17px/1.05 Outfit,Arial,sans-serif;text-transform:uppercase}.ac-t small{color:#ffffffa6;font-size:11px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ac-n{position:absolute;top:-6px;right:6px;font:italic 900 58px/1 Outfit,Arial,sans-serif;color:transparent;-webkit-text-stroke:1.5px color-mix(in srgb,var(--c) 55%,transparent);opacity:.75}
-.ac-i{position:absolute;top:12px;left:12px;font-size:22px}
-.ac-t em{position:absolute;top:10px;left:40px;font-style:normal;font-size:11px;font-weight:900;background:#e5202e;color:#fff;border-radius:999px;padding:2px 7px}
-.ac-t.ac-big{width:clamp(180px,20vw,250px);min-height:128px;background:linear-gradient(150deg,#e5202e 0%,#8f0f1a 70%);border-color:#ff5a66}
-.ac-t.ac-big b{font-size:24px}.ac-t.ac-big small{color:#fff;font-weight:700}.ac-t.ac-big .ac-n{font-size:78px;-webkit-text-stroke-color:#ffffff66}
-/* le joueur du jour */
-.ac-star{position:sticky;top:84px;height:min(640px,calc(100vh - 110px));border-radius:24px;overflow:hidden;background:#0c0b0e;border:1px solid #ffffff14}
-.ac-star img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
-.ac-star::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0000 35%,#0b0a0dcc 70%,#0b0a0d 100%),linear-gradient(90deg,#e5202e22,#0000 40%)}
-.ac-st{position:absolute;left:0;right:0;bottom:0;z-index:1;display:grid;gap:4px;padding:22px}
-.ac-sig{font:400 clamp(54px,6vw,76px)/1 "Mr Dafoe",cursive;transform:rotate(-4deg);transform-origin:left;margin:6px 0 4px;
+.ac-t b{font:italic 900 clamp(15px,1.5vw,24px)/1.05 Outfit,Arial,sans-serif;text-transform:uppercase}.ac-t small{color:#ffffffa6;font-size:clamp(11px,.85vw,13px);line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ac-i{font-size:clamp(20px,2.6vh,32px);line-height:1;margin-bottom:auto}
+.ac-t em{position:absolute;top:12px;right:12px;font-style:normal;font-size:12px;font-weight:900;background:#e5202e;color:#fff;border-radius:999px;padding:2px 8px}
+.ac-t.ac-big{flex-basis:340px;background:linear-gradient(150deg,#e5202e 0%,#8f0f1a 75%);border-color:#ff5a66}
+.ac-t.ac-big b{font-size:clamp(22px,2.2vw,36px)}.ac-t.ac-big small{color:#fff;font-weight:700;font-size:clamp(12px,1vw,15px)}
+.ac-rg .ac-t{flex-basis:220px}
+.ac-bench{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ac-bn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:#171519;border:1px solid var(--line);color:#fff;font-weight:800;font-size:13px}
+.ac-bn:hover{border-color:#e5202e}
+/* le défilé des cartes */
+.ac-show{--ac-c:#14915f;position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto auto;border-radius:24px;overflow:hidden;min-height:0;
+  background:radial-gradient(ellipse 70% 55% at 50% 42%,color-mix(in srgb,var(--ac-c) 30%,#0c0b0e),#0a090c 70%);border:1px solid color-mix(in srgb,var(--ac-c) 35%,#ffffff14);transition:border-color .6s}
+.ac-show::before{content:"";position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 42%,#ffffff08 0 6deg,#0000 6deg 18deg);pointer-events:none;animation:acRays 40s linear infinite}
+@keyframes acRays{to{transform:rotate(360deg)}}
+.ac-stage{position:relative;display:grid;place-items:center;min-height:0;padding:18px}
+.ac-cw{grid-area:1/1;position:relative;animation:acIn .6s cubic-bezier(.2,.9,.3,1.1) both}
+.ac-cw.out{animation:acOut .5s ease forwards}
+@keyframes acIn{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes acOut{to{opacity:0;transform:translateY(-14px) scale(.96)}}
+/* l'aura : une lueur de la couleur de la rareté autour du cadre, qui respire (derrière la carte, jamais sur la photo) */
+.ac-cw::before{content:"";position:absolute;inset:-5px;border-radius:16px;z-index:-1;background:var(--ac-c);opacity:.55;
+  box-shadow:0 0 18px 4px var(--ac-c),0 0 46px 12px color-mix(in srgb,var(--ac-c) 60%,transparent),0 0 90px 30px color-mix(in srgb,var(--ac-c) 30%,transparent);animation:acAura 2.6s ease-in-out infinite}
+@keyframes acAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.85;transform:scale(1.025)}}
+.ac-cap{position:relative;display:grid;justify-items:center;gap:4px;padding:0 18px 6px;text-align:center}
+.ac-sig{font:400 clamp(40px,3.6vw,64px)/1 "Mr Dafoe",cursive;transform:rotate(-4deg);margin:4px 0;
   background:linear-gradient(180deg,#fff7d6 10%,#f1cf74 55%,#b88a2c 95%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 6px #000c)}
-.ac-st small{color:#ffffffb3;font-size:13px}
-.ac-see{justify-self:start;margin-top:8px;padding:9px 16px;border-radius:999px;background:#ffffff14;border:1px solid #ffffff33;color:#fff;font-weight:800}
-.ac-see:hover{background:#e5202e;border-color:#e5202e}
-@media(max-width:1000px){.ac{grid-template-columns:1fr}.ac-main,.ac-star{grid-column:1;grid-row:auto}.ac-star{order:-1;position:relative;top:0;height:300px}.ac-star img{object-position:50% 12%}
-  .ac-star::after{background:linear-gradient(90deg,#0b0a0d 0%,#0b0a0dcc 38%,#0000 70%),linear-gradient(180deg,#0000 60%,#0b0a0d)}
-  .ac-star img{left:auto;width:62%;right:0}.ac-st{right:auto;max-width:62%}}
-.ac-page{padding:4px 0 28px}
-@media(max-width:700px){.ac-page{padding:4px 14px 24px}.ac{gap:14px}.ac-star{height:250px}.ac-sig{font-size:50px}
-  .ac-pitch{gap:12px;padding:18px 8px 16px;border-radius:18px}.ac-lab{display:none}.ac-row{gap:7px;flex-wrap:wrap}
-  .ac-t{width:calc((100% - 14px)/3);min-height:92px;padding:10px 9px 9px;border-radius:13px}.ac-t b{font-size:13px}.ac-t small{font-size:10px}.ac-n{font-size:42px}.ac-i{font-size:18px;top:9px;left:9px}.ac-t em{left:32px;top:8px}
-  .ac-row.ac-ra .ac-big{order:-1;width:100%;min-height:96px}.ac-row.ac-ra .ac-t:not(.ac-big){width:calc((100% - 7px)/2)}
-  .ac-row.ac-rd .ac-t{width:calc((100% - 7px)/2);min-height:80px}
-  .ac-pitch::before,.ac-pitch::after{height:46px}.ac-ln::after{width:100px;height:100px;margin:-50px 0 0 -50px}}
-/* bandeau « Active les notifications » */
+.ac-cap small{color:#ffffffb3;font-size:13px}
+.ac-ctl{position:relative;display:flex;align-items:center;gap:10px;padding:10px 18px 18px}
+.ac-ctl>button:not(.ac-see){width:36px;height:36px;border-radius:50%;background:#ffffff12;border:1px solid #ffffff26;color:#fff;font-size:20px;line-height:1}
+.ac-bar{flex:1;height:4px;border-radius:9px;background:#ffffff18;overflow:hidden}.ac-bar u{display:block;height:100%;width:100%;background:var(--ac-c);transform-origin:left;animation:acBar 5s linear}
+.ac-show:hover .ac-bar u{animation-play-state:paused}
+@keyframes acBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.ac-see{padding:9px 16px;border-radius:999px;background:#ffffff14;border:1px solid #ffffff33;color:#fff;font-weight:800}.ac-see:hover{background:#e5202e;border-color:#e5202e}
+/* tablette et téléphone : le défilé en haut, le terrain en dessous, la page défile normalement */
+@media(max-width:1000px){.ac{grid-template-columns:1fr;height:auto;min-height:0}.ac-show{order:-1;height:600px}.ac-main>.ac-pitch{flex:none}
+  .ac-pitch{grid-template-rows:none}.ac-t{min-height:104px}}
+@media(max-width:700px){.ac-page{padding:6px 14px 24px}.ac{gap:14px}.ac-show{height:540px}.ac-sig{font-size:42px}
+  .ac-pitch{gap:10px;padding:16px 8px 14px;border-radius:18px}.ac-row{gap:7px;flex-wrap:wrap}
+  .ac-t{flex:0 0 calc((100% - 14px)/3);min-height:90px;padding:10px 9px 9px;border-radius:13px}.ac-t b{font-size:13px}.ac-t small{font-size:10px}.ac-i{font-size:18px}.ac-t em{top:8px;right:8px}
+  .ac-ra .ac-big{order:-1;flex-basis:100%;min-height:96px}.ac-ra .ac-t:not(.ac-big){flex-basis:calc((100% - 7px)/2)}
+  .ac-rd .ac-t{flex-basis:calc((100% - 7px)/2);min-height:80px}.ac-rg .ac-t{flex-basis:calc((100% - 14px)/3)}
+  .ac-pitch::before,.ac-pitch::after{height:40px}}/* bandeau « Active les notifications » */
 .ntb{display:flex;align-items:center;gap:14px;padding:12px 16px;margin-bottom:14px;border-radius:16px;background:linear-gradient(90deg,color-mix(in srgb,#facc15 14%,#1c1a1e),#1c1a1e 70%);border:1px solid #facc1544}
 .ntb-i{font-size:24px}.ntb-t{flex:1;display:grid;gap:2px}.ntb-t small{color:var(--mute);font-size:12px}
 .ntb-x{background:none;border:0;color:var(--mute);font-size:16px;padding:6px}
@@ -4615,46 +4631,50 @@ async function claimAlbum(id){ const d=await rpd("album_claim",{p_id:id}); if(!d
   const a=ALB.find(x=>x.id===id); toast(`Album complété ! ${alReward(a).join(" + ")}${d.booster?" (dans Boosters)":""}`,true);
   if(d.booster) await refLoad(); if(d.card) await loadCollection(); renderAlbums(); }
 
-/* ---------- accueil : le sommaire du site, présenté comme un onze sur le terrain + le joueur du jour (R10) ---------- */
+/* ---------- accueil : le sommaire du site, présenté comme une équipe sur le terrain + un défilé des cartes Prime et GOAT ---------- */
 const acVis=()=>{ const v=$("view-accueil"); return v&&!v.classList.contains("hidden"); };
 const acRefresh=()=>{ if(acVis()) renderAccueil(); };
 function acFreeTxt(){ if(!profile||typeof freeNow!=="function") return ""; const f=freeNow(); if(f.n>0) return `${f.n}/${cap()} gratuits à ouvrir`;
   const s=Math.ceil(f.next||0); return `+1 gratuit dans ${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`; }
 function renderAccueil(){ const box=$("ac-body"); if(!box||!profile) return;
+  if(!$("ac-show")) box.innerHTML=`<div class="ac"><div class="ac-main" id="ac-left"></div>
+    <aside class="ac-show" id="ac-show" onmouseenter="ACS.pause=1" onmouseleave="ACS.pause=0"><div class="ac-stage"></div>
+      <div class="ac-cap"></div><div class="ac-ctl"><button onclick="acShow(-1)" aria-label="Carte précédente">‹</button><span class="ac-bar"><u></u></span><button onclick="acShow(1)" aria-label="Carte suivante">›</button><button class="ac-see" onclick="acSee()">Voir la carte</button></div></aside></div>`;
   const nm=profile.username||"Joueur", have=allCards.filter(c=>owned[c.id]).length, tot=allCards.length;
   const sk=mzData&&mzData.streak, todo=mzData?(mzData.claimable||0)+(sk&&sk.can_claim?1:0):0;
   const albs=ALB?`${ALBC.size}/${ALB.length} albums`:"Cartes & albums", unread=+($("msg-badge")||{}).textContent||0, soc=+($("soc-badge")||{}).textContent||0;
   let rkTxt="Ton onze contre les autres"; try{ if(typeof rk!=="undefined"&&rk.st){ const t=rkTier(rk.st.elo); rkTxt=`${t.n||t.name||"Classé"} · ${nf(rk.st.elo)} pts`; } }catch(e){}
-  const r10=allCards.find(c=>/^RONALDINHO/.test(c.name)&&c.rarity==="prime")||allCards.find(c=>/^RONALDINHO/.test(c.name));
-  const T=(n,ic,t,sub,col,go,o)=>`<button class="ac-t ${o&&o.big?"ac-big":""}" style="--c:${col}" onclick="${go}"><span class="ac-n">${n}</span><span class="ac-i">${ic}</span><b>${t}</b><small ${o&&o.id?`id="${o.id}"`:""}>${sub}</small>${o&&o.badge?`<em>${o.badge}</em>`:""}</button>`;
+  const T=(ic,t,sub,col,go,o)=>`<button class="ac-t ${o&&o.big?"ac-big":""}" style="--c:${col}" onclick="${go}"><span class="ac-i">${ic}</span><b>${t}</b><small ${o&&o.id?`id="${o.id}"`:""}>${sub}</small>${o&&o.badge?`<em>${o.badge}</em>`:""}</button>`;
+  const B=(ic,t,go)=>`<button class="ac-bn" onclick="${go}"><span>${ic}</span>${t}</button>`;
+  const cag=$("tab-cagnotte")&&!$("tab-cagnotte").classList.contains("hidden");
   const daily=sk&&sk.packs?(sk.can_claim?`<button class="ac-daily ac-on" onclick="claimStreak()"><span>🎁</span><div><b>Ton pack du jour t’attend</b><small>Jour ${sk.next}/7 · ${esc(bName(sk.packs[sk.next-1]))} offert${sk.next===7?" · Élite garantie":""}</small></div><em>Ouvrir</em></button>`
     :`<div class="ac-daily"><span>🔥</span><div><b>Série de ${sk.claimed} jour${sk.claimed>1?"s":""}</b><small>Ton prochain pack du jour arrive demain</small></div></div>`):"";
-  box.innerHTML=`<div class="ac">
-    <aside class="ac-star"><img src="img/r10-accueil.jpg" alt="Ronaldinho"><div class="ac-st">
-      <span class="ac-k">Joueur du jour${r10?` · N°${numTxt(r10)}`:""}</span><div class="ac-sig">Ronaldinho</div><small>Ballon d’Or 2005 · FC Barcelone</small>
-      ${r10?`<button class="ac-see" onclick="openCard(${r10.id},null,'seen')">Voir sa carte</button>`:""}</div></aside>
-    <div class="ac-main">
-      <div class="ac-hi"><div><span class="ac-k">Le vestiaire</span><h2>Salut <b>${esc(nm)}</b></h2></div>
-        <div class="ac-chips"><span>⚽ <b>${nf(profile.balloons)}</b> ${CURRENCY}</span><span>🃏 <b>${have}</b>/${tot}</span>${todo?`<span class="ac-hot">🎯 <b>${todo}</b> à réclamer</span>`:""}</div></div>
-      ${daily}
-      <div class="ac-pitch"><i class="ac-ln"></i>
-        <div class="ac-row ac-ra"><span class="ac-lab">Attaque</span>
-          ${T(9,"⚔️","Classé",esc(rkTxt),"#ff4d8d","showTab('games');gxGo('ranked')")}
-          ${T(10,"📦","Boosters",acFreeTxt(),"#e5202e","showTab('boosters')",{big:1,id:"ac-free"})}
-          ${T(7,"🏆","Ballon d’Or","Classement de la semaine","#f5b800","showTab('ballon')")}</div>
-        <div class="ac-row ac-rm"><span class="ac-lab">Milieu</span>
-          ${T(8,"🃏","Collection",`${have}/${tot} · ${albs}`,"#a855f7","showTab('collection')")}
-          ${T(6,"🎯","Missions",todo?`${todo} récompense${todo>1?"s":""} à réclamer`:"Jour, semaine & succès","#4ade80","showTab('missions')",{badge:todo||""})}
-          ${T(11,"🎮","Jeux","LDC, draft, penalty, quiz","#3b82f6","showTab('games');gxGo('hub')")}</div>
-        <div class="ac-row ac-rd"><span class="ac-lab">Défense</span>
-          ${T(2,"🏷️","Marché","Achats & ventes","#fb923c","showTab('market')")}
-          ${T(3,"🤝","Amis","Échanges entre potes","#2dd4bf","showTab('friends')",{badge:soc||""})}
-          ${T(4,"✉️","Messages","Cadeaux & annonces","#f472b6","showTab('messages')",{badge:unread||""})}
-          ${T(5,"📊","Classements","Les meilleurs joueurs","#94a3b8","showTab('classement')")}</div>
-        <div class="ac-row ac-rg"><span class="ac-lab">Gardien</span>
-          ${T(1,"👤","Profil",esc(nm),"#e9c46a","showTab('profile')")}</div>
-      </div></div></div>`; }
-
+  $("ac-left").innerHTML=`<div class="ac-hi"><div><span class="ac-k">Le vestiaire</span><h2>Salut <b>${esc(nm)}</b></h2></div>
+      <div class="ac-chips"><span>🃏 <b>${have}</b>/${tot} cartes</span>${todo?`<span class="ac-hot">🎯 <b>${todo}</b> à réclamer</span>`:""}</div></div>
+    ${daily}
+    <div class="ac-pitch"><i class="ac-ln"></i>
+      <div class="ac-row ac-ra">${T("⚔️","Classé",esc(rkTxt),"#ff4d8d","showTab('games');gxGo('ranked')")}${T("📦","Boosters",acFreeTxt(),"#e5202e","showTab('boosters')",{big:1,id:"ac-free"})}${T("🏆","Ballon d’Or","Classement de la semaine","#f5b800","showTab('ballon')")}</div>
+      <div class="ac-row ac-rm">${T("🃏","Collection",`${have}/${tot} · ${albs}`,"#a855f7","showTab('collection')")}${T("🎯","Missions",todo?`${todo} récompense${todo>1?"s":""} à réclamer`:"Jour, semaine & succès","#4ade80","showTab('missions')",{badge:todo||""})}${T("🎮","Jeux","LDC, draft, penalty, quiz","#3b82f6","showTab('games');gxGo('hub')")}</div>
+      <div class="ac-row ac-rd">${T("🏷️","Marché","Achats & ventes","#fb923c","showTab('market')")}${T("🤝","Amis","Échanges entre potes","#2dd4bf","showTab('friends')",{badge:soc||""})}${T("✉️","Messages","Cadeaux & annonces","#f472b6","showTab('messages')",{badge:unread||""})}${T("📊","Classements","Les meilleurs joueurs","#94a3b8","showTab('classement')")}</div>
+      <div class="ac-row ac-rg">${T("👤","Profil",esc(nm),"#e9c46a","showTab('profile')")}</div></div>
+    <div class="ac-bench"><span class="ac-k">Le banc</span>${B("📚","Albums","showTab('albums')")}${B("💬","Discord","showTab('discord')")}${cag?B("❤️","Cagnotte","showTab('cagnotte')"):""}${B("⚙️","Paramètres","showTab('settings')")}</div>`;
+  if(!$("ac-show").dataset.cid) acShow(0); else acFit(); }
+/* le défilé : une carte Prime ou GOAT à la fois, avec une aura de sa couleur, une nouvelle toutes les 5 s */
+const ACS={list:[],i:0,last:0,pause:0};
+function acList(){ const L=allCards.filter(c=>(c.rarity==="prime"||c.rarity==="goat")&&c.image_url); if(L.length===ACS.list.length) return;
+  ACS.list=L.sort(()=>Math.random()-.5); const g=ACS.list.findIndex(c=>c.rarity==="goat"); if(g>0) [ACS.list[0],ACS.list[g]]=[ACS.list[g],ACS.list[0]]; ACS.i=0; }
+function acShow(d){ const st=$("ac-show"); if(!st) return; acList(); if(!ACS.list.length) return; ACS.last=Date.now();
+  if(d) ACS.i=(ACS.i+d+ACS.list.length)%ACS.list.length; const c=ACS.list[ACS.i], m=String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/);
+  st.style.setProperty("--ac-c",COLOR[c.rarity]); st.dataset.cid=c.id;
+  const stage=st.querySelector(".ac-stage"); stage.querySelectorAll(".ac-cw").forEach(o=>{ o.classList.add("out"); setTimeout(()=>o.remove(),550); });
+  const w=document.createElement("div"); w.className="ac-cw"; w.innerHTML=cardHTML(c,true,0); stage.appendChild(w); acFit();
+  st.querySelector(".ac-cap").innerHTML=`<span class="ac-k">À la une · ${RARITY[c.rarity]}${owned[c.id]?" · dans ta collection":""}</span><div class="ac-sig">${esc(sigName(c))}</div><small>${m?m[1]:""}${c.club?(m?" · ":"")+esc(c.club):""}</small>`;
+  const u=st.querySelector(".ac-bar u"); u.style.animation="none"; void u.offsetWidth; u.style.animation=""; }
+function acFit(){ const st=$("ac-show"); if(!st) return; const h=document.querySelector(".nav2"); document.documentElement.style.setProperty("--hh",(h?h.offsetHeight:64)+"px");
+  const s=st.querySelector(".ac-stage"); const z=Math.max(.9,Math.min((s.clientHeight-40)/228,(s.clientWidth-60)/158)); s.querySelectorAll(".ac-cw").forEach(w=>w.style.zoom=z.toFixed(3)); }
+function acSee(){ const id=+($("ac-show")||{dataset:{}}).dataset.cid; if(id) openCard(id,null,"seen"); }
+setInterval(()=>{ if(acVis()&&!document.hidden&&!ACS.pause&&Date.now()-ACS.last>5000) acShow(1); },500);
+addEventListener("resize",()=>{ if(acVis()) acFit(); });
 /* ---------- admin : albums (choisir les cartes, la récompense, l'ordre, masquer ou supprimer) ---------- */
 const AA={list:[],ed:null};
 const aaNorm=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
@@ -5806,6 +5826,7 @@ function mOpen(v){ document.body.classList.toggle("mopen",v===undefined?!documen
 function mtabSync(t){ if(t==="albums") t="collection"; if(t==="accueil"){ document.querySelectorAll("#mtab button").forEach(b=>b.classList.remove("on")); return; } const main=["boosters","collection","games"]; document.querySelectorAll("#mtab button").forEach(b=>b.classList.toggle("on",b.dataset.t===t||(b.dataset.t==="more"&&!main.includes(t)))); }
 function showTab(t,arg){ if(t!=="games"){ try{ crowdBed(false); crMusic(false); }catch(e){} } mtabSync(t); mOpen(0); closeSheet();
   TABS.forEach(x=>{ $("view-"+x).classList.toggle("hidden",x!==t); const b=$("tab-"+x); if(b) b.classList.toggle("on",x===t); });
+  document.body.classList.toggle("ac-mode",t==="accueil");   /* l'accueil remplace le menu du haut : on le cache (sur ordinateur) */
   /* les albums font partie de la Collection : même entrée de menu, et un sélecteur « Mes cartes / Albums » en haut */
   if(t==="albums") $("tab-collection").classList.add("on"); document.querySelectorAll(".cmode button").forEach(b=>b.classList.toggle("on",b.dataset.m===t));
   if(t==="accueil") renderAccueil(); if(t==="collection") loadCollection(); if(t==="albums") loadAlbums(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="admin-albums") loadAdminAlbums(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings(); if(t==="cagnotte") renderCagnotte(); if(t==="discord") renderDiscord();
