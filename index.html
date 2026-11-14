@@ -3403,16 +3403,23 @@ const cap = () => isGuest ? FREE_MAX_GUEST : FREE_MAX;
 const esc = t => String(t ?? "").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
 const SIMPLE=["commune","rare","elite"];
 const dispName=c=>SIMPLE.includes(c.rarity)?String(c.name).replace(/\s+(\d{2}\/\d{2}|\d{4})$/,""):c.name;
-let numMap={}; const numOf=c=>numMap[c.name]||c.id;
+let numMap={}; const numOf=c=>(c&&numMap[c.id])||9999;
 /* téléphone ou tablette (pas de souris) : textes et effets adaptés */
 const TOUCH=matchMedia("(hover:none)").matches;
 const CK=TOUCH?"Touche":"Clique sur";
 const CK1=TOUCH?"Touche":"Clique";
 const IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const DUSTH=()=>TOUCH?"Gratte la poussière avec ton doigt · touche à côté pour tout enlever":"Gratte la poussière avec ta souris · clic à côté pour tout enlever";
-/* numéro affiché : « 1 » pour les deux GOAT, « ? » pour les autres en attendant la vraie numérotation */
-const numTxt=c=>c&&c.rarity==="goat"?"001":"?";
-function buildNums(){ numMap={}; const top=c=>c.rarity==="goat"&&/^(L\.MESSI|C\.RONALDO)/.test(c.name); let n=1; allCards.forEach(c=>{ if(top(c)) numMap[c.name]=1; }); allCards.forEach(c=>{ if(!top(c)&&c.rarity!=="promo") numMap[c.name]=++n; }); allCards.forEach(c=>{ if(c.rarity==="promo") numMap[c.name]=++n; }); }
+/* numéro de la carte = son rang parmi les meilleurs joueurs : N°001 = la meilleure note, puis dans l'ordre.
+   Un numéro fixé à la main dans l'admin (colonne cards.num) passe avant ; les autres cartes prennent les numéros libres. */
+const numTxt=c=>c&&numMap[c.id]?String(numMap[c.id]).padStart(3,"0"):"?";
+function buildNums(){ numMap={}; const L=allCards.filter(c=>c&&c.id);
+  const fixed=L.filter(c=>+c.num>0), taken=new Set(fixed.map(c=>+c.num)); fixed.forEach(c=>numMap[c.id]=+c.num);
+  const R=c=>{ try{ return drRating(c); }catch(e){ return 0; } };
+  /* à note égale : la légende la plus ancienne d'abord (R9 97/98 avant Neymar 17/18), puis la rareté */
+  const yr=c=>{ const m=String(c.name).match(/(\d{2})\/\d{2}$|(\d{4})$/); if(!m) return 3000; if(m[2]) return +m[2]; const y=+m[1]; return y>=50?1900+y:2000+y; };
+  const rest=L.filter(c=>!(+c.num>0)).map(c=>[c,R(c),yr(c)]).sort((a,b)=>b[1]-a[1]||a[2]-b[2]||ORDER.indexOf(b[0].rarity)-ORDER.indexOf(a[0].rarity)||a[0].name.localeCompare(b[0].name));
+  let n=1; rest.forEach(([c])=>{ while(taken.has(n)) n++; numMap[c.id]=n++; }); }
 const PACK_IMG={pantheon:""}; PACK_IMG.promo=IMG["h-yamal"]||""; /* colle ici le lien d'une image pour le fond du Panthéon, sinon silhouette par défaut */
 const PANART=`<svg viewBox="0 0 240 340" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="pg" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#fff3b0" stop-opacity=".95"/><stop offset=".45" stop-color="#f5b800" stop-opacity=".35"/><stop offset="1" stop-color="#6b3f00" stop-opacity="0"/></radialGradient></defs>
 <rect width="240" height="340" fill="url(#pg)"/><g transform="translate(30,-8) scale(.75)" fill="#0a0a0a" stroke="#fff3b0" stroke-opacity=".7" stroke-width="2.2" stroke-linejoin="round"><circle cx="120" cy="112" r="16"/><path d="M104 108q16-26 32 0q-16-9-32 0z"/><path d="M104 132h32l5 58h-42z"/><text x="120" y="172" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-style="italic" font-weight="800" font-size="30" fill="#f5b800" stroke="none">10</text><path d="M104 136L60 112l-6 9 46 33z"/><path d="M136 136l44-24 6 9-46 33z"/><path d="M99 188h42l3 28h-48z"/><path d="M99 214h20l-6 78H93z"/><path d="M121 214h20l7 78h-20z"/><path d="M90 292h26l2 9H88zM126 292h26l2 9h-30z"/></g>
@@ -4660,6 +4667,7 @@ function renderAdmin(){
   $("admin-list").innerHTML=list.slice(0,80).map(c=>`<div class="arow r-${c.rarity}"><div class="athumb">${art(c)}</div>
   <input id="n-${c.id}" value="${esc(c.name)}" placeholder="Nom"><select id="r-${c.id}">${ORDER.map(x=>`<option value="${x}" ${x===c.rarity?"selected":""}>${RARITY[x]}</option>`).join("")}</select>
   <label class="a-note" title="Note du joueur (vide = note automatique selon la rareté)">Note<input id="rt-${c.id}" type="number" min="40" max="99" inputmode="numeric" value="${c.rating||""}" placeholder="${typeof drRating==="function"?drRating(Object.assign({},c,{rating:null})):""}"></label>
+  <label class="a-note" title="Numéro de la carte (vide = automatique, selon la note : N°1 = la meilleure)">N°<input id="nm-${c.id}" type="number" min="1" max="9999" inputmode="numeric" value="${c.num||""}" placeholder="${numMap[c.id]||""}"></label>
   <input id="cl-${c.id}" value="${esc(c.club)}" placeholder="Club"><input id="lg-${c.id}" list="dl-lg" value="${esc(c.league)}" placeholder="Championnat"><input id="u-${c.id}" value="${esc(c.image_url)}" placeholder="https://lien-de-l-image.png"><button class="ghost avt ${c.sfx_url?"on":""}" onclick="sfxEdit(${c.id})" title="${c.sfx_url?"Ce joueur a un VFX : modifier":"Ajouter un VFX"}">${c.sfx_url?"VFX ✓":"+ VFX"}</button>
   <label><input type="checkbox" id="a-${c.id}" ${c.active?"checked":""}>active</label><button class="go" onclick="saveCard(${c.id})">Enregistrer</button></div>`).join("");
 }
@@ -4668,10 +4676,15 @@ async function saveCard(id){
   const card=adminCards.find(c=>c.id===id), rv=$("rt-"+id)?$("rt-"+id).value.trim():"";
   if(rv!==""&&!(+rv>=40&&+rv<=99)){ toast("La note doit être entre 40 et 99 (ou vide pour la note automatique)"); return; }
   if(rv!==""||card.rating!=null) upd.rating=rv===""?null:Math.round(+rv);
+  const nv=$("nm-"+id)?$("nm-"+id).value.trim():"";
+  if(nv!==""&&!(+nv>=1&&+nv<=9999)){ toast("Le numéro doit être entre 1 et 9999 (ou vide pour le numéro automatique)"); return; }
+  if(nv!==""){ const dup=adminCards.find(c=>c.id!==id&&+c.num===+nv); if(dup){ toast(`Le N°${nv} est déjà fixé pour ${dup.name} : vide son numéro d’abord`); return; } }
+  if(nv!==""||card.num!=null) upd.num=nv===""?null:Math.round(+nv);
   let {error}=await sb.from("cards").update(upd).eq("id",id);
   if(error&&/rating/i.test(error.message)){ toast("Pour changer la note, lance d’abord notes-joueurs.sql dans Supabase"); delete upd.rating; ({error}=await sb.from("cards").update(upd).eq("id",id)); }
+  if(error&&/\bnum\b/i.test(error.message)){ toast("Pour changer le numéro, lance d’abord notes-et-numeros.sql dans Supabase"); delete upd.num; ({error}=await sb.from("cards").update(upd).eq("id",id)); }
   if(error){ toast(error.message); return; }
-  Object.assign(card,upd); const ac=allCards.find(c=>c.id===id); if(ac) Object.assign(ac,upd); toast("Carte enregistrée",true); renderAdmin();
+  Object.assign(card,upd); const ac=allCards.find(c=>c.id===id); if(ac) Object.assign(ac,upd); if(typeof stCache!=="undefined") stCache.clear(); buildNums(); toast("Carte enregistrée",true); renderAdmin();
 }
 async function addCard(){
   const {error}=await sb.from("cards").insert({name:"Nouveau joueur",rarity:"commune",category:"Custom"}); if(error){ toast(error.message); return; }
