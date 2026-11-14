@@ -3291,7 +3291,35 @@ html{overflow-x:hidden}
   .ac-cw{-webkit-mask-image:linear-gradient(180deg,#0000 0%,#000 14%,#000 55%,#0000 100%);mask-image:linear-gradient(180deg,#0000 0%,#000 14%,#000 55%,#0000 100%);-webkit-mask-composite:source-over;mask-composite:add}}
 @media(max-width:700px){.ah{padding:14px 14px 26px}.ah-hero{height:540px}.ac-stage{top:-14px;left:-14px;right:-14px}.ac-cap b{font-size:44px}.ah-me b{font-size:15px}.ah-me i{width:110px}
   .ah-feat{padding:18px 18px;min-height:150px}.ah-feat-t>b{font-size:42px}.ah-feat-pk{width:92px}
-  .ah-duo{grid-template-columns:1fr}.ah-box{min-height:130px}.ah-rbs{grid-template-columns:1fr}.ah-rbs .ah-rb:nth-child(even){transform:none}.ah-sl.s1{left:-2%}}/* bandeau « Active les notifications » */
+  .ah-duo{grid-template-columns:1fr}.ah-box{min-height:130px}.ah-rbs{grid-template-columns:1fr}.ah-rbs .ah-rb:nth-child(even){transform:none}.ah-sl.s1{left:-2%}}/* ---------- toutes les pages (sauf l'accueil) : plein écran, fond texturé, menu du haut retiré, bouton retour à l'accueil ---------- */
+@media(min-width:761px){.sb{display:none!important}}
+body:not(.ac-mode) .content{position:relative;min-height:calc(100dvh - var(--hh,64px));
+  background:var(--grain),repeating-linear-gradient(115deg,#ffffff04 0 2px,#0000 2px 14px),radial-gradient(ellipse 60% 50% at 85% 0%,#2a0b12 0%,#0000 60%),radial-gradient(ellipse 50% 60% at 0% 100%,#1f080d 0%,#0000 60%),#0c0b0f}
+.content>.page,#view-boosters>.wrap{max-width:none!important;padding-left:clamp(18px,3vw,56px)!important;padding-right:clamp(18px,3vw,56px)!important}
+.pz-top{position:sticky;top:var(--hh,64px);z-index:15;display:flex;align-items:center;gap:14px;padding:12px clamp(18px,3vw,56px);background:linear-gradient(180deg,#0c0b0ff2,#0c0b0f00)}
+.pz-back{display:inline-flex;align-items:center;gap:8px;padding:9px 16px 9px 12px;border-radius:999px;background:#ffffff0d;border:1px solid #ffffff22;color:#fff;font:italic 800 14px/1 Kanit,Outfit,sans-serif;text-transform:uppercase;cursor:pointer;transition:background .2s,border-color .2s}
+.pz-back span{font-size:16px;transition:transform .2s}.pz-back:hover{background:#e5202e;border-color:#e5202e}.pz-back:hover span{transform:translateX(-3px)}
+.pz-tt{font:700 10px/1 Outfit,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#ffffff73}
+/* gros titres de page dans le style de l'accueil */
+.content .page>h2.disp,.content .collhead h2.disp,.content .mz-head h2.disp,.content .bx-head h2.disp{font:italic 800 clamp(40px,4.4vw,78px)/.95 Kanit,Outfit,sans-serif!important;text-transform:uppercase;letter-spacing:0}
+/* décors : grandes cartes en bord d'écran, avec leur aura (Yamal PROMO sur Boosters, Ronaldo et Messi sur la Collection) */
+.pz-dc{display:none}
+@media(min-width:1400px){
+  .pz-dc{display:block;position:fixed;z-index:5;top:calc(50% + var(--hh,64px) / 2);cursor:pointer;transition:transform .4s}
+  body.ac-mode #pz-decos,#app.hidden~#pz-decos{display:none}
+  .pz-dc.r{right:2.4vw;transform:translateY(-50%) rotate(6deg)}.pz-dc.l{left:2.4vw;transform:translateY(-50%) rotate(-6deg)}
+  .pz-dc:hover{transform:translateY(-52%) rotate(0deg)}
+  .pz-dcw{position:relative;zoom:1.55}
+  .pz-dcw::before{content:"";position:absolute;inset:-6px;border-radius:16px;background:var(--ac-c);opacity:.5;z-index:-1;box-shadow:0 0 22px 6px var(--ac-c),0 0 70px 24px color-mix(in srgb,var(--ac-c) 45%,transparent);animation:acAura 2.6s ease-in-out infinite}
+  #view-boosters>.wrap{margin-right:calc(158px * 1.55 + 6vw)!important}
+  #view-collection,#view-albums{padding-left:calc(158px * 1.55 + 6vw)!important;padding-right:calc(158px * 1.55 + 6vw)!important}}
+@media(min-width:1800px){.pz-dcw{zoom:2}#view-boosters>.wrap{margin-right:calc(158px * 2 + 7vw)!important}
+  #view-collection,#view-albums{padding-left:calc(158px * 2 + 7vw)!important;padding-right:calc(158px * 2 + 7vw)!important}}
+/* missions : les tableaux et les missions en plus grand */
+@media(min-width:1300px){#view-missions .mu{grid-template-columns:clamp(190px,13vw,250px) minmax(0,1fr) clamp(190px,13vw,250px);gap:clamp(30px,3vw,60px)}
+  #view-missions .mu-cv{width:clamp(160px,11vw,215px)}#view-missions .mu-wall{gap:64px}}
+@media(min-width:1500px){#view-missions .mu-mid{zoom:1.15}}
+/* bandeau « Active les notifications » */
 .ntb{display:flex;align-items:center;gap:14px;padding:12px 16px;margin-bottom:14px;border-radius:16px;background:linear-gradient(90deg,color-mix(in srgb,#facc15 14%,#1c1a1e),#1c1a1e 70%);border:1px solid #facc1544}
 .ntb-i{font-size:24px}.ntb-t{flex:1;display:grid;gap:2px}.ntb-t small{color:var(--mute);font-size:12px}
 .ntb-x{background:none;border:0;color:var(--mute);font-size:16px;padding:6px}
@@ -3392,6 +3420,7 @@ const FREE_MAX = 10, FREE_MAX_GUEST = 3, FREE_SECONDS = 600;
   <div class="adk-v"><span class="adk-k">Voir comme</span><div class="adk-seg"><button data-v="modo" onclick="setView('modo')">Modo</button><button data-v="joueur" onclick="setView('joueur')">Joueur</button><button data-v="invite" onclick="setView('invite')">Invité</button></div></div></div>
   <div class="content">
     <div class="install hidden" id="install-bar"><span> <b>Installe PrimeZ</b> sur ton ordinateur, il s’ouvre comme une vraie application.</span><span class="sp"></span><button class="go" onclick="installApp()">Installer</button><button class="x" title="Fermer" onclick="closeInstall()">✕</button></div>
+    <div class="pz-top hidden" id="pz-top"><button class="pz-back" onclick="showTab('accueil')"><span>←</span> Accueil</button><span class="pz-tt" id="pz-tt"></span></div>
     <div class="banner hidden" id="guest-banner"><span><b>Tu joues en invité.</b> Si tu vides ton navigateur, ta collection est perdue.</span><button class="go" onclick="saveAccount()">Sauvegarder avec Discord (+400 ballons, +7 boosters)</button></div>
 
     <section id="view-accueil" class="ac-page"><div id="ac-body"></div></section>
@@ -4672,6 +4701,12 @@ async function claimAlbum(id){ const d=await rpd("album_claim",{p_id:id}); if(!d
   const a=ALB.find(x=>x.id===id); toast(`Album complété ! ${alReward(a).join(" + ")}${d.booster?" (dans Boosters)":""}`,true);
   if(d.booster) await refLoad(); if(d.card) await loadCollection(); renderAlbums(); }
 
+/* ---------- décors des pages : de grandes cartes sur les côtés, avec une aura de leur couleur (seulement sur grand écran) ---------- */
+const PZ_DECO={boosters:[["r",/^L\.YAMAL 25\/26/,"promo"]],collection:[["l",/^C\.RONALDO 13\/14/],["r",/^L\.MESSI 11\/12/]],albums:[["l",/^C\.RONALDO 13\/14/],["r",/^L\.MESSI 11\/12/]]};
+function pzDecos(t){ let v=$("pz-decos"); if(!v){ v=document.createElement("div"); v.id="pz-decos"; document.body.appendChild(v); }
+  const D=PZ_DECO[t]; if(v.dataset.t===t&&v.children.length) return; v.innerHTML=""; v.dataset.t=t; if(!D||!allCards.length) return;
+  D.forEach(([side,re,rar])=>{ const c=allCards.find(x=>re.test(x.name)&&(!rar||x.rarity===rar)); if(!c) return;
+    v.insertAdjacentHTML("beforeend",`<div class="pz-dc ${side}" style="--ac-c:${COLOR[c.rarity]}" onclick="openCard(${c.id},null,'seen')" title="Voir la carte"><div class="pz-dcw">${cardHTML(c,true,0)}</div></div>`); }); }
 /* ---------- accueil : à gauche le joueur à la une (Prime / GOAT qui défilent, photo sur toute la hauteur),
    à droite le menu : le booster en vitrine, la collection et le classé en grand, le reste en rubans inclinés ---------- */
 const acVis=()=>{ const v=$("view-accueil"); return v&&!v.classList.contains("hidden"); };
@@ -5913,7 +5948,9 @@ function mOpen(v){ document.body.classList.toggle("mopen",v===undefined?!documen
 function mtabSync(t){ if(t==="albums") t="collection"; if(t==="accueil"){ document.querySelectorAll("#mtab button").forEach(b=>b.classList.remove("on")); return; } const main=["boosters","collection","games"]; document.querySelectorAll("#mtab button").forEach(b=>b.classList.toggle("on",b.dataset.t===t||(b.dataset.t==="more"&&!main.includes(t)))); }
 function showTab(t,arg){ if(t!=="games"){ try{ crowdBed(false); crMusic(false); }catch(e){} } mtabSync(t); mOpen(0); closeSheet();
   TABS.forEach(x=>{ $("view-"+x).classList.toggle("hidden",x!==t); const b=$("tab-"+x); if(b) b.classList.toggle("on",x===t); });
-  document.body.classList.toggle("ac-mode",t==="accueil");   /* l'accueil remplace le menu du haut : on le cache (sur ordinateur) */
+  document.body.classList.toggle("ac-mode",t==="accueil");
+  { const pt=$("pz-top"); if(pt){ pt.classList.toggle("hidden",t==="accueil"); const TT2={boosters:"Boosters",collection:"Collection",albums:"Albums",missions:"Missions",games:"Jeux",market:"Marché",friends:"Amis & échanges",ballon:"Ballon d’Or",classement:"Classements",cagnotte:"Cagnotte",discord:"Discord",messages:"Messages",profile:"Profil",settings:"Paramètres"}; $("pz-tt").textContent=TT2[t]||""; } }
+  setTimeout(()=>pzDecos(t),0);   /* l'accueil remplace le menu du haut : on le cache (sur ordinateur) */
   /* les albums font partie de la Collection : même entrée de menu, et un sélecteur « Mes cartes / Albums » en haut */
   if(t==="albums") $("tab-collection").classList.add("on"); document.querySelectorAll(".cmode button").forEach(b=>b.classList.toggle("on",b.dataset.m===t));
   if(t==="accueil") renderAccueil(); if(t==="collection") loadCollection(); if(t==="albums") loadAlbums(); if(t==="missions") loadMissions(); if(t==="games") gxRender(); if(t==="messages") loadMessages(); if(t==="admin-cards") loadAdmin(); if(t==="admin-players") initPlayers(); if(t==="admin-photos") initPhotos(); if(t==="admin-albums") loadAdminAlbums(); if(t==="boosters") loadFeed(); if(t==="settings") renderSettings(); if(t==="cagnotte") renderCagnotte(); if(t==="discord") renderDiscord();
