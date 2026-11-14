@@ -3200,6 +3200,7 @@ html{overflow-x:hidden}
 .ac-stage{position:absolute;z-index:0;top:calc(-1 * clamp(18px,3vh,36px));bottom:calc(-1 * clamp(18px,3vh,36px));left:calc(-1 * clamp(18px,3vw,56px));right:-20%;pointer-events:none}
 .ac-cw{position:absolute;inset:0;animation:acIn 1s ease both}.ac-cw.out{animation:acOut .7s ease forwards}
 .ac-cw img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 16%;filter:brightness(.8) contrast(1.08) saturate(1.05)}
+.ac-cw.sh{-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 62%,#0008 82%,#0000 100%),linear-gradient(180deg,#0000 0%,#000 16%,#000 62%,#0000 100%);mask-image:linear-gradient(90deg,#000 0%,#000 62%,#0008 82%,#0000 100%),linear-gradient(180deg,#0000 0%,#000 16%,#000 62%,#0000 100%)}
 .ac-cw{-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 38%,#0009 58%,#0003 76%,#0000 90%),linear-gradient(180deg,#0000 0%,#000 16%,#000 62%,#0000 100%);-webkit-mask-composite:source-in;
   mask-image:linear-gradient(90deg,#000 0%,#000 38%,#0009 58%,#0003 76%,#0000 90%),linear-gradient(180deg,#0000 0%,#000 16%,#000 62%,#0000 100%);mask-composite:intersect}
 /* une ombre colorée de la rareté qui monte du bas, et un voile pour que les fonds clairs se fondent */
@@ -4733,22 +4734,31 @@ function renderAccueil(){ const box=$("ac-body"); if(!box||!profile) return;
 function acClock(){ const t=$("ah-time"), d=$("ah-date"); if(!t) return; const n=new Date();
   t.textContent=n.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); d.textContent=n.toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"}).replace(/\./g,"").toUpperCase(); }
 /* le défilé : un joueur Prime ou GOAT à la fois, sa photo sur toute la hauteur, un nouveau toutes les 5 s */
-/* photos choisies à la main pour l'accueil (à la place de la photo de la carte) : [image, cadrage] */
-const AH_PHOTO={"J.CRUYFF 71/72":["img/cruyff-accueil.webp","50% 42%"],"J.CRUYFF 73/74":["img/cruyff-accueil.webp","50% 42%"]};
-/* la meilleure qualité disponible : Pinterest garde l'image d'origine (plus grande) à l'adresse /originals/ */
-const ahHi=u=>String(u||"").replace(/\/\/i\.pinimg\.com\/\d+x\//,"//i.pinimg.com/originals/");
+/* le défilé de l'accueil : une photo HD par joueur (img/stars), son surnom, son club, et la carte qui s'ouvre avec « Voir la carte ».
+   pos = cadrage de la photo ; shift = photo décalée vers la gauche quand le joueur est sur le bord droit de l'image */
+const AH_STARS=[
+  {n:"Messi",      nick:"La Pulga",             club:"FC Barcelone", img:"img/stars/messi.webp",      pos:"50% 30%", shift:1, card:/^L\.MESSI/},
+  {n:"Ronaldo",    nick:"El Bicho",             club:"Real Madrid",  img:"img/stars/ronaldo.webp",    pos:"50% 20%", card:/^C\.RONALDO/},
+  {n:"R9",         nick:"Il Fenomeno",          club:"Brésil",       img:"img/stars/r9.webp",         pos:"50% 24%", card:/^R9 /},
+  {n:"Zidane",     nick:"Zizou",                club:"Real Madrid",  img:"img/stars/zidane.webp",     pos:"50% 16%", card:/^Z\.ZIDANE/},
+  {n:"Cruyff",     nick:"Le Hollandais volant", club:"Pays-Bas",     img:"img/stars/cruyff.webp",     pos:"50% 42%", card:/^J\.CRUYFF/},
+  {n:"Neymar",     nick:"Ney",                  club:"FC Barcelone", img:"img/stars/neymar.webp",     pos:"50% 35%", card:/^NEYMAR/},
+  {n:"Maradona",   nick:"El Pibe de Oro",       club:"Argentine",    img:"img/stars/maradona.webp",   pos:"50% 22%", card:/^D\.MARADONA/},
+  {n:"Ronaldinho", nick:"Le Sorcier",           club:"FC Barcelone", img:"img/stars/ronaldinho.webp", pos:"50% 18%", card:/^RONALDINHO/},
+  {n:"Maldini",    nick:"Il Capitano",          club:"AC Milan",     img:"img/stars/maldini.webp",    pos:"50% 28%", card:/^P\.MALDINI/}];
+/* sa meilleure carte (GOAT avant Prime, puis la meilleure note) : pour la couleur et « Voir la carte » */
+const ahCard=s=>allCards.filter(c=>s.card.test(c.name)).sort((x,y)=>ORDER.indexOf(y.rarity)-ORDER.indexOf(x.rarity)||(typeof drRating==="function"?drRating(y)-drRating(x):0))[0]||null;
 const ACS={list:[],i:0,last:0,pause:0};
-function acList(){ const L=allCards.filter(c=>(c.rarity==="prime"||c.rarity==="goat")&&c.image_url); if(L.length===ACS.list.length) return;
-  ACS.list=L.sort(()=>Math.random()-.5); const g=ACS.list.findIndex(c=>c.rarity==="goat"); if(g>0) [ACS.list[0],ACS.list[g]]=[ACS.list[g],ACS.list[0]]; ACS.i=0; }
-function acShow(d){ const st=$("ac-show"); if(!st) return; acList(); if(!ACS.list.length) return; ACS.last=Date.now();
-  if(d) ACS.i=(ACS.i+d+ACS.list.length)%ACS.list.length; const c=ACS.list[ACS.i], m=String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/);
-  st.style.setProperty("--ac-c",COLOR[c.rarity]); st.dataset.cid=c.id;
+function acList(){ if(ACS.list.length) return; ACS.list=AH_STARS.slice().sort(()=>Math.random()-.5); ACS.i=0; }
+function acShow(d){ const st=$("ac-show"); if(!st) return; acList(); ACS.last=Date.now();
+  if(d) ACS.i=(ACS.i+d+ACS.list.length)%ACS.list.length; const s=ACS.list[ACS.i], c=ahCard(s), rar=c?c.rarity:"prime";
+  st.style.setProperty("--ac-c",COLOR[rar]); st.dataset.cid=c?c.id:"";
   const stage=st.querySelector(".ac-stage"); stage.querySelectorAll(".ac-cw").forEach(o=>{ o.classList.add("out"); setTimeout(()=>o.remove(),700); });
-  const w=document.createElement("div"); w.className="ac-cw"; const ph=AH_PHOTO[c.name], hi=ph?ph[0]:ahHi(c.image_url); w.innerHTML=`<img src="${esc(hi)}" alt="${esc(sigName(c))}"${ph&&ph[1]?` style="object-position:${ph[1]}"`:""}${hi!==c.image_url&&!ph?` onerror="this.onerror=null;this.src='${esc(c.image_url)}'"`:""}>`; stage.appendChild(w);
-  const cap=st.querySelector(".ac-cap"); cap.innerHTML=`<span class="ah-rar">${RARITY[c.rarity]}</span><b>${esc(sigName(c))}</b><small>${[m?m[1]:"",c.club||""].filter(Boolean).map(esc).join(" · ")}${owned[c.id]?" · dans ta collection":""}</small>`;
+  const w=document.createElement("div"); w.className="ac-cw"+(s.shift?" sh":""); w.innerHTML=`<img src="${s.img}" alt="${esc(s.n)}" style="object-position:${s.pos}">`; stage.appendChild(w);
+  const cap=st.querySelector(".ac-cap"); cap.innerHTML=`<span class="ah-rar">${RARITY[rar]}</span><b>${esc(s.n)}</b><small>« ${esc(s.nick)} » · ${esc(s.club)}</small>`;
   cap.classList.remove("in"); void cap.offsetWidth; cap.classList.add("in");
-  const u=st.querySelector(".ac-bar u"); u.style.animation="none"; void u.offsetWidth; u.style.animation=""; }
-function acFit(){ const h=document.querySelector(".nav2"); document.documentElement.style.setProperty("--hh",(h?h.offsetHeight:64)+"px"); }
+  const u=st.querySelector(".ac-bar u"); u.style.animation="none"; void u.offsetWidth; u.style.animation=""; }function acFit(){ const h=document.querySelector(".nav2"); document.documentElement.style.setProperty("--hh",(h?h.offsetHeight:64)+"px"); }
+setTimeout(()=>AH_STARS.forEach(s=>{ const i=new Image(); i.src=s.img; }),3000);
 function acSee(){ const id=+($("ac-show")||{dataset:{}}).dataset.cid; if(id) openCard(id,null,"seen"); }
 setInterval(()=>{ if(!acVis()||document.hidden) return; acClock(); if(!ACS.pause&&Date.now()-ACS.last>5000) acShow(1); },500);
 addEventListener("resize",()=>{ if(acVis()) acFit(); });
