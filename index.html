@@ -10,7 +10,7 @@
 <meta property="og:image" content="https://primez-one.vercel.app/og.jpg?v=2"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://primez-one.vercel.app/og.jpg?v=2"><meta name="theme-color" content="#e5202e">
 <link rel="icon" type="image/png" href="logo.png"><meta name="theme-color" content="#18161a"><link rel="apple-touch-icon" href="logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Mr+Dafoe&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Mr+Dafoe&family=Outfit:wght@400;500;600;700;800;900&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <style>
 :root{--bg:#000;--panel:#171519;--line:#2c2c2c;--text:#f5f5f5;--mute:#a8a8a8;--ac:#e5202e;--ac2:#ffc9cc;--grass:#22c55e;
@@ -3183,74 +3183,69 @@ html{overflow-x:hidden}
 .al-th.no{border-color:#ffffff22;background:#111}.al-th.no img{filter:grayscale(1) brightness(.45)}
 .al-strip em{flex:0 0 auto;margin-left:8px;font-style:normal;font-size:12px;font-weight:800;color:var(--mute);white-space:nowrap}
 .al-cards{margin:16px 0 4px!important}
-/* ---------- accueil : plein écran, le terrain à gauche, le défilé des cartes à droite ---------- */
+/* ---------- accueil : plein écran, épuré : la carte à la une à gauche, le menu en tuiles alignées à droite ---------- */
 @media(min-width:761px){body.ac-mode .sb{display:none!important}}
-.ac-page{padding:14px 22px 18px}
-.ac{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,32vw);gap:20px;height:calc(100dvh - var(--hh,64px) - 32px);min-height:600px}
-.ac-k{font:800 10px/1 Outfit,Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
-.ac-main{display:flex;flex-direction:column;gap:12px;min-width:0;min-height:0}.ac-main>.ac-pitch{flex:1 1 0}
-.ac-hi{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.ac-hi h2{margin:4px 0 0;font:italic 900 clamp(28px,3.4vw,52px)/1 Outfit,Arial,sans-serif;text-transform:uppercase}.ac-hi h2 b{color:#ff3b47}
-.ac-chips{display:flex;gap:6px;flex-wrap:wrap}.ac-chips span{background:#171519;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12px;color:var(--mute)}
-.ac-chips b{color:#fff}.ac-chips .ac-hot{border-color:#4ade8066;color:#4ade80}
-.ac-daily{display:flex;align-items:center;gap:12px;width:100%;padding:10px 16px;border-radius:16px;background:#171519;border:1px solid var(--line);color:inherit;text-align:left}
-.ac-daily>span{font-size:24px}.ac-daily div{flex:1;display:grid;gap:2px}.ac-daily small{color:var(--mute);font-size:12px}
-.ac-daily.ac-on{cursor:pointer;background:linear-gradient(90deg,color-mix(in srgb,#4ade80 20%,#171519),#171519 75%);border-color:#4ade8066}
-.ac-daily em{font-style:normal;font-weight:900;background:#4ade80;color:#0c1a10;padding:9px 16px;border-radius:999px}
-/* le terrain */
-.ac-pitch{position:relative;display:grid;grid-template-rows:1.2fr 1fr 1fr .9fr;gap:clamp(10px,1.6vh,18px);padding:clamp(16px,2.4vh,28px) clamp(14px,2vw,30px);border-radius:24px;overflow:hidden;min-height:0;
-  background:repeating-linear-gradient(180deg,#0e1a12 0 12.5%,#112016 12.5% 25%);border:1px solid #ffffff14;box-shadow:inset 0 0 140px #000a}
-.ac-ln{position:absolute;inset:12px;border:2px solid #ffffff1a;border-radius:14px;pointer-events:none}
-.ac-ln::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px solid #ffffff1a}
-.ac-ln::after{content:"";position:absolute;left:50%;top:50%;width:min(22vh,180px);aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid #ffffff1a;border-radius:50%}
-.ac-pitch::before,.ac-pitch::after{content:"";position:absolute;left:50%;width:44%;height:11%;transform:translateX(-50%);border:2px solid #ffffff1a;pointer-events:none}
-.ac-pitch::before{top:12px;border-top:0}.ac-pitch::after{bottom:12px;border-bottom:0}
-.ac-row{position:relative;display:flex;justify-content:center;align-items:stretch;gap:clamp(10px,1.2vw,18px);z-index:1;min-height:0}
-.ac-t{position:relative;flex:0 1 250px;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:clamp(10px,1.6vh,18px) 14px;border-radius:18px;text-align:left;color:#fff;overflow:hidden;cursor:pointer;
-  background:linear-gradient(160deg,color-mix(in srgb,var(--c) 28%,#141118) 0%,#121014ee 62%);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);box-shadow:0 10px 24px -14px #000;transition:transform .18s,box-shadow .18s,border-color .18s}
-.ac-t:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 16px 34px -14px color-mix(in srgb,var(--c) 70%,#000)}
-.ac-t b{font:italic 900 clamp(15px,1.5vw,24px)/1.05 Outfit,Arial,sans-serif;text-transform:uppercase}.ac-t small{color:#ffffffa6;font-size:clamp(11px,.85vw,13px);line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ac-i{font-size:clamp(20px,2.6vh,32px);line-height:1;margin-bottom:auto}
-.ac-t em{position:absolute;top:12px;right:12px;font-style:normal;font-size:12px;font-weight:900;background:#e5202e;color:#fff;border-radius:999px;padding:2px 8px}
-.ac-t.ac-big{flex-basis:340px;background:linear-gradient(150deg,#e5202e 0%,#8f0f1a 75%);border-color:#ff5a66}
-.ac-t.ac-big b{font-size:clamp(22px,2.2vw,36px)}.ac-t.ac-big small{color:#fff;font-weight:700;font-size:clamp(12px,1vw,15px)}
-.ac-rg .ac-t{flex-basis:220px}
-.ac-bench{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.ac-bn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:#171519;border:1px solid var(--line);color:#fff;font-weight:800;font-size:13px}
-.ac-bn:hover{border-color:#e5202e}
-/* le défilé des cartes */
-.ac-show{--ac-c:#14915f;position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto auto;border-radius:24px;overflow:hidden;min-height:0;
-  background:radial-gradient(ellipse 70% 55% at 50% 42%,color-mix(in srgb,var(--ac-c) 30%,#0c0b0e),#0a090c 70%);border:1px solid color-mix(in srgb,var(--ac-c) 35%,#ffffff14);transition:border-color .6s}
-.ac-show::before{content:"";position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 42%,#ffffff08 0 6deg,#0000 6deg 18deg);pointer-events:none;animation:acRays 40s linear infinite}
-@keyframes acRays{to{transform:rotate(360deg)}}
-.ac-stage{position:relative;display:grid;place-items:center;min-height:0;padding:18px}
-.ac-cw{grid-area:1/1;position:relative;animation:acIn .6s cubic-bezier(.2,.9,.3,1.1) both}
-.ac-cw.out{animation:acOut .5s ease forwards}
-@keyframes acIn{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
-@keyframes acOut{to{opacity:0;transform:translateY(-14px) scale(.96)}}
-/* l'aura : une lueur de la couleur de la rareté autour du cadre, qui respire (derrière la carte, jamais sur la photo) */
+.ac-page{--ah-r:#e5202e;--ah-g:#f1cf74;padding:0}
+.ah{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,3vw,56px);height:calc(100dvh - var(--hh,64px));min-height:620px;
+  padding:clamp(18px,3vh,36px) clamp(18px,3vw,56px);overflow:hidden;background:radial-gradient(ellipse 55% 75% at 22% 55%,#2a0d12 0%,#0c0b0f 62%),#0c0b0f}
+/* deux traits en biais qui donnent le mouvement */
+.ah-sl{position:absolute;top:-10%;bottom:-10%;width:clamp(10px,1.1vw,18px);background:linear-gradient(180deg,#0000,var(--ah-r) 25%,var(--ah-r) 75%,#0000);transform:skewX(-14deg);opacity:.9;pointer-events:none}
+.ah-sl.s1{left:6%}.ah-sl.s2{left:47%;width:3px;background:linear-gradient(180deg,#0000,var(--ah-g) 30%,var(--ah-g) 70%,#0000);opacity:.5}
+/* à gauche : la carte à la une */
+.ah-hero{--ac-c:#14915f;position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto;min-height:0;z-index:1}
+.ah-me{display:flex;align-items:center;gap:12px;justify-self:start;padding:10px 16px 10px 10px;background:#ffffff0a;border:1px solid #ffffff14;border-radius:14px;backdrop-filter:blur(6px)}
+.ah-av{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--ah-r);font:700 26px/1 Teko,Outfit,sans-serif;padding-top:3px}
+.ah-me div{display:grid;gap:3px}.ah-me small{font:700 10px/1 Outfit,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#ffffff80}
+.ah-me b{font:600 24px/.9 Teko,Outfit,sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.ah-me i{display:block;width:150px;height:3px;border-radius:3px;background:#ffffff1a;overflow:hidden}.ah-me u{display:block;height:100%;background:var(--ah-r)}
+.ah-me em{font-style:normal;font-size:11px;color:#ffffff99}
+.ac-stage{position:relative;display:grid;place-items:center;min-height:0;padding:10px}
+.ac-cw{grid-area:1/1;position:relative;animation:acIn .6s cubic-bezier(.2,.9,.3,1.1) both}.ac-cw.out{animation:acOut .5s ease forwards}
+@keyframes acIn{from{opacity:0;transform:translateX(-24px) rotate(-3deg)}to{opacity:1;transform:none}}
+@keyframes acOut{to{opacity:0;transform:translateX(24px) rotate(2deg)}}
+/* l'aura autour du cadre (derrière la carte, jamais sur la photo) */
 .ac-cw::before{content:"";position:absolute;inset:-5px;border-radius:16px;z-index:-1;background:var(--ac-c);opacity:.55;
-  box-shadow:0 0 18px 4px var(--ac-c),0 0 46px 12px color-mix(in srgb,var(--ac-c) 60%,transparent),0 0 90px 30px color-mix(in srgb,var(--ac-c) 30%,transparent);animation:acAura 2.6s ease-in-out infinite}
+  box-shadow:0 0 18px 4px var(--ac-c),0 0 46px 12px color-mix(in srgb,var(--ac-c) 60%,transparent),0 0 100px 34px color-mix(in srgb,var(--ac-c) 28%,transparent);animation:acAura 2.6s ease-in-out infinite}
 @keyframes acAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.85;transform:scale(1.025)}}
-.ac-cap{position:relative;display:grid;justify-items:center;gap:4px;padding:0 18px 6px;text-align:center}
-.ac-sig{font:400 clamp(40px,3.6vw,64px)/1 "Mr Dafoe",cursive;transform:rotate(-4deg);margin:4px 0;
-  background:linear-gradient(180deg,#fff7d6 10%,#f1cf74 55%,#b88a2c 95%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 6px #000c)}
-.ac-cap small{color:#ffffffb3;font-size:13px}
-.ac-ctl{position:relative;display:flex;align-items:center;gap:10px;padding:10px 18px 18px}
-.ac-ctl>button:not(.ac-see){width:36px;height:36px;border-radius:50%;background:#ffffff12;border:1px solid #ffffff26;color:#fff;font-size:20px;line-height:1}
-.ac-bar{flex:1;height:4px;border-radius:9px;background:#ffffff18;overflow:hidden}.ac-bar u{display:block;height:100%;width:100%;background:var(--ac-c);transform-origin:left;animation:acBar 5s linear}
-.ac-show:hover .ac-bar u{animation-play-state:paused}
-@keyframes acBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.ac-see{padding:9px 16px;border-radius:999px;background:#ffffff14;border:1px solid #ffffff33;color:#fff;font-weight:800}.ac-see:hover{background:#e5202e;border-color:#e5202e}
-/* tablette et téléphone : le défilé en haut, le terrain en dessous, la page défile normalement */
-@media(max-width:1000px){.ac{grid-template-columns:1fr;height:auto;min-height:0}.ac-show{order:-1;height:600px}.ac-main>.ac-pitch{flex:none}
-  .ac-pitch{grid-template-rows:none}.ac-t{min-height:104px}}
-@media(max-width:700px){.ac-page{padding:6px 14px 24px}.ac{gap:14px}.ac-show{height:540px}.ac-sig{font-size:42px}
-  .ac-pitch{gap:10px;padding:16px 8px 14px;border-radius:18px}.ac-row{gap:7px;flex-wrap:wrap}
-  .ac-t{flex:0 0 calc((100% - 14px)/3);min-height:90px;padding:10px 9px 9px;border-radius:13px}.ac-t b{font-size:13px}.ac-t small{font-size:10px}.ac-i{font-size:18px}.ac-t em{top:8px;right:8px}
-  .ac-ra .ac-big{order:-1;flex-basis:100%;min-height:96px}.ac-ra .ac-t:not(.ac-big){flex-basis:calc((100% - 7px)/2)}
-  .ac-rd .ac-t{flex-basis:calc((100% - 7px)/2);min-height:80px}.ac-rg .ac-t{flex-basis:calc((100% - 14px)/3)}
-  .ac-pitch::before,.ac-pitch::after{height:40px}}/* bandeau « Active les notifications » */
+.ac-cap{display:grid;gap:2px;justify-items:start;padding-left:4px}
+.ac-cap.in{animation:capIn .5s ease both}@keyframes capIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ah-rar{font:700 11px/1 Outfit,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:var(--ac-c);padding:5px 9px 4px;border-radius:4px}
+.ac-cap b{font:700 clamp(48px,5.4vw,96px)/.82 Teko,Outfit,sans-serif;text-transform:uppercase;letter-spacing:.01em;margin-top:6px}
+.ac-cap small{font:600 12px/1 Outfit,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#ffffff99}
+.ac-ctl{display:flex;align-items:center;gap:10px;margin-top:14px;max-width:460px}
+.ac-ctl>button:not(.ac-see){width:34px;height:34px;border-radius:50%;background:#ffffff0d;border:1px solid #ffffff22;color:#fff;font-size:18px;line-height:1}
+.ac-bar{flex:1;height:3px;border-radius:9px;background:#ffffff18;overflow:hidden}.ac-bar u{display:block;height:100%;width:100%;background:var(--ac-c);transform-origin:left;animation:acBar 5s linear}
+.ah-hero:hover .ac-bar u{animation-play-state:paused}@keyframes acBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.ac-see{padding:8px 14px;border-radius:999px;background:transparent;border:1px solid #ffffff33;color:#fff;font-weight:700;font-size:13px}.ac-see:hover{background:var(--ah-r);border-color:var(--ah-r)}
+/* à droite : l'heure, le pack du jour et les tuiles */
+.ah-menu{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;gap:12px;min-height:0}
+.ah-clock{position:absolute;top:0;right:0;display:grid;justify-items:end}.ah-clock b{font:600 54px/.8 Teko,Outfit,sans-serif}.ah-clock small{font:700 10px/1 Outfit,sans-serif;letter-spacing:.22em;color:#ffffff80;margin-top:6px}
+.ah-daily{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid color-mix(in srgb,var(--ah-g) 45%,transparent);background:linear-gradient(90deg,color-mix(in srgb,var(--ah-g) 14%,#141218),#141218);color:#fff;text-align:left;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.ah-daily b{font:600 24px/1 Teko,Outfit,sans-serif;text-transform:uppercase;padding-top:3px}.ah-daily span{flex:1;font-size:12px;color:#ffffffb3}
+.ah-daily em{font-style:normal;font-weight:800;font-size:13px;background:var(--ah-g);color:#1a1405;padding:7px 14px}
+.ah-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.ah-t{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:clamp(96px,14vh,150px);padding:14px 16px;color:#fff;text-align:left;overflow:hidden;
+  background:linear-gradient(135deg,#1b1920 0%,#141218 100%);border:0;box-shadow:inset 0 0 0 1px #ffffff12;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%);transition:transform .18s,background .18s}
+.ah-t::before{content:"";position:absolute;left:0;top:0;width:36%;height:3px;background:var(--ah-r)}
+.ah-t:hover{transform:translateY(-3px);background:linear-gradient(135deg,#25222b 0%,#18161d 100%)}
+.ah-t b{position:relative;font:600 clamp(26px,2.4vw,40px)/.85 Teko,Outfit,sans-serif;text-transform:uppercase;letter-spacing:.01em;padding-top:4px}
+.ah-t small{position:relative;font:700 10px/1.2 Outfit,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#ffffff8c;margin-top:4px}
+.ah-wm{position:absolute;right:-6px;bottom:-10px;width:clamp(70px,7vw,110px);height:auto;color:#ffffff10;stroke-width:1.2}
+.ah-tv{position:absolute;top:12px;right:22px;font:600 22px/1 Teko,Outfit,sans-serif;color:#fff}.ah-tv small{font-size:14px;color:#ffffff80;letter-spacing:0;margin:0}
+.ah-t em{position:absolute;top:14px;left:16px;font-style:normal;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ah-g)}
+.ah-t.w6{grid-column:span 6;min-height:clamp(120px,17vh,190px)}.ah-t.w3{grid-column:span 3}.ah-t.w2{grid-column:span 2}
+.ah-t.hot{background:linear-gradient(120deg,#e5202e 0%,#9d1220 100%)}.ah-t.hot::before{background:#fff}.ah-t.hot .ah-wm{color:#ffffff22}.ah-t.hot small{color:#ffffffcc}
+.ah-t.hot b{font-size:clamp(40px,3.8vw,64px)}.ah-t.hot .ah-tv{font-size:34px;top:14px}
+.ah-t.hot2{background:linear-gradient(135deg,#3a1018 0%,#1d1116 100%)}.ah-t.hot2::before{background:var(--ah-g)}
+.ah-quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.ah-quick button{position:relative;padding:8px 14px;background:#ffffff08;border:1px solid #ffffff14;color:#ffffffcc;font:700 11px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.ah-quick button:hover{color:#fff;border-color:var(--ah-r)}.ah-quick em{font-style:normal;margin-left:6px;color:var(--ah-r)}
+/* tablette / téléphone */
+@media(max-width:1000px){.ah{grid-template-columns:1fr;height:auto;min-height:0;gap:18px}.ah-hero{height:620px}.ah-clock{display:none}.ah-sl.s2{display:none}.ah-menu{justify-content:flex-start}}
+@media(max-width:700px){.ah{padding:14px 14px 26px}.ah-hero{height:560px}.ac-cap b{font-size:54px}.ah-me b{font-size:20px}.ah-me i{width:110px}
+  .ah-grid{grid-template-columns:repeat(2,1fr);gap:8px}.ah-t.w6{grid-column:span 2;min-height:120px}.ah-t.w3,.ah-t.w2{grid-column:span 1}.ah-t{min-height:96px;padding:12px}
+  .ah-t b{font-size:28px}.ah-t.hot b{font-size:44px}.ah-wm{width:72px}.ah-sl.s1{left:-2%}}/* bandeau « Active les notifications » */
 .ntb{display:flex;align-items:center;gap:14px;padding:12px 16px;margin-bottom:14px;border-radius:16px;background:linear-gradient(90deg,color-mix(in srgb,#facc15 14%,#1c1a1e),#1c1a1e 70%);border:1px solid #facc1544}
 .ntb-i{font-size:24px}.ntb-t{flex:1;display:grid;gap:2px}.ntb-t small{color:var(--mute);font-size:12px}
 .ntb-x{background:none;border:0;color:var(--mute);font-size:16px;padding:6px}
@@ -4631,34 +4626,55 @@ async function claimAlbum(id){ const d=await rpd("album_claim",{p_id:id}); if(!d
   const a=ALB.find(x=>x.id===id); toast(`Album complété ! ${alReward(a).join(" + ")}${d.booster?" (dans Boosters)":""}`,true);
   if(d.booster) await refLoad(); if(d.card) await loadCollection(); renderAlbums(); }
 
-/* ---------- accueil : le sommaire du site, présenté comme une équipe sur le terrain + un défilé des cartes Prime et GOAT ---------- */
+/* ---------- accueil : à gauche la carte à la une (Prime / GOAT qui défilent), à droite le menu en tuiles alignées ---------- */
 const acVis=()=>{ const v=$("view-accueil"); return v&&!v.classList.contains("hidden"); };
 const acRefresh=()=>{ if(acVis()) renderAccueil(); };
-function acFreeTxt(){ if(!profile||typeof freeNow!=="function") return ""; const f=freeNow(); if(f.n>0) return `${f.n}/${cap()} gratuits à ouvrir`;
-  const s=Math.ceil(f.next||0); return `+1 gratuit dans ${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`; }
+function acFreeTxt(){ if(!profile||typeof freeNow!=="function") return ""; const f=freeNow(); if(f.n>0) return `${f.n}/${cap()}`;
+  const s=Math.ceil(f.next||0); return `${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`; }
+const AH_IC={
+  bx:'<rect x="4" y="7" width="16" height="14" rx="1"/><path d="M4 11h16M9 7V3h6v4"/>',
+  col:'<rect x="3" y="7" width="12" height="14" rx="1"/><path d="M8 3h13v14"/>',
+  rk:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+  mz:'<path d="M6 21V4M6 5h12l-2.5 4L18 13H6"/>',
+  gx:'<rect x="3" y="8" width="18" height="10" rx="2"/><path d="M8 11v4M6 13h4M16 12h.01M18 14h.01"/>',
+  mk:'<path d="M3 12l9-9h9v9l-9 9z"/><circle cx="16" cy="8" r="1.5"/>',
+  bo:'<path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 20h8"/>',
+  fr:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M16 5a3 3 0 0 1 0 6M21 20c0-3-2-5-4-5.5"/>',
+  cl:'<path d="M4 20V10h5v10M9.5 20V4h5v16M15 20v-7h5v7M3 20h18"/>'};
+const ahIc=(k,c)=>`<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${AH_IC[k]}</svg>`;
 function renderAccueil(){ const box=$("ac-body"); if(!box||!profile) return;
-  if(!$("ac-show")) box.innerHTML=`<div class="ac"><div class="ac-main" id="ac-left"></div>
-    <aside class="ac-show" id="ac-show" onmouseenter="ACS.pause=1" onmouseleave="ACS.pause=0"><div class="ac-stage"></div>
-      <div class="ac-cap"></div><div class="ac-ctl"><button onclick="acShow(-1)" aria-label="Carte précédente">‹</button><span class="ac-bar"><u></u></span><button onclick="acShow(1)" aria-label="Carte suivante">›</button><button class="ac-see" onclick="acSee()">Voir la carte</button></div></aside></div>`;
+  if(!$("ac-show")) box.innerHTML=`<div class="ah"><i class="ah-sl s1"></i><i class="ah-sl s2"></i>
+    <section class="ah-hero" id="ac-show" onmouseenter="ACS.pause=1" onmouseleave="ACS.pause=0">
+      <div class="ah-me" id="ah-me"></div><div class="ac-stage"></div><div class="ac-cap"></div>
+      <div class="ac-ctl"><button onclick="acShow(-1)" aria-label="Carte précédente">‹</button><span class="ac-bar"><u></u></span><button onclick="acShow(1)" aria-label="Carte suivante">›</button><button class="ac-see" onclick="acSee()">Voir la carte</button></div></section>
+    <section class="ah-menu" id="ac-left"></section></div>`;
   const nm=profile.username||"Joueur", have=allCards.filter(c=>owned[c.id]).length, tot=allCards.length;
   const sk=mzData&&mzData.streak, todo=mzData?(mzData.claimable||0)+(sk&&sk.can_claim?1:0):0;
-  const albs=ALB?`${ALBC.size}/${ALB.length} albums`:"Cartes & albums", unread=+($("msg-badge")||{}).textContent||0, soc=+($("soc-badge")||{}).textContent||0;
-  let rkTxt="Ton onze contre les autres"; try{ if(typeof rk!=="undefined"&&rk.st){ const t=rkTier(rk.st.elo); rkTxt=`${t.n||t.name||"Classé"} · ${nf(rk.st.elo)} pts`; } }catch(e){}
-  const T=(ic,t,sub,col,go,o)=>`<button class="ac-t ${o&&o.big?"ac-big":""}" style="--c:${col}" onclick="${go}"><span class="ac-i">${ic}</span><b>${t}</b><small ${o&&o.id?`id="${o.id}"`:""}>${sub}</small>${o&&o.badge?`<em>${o.badge}</em>`:""}</button>`;
-  const B=(ic,t,go)=>`<button class="ac-bn" onclick="${go}"><span>${ic}</span>${t}</button>`;
+  const unread=+($("msg-badge")||{}).textContent||0, soc=+($("soc-badge")||{}).textContent||0;
+  let rkV="", rkS="Duel en direct"; try{ if(typeof rk!=="undefined"&&rk.st){ const t=rkTier(rk.st.elo); rkV=nf(rk.st.elo); rkS=(t.n||t.name||"Classé")+" · ton onze"; } }catch(e){}
+  const fr=typeof freeNow==="function"?freeNow():{n:0};
+  $("ah-me").innerHTML=`<span class="ah-av">${esc((nm[0]||"?").toUpperCase())}</span><div><small>Bon retour</small><b>${esc(nm)}</b><i><u style="width:${tot?have/tot*100:0}%"></u></i><em>${have} / ${tot} cartes</em></div>`;
+  const T=(k,t,sub,val,cls,go,o)=>`<button class="ah-t ${cls||""}" onclick="${go}">${ahIc(k,"ah-wm")}<span class="ah-tv" ${o&&o.id?`id="${o.id}"`:""}>${val||""}</span><b>${t}</b><small>${sub}</small>${o&&o.badge?`<em>${o.badge}</em>`:""}</button>`;
+  const daily=sk&&sk.packs&&sk.can_claim?`<button class="ah-daily" onclick="claimStreak()"><b>Pack du jour</b><span>Jour ${sk.next}/7 · ${esc(bName(sk.packs[sk.next-1]))} offert${sk.next===7?" · Élite garantie":""}</span><em>Ouvrir</em></button>`:"";
   const cag=$("tab-cagnotte")&&!$("tab-cagnotte").classList.contains("hidden");
-  const daily=sk&&sk.packs?(sk.can_claim?`<button class="ac-daily ac-on" onclick="claimStreak()"><span>🎁</span><div><b>Ton pack du jour t’attend</b><small>Jour ${sk.next}/7 · ${esc(bName(sk.packs[sk.next-1]))} offert${sk.next===7?" · Élite garantie":""}</small></div><em>Ouvrir</em></button>`
-    :`<div class="ac-daily"><span>🔥</span><div><b>Série de ${sk.claimed} jour${sk.claimed>1?"s":""}</b><small>Ton prochain pack du jour arrive demain</small></div></div>`):"";
-  $("ac-left").innerHTML=`<div class="ac-hi"><div><span class="ac-k">Le vestiaire</span><h2>Salut <b>${esc(nm)}</b></h2></div>
-      <div class="ac-chips"><span>🃏 <b>${have}</b>/${tot} cartes</span>${todo?`<span class="ac-hot">🎯 <b>${todo}</b> à réclamer</span>`:""}</div></div>
+  const Q=(t,go,n)=>`<button onclick="${go}">${t}${n?`<em>${n}</em>`:""}</button>`;
+  $("ac-left").innerHTML=`<div class="ah-clock"><b id="ah-time"></b><small id="ah-date"></small></div>
     ${daily}
-    <div class="ac-pitch"><i class="ac-ln"></i>
-      <div class="ac-row ac-ra">${T("⚔️","Classé",esc(rkTxt),"#ff4d8d","showTab('games');gxGo('ranked')")}${T("📦","Boosters",acFreeTxt(),"#e5202e","showTab('boosters')",{big:1,id:"ac-free"})}${T("🏆","Ballon d’Or","Classement de la semaine","#f5b800","showTab('ballon')")}</div>
-      <div class="ac-row ac-rm">${T("🃏","Collection",`${have}/${tot} · ${albs}`,"#a855f7","showTab('collection')")}${T("🎯","Missions",todo?`${todo} récompense${todo>1?"s":""} à réclamer`:"Jour, semaine & succès","#4ade80","showTab('missions')",{badge:todo||""})}${T("🎮","Jeux","LDC, draft, penalty, quiz","#3b82f6","showTab('games');gxGo('hub')")}</div>
-      <div class="ac-row ac-rd">${T("🏷️","Marché","Achats & ventes","#fb923c","showTab('market')")}${T("🤝","Amis","Échanges entre potes","#2dd4bf","showTab('friends')",{badge:soc||""})}${T("✉️","Messages","Cadeaux & annonces","#f472b6","showTab('messages')",{badge:unread||""})}${T("📊","Classements","Les meilleurs joueurs","#94a3b8","showTab('classement')")}</div>
-      <div class="ac-row ac-rg">${T("👤","Profil",esc(nm),"#e9c46a","showTab('profile')")}</div></div>
-    <div class="ac-bench"><span class="ac-k">Le banc</span>${B("📚","Albums","showTab('albums')")}${B("💬","Discord","showTab('discord')")}${cag?B("❤️","Cagnotte","showTab('cagnotte')"):""}${B("⚙️","Paramètres","showTab('settings')")}</div>`;
-  if(!$("ac-show").dataset.cid) acShow(0); else acFit(); }
+    <div class="ah-grid">
+      ${T("bx","Boosters",fr.n>0?"Gratuits à ouvrir":"Prochain gratuit","<span id='ac-free'>"+acFreeTxt()+"</span>","hot w6","showTab('boosters')")}
+      ${T("col","Collection","Cartes & albums",`${have}/${tot}`,"w3","showTab('collection')")}
+      ${T("rk","Classé",rkS,rkV,"hot2 w3","showTab('games');gxGo('ranked')")}
+      ${T("mz","Missions","Jour & semaine",todo?todo:"","w2","showTab('missions')",{badge:todo?"à réclamer":""})}
+      ${T("gx","Jeux","LDC · draft · quiz","","w2","showTab('games');gxGo('hub')")}
+      ${T("mk","Marché","Ventes & achats","","w2","showTab('market')")}
+      ${T("bo","Ballon d’Or","Top de la semaine","","w2","showTab('ballon')")}
+      ${T("fr","Amis","Échanges",soc||"","w2","showTab('friends')")}
+      ${T("cl","Classements","Les meilleurs","","w2","showTab('classement')")}
+    </div>
+    <nav class="ah-quick">${Q("Profil","showTab('profile')")}${Q("Messages","showTab('messages')",unread)}${Q("Albums","showTab('albums')")}${Q("Discord","showTab('discord')")}${cag?Q("Cagnotte","showTab('cagnotte')"):""}${Q("Paramètres","showTab('settings')")}</nav>`;
+  acClock(); if(!$("ac-show").dataset.cid) acShow(0); else acFit(); }
+function acClock(){ const t=$("ah-time"), d=$("ah-date"); if(!t) return; const n=new Date();
+  t.textContent=n.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); d.textContent=n.toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"}).replace(/\./g,"").toUpperCase(); }
 /* le défilé : une carte Prime ou GOAT à la fois, avec une aura de sa couleur, une nouvelle toutes les 5 s */
 const ACS={list:[],i:0,last:0,pause:0};
 function acList(){ const L=allCards.filter(c=>(c.rarity==="prime"||c.rarity==="goat")&&c.image_url); if(L.length===ACS.list.length) return;
@@ -4668,12 +4684,13 @@ function acShow(d){ const st=$("ac-show"); if(!st) return; acList(); if(!ACS.lis
   st.style.setProperty("--ac-c",COLOR[c.rarity]); st.dataset.cid=c.id;
   const stage=st.querySelector(".ac-stage"); stage.querySelectorAll(".ac-cw").forEach(o=>{ o.classList.add("out"); setTimeout(()=>o.remove(),550); });
   const w=document.createElement("div"); w.className="ac-cw"; w.innerHTML=cardHTML(c,true,0); stage.appendChild(w); acFit();
-  st.querySelector(".ac-cap").innerHTML=`<span class="ac-k">À la une · ${RARITY[c.rarity]}${owned[c.id]?" · dans ta collection":""}</span><div class="ac-sig">${esc(sigName(c))}</div><small>${m?m[1]:""}${c.club?(m?" · ":"")+esc(c.club):""}</small>`;
+  const cap=st.querySelector(".ac-cap"); cap.innerHTML=`<span class="ah-rar">${RARITY[c.rarity]}</span><b>${esc(sigName(c))}</b><small>${[m?m[1]:"",c.club||""].filter(Boolean).map(esc).join(" · ")}${owned[c.id]?" · dans ta collection":""}</small>`;
+  cap.classList.remove("in"); void cap.offsetWidth; cap.classList.add("in");
   const u=st.querySelector(".ac-bar u"); u.style.animation="none"; void u.offsetWidth; u.style.animation=""; }
 function acFit(){ const st=$("ac-show"); if(!st) return; const h=document.querySelector(".nav2"); document.documentElement.style.setProperty("--hh",(h?h.offsetHeight:64)+"px");
-  const s=st.querySelector(".ac-stage"); const z=Math.max(.9,Math.min((s.clientHeight-40)/228,(s.clientWidth-60)/158)); s.querySelectorAll(".ac-cw").forEach(w=>w.style.zoom=z.toFixed(3)); }
+  const s=st.querySelector(".ac-stage"); const z=Math.max(.9,Math.min((s.clientHeight-30)/228,(s.clientWidth-40)/158)); s.querySelectorAll(".ac-cw").forEach(w=>w.style.zoom=z.toFixed(3)); }
 function acSee(){ const id=+($("ac-show")||{dataset:{}}).dataset.cid; if(id) openCard(id,null,"seen"); }
-setInterval(()=>{ if(acVis()&&!document.hidden&&!ACS.pause&&Date.now()-ACS.last>5000) acShow(1); },500);
+setInterval(()=>{ if(!acVis()||document.hidden) return; acClock(); if(!ACS.pause&&Date.now()-ACS.last>5000) acShow(1); },500);
 addEventListener("resize",()=>{ if(acVis()) acFit(); });
 /* ---------- admin : albums (choisir les cartes, la récompense, l'ordre, masquer ou supprimer) ---------- */
 const AA={list:[],ed:null};
