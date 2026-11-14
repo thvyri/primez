@@ -3183,71 +3183,107 @@ html{overflow-x:hidden}
 .al-th.no{border-color:#ffffff22;background:#111}.al-th.no img{filter:grayscale(1) brightness(.45)}
 .al-strip em{flex:0 0 auto;margin-left:8px;font-style:normal;font-size:12px;font-weight:800;color:var(--mute);white-space:nowrap}
 .al-cards{margin:16px 0 4px!important}
-/* ---------- accueil : plein écran, épuré : la carte à la une à gauche, le menu en tuiles alignées à droite ---------- */
+/* ---------- accueil : plein écran, le joueur à la une à gauche, le menu à droite, avec textures et mouvement ---------- */
 @media(min-width:761px){body.ac-mode .sb{display:none!important}}
-.ac-page{--ah-r:#e5202e;--ah-g:#f1cf74;padding:0}
-.ah{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,3vw,56px);height:calc(100dvh - var(--hh,64px));min-height:620px;
-  padding:clamp(18px,3vh,36px) clamp(18px,3vw,56px);overflow:hidden;background:radial-gradient(ellipse 55% 75% at 22% 55%,#2a0d12 0%,#0c0b0f 62%),#0c0b0f}
-/* deux traits en biais qui donnent le mouvement */
-.ah-sl{position:absolute;top:-10%;bottom:-10%;width:clamp(10px,1.1vw,18px);background:linear-gradient(180deg,#0000,var(--ah-r) 25%,var(--ah-r) 75%,#0000);transform:skewX(-14deg);opacity:.9;pointer-events:none}
-.ah-sl.s1{left:6%}.ah-sl.s2{left:47%;width:3px;background:linear-gradient(180deg,#0000,var(--ah-g) 30%,var(--ah-g) 70%,#0000);opacity:.5}
-/* à gauche : la carte à la une */
-.ah-hero{--ac-c:#14915f;position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto;min-height:0;z-index:1}
-.ah-me{display:flex;align-items:center;gap:12px;justify-self:start;padding:10px 16px 10px 10px;background:#ffffff0a;border:1px solid #ffffff14;border-radius:14px;backdrop-filter:blur(6px)}
-.ah-av{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--ah-r);font:italic 800 19px/1 Kanit,Outfit,sans-serif}
-.ah-me div{display:grid;gap:3px}.ah-me small{font:700 10px/1 Outfit,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#ffffff80}
-.ah-me b{font:italic 800 17px/1.05 Kanit,Outfit,sans-serif;text-transform:uppercase}
+.ac-page{--ah-r:#e5202e;--ah-g:#f1cf74;--ah-bg:#0c0b0f;--ah-f:Kanit,Outfit,sans-serif;padding:0}
+.ah{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,56px);height:calc(100dvh - var(--hh,64px));min-height:640px;
+  padding:clamp(18px,3vh,36px) clamp(18px,3vw,56px);overflow:hidden;isolation:isolate;
+  background:radial-gradient(ellipse 60% 70% at 85% 30%,#1a0b10 0%,#0000 60%),radial-gradient(ellipse 50% 80% at 20% 60%,#24090e 0%,#0000 65%),var(--ah-bg)}
+/* textures : grain, rayures en biais et trame de points, très discrètes */
+.ah-tx{position:absolute;inset:0;z-index:0;pointer-events:none;background:var(--grain),repeating-linear-gradient(115deg,#ffffff05 0 2px,#0000 2px 14px);opacity:.9}
+.ah-tx::after{content:"";position:absolute;right:0;top:0;width:55%;height:100%;background:radial-gradient(#ffffff14 1px,#0000 1.6px) 0 0/10px 10px;
+  -webkit-mask-image:linear-gradient(200deg,#000 0%,#0000 55%);mask-image:linear-gradient(200deg,#000 0%,#0000 55%)}
+.ah-sl{position:absolute;top:-10%;bottom:-10%;z-index:3;width:clamp(8px,.9vw,16px);background:linear-gradient(180deg,#0000,var(--ah-r) 20%,var(--ah-r) 80%,#0000);transform:skewX(-14deg);pointer-events:none;box-shadow:0 0 30px #e5202e88}
+.ah-sl.s1{left:4%}.ah-sl.s2{left:50%;width:2px;background:linear-gradient(180deg,#0000,var(--ah-g) 30%,var(--ah-g) 70%,#0000);opacity:.55;box-shadow:none}
+/* à gauche : le joueur à la une, sa photo sur toute la hauteur, fondue vers la droite, le haut et le bas */
+.ah-hero{--ac-c:#14915f;position:relative;z-index:1;display:flex;flex-direction:column;min-height:0}
+.ac-stage{position:absolute;z-index:0;top:calc(-1 * clamp(18px,3vh,36px));bottom:calc(-1 * clamp(18px,3vh,36px));left:calc(-1 * clamp(18px,3vw,56px));right:-20%;pointer-events:none}
+.ac-cw{position:absolute;inset:0;animation:acIn 1s ease both}.ac-cw.out{animation:acOut .7s ease forwards}
+.ac-cw img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 16%;filter:brightness(.8) contrast(1.08) saturate(1.05)}
+.ac-cw{-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 38%,#0009 58%,#0003 76%,#0000 90%),linear-gradient(180deg,#0000 0%,#000 16%,#000 62%,#0000 100%);-webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,#000 0%,#000 38%,#0009 58%,#0003 76%,#0000 90%),linear-gradient(180deg,#0000 0%,#000 16%,#000 62%,#0000 100%);mask-composite:intersect}
+/* une ombre colorée de la rareté qui monte du bas, et un voile pour que les fonds clairs se fondent */
+.ac-cw::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,color-mix(in srgb,var(--ac-c) 30%,#0000) 0%,#0000 40%),linear-gradient(90deg,#0c0b0f55,#0000 30%)}
+@keyframes acIn{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:none}}
+@keyframes acOut{to{opacity:0}}
+.ah-me{position:relative;z-index:2;display:flex;align-items:center;gap:12px;align-self:flex-start;padding:10px 16px 10px 10px;background:#0c0b0fb3;border:1px solid #ffffff14;border-radius:14px;backdrop-filter:blur(8px);box-shadow:0 10px 30px -12px #000}
+.ah-av{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--ah-r);font:italic 800 19px/1 var(--ah-f);box-shadow:0 0 0 3px #e5202e33}
+.ah-me div{display:grid;gap:3px}.ah-me small{font:700 9px/1 Outfit,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#ffffff80}
+.ah-me b{font:italic 800 17px/1.05 var(--ah-f);text-transform:uppercase}
 .ah-me i{display:block;width:150px;height:3px;border-radius:3px;background:#ffffff1a;overflow:hidden}.ah-me u{display:block;height:100%;background:var(--ah-r)}
 .ah-me em{font-style:normal;font-size:11px;color:#ffffff99}
-.ac-stage{position:relative;display:grid;place-items:center;min-height:0;padding:10px}
-.ac-cw{grid-area:1/1;position:relative;height:100%;aspect-ratio:3/4;max-width:100%;animation:acIn .7s cubic-bezier(.2,.9,.3,1) both}
-.ac-cw img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 20%;opacity:.96;
-  -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 47%,#000 32%,#000c 54%,#0005 76%,transparent 96%);mask-image:radial-gradient(ellipse 50% 50% at 50% 47%,#000 32%,#000c 54%,#0005 76%,transparent 96%)}.ac-cw.out{animation:acOut .5s ease forwards}
-@keyframes acIn{from{opacity:0;transform:translateX(-24px) rotate(-3deg)}to{opacity:1;transform:none}}
-@keyframes acOut{to{opacity:0;transform:translateX(24px) rotate(2deg)}}
-/* l'aura autour du cadre (derrière la carte, jamais sur la photo) */
-.ac-cw::before{content:"";position:absolute;left:14%;right:14%;top:16%;bottom:26%;border-radius:50%;z-index:-1;background:radial-gradient(closest-side,var(--ac-c),transparent);filter:blur(40px);opacity:.5;
-  animation:acAura 3s ease-in-out infinite}
-@keyframes acAura{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.85;transform:scale(1.025)}}
-.ac-cap{position:relative;z-index:2;display:grid;gap:2px;justify-items:start;padding-left:4px;margin-top:-56px}
-.ac-cap.in{animation:capIn .5s ease both}@keyframes capIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.ah-rar{font:700 11px/1 Outfit,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:var(--ac-c);padding:5px 9px 4px;border-radius:4px}
-.ac-cap b{font:italic 800 clamp(36px,3.9vw,70px)/.95 Kanit,Outfit,sans-serif;text-transform:uppercase;margin-top:6px}
-.ac-cap small{font:600 12px/1 Outfit,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#ffffff99}
-.ac-ctl{display:flex;align-items:center;gap:10px;margin-top:14px;max-width:460px}
-.ac-ctl>button:not(.ac-see){width:34px;height:34px;border-radius:50%;background:#ffffff0d;border:1px solid #ffffff22;color:#fff;font-size:18px;line-height:1}
-.ac-bar{flex:1;height:3px;border-radius:9px;background:#ffffff18;overflow:hidden}.ac-bar u{display:block;height:100%;width:100%;background:var(--ac-c);transform-origin:left;animation:acBar 5s linear}
+.ah-gap{flex:1}
+.ac-cap{position:relative;z-index:2;display:grid;gap:2px;justify-items:start;padding-left:4px;text-shadow:0 4px 24px #000}
+.ac-cap.in{animation:capIn .6s ease both}@keyframes capIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+.ah-rar{font:700 11px/1 Outfit,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:var(--ac-c);padding:5px 9px 4px;border-radius:4px;text-shadow:none}
+.ac-cap b{font:italic 800 clamp(40px,4.4vw,80px)/.95 var(--ah-f);text-transform:uppercase;margin-top:8px}
+.ac-cap small{font:700 12px/1 Outfit,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#ffffffb3}
+.ac-ctl{position:relative;z-index:2;display:flex;align-items:center;gap:10px;margin-top:14px;max-width:460px}
+.ac-ctl>button:not(.ac-see){width:34px;height:34px;border-radius:50%;background:#0c0b0f99;border:1px solid #ffffff2a;color:#fff;font-size:18px;line-height:1}
+.ac-bar{flex:1;height:3px;border-radius:9px;background:#ffffff22;overflow:hidden}.ac-bar u{display:block;height:100%;width:100%;background:var(--ac-c);transform-origin:left;animation:acBar 5s linear}
 .ah-hero:hover .ac-bar u{animation-play-state:paused}@keyframes acBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.ac-see{padding:8px 14px;border-radius:999px;background:transparent;border:1px solid #ffffff33;color:#fff;font-weight:700;font-size:13px}.ac-see:hover{background:var(--ah-r);border-color:var(--ah-r)}
-/* à droite : l'heure, le pack du jour et les tuiles */
-.ah-menu{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;gap:12px;min-height:0}
-.ah-clock{position:absolute;top:0;right:0;display:grid;justify-items:end}.ah-clock b{font:italic 700 40px/1 Kanit,Outfit,sans-serif}.ah-clock small{font:700 10px/1 Outfit,sans-serif;letter-spacing:.22em;color:#ffffff80;margin-top:6px}
-.ah-daily{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid color-mix(in srgb,var(--ah-g) 45%,transparent);background:linear-gradient(90deg,color-mix(in srgb,var(--ah-g) 14%,#141218),#141218);color:#fff;text-align:left;
-  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
-.ah-daily b{font:italic 800 18px/1 Kanit,Outfit,sans-serif;text-transform:uppercase}.ah-daily span{flex:1;font-size:12px;color:#ffffffb3}
-.ah-daily em{font-style:normal;font-weight:800;font-size:13px;background:var(--ah-g);color:#1a1405;padding:7px 14px}
-.ah-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
-.ah-t{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:clamp(96px,14vh,150px);padding:14px 16px;color:#fff;text-align:left;overflow:hidden;
-  background:linear-gradient(135deg,#1b1920 0%,#141218 100%);border:0;box-shadow:inset 0 0 0 1px #ffffff12;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%);transition:transform .18s,background .18s}
-.ah-t::before{content:"";position:absolute;left:0;top:0;width:36%;height:3px;background:var(--ah-r)}
-.ah-t:hover{transform:translateY(-3px);background:linear-gradient(135deg,#25222b 0%,#18161d 100%)}
-.ah-t b{position:relative;font:italic 800 clamp(18px,1.7vw,28px)/1 Kanit,Outfit,sans-serif;text-transform:uppercase}
-.ah-t small{position:relative;font:700 10px/1.2 Outfit,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#ffffff8c;margin-top:4px}
-.ah-wm{position:absolute;right:-6px;bottom:-10px;width:clamp(70px,7vw,110px);height:auto;color:#ffffff10;stroke-width:1.2}
-.ah-tv{position:absolute;top:12px;right:22px;font:italic 700 18px/1 Kanit,Outfit,sans-serif;color:#fff}.ah-tv small{font-size:14px;color:#ffffff80;letter-spacing:0;margin:0}
-.ah-t em{position:absolute;top:14px;left:16px;font-style:normal;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ah-g)}
-.ah-t.w6{grid-column:span 6;min-height:clamp(120px,17vh,190px)}.ah-t.w3{grid-column:span 3}.ah-t.w2{grid-column:span 2}
-.ah-t.hot{background:linear-gradient(120deg,#e5202e 0%,#9d1220 100%)}.ah-t.hot::before{background:#fff}.ah-t.hot .ah-wm{color:#ffffff22}.ah-t.hot small{color:#ffffffcc}
-.ah-t.hot b{font-size:clamp(28px,2.8vw,48px)}.ah-t.hot .ah-tv{font-size:26px;top:14px}
-.ah-t.hot2{background:linear-gradient(135deg,#3a1018 0%,#1d1116 100%)}.ah-t.hot2::before{background:var(--ah-g)}
-.ah-quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
-.ah-quick button{position:relative;padding:8px 14px;background:#ffffff08;border:1px solid #ffffff14;color:#ffffffcc;font:700 11px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.ac-see{padding:8px 14px;border-radius:999px;background:#0c0b0f99;border:1px solid #ffffff33;color:#fff;font:italic 700 13px/1 var(--ah-f)}.ac-see:hover{background:var(--ah-r);border-color:var(--ah-r)}
+/* à droite */
+.ah-menu{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:14px;min-height:0;padding-left:clamp(0px,2vw,30px)}
+.ah-k{font:700 10px/1 Outfit,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#ffffffa6}
+.ah-clock{position:absolute;top:0;right:0;display:grid;justify-items:end}.ah-clock b{font:italic 700 46px/1 var(--ah-f)}.ah-clock small{font:700 10px/1 Outfit,sans-serif;letter-spacing:.22em;color:#ffffff80;margin-top:4px}
+.ah-daily{display:flex;align-items:center;gap:12px;padding:11px 16px;border:1px solid color-mix(in srgb,var(--ah-g) 45%,transparent);background:linear-gradient(90deg,color-mix(in srgb,var(--ah-g) 16%,#141218),#141218cc);color:#fff;text-align:left;border-radius:12px;box-shadow:0 12px 30px -16px #f1cf7466}
+.ah-dot{width:9px;height:9px;border-radius:50%;background:var(--ah-g);box-shadow:0 0 12px var(--ah-g);animation:acAura 1.6s ease-in-out infinite}
+@keyframes acAura{0%,100%{opacity:.5}50%{opacity:1}}
+.ah-daily b{font:italic 800 17px/1 var(--ah-f);text-transform:uppercase}.ah-daily span:not(.ah-dot){flex:1;font-size:12px;color:#ffffffb3}
+.ah-daily em{font-style:normal;font:italic 800 13px/1 var(--ah-f);background:var(--ah-g);color:#1a1405;padding:8px 14px;border-radius:999px}
+/* la vitrine du booster : dégradé rouge, rayures, le vrai visuel du booster qui dépasse */
+.ah-feat{position:relative;display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:clamp(150px,22vh,230px);padding:20px 26px;color:#fff;text-align:left;border:0;border-radius:20px;overflow:visible;
+  background:linear-gradient(115deg,#ff2a3a 0%,#c3121f 45%,#6d0a14 100%);box-shadow:0 24px 60px -24px #e5202ecc,inset 0 1px 0 #ffffff40;transition:transform .2s}
+.ah-feat::before{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(115deg,#ffffff12 0 2px,#0000 2px 12px),var(--grain);opacity:.6;pointer-events:none}
+.ah-feat::after{content:"";position:absolute;right:-8%;top:-40%;width:55%;height:180%;background:radial-gradient(closest-side,#ffffff38,#0000);transform:rotate(18deg);pointer-events:none}
+.ah-feat:hover{transform:translateY(-3px)}
+.ah-feat-t{position:relative;z-index:1;display:grid;gap:6px}.ah-feat-t .ah-k{color:#ffffffcc}
+.ah-feat b{font:italic 800 clamp(40px,4.2vw,72px)/.9 var(--ah-f);text-transform:uppercase;text-shadow:0 6px 24px #0006}
+.ah-feat-v{font:italic 700 clamp(22px,2vw,32px)/1 var(--ah-f)}
+.ah-cta{justify-self:start;margin-top:6px;padding:8px 14px;border-radius:999px;background:#0c0b0f;color:#fff;font:italic 700 13px/1 var(--ah-f);box-shadow:0 8px 20px -8px #000}
+.ah-feat-pk{position:relative;z-index:1;flex:0 0 auto;width:clamp(96px,8.5vw,150px);aspect-ratio:5/7;transform:rotate(8deg) translateY(-6%);filter:drop-shadow(0 18px 24px #0009);transition:transform .3s}
+.ah-feat:hover .ah-feat-pk{transform:rotate(3deg) translateY(-10%) scale(1.04)}
+.ah-feat-pk .bpk{transform:none!important;filter:none!important}
+/* collection (éventail de tes plus belles cartes) et classé */
+.ah-duo{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+.ah-box{position:relative;display:flex;align-items:flex-end;min-height:clamp(130px,19vh,200px);padding:18px 20px;color:#fff;text-align:left;border:1px solid #ffffff14;border-radius:18px;overflow:hidden;
+  background:linear-gradient(160deg,#1f1c25 0%,#121016 100%);box-shadow:0 18px 40px -22px #000;transition:transform .2s,border-color .2s}
+.ah-box::before{content:"";position:absolute;inset:0;background:var(--grain),radial-gradient(#ffffff0f 1px,#0000 1.6px) 0 0/9px 9px;opacity:.7;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,#0000,#000);mask-image:linear-gradient(90deg,#0000,#000)}
+.ah-box:hover{transform:translateY(-3px);border-color:#ffffff30}
+.ah-box-t{position:relative;z-index:1;display:grid;gap:5px}
+.ah-box b{font:italic 800 clamp(24px,2.2vw,38px)/.95 var(--ah-f);text-transform:uppercase}
+.ah-box-v{font:italic 700 18px/1 var(--ah-f);color:#ffffffd9}.ah-box-v small{font-size:13px;color:#ffffff80}
+.ah-fan{position:absolute;right:12px;top:50%;width:46%;height:86%;transform:translateY(-50%)}
+.ah-fan img{position:absolute;bottom:0;right:calc(var(--i) * 26%);width:48%;aspect-ratio:3/4;object-fit:cover;object-position:50% 20%;border-radius:8px;border:2px solid var(--rc);
+  transform:rotate(calc((var(--i) - 1) * -9deg)) translateY(calc(var(--i) * 4px));box-shadow:0 10px 24px -8px #000,0 0 18px -6px var(--rc);transition:transform .3s}
+.ah-box:hover .ah-fan img{transform:rotate(calc((var(--i) - 1) * -14deg)) translateY(-6px)}
+.ah-box.rk{background:linear-gradient(160deg,#3b0f18 0%,#16090d 100%);border-color:#e5202e40}
+.ah-box-ic{position:absolute;right:-12px;top:-8px;width:62%;height:auto;color:#e5202e2e;stroke-width:1}
+.ah-box.rk .ah-box-v{color:var(--ah-g)}
+/* les rubans inclinés, en deux colonnes décalées */
+.ah-rbs{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.ah-rbs .ah-rb:nth-child(even){transform:translateX(18px)}
+.ah-rb{position:relative;display:flex;align-items:center;gap:14px;padding:12px 16px 12px 12px;color:#fff;text-align:left;border:0;
+  background:linear-gradient(90deg,#1c1a22 0%,#15131a 100%);clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);box-shadow:inset 0 0 0 1px #ffffff10;transition:background .2s,translate .2s}
+.ah-rb::after{content:"";position:absolute;left:14px;right:28px;bottom:0;height:2px;background:linear-gradient(90deg,var(--ah-r),#0000);opacity:.7}
+.ah-rb:hover{background:linear-gradient(90deg,#e5202e 0%,#7a0d17 100%);translate:6px 0}
+.ah-rb-i{flex:0 0 auto;display:grid;place-items:center;width:40px;height:40px;border-radius:10px;background:#0c0b0f;color:var(--ah-r);box-shadow:inset 0 0 0 1px #ffffff12}
+.ah-rb-i svg{width:22px;height:22px}.ah-rb:hover .ah-rb-i{color:#fff;background:#0c0b0f66}
+.ah-rb-t{flex:1;display:grid;gap:3px;min-width:0}.ah-rb b{font:italic 800 clamp(16px,1.35vw,21px)/1 var(--ah-f);text-transform:uppercase}
+.ah-rb small{font:600 11px/1.2 Outfit,sans-serif;color:#ffffff8c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ah-rb:hover small{color:#ffffffcc}
+.ah-rb em{font-style:normal;font:italic 800 12px/1 var(--ah-f);background:var(--ah-g);color:#1a1405;border-radius:999px;padding:4px 8px}
+.ah-rb-go{font-style:normal;color:#ffffff55;font-size:16px;margin-right:10px}.ah-rb:hover .ah-rb-go{color:#fff}
+.ah-quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.ah-quick button{position:relative;padding:8px 14px;background:#ffffff08;border:1px solid #ffffff14;border-radius:999px;color:#ffffffcc;font:700 10px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase}
 .ah-quick button:hover{color:#fff;border-color:var(--ah-r)}.ah-quick em{font-style:normal;margin-left:6px;color:var(--ah-r)}
-/* tablette / téléphone */
-@media(max-width:1000px){.ah{grid-template-columns:1fr;height:auto;min-height:0;gap:18px}.ah-hero{height:620px}.ah-clock{display:none}.ah-sl.s2{display:none}.ah-menu{justify-content:flex-start}}
-@media(max-width:700px){.ah{padding:14px 14px 26px}.ah-hero{height:560px}.ac-cap b{font-size:40px}.ah-me b{font-size:15px}.ah-me i{width:110px}
-  .ah-grid{grid-template-columns:repeat(2,1fr);gap:8px}.ah-t.w6{grid-column:span 2;min-height:120px}.ah-t.w3,.ah-t.w2{grid-column:span 1}.ah-t{min-height:96px;padding:12px}
-  .ah-t b{font-size:19px}.ah-t.hot b{font-size:31px}.ah-wm{width:72px}.ah-sl.s1{left:-2%}}/* bandeau « Active les notifications » */
+/* tablette / téléphone : le joueur en haut, le menu en dessous */
+@media(max-width:1000px){.ah{grid-template-columns:1fr;height:auto;min-height:0;gap:22px}.ah-hero{height:600px}.ah-clock{display:none}.ah-sl.s2{display:none}.ah-menu{justify-content:flex-start;padding-left:0;z-index:4}
+  .ac-stage{right:calc(-1 * clamp(18px,3vw,56px));bottom:0}
+  .ac-cw{-webkit-mask-image:linear-gradient(180deg,#0000 0%,#000 14%,#000 55%,#0000 100%);mask-image:linear-gradient(180deg,#0000 0%,#000 14%,#000 55%,#0000 100%);-webkit-mask-composite:source-over;mask-composite:add}}
+@media(max-width:700px){.ah{padding:14px 14px 26px}.ah-hero{height:540px}.ac-stage{top:-14px;left:-14px;right:-14px}.ac-cap b{font-size:44px}.ah-me b{font-size:15px}.ah-me i{width:110px}
+  .ah-feat{padding:18px 18px;min-height:150px}.ah-feat b{font-size:42px}.ah-feat-pk{width:92px}
+  .ah-duo{grid-template-columns:1fr}.ah-box{min-height:130px}.ah-rbs{grid-template-columns:1fr}.ah-rbs .ah-rb:nth-child(even){transform:none}.ah-sl.s1{left:-2%}}/* bandeau « Active les notifications » */
 .ntb{display:flex;align-items:center;gap:14px;padding:12px 16px;margin-bottom:14px;border-radius:16px;background:linear-gradient(90deg,color-mix(in srgb,#facc15 14%,#1c1a1e),#1c1a1e 70%);border:1px solid #facc1544}
 .ntb-i{font-size:24px}.ntb-t{flex:1;display:grid;gap:2px}.ntb-t small{color:var(--mute);font-size:12px}
 .ntb-x{background:none;border:0;color:var(--mute);font-size:16px;padding:6px}
@@ -4628,7 +4664,8 @@ async function claimAlbum(id){ const d=await rpd("album_claim",{p_id:id}); if(!d
   const a=ALB.find(x=>x.id===id); toast(`Album complété ! ${alReward(a).join(" + ")}${d.booster?" (dans Boosters)":""}`,true);
   if(d.booster) await refLoad(); if(d.card) await loadCollection(); renderAlbums(); }
 
-/* ---------- accueil : à gauche la carte à la une (Prime / GOAT qui défilent), à droite le menu en tuiles alignées ---------- */
+/* ---------- accueil : à gauche le joueur à la une (Prime / GOAT qui défilent, photo sur toute la hauteur),
+   à droite le menu : le booster en vitrine, la collection et le classé en grand, le reste en rubans inclinés ---------- */
 const acVis=()=>{ const v=$("view-accueil"); return v&&!v.classList.contains("hidden"); };
 const acRefresh=()=>{ if(acVis()) renderAccueil(); };
 function acFreeTxt(){ if(!profile||typeof freeNow!=="function") return ""; const f=freeNow(); if(f.n>0) return `${f.n}/${cap()}`;
@@ -4643,54 +4680,61 @@ const AH_IC={
   bo:'<path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 20h8"/>',
   fr:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M16 5a3 3 0 0 1 0 6M21 20c0-3-2-5-4-5.5"/>',
   cl:'<path d="M4 20V10h5v10M9.5 20V4h5v16M15 20v-7h5v7M3 20h18"/>'};
-const ahIc=(k,c)=>`<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${AH_IC[k]}</svg>`;
+const ahIc=(k,c)=>`<svg class="${c||""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${AH_IC[k]}</svg>`;
 function renderAccueil(){ const box=$("ac-body"); if(!box||!profile) return;
-  if(!$("ac-show")) box.innerHTML=`<div class="ah"><i class="ah-sl s1"></i><i class="ah-sl s2"></i>
-    <section class="ah-hero" id="ac-show" onmouseenter="ACS.pause=1" onmouseleave="ACS.pause=0">
-      <div class="ah-me" id="ah-me"></div><div class="ac-stage"></div><div class="ac-cap"></div>
+  if(!$("ac-show")) box.innerHTML=`<div class="ah"><i class="ah-tx"></i><i class="ah-sl s1"></i><i class="ah-sl s2"></i>
+    <section class="ah-hero" id="ac-show" onmouseenter="ACS.pause=1" onmouseleave="ACS.pause=0"><div class="ac-stage"></div>
+      <div class="ah-me" id="ah-me"></div><span class="ah-gap"></span><div class="ac-cap"></div>
       <div class="ac-ctl"><button onclick="acShow(-1)" aria-label="Carte précédente">‹</button><span class="ac-bar"><u></u></span><button onclick="acShow(1)" aria-label="Carte suivante">›</button><button class="ac-see" onclick="acSee()">Voir la carte</button></div></section>
     <section class="ah-menu" id="ac-left"></section></div>`;
   const nm=profile.username||"Joueur", have=allCards.filter(c=>owned[c.id]).length, tot=allCards.length;
   const sk=mzData&&mzData.streak, todo=mzData?(mzData.claimable||0)+(sk&&sk.can_claim?1:0):0;
   const unread=+($("msg-badge")||{}).textContent||0, soc=+($("soc-badge")||{}).textContent||0;
-  let rkV="", rkS="Duel en direct"; try{ if(typeof rk!=="undefined"&&rk.st){ const t=rkTier(rk.st.elo); rkV=nf(rk.st.elo); rkS=(t.n||t.name||"Classé")+" · ton onze"; } }catch(e){}
+  let rkN="Duel en direct", rkV=""; try{ if(typeof rk!=="undefined"&&rk.st){ const t=rkTier(rk.st.elo); rkN=t.n||t.name||"Classé"; rkV=nf(rk.st.elo)+" pts"; } }catch(e){}
   const fr=typeof freeNow==="function"?freeNow():{n:0};
+  const pk=boosters.find(b=>b.id==="prolongation")||boosters[0];
+  /* trois de tes plus belles cartes (ou les plus rares du jeu) en éventail sur la tuile Collection */
+  const fan=allCards.filter(c=>c.image_url&&(owned[c.id]||!have)).sort((x,y)=>ORDER.indexOf(y.rarity)-ORDER.indexOf(x.rarity)).slice(0,3);
   $("ah-me").innerHTML=`<span class="ah-av">${esc((nm[0]||"?").toUpperCase())}</span><div><small>Bon retour</small><b>${esc(nm)}</b><i><u style="width:${tot?have/tot*100:0}%"></u></i><em>${have} / ${tot} cartes</em></div>`;
-  const T=(k,t,sub,val,cls,go,o)=>`<button class="ah-t ${cls||""}" onclick="${go}">${ahIc(k,"ah-wm")}<span class="ah-tv" ${o&&o.id?`id="${o.id}"`:""}>${val||""}</span><b>${t}</b><small>${sub}</small>${o&&o.badge?`<em>${o.badge}</em>`:""}</button>`;
-  const daily=sk&&sk.packs&&sk.can_claim?`<button class="ah-daily" onclick="claimStreak()"><b>Pack du jour</b><span>Jour ${sk.next}/7 · ${esc(bName(sk.packs[sk.next-1]))} offert${sk.next===7?" · Élite garantie":""}</span><em>Ouvrir</em></button>`:"";
+  const R=(k,t,sub,go,o)=>`<button class="ah-rb" onclick="${go}"><span class="ah-rb-i">${ahIc(k)}</span><span class="ah-rb-t"><b>${t}</b><small>${sub}</small></span>${o&&o.badge?`<em>${o.badge}</em>`:""}<i class="ah-rb-go">→</i></button>`;
+  const daily=sk&&sk.packs&&sk.can_claim?`<button class="ah-daily" onclick="claimStreak()"><span class="ah-dot"></span><b>Pack du jour</b><span>Jour ${sk.next}/7 · ${esc(bName(sk.packs[sk.next-1]))} offert${sk.next===7?" · Élite garantie":""}</span><em>Ouvrir</em></button>`:"";
   const cag=$("tab-cagnotte")&&!$("tab-cagnotte").classList.contains("hidden");
   const Q=(t,go,n)=>`<button onclick="${go}">${t}${n?`<em>${n}</em>`:""}</button>`;
   $("ac-left").innerHTML=`<div class="ah-clock"><b id="ah-time"></b><small id="ah-date"></small></div>
     ${daily}
-    <div class="ah-grid">
-      ${T("bx","Boosters",fr.n>0?"Gratuits à ouvrir":"Prochain gratuit","<span id='ac-free'>"+acFreeTxt()+"</span>","hot w6","showTab('boosters')")}
-      ${T("col","Collection","Cartes & albums",`${have}/${tot}`,"w3","showTab('collection')")}
-      ${T("rk","Classé",rkS,rkV,"hot2 w3","showTab('games');gxGo('ranked')")}
-      ${T("mz","Missions","Jour & semaine","","w2","showTab('missions')",{badge:todo?todo+" à réclamer":""})}
-      ${T("gx","Jeux","LDC · draft · quiz","","w2","showTab('games');gxGo('hub')")}
-      ${T("mk","Marché","Ventes & achats","","w2","showTab('market')")}
-      ${T("bo","Ballon d’Or","Top de la semaine","","w2","showTab('ballon')")}
-      ${T("fr","Amis","Échanges",soc||"","w2","showTab('friends')")}
-      ${T("cl","Classements","Les meilleurs","","w2","showTab('classement')")}
+    <button class="ah-feat" onclick="showTab('boosters')"><span class="ah-feat-t"><span class="ah-k">${fr.n>0?"Gratuits à ouvrir":"Prochain gratuit dans"}</span><b>Boosters</b><span class="ah-feat-v" id="ac-free">${acFreeTxt()}</span><span class="ah-cta">Ouvrir un booster →</span></span>
+      <span class="ah-feat-pk">${pk&&typeof packHTML==="function"?packHTML(pk,"",""):""}</span></button>
+    <div class="ah-duo">
+      <button class="ah-box" onclick="showTab('collection')"><span class="ah-fan">${fan.map((c,i)=>`<img src="${esc(c.image_url)}" alt="" style="--i:${i};--rc:${COLOR[c.rarity]}" loading="lazy">`).join("")}</span>
+        <span class="ah-box-t"><span class="ah-k">Collection & albums</span><b>Collection</b><span class="ah-box-v">${have}<small>/${tot}</small></span></span></button>
+      <button class="ah-box rk" onclick="showTab('games');gxGo('ranked')">${ahIc("rk","ah-box-ic")}
+        <span class="ah-box-t"><span class="ah-k">${esc(rkN)}</span><b>Classé</b><span class="ah-box-v">${rkV||"Joue en ligne"}</span></span></button>
+    </div>
+    <div class="ah-rbs">
+      ${R("mz","Missions",todo?`${todo} récompense${todo>1?"s":""} à réclamer`:"Jour & semaine","showTab('missions')",{badge:todo||""})}
+      ${R("gx","Jeux","LDC · draft · penalty · quiz","showTab('games');gxGo('hub')")}
+      ${R("mk","Marché","Ventes & achats","showTab('market')")}
+      ${R("bo","Ballon d’Or","Le top de la semaine","showTab('ballon')")}
+      ${R("fr","Amis","Échanges entre potes","showTab('friends')",{badge:soc||""})}
+      ${R("cl","Classements","Les meilleurs joueurs","showTab('classement')")}
     </div>
     <nav class="ah-quick">${Q("Profil","showTab('profile')")}${Q("Messages","showTab('messages')",unread)}${Q("Albums","showTab('albums')")}${Q("Discord","showTab('discord')")}${cag?Q("Cagnotte","showTab('cagnotte')"):""}${Q("Paramètres","showTab('settings')")}</nav>`;
   acClock(); if(!$("ac-show").dataset.cid) acShow(0); else acFit(); }
 function acClock(){ const t=$("ah-time"), d=$("ah-date"); if(!t) return; const n=new Date();
   t.textContent=n.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); d.textContent=n.toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"}).replace(/\./g,"").toUpperCase(); }
-/* le défilé : une carte Prime ou GOAT à la fois, avec une aura de sa couleur, une nouvelle toutes les 5 s */
+/* le défilé : un joueur Prime ou GOAT à la fois, sa photo sur toute la hauteur, un nouveau toutes les 5 s */
 const ACS={list:[],i:0,last:0,pause:0};
 function acList(){ const L=allCards.filter(c=>(c.rarity==="prime"||c.rarity==="goat")&&c.image_url); if(L.length===ACS.list.length) return;
   ACS.list=L.sort(()=>Math.random()-.5); const g=ACS.list.findIndex(c=>c.rarity==="goat"); if(g>0) [ACS.list[0],ACS.list[g]]=[ACS.list[g],ACS.list[0]]; ACS.i=0; }
 function acShow(d){ const st=$("ac-show"); if(!st) return; acList(); if(!ACS.list.length) return; ACS.last=Date.now();
   if(d) ACS.i=(ACS.i+d+ACS.list.length)%ACS.list.length; const c=ACS.list[ACS.i], m=String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/);
   st.style.setProperty("--ac-c",COLOR[c.rarity]); st.dataset.cid=c.id;
-  const stage=st.querySelector(".ac-stage"); stage.querySelectorAll(".ac-cw").forEach(o=>{ o.classList.add("out"); setTimeout(()=>o.remove(),550); });
+  const stage=st.querySelector(".ac-stage"); stage.querySelectorAll(".ac-cw").forEach(o=>{ o.classList.add("out"); setTimeout(()=>o.remove(),700); });
   const w=document.createElement("div"); w.className="ac-cw"; w.innerHTML=`<img src="${esc(c.image_url)}" alt="${esc(sigName(c))}">`; stage.appendChild(w);
   const cap=st.querySelector(".ac-cap"); cap.innerHTML=`<span class="ah-rar">${RARITY[c.rarity]}</span><b>${esc(sigName(c))}</b><small>${[m?m[1]:"",c.club||""].filter(Boolean).map(esc).join(" · ")}${owned[c.id]?" · dans ta collection":""}</small>`;
   cap.classList.remove("in"); void cap.offsetWidth; cap.classList.add("in");
   const u=st.querySelector(".ac-bar u"); u.style.animation="none"; void u.offsetWidth; u.style.animation=""; }
-function acFit(){ const st=$("ac-show"); if(!st) return; const h=document.querySelector(".nav2"); document.documentElement.style.setProperty("--hh",(h?h.offsetHeight:64)+"px");
- }
+function acFit(){ const h=document.querySelector(".nav2"); document.documentElement.style.setProperty("--hh",(h?h.offsetHeight:64)+"px"); }
 function acSee(){ const id=+($("ac-show")||{dataset:{}}).dataset.cid; if(id) openCard(id,null,"seen"); }
 setInterval(()=>{ if(!acVis()||document.hidden) return; acClock(); if(!ACS.pause&&Date.now()-ACS.last>5000) acShow(1); },500);
 addEventListener("resize",()=>{ if(acVis()) acFit(); });
