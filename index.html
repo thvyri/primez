@@ -3302,23 +3302,83 @@ body:not(.ac-mode) .content{position:relative;min-height:calc(100dvh - var(--hh,
 .pz-tt{font:700 10px/1 Outfit,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#ffffff73}
 /* gros titres de page dans le style de l'accueil */
 .content .page>h2.disp,.content .collhead h2.disp,.content .mz-head h2.disp,.content .bx-head h2.disp{font:italic 800 clamp(40px,4.4vw,78px)/.95 Kanit,Outfit,sans-serif!important;text-transform:uppercase;letter-spacing:0}
-/* décors : grandes cartes en bord d'écran, avec leur aura (Yamal PROMO sur Boosters, Ronaldo et Messi sur la Collection) */
-.pz-dc{display:none}
-@media(min-width:1400px){
-  .pz-dc{display:block;position:fixed;z-index:5;top:calc(50% + var(--hh,64px) / 2);cursor:pointer;transition:transform .4s}
+/* décors : les photos des joueurs sur les bords (Boosters, Collection), fondues vers le centre comme à l'accueil */
+.pz-ph{display:none}
+@media(min-width:1100px){
   body.ac-mode #pz-decos,#app.hidden~#pz-decos{display:none}
-  .pz-dc.r{right:2.4vw;transform:translateY(-50%) rotate(6deg)}.pz-dc.l{left:2.4vw;transform:translateY(-50%) rotate(-6deg)}
-  .pz-dc:hover{transform:translateY(-52%) rotate(0deg)}
-  .pz-dcw{position:relative;zoom:1.55}
-  .pz-dcw::before{content:"";position:absolute;inset:-6px;border-radius:16px;background:var(--ac-c);opacity:.5;z-index:-1;box-shadow:0 0 22px 6px var(--ac-c),0 0 70px 24px color-mix(in srgb,var(--ac-c) 45%,transparent);animation:acAura 2.6s ease-in-out infinite}
-  #view-boosters>.wrap{margin-right:calc(158px * 1.55 + 6vw)!important}
-  #view-collection,#view-albums{padding-left:calc(158px * 1.55 + 6vw)!important;padding-right:calc(158px * 1.55 + 6vw)!important}}
-@media(min-width:1800px){.pz-dcw{zoom:2}#view-boosters>.wrap{margin-right:calc(158px * 2 + 7vw)!important}
-  #view-collection,#view-albums{padding-left:calc(158px * 2 + 7vw)!important;padding-right:calc(158px * 2 + 7vw)!important}}
+  .pz-ph{display:block;position:fixed;z-index:1;top:var(--hh,64px);bottom:0;width:min(36vw,680px);pointer-events:none;animation:pzIn 1s ease both}
+  @keyframes pzIn{from{opacity:0}to{opacity:1}}
+  .pz-ph.l{left:0}.pz-ph.r{right:0}
+  .pz-ph img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.72) contrast(1.08) saturate(1.05)}
+  .pz-ph.l img{-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 28%,#0007 58%,#0000 92%),linear-gradient(180deg,#0000 0%,#000 14%,#000 70%,#0000 100%);-webkit-mask-composite:source-in;
+    mask-image:linear-gradient(90deg,#000 0%,#000 28%,#0007 58%,#0000 92%),linear-gradient(180deg,#0000 0%,#000 14%,#000 70%,#0000 100%);mask-composite:intersect}
+  .pz-ph.r img{-webkit-mask-image:linear-gradient(270deg,#000 0%,#000 28%,#0007 58%,#0000 92%),linear-gradient(180deg,#0000 0%,#000 14%,#000 70%,#0000 100%);-webkit-mask-composite:source-in;
+    mask-image:linear-gradient(270deg,#000 0%,#000 28%,#0007 58%,#0000 92%),linear-gradient(180deg,#0000 0%,#000 14%,#000 70%,#0000 100%);mask-composite:intersect}
+  .content>.page,#view-boosters{position:relative;z-index:2}
+  body.pz-r #view-boosters>.wrap{margin-right:min(22vw,400px)!important}
+  body.pz-l .content>.page{padding-left:min(22vw,400px)!important}body.pz-r .content>.page{padding-right:min(22vw,400px)!important}}
 /* missions : les tableaux et les missions en plus grand */
 @media(min-width:1300px){#view-missions .mu{grid-template-columns:clamp(190px,13vw,250px) minmax(0,1fr) clamp(190px,13vw,250px);gap:clamp(30px,3vw,60px)}
   #view-missions .mu-cv{width:clamp(160px,11vw,215px)}#view-missions .mu-wall{gap:64px}}
 @media(min-width:1500px){#view-missions .mu-mid{zoom:1.15}}
+/* ---------- le marché en boutique : murs sombres, spots, vitrines en verre, socles, étiquettes de prix, zoom sur un objet ---------- */
+.bq-head{position:relative;display:grid;gap:6px;margin:6px 0 20px;padding:26px 28px;border-radius:20px;overflow:hidden;
+  background:radial-gradient(ellipse 60% 120% at 80% 0%,#f1cf7426,#0000 60%),repeating-linear-gradient(90deg,#ffffff06 0 1px,#0000 1px 64px),linear-gradient(180deg,#1b1714,#100d0c);border:1px solid #f1cf7433}
+.bq-k{font:700 10px/1 Outfit,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#f1cf74}
+.bq-head b{font:italic 800 clamp(30px,3vw,52px)/1 Kanit,Outfit,sans-serif;text-transform:uppercase}
+.bq-head p{margin:0;max-width:720px;color:#ffffffa6;font-size:13px}
+#mk-list{position:relative}
+.bq-room{position:relative;margin:26px 0 40px;padding:30px 24px 26px;border-radius:22px;overflow:hidden;
+  background:linear-gradient(180deg,#151217 0%,#0f0d11 70%,#0b0a0d 100%);border:1px solid #ffffff10;box-shadow:inset 0 -60px 80px -40px #000,0 30px 60px -40px #000}
+.bq-room::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,#ffffff05 0 1px,#0000 1px 90px),var(--grain);opacity:.8;pointer-events:none}
+.bq-room::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#0000,var(--c),#0000)}
+.bq-sign{position:relative;display:flex;align-items:baseline;justify-content:center;gap:12px;margin:0 0 26px;text-align:center}
+.bq-sign span{font:italic 800 clamp(22px,2vw,32px)/1 Kanit,Outfit,sans-serif;text-transform:uppercase;color:#fff;text-shadow:0 0 18px color-mix(in srgb,var(--c) 70%,transparent),0 0 2px #fff}
+.bq-sign small{font:700 10px/1 Outfit,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#ffffff80}
+.bq-shelf{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:44px 38px}
+.bq-it{position:relative;display:grid;justify-items:center;width:230px;padding:0;background:none;border:0;cursor:pointer;color:#fff}
+/* le spot au-dessus de chaque vitrine */
+.bq-spot{position:absolute;top:-40px;left:50%;width:170%;height:330px;transform:translateX(-50%);pointer-events:none;opacity:.7;transition:opacity .3s;
+  background:conic-gradient(from 160deg at 50% 0%,#0000 0deg,color-mix(in srgb,var(--c) 30%,#ffffff22) 20deg,#0000 40deg);filter:blur(6px)}
+.bq-it:hover .bq-spot{opacity:1}
+/* la vitrine en verre */
+.bq-case{position:relative;display:grid;place-items:center;width:206px;height:280px;border-radius:10px 10px 4px 4px;
+  background:linear-gradient(115deg,#ffffff14 0%,#ffffff03 30%,#0000 55%,#ffffff0a 80%),#ffffff06;border:1px solid #ffffff26;border-bottom:0;box-shadow:inset 0 0 30px #0008,inset 0 1px 0 #ffffff33}
+.bq-case::after{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:14px;background:linear-gradient(90deg,#ffffff26,#0000);border-radius:8px;pointer-events:none}
+.bq-card{zoom:.96;pointer-events:none;transition:transform .35s cubic-bezier(.2,.9,.3,1.2);filter:drop-shadow(0 12px 18px #000c)}
+.bq-it:hover .bq-card{transform:translateY(-10px) rotate(-2deg)}
+/* le socle */
+.bq-ped{display:block;width:230px;height:20px;border-radius:3px;background:linear-gradient(180deg,#3a3236 0%,#1a1619 40%,#0e0c0e 100%);box-shadow:0 1px 0 #ffffff26 inset,0 14px 24px -8px #000,0 0 30px -10px var(--c)}
+/* l'étiquette de prix */
+.bq-tag{position:relative;margin-top:10px;display:grid;justify-items:center;gap:2px;padding:7px 14px 6px;border-radius:4px;
+  background:linear-gradient(180deg,#f6dc8e,#c99a3a);color:#2a1d05;box-shadow:0 6px 14px -6px #000;transform:rotate(-2deg)}
+.bq-tag::before{content:"";position:absolute;top:-7px;left:50%;width:2px;height:8px;background:#c99a3a}
+.bq-tag b{font:italic 800 18px/1 Kanit,Outfit,sans-serif}.bq-tag b::after{content:" ballons";font:700 9px/1 Outfit,sans-serif;letter-spacing:.06em}
+.bq-tag small{font:600 10px/1 Outfit,sans-serif;opacity:.8}
+.bq-it.mine .bq-tag{background:linear-gradient(180deg,#e8eaee,#9a9fa6)}
+.bq-empty{display:grid;gap:6px;justify-items:center;padding:60px 20px;text-align:center;border:1px dashed #ffffff22;border-radius:20px;color:#ffffffa6}.bq-empty b{font:italic 800 26px/1 Kanit,Outfit,sans-serif;color:#fff;text-transform:uppercase}
+/* le zoom sur un objet */
+.bq-pop{position:fixed;inset:0;z-index:72;display:grid;place-items:center;padding:24px;background:#060507e6;backdrop-filter:blur(10px);opacity:0;transition:opacity .3s}
+.bq-pop.on{opacity:1}
+.bq-zoom{position:relative;display:flex;align-items:center;gap:clamp(24px,5vw,80px);max-width:1000px;width:100%;padding:clamp(24px,4vw,56px);border-radius:24px;overflow:hidden;
+  background:radial-gradient(ellipse 50% 70% at 30% 20%,color-mix(in srgb,var(--c) 22%,#0000),#0000 70%),var(--grain),linear-gradient(180deg,#17141a,#0d0b0f);border:1px solid #ffffff1a;box-shadow:0 40px 100px -30px #000;
+  transform:scale(.88) translateY(20px);transition:transform .45s cubic-bezier(.2,.9,.3,1.15)}
+.bq-pop.on .bq-zoom{transform:none}
+.bq-beam{position:absolute;left:30%;top:-20%;width:60%;height:120%;transform:translateX(-50%);background:conic-gradient(from 165deg at 50% 0%,#0000 0deg,#ffffff1f 15deg,#0000 30deg);filter:blur(10px);pointer-events:none}
+.bq-x{position:absolute;top:12px;right:16px;z-index:2;background:none;border:0;color:#fff;font-size:30px;cursor:pointer}
+.bq-big{position:relative;display:grid;justify-items:center;flex:0 0 auto}
+.bq-bigc{zoom:1.7;filter:drop-shadow(0 20px 30px #000c)}
+.bq-pop.on .bq-bigc{animation:bqUp .7s cubic-bezier(.2,.9,.3,1.1) both}@keyframes bqUp{from{transform:translateY(30px) rotate(-6deg) scale(.9)}to{transform:none}}
+.bq-bigped{display:block;width:120%;height:22px;margin-top:-4px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--c) 45%,#0000),#0000);filter:blur(4px)}
+.bq-info{position:relative;display:grid;gap:10px;min-width:0;flex:1}
+.bq-rar{justify-self:start;font:700 11px/1 Outfit,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:var(--c);padding:6px 10px 5px;border-radius:4px}
+.bq-info h3{margin:0;font:italic 800 clamp(32px,3.6vw,56px)/1 Kanit,Outfit,sans-serif;text-transform:uppercase}
+.bq-info>small{color:#ffffff99;font-size:13px;letter-spacing:.06em}
+.bq-price{display:flex;align-items:baseline;gap:8px;margin-top:6px}.bq-price b{font:italic 800 clamp(36px,3.4vw,52px)/1 Kanit,Outfit,sans-serif;color:#f1cf74;text-shadow:0 0 24px #f1cf7455}.bq-price span{font-weight:700;color:#f1cf74b3}
+.bq-info ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px}.bq-info li{display:flex;justify-content:space-between;gap:20px;padding:8px 0;border-bottom:1px solid #ffffff12;font-size:13px}.bq-info li span{color:#ffffff8c}
+.bq-act{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.bq-act .go{padding:12px 26px;font-size:15px}
+@media(max-width:760px){.bq-room{padding:22px 12px}.bq-shelf{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 10px}.bq-it{width:auto}.bq-case{width:142px;height:196px}.bq-card{zoom:.66}.bq-ped{width:156px}
+  .bq-zoom{flex-direction:column;padding:26px 18px;gap:18px}.bq-bigc{zoom:1.25}.bq-info{width:100%}}
 /* bandeau « Active les notifications » */
 .ntb{display:flex;align-items:center;gap:14px;padding:12px 16px;margin-bottom:14px;border-radius:16px;background:linear-gradient(90deg,color-mix(in srgb,#facc15 14%,#1c1a1e),#1c1a1e 70%);border:1px solid #facc1544}
 .ntb-i{font-size:24px}.ntb-t{flex:1;display:grid;gap:2px}.ntb-t small{color:var(--mute);font-size:12px}
@@ -4702,11 +4762,16 @@ async function claimAlbum(id){ const d=await rpd("album_claim",{p_id:id}); if(!d
   if(d.booster) await refLoad(); if(d.card) await loadCollection(); renderAlbums(); }
 
 /* ---------- décors des pages : de grandes cartes sur les côtés, avec une aura de leur couleur (seulement sur grand écran) ---------- */
-const PZ_DECO={boosters:[["r",/^L\.YAMAL 25\/26/,"promo"]],collection:[["l",/^C\.RONALDO 13\/14/],["r",/^L\.MESSI 11\/12/]],albums:[["l",/^C\.RONALDO 13\/14/],["r",/^L\.MESSI 11\/12/]]};
+/* chaque page a ses joueurs : la photo (celle de l'accueil, img/stars) posée sur le bord et fondue vers le centre.
+   "@yamal" = la photo de sa carte PROMO (pas encore de photo HD pour lui) */
+const PZ_DECO={boosters:[["r","@yamal"]],collection:[["l","Ronaldo"],["r","Messi"]],albums:[["l","Ronaldo"],["r","Messi"]]};
 function pzDecos(t){ let v=$("pz-decos"); if(!v){ v=document.createElement("div"); v.id="pz-decos"; document.body.appendChild(v); }
-  const D=PZ_DECO[t]; if(v.dataset.t===t&&v.children.length) return; v.innerHTML=""; v.dataset.t=t; if(!D||!allCards.length) return;
-  D.forEach(([side,re,rar])=>{ const c=allCards.find(x=>re.test(x.name)&&(!rar||x.rarity===rar)); if(!c) return;
-    v.insertAdjacentHTML("beforeend",`<div class="pz-dc ${side}" style="--ac-c:${COLOR[c.rarity]}" onclick="openCard(${c.id},null,'seen')" title="Voir la carte"><div class="pz-dcw">${cardHTML(c,true,0)}</div></div>`); }); }
+  const D=PZ_DECO[t]; document.body.classList.toggle("pz-l",!!D&&D.some(d=>d[0]==="l")); document.body.classList.toggle("pz-r",!!D&&D.some(d=>d[0]==="r"));
+  if(v.dataset.t===t&&v.children.length) return; v.innerHTML=""; v.dataset.t=t; if(!D) return;
+  D.forEach(([side,who])=>{ let src="", pos="50% 20%";
+    if(who==="@yamal"){ const c=allCards.find(x=>/^L\.YAMAL 25\/26/.test(x.name)&&x.rarity==="promo"); src=c&&c.image_url; }
+    else { const s=AH_STARS.find(x=>x.n===who); if(s){ src=s.img; pos=s.pos; } }
+    if(src) v.insertAdjacentHTML("beforeend",`<div class="pz-ph ${side}"><img src="${esc(src)}" alt="" style="object-position:${pos}"></div>`); }); }
 /* ---------- accueil : à gauche le joueur à la une (Prime / GOAT qui défilent, photo sur toute la hauteur),
    à droite le menu : le booster en vitrine, la collection et le classé en grand, le reste en rubans inclinés ---------- */
 const acVis=()=>{ const v=$("view-accueil"); return v&&!v.classList.contains("hidden"); };
@@ -5756,7 +5821,7 @@ async function sendTrade(){
 let mk={tab:"buy",rar:"",q:"",sort:"recent",list:[],dup:"1",sq:""}, mkT=null;
 function loadMarket(){
   if(gate("mk-body","Le marché est réservé aux joueurs connectés avec Discord")) return;
-  $("mk-body").innerHTML=`<p class="pnote">Achète et vends des cartes aux autres joueurs, en ${CURRENCY}. Une taxe de 5 % est prélevée sur chaque vente. Une carte mise en vente est mise de côté jusqu’à sa vente, ou jusqu’à ce que tu la retires.</p>
+  $("mk-body").innerHTML=`<div class="bq-head"><span class="bq-k">PrimeZ · boutique officielle</span><b>Les vitrines</b><p>Des cartes mises en vente par les autres joueurs, en ${CURRENCY}. Clique sur un objet pour le voir de près. Une taxe de 5 % est prélevée sur chaque vente.</p></div>
   <div class="seg" style="margin-bottom:14px"><button id="mk-t-buy" class="on" onclick="mkTab('buy')">Acheter</button><button id="mk-t-sell" onclick="mkTab('sell')">Vendre</button></div>
   <div class="filters" id="mk-fb"><input placeholder="Rechercher un joueur ou un club…" oninput="mkSearch(this.value)"><select onchange="mk.rar=this.value;mkFetch()"><option value="">Toutes les raretés</option>${[...ORDER].reverse().map(r=>`<option value="${r}">${RARITY[r]}</option>`).join("")}</select><select onchange="mk.sort=this.value;mkFetch()"><option value="recent">Plus récentes</option><option value="price-asc">Prix croissant</option><option value="price-desc">Prix décroissant</option><option value="rarity">Rareté</option></select></div>
   <div class="filters hidden" id="mk-fs"><input placeholder="Rechercher dans mes cartes…" oninput="mk.sq=this.value.toLowerCase();mkRender()"><select onchange="mk.dup=this.value;mkRender()"><option value="1">Mes doublons</option><option value="0">Toutes mes cartes</option></select></div>
@@ -5775,10 +5840,14 @@ async function mkFetch(){
 function mkRender(){
   const box=$("mk-list"); if(!box) return;
   if(mk.tab==="buy"){
-    box.innerHTML=mk.list.length?`<div class="mgrid">${mk.list.map(l=>{ const c=l.card;
-      return `<div class="lt" style="--c:${COLOR[c.rarity]}">${tn(c,.8)}<div class="li"><b>${esc(dispName(c))}</b><small>${esc(c.club||RARITY[c.rarity])}${c.league?" · "+esc(c.league):""}</small><div class="pr">${nf(l.price)} ${CURRENCY}</div><small>${l.last_price?`Dernière vente : ${nf(l.last_price)}`:"Aucune vente récente"}</small><small>Vendeur : ${esc(l.seller)}</small>
-      ${l.mine?`<span class="mine">Ton annonce</span><button class="ghost" onclick="cancelListing(${l.id})">Retirer</button>`:`<button class="go" ${profile.balloons<l.price?"disabled":""} onclick="buyListing(${l.id})">Acheter</button>`}</div></div>`; }).join("")}</div>`
-      :`<div class="nothing">Aucune annonce pour ce filtre. Reviens plus tard, ou mets tes propres cartes en vente.</div>`;
+    /* la boutique : chaque carte dans sa vitrine éclairée, sur un socle, avec son étiquette de prix ; rangées par salle (rareté) */
+    if(!mk.list.length){ box.innerHTML=`<div class="bq-empty"><b>Les vitrines sont vides</b><span>Aucune annonce pour ce filtre. Reviens plus tard, ou mets tes propres cartes en vente.</span></div>`; return; }
+    const SALLE={goat:"La salle des GOAT",promo:"Éditions PROMO",prime:"La galerie Prime",mythique:"Les Mythiques",legende:"Les Légendes",elite:"Élite",rare:"Rares",commune:"Le bac des Communes"};
+    const groups=[...ORDER].reverse().map(r=>[r,mk.list.filter(l=>l.card.rarity===r)]).filter(g=>g[1].length);
+    box.innerHTML=groups.map(([r,L])=>`<section class="bq-room" style="--c:${COLOR[r]}"><h3 class="bq-sign"><span>${SALLE[r]||RARITY[r]}</span><small>${L.length} objet${L.length>1?"s":""}</small></h3>
+      <div class="bq-shelf">${L.map(l=>{ const c=l.card; return `<button class="bq-it ${l.mine?"mine":""}" style="--c:${COLOR[c.rarity]}" onclick="mkZoom(${l.id})" title="Voir de près">
+        <i class="bq-spot"></i><span class="bq-case"><span class="bq-card">${cardHTML(c,true,0)}</span></span><span class="bq-ped"></span>
+        <span class="bq-tag"><b>${nf(l.price)}</b><small>${l.mine?"Ton annonce":"par "+esc(l.seller)}</small></span></button>`; }).join("")}</div></section>`).join("");
     return;
   }
   const mine=mk.list;
@@ -5789,6 +5858,18 @@ function mkRender(){
   <h3 class="sech disp sect">Mettre une carte en vente</h3>
   ${cards.length?`<div class="mgrid">${cards.slice(0,120).map(c=>`<div class="lt" style="--c:${COLOR[c.rarity]}">${tn(c,.6)}<div class="li"><b>${esc(dispName(c))}</b><small>${RARITY[c.rarity]} · en ${owned[c.id]} exemplaire${owned[c.id]>1?"s":""}</small><small>Prix : ${nf(MB[c.rarity][0])} à ${nf(MB[c.rarity][1])}</small><button class="go" onclick="sellCard(${c.id})">Vendre</button></div></div>`).join("")}</div>`:`<div class="nothing">${mk.dup==="1"?"Tu n’as aucun doublon à vendre. Choisis « Toutes mes cartes » pour voir tout ce que tu possèdes.":"Aucune carte."}</div>`}`;
 }
+/* un clic sur un objet de la boutique : il sort de sa vitrine et s'affiche en grand sous les projecteurs */
+function mkZoom(id){ const l=mk.list.find(x=>x.id===id); if(!l) return; const c=l.card, col=COLOR[c.rarity], m=String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/), poor=profile.balloons<l.price;
+  const d=document.createElement("div"); d.className="bq-pop"; d.style.setProperty("--c",col); d.onclick=e=>{ if(e.target===d||e.target.closest(".bq-x")) bqClose(d); };
+  d.innerHTML=`<div class="bq-zoom"><button class="bq-x" aria-label="Fermer">×</button><i class="bq-beam"></i>
+    <div class="bq-big"><div class="bq-bigc">${cardHTML(c,true,0)}</div><span class="bq-bigped"></span></div>
+    <div class="bq-info"><span class="bq-rar">${RARITY[c.rarity]}${m?" · "+m[1]:""}</span><h3>${esc(dispName(c))}</h3><small>${esc([c.club,c.league].filter(Boolean).join(" · "))}</small>
+      <div class="bq-price"><b>${nf(l.price)}</b><span>${CURRENCY}</span></div>
+      <ul><li><span>Dernière vente</span><b>${l.last_price?nf(l.last_price)+" "+CURRENCY:"—"}</b></li><li><span>Vendu par</span><b>${l.mine?"toi":esc(l.seller)}</b></li><li><span>Ton solde</span><b>${nf(profile.balloons)} ${CURRENCY}</b></li></ul>
+      <div class="bq-act">${l.mine?`<button class="ghost" onclick="bqClose(this.closest('.bq-pop'));cancelListing(${l.id})">Retirer de la vente</button>`
+        :`<button class="go" ${poor?"disabled":""} onclick="bqClose(this.closest('.bq-pop'));buyListing(${l.id})">${poor?"Pas assez de "+CURRENCY:"Acheter"}</button>`}<button class="ghost" onclick="bqClose(this.closest('.bq-pop'))">Retour aux vitrines</button></div></div></div>`;
+  document.body.appendChild(d); requestAnimationFrame(()=>d.classList.add("on")); }
+function bqClose(d){ if(!d) return; d.classList.remove("on"); setTimeout(()=>d.remove(),300); }
 function sellCard(id){
   const c=allCards.find(x=>x.id===id), b=MB[c.rarity], sug=Math.round(Math.sqrt(b[0]*b[1]));
   openGm(`<h3>Vendre ${esc(dispName(c))}</h3><p>${RARITY[c.rarity]} · prix autorisé de ${nf(b[0])} à ${nf(b[1])} ${CURRENCY}.</p>
