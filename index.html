@@ -3193,8 +3193,8 @@ html{overflow-x:hidden}
 .ah-tx{position:absolute;inset:0;z-index:0;pointer-events:none;background:var(--grain),repeating-linear-gradient(115deg,#ffffff05 0 2px,#0000 2px 14px);opacity:.9}
 .ah-tx::after{content:"";position:absolute;right:0;top:0;width:55%;height:100%;background:radial-gradient(#ffffff14 1px,#0000 1.6px) 0 0/10px 10px;
   -webkit-mask-image:linear-gradient(200deg,#000 0%,#0000 55%);mask-image:linear-gradient(200deg,#000 0%,#0000 55%)}
-.ah-sl{position:absolute;top:-10%;bottom:-10%;z-index:3;width:clamp(8px,.9vw,16px);background:linear-gradient(180deg,#0000,var(--ah-r) 20%,var(--ah-r) 80%,#0000);transform:skewX(-14deg);pointer-events:none;box-shadow:0 0 30px #e5202e88}
-.ah-sl.s1{left:4%}.ah-sl.s2{left:50%;width:2px;background:linear-gradient(180deg,#0000,var(--ah-g) 30%,var(--ah-g) 70%,#0000);opacity:.55;box-shadow:none}
+.ah-sl{position:absolute;top:-10%;bottom:-10%;z-index:0;width:clamp(8px,.9vw,16px);background:linear-gradient(180deg,#0000,var(--ah-r) 20%,var(--ah-r) 80%,#0000);transform:skewX(-14deg);pointer-events:none;box-shadow:0 0 30px #e5202e88}
+.ah-sl{display:none!important}
 /* à gauche : le joueur à la une, sa photo sur toute la hauteur, fondue vers la droite, le haut et le bas */
 .ah-hero{--ac-c:#14915f;position:relative;z-index:1;display:flex;flex-direction:column;min-height:0}
 .ac-stage{position:absolute;z-index:0;top:calc(-1 * clamp(18px,3vh,36px));bottom:calc(-1 * clamp(18px,3vh,36px));left:calc(-1 * clamp(18px,3vw,56px));right:-20%;pointer-events:none}
@@ -3239,12 +3239,19 @@ html{overflow-x:hidden}
 .ah-feat::after{content:"";position:absolute;right:-8%;top:-40%;width:55%;height:180%;background:radial-gradient(closest-side,#ffffff38,#0000);transform:rotate(18deg);pointer-events:none}
 .ah-feat:hover{transform:translateY(-3px)}
 .ah-feat-t{position:relative;z-index:1;display:grid;gap:6px}.ah-feat-t .ah-k{color:#ffffffcc}
-.ah-feat b{font:italic 800 clamp(40px,4.2vw,72px)/.9 var(--ah-f);text-transform:uppercase;text-shadow:0 6px 24px #0006}
+.ah-feat-t>b{font:italic 800 clamp(40px,4.2vw,72px)/.9 var(--ah-f);text-transform:uppercase;text-shadow:0 6px 24px #0006}
 .ah-feat-v{font:italic 700 clamp(22px,2vw,32px)/1 var(--ah-f)}
 .ah-cta{justify-self:start;margin-top:6px;padding:8px 14px;border-radius:999px;background:#0c0b0f;color:#fff;font:italic 700 13px/1 var(--ah-f);box-shadow:0 8px 20px -8px #000}
-.ah-feat-pk{position:relative;z-index:1;flex:0 0 auto;width:clamp(96px,8.5vw,150px);aspect-ratio:5/7;transform:rotate(8deg) translateY(-6%);filter:drop-shadow(0 18px 24px #0009);transition:transform .3s}
+.ah-feat-pk{position:relative;z-index:1;flex:0 0 auto;display:block;width:clamp(100px,8.5vw,150px);transform:rotate(8deg) translateY(-6%);filter:drop-shadow(0 18px 24px #0009);transition:transform .3s}
 .ah-feat:hover .ah-feat-pk{transform:rotate(3deg) translateY(-10%) scale(1.04)}
-.ah-feat-pk .bpk{transform:none!important;filter:none!important}
+.ah-feat-pk .bpk{container-type:inline-size;width:100%;animation:none}
+.ah-feat-pk.bx-spk{animation:none!important;filter:drop-shadow(0 18px 24px #0009)!important;width:clamp(100px,8.5vw,150px)!important;margin:0!important}
+.ah-pack{position:absolute;inset:0;border-radius:12px;overflow:hidden;background:#0c0b0f;border:2px solid #ffffffd9;box-shadow:0 0 0 1px #0006}
+.ah-pack>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.ah-pack::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0000 45%,color-mix(in srgb,var(--bc) 85%,#000) 82%)}
+.ah-pack-hd{position:absolute;z-index:1;left:8px;top:8px;display:flex;align-items:center;gap:5px;font:italic 800 10px/1 var(--ah-f);letter-spacing:.06em;color:#fff;text-shadow:0 1px 4px #000}
+.ah-pack-hd img{width:16px;height:16px;border-radius:4px}
+.ah-pack b{position:absolute;z-index:1;left:0;right:0;bottom:10px;text-align:center;font:italic 800 clamp(11px,1vw,15px)/1 var(--ah-f);text-transform:uppercase;letter-spacing:.02em;color:#fff;text-shadow:0 2px 6px #000a}
 /* collection (éventail de tes plus belles cartes) et classé */
 .ah-duo{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
 .ah-box{position:relative;display:flex;align-items:flex-end;min-height:clamp(130px,19vh,200px);padding:18px 20px;color:#fff;text-align:left;border:1px solid #ffffff14;border-radius:18px;overflow:hidden;
@@ -3282,7 +3289,7 @@ html{overflow-x:hidden}
   .ac-stage{right:calc(-1 * clamp(18px,3vw,56px));bottom:0}
   .ac-cw{-webkit-mask-image:linear-gradient(180deg,#0000 0%,#000 14%,#000 55%,#0000 100%);mask-image:linear-gradient(180deg,#0000 0%,#000 14%,#000 55%,#0000 100%);-webkit-mask-composite:source-over;mask-composite:add}}
 @media(max-width:700px){.ah{padding:14px 14px 26px}.ah-hero{height:540px}.ac-stage{top:-14px;left:-14px;right:-14px}.ac-cap b{font-size:44px}.ah-me b{font-size:15px}.ah-me i{width:110px}
-  .ah-feat{padding:18px 18px;min-height:150px}.ah-feat b{font-size:42px}.ah-feat-pk{width:92px}
+  .ah-feat{padding:18px 18px;min-height:150px}.ah-feat-t>b{font-size:42px}.ah-feat-pk{width:92px}
   .ah-duo{grid-template-columns:1fr}.ah-box{min-height:130px}.ah-rbs{grid-template-columns:1fr}.ah-rbs .ah-rb:nth-child(even){transform:none}.ah-sl.s1{left:-2%}}/* bandeau « Active les notifications » */
 .ntb{display:flex;align-items:center;gap:14px;padding:12px 16px;margin-bottom:14px;border-radius:16px;background:linear-gradient(90deg,color-mix(in srgb,#facc15 14%,#1c1a1e),#1c1a1e 70%);border:1px solid #facc1544}
 .ntb-i{font-size:24px}.ntb-t{flex:1;display:grid;gap:2px}.ntb-t small{color:var(--mute);font-size:12px}
@@ -4681,6 +4688,9 @@ const AH_IC={
   fr:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M16 5a3 3 0 0 1 0 6M21 20c0-3-2-5-4-5.5"/>',
   cl:'<path d="M4 20V10h5v10M9.5 20V4h5v16M15 20v-7h5v7M3 20h18"/>'};
 const ahIc=(k,c)=>`<svg class="${c||""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${AH_IC[k]}</svg>`;
+/* le visuel d'un booster pour la vitrine : sa photo, le logo PrimeZ et son nom, sans les détails de la page Boosters */
+function ahPack(b){ if(!b) return ""; let img=""; try{ const h=heroOf(b); img=PACK_IMG[b.id]||(h.pack&&(IMG["k-"+h.pack]||IMG["h-"+h.pack]))||""; }catch(e){}
+  return `<span class="ah-pack" style="--bc:${PACK_THEME[b.id]||"#d21f2e"}">${img?`<img src="${img}" alt="">`:""}<span class="ah-pack-hd"><img src="logo.png" alt="">PRIMEZ</span><b>${esc(b.name)}</b></span>`; }
 function renderAccueil(){ const box=$("ac-body"); if(!box||!profile) return;
   if(!$("ac-show")) box.innerHTML=`<div class="ah"><i class="ah-tx"></i><i class="ah-sl s1"></i><i class="ah-sl s2"></i>
     <section class="ah-hero" id="ac-show" onmouseenter="ACS.pause=1" onmouseleave="ACS.pause=0"><div class="ac-stage"></div>
@@ -4703,7 +4713,7 @@ function renderAccueil(){ const box=$("ac-body"); if(!box||!profile) return;
   $("ac-left").innerHTML=`<div class="ah-clock"><b id="ah-time"></b><small id="ah-date"></small></div>
     ${daily}
     <button class="ah-feat" onclick="showTab('boosters')"><span class="ah-feat-t"><span class="ah-k">${fr.n>0?"Gratuits à ouvrir":"Prochain gratuit dans"}</span><b>Boosters</b><span class="ah-feat-v" id="ac-free">${acFreeTxt()}</span><span class="ah-cta">Ouvrir un booster →</span></span>
-      <span class="ah-feat-pk">${pk&&typeof packHTML==="function"?packHTML(pk,"",""):""}</span></button>
+      <span class="ah-feat-pk bx-spk">${pk&&typeof packHTML==="function"?packHTML(pk,"",""):""}</span></button>
     <div class="ah-duo">
       <button class="ah-box" onclick="showTab('collection')"><span class="ah-fan">${fan.map((c,i)=>`<img src="${esc(c.image_url)}" alt="" style="--i:${i};--rc:${COLOR[c.rarity]}" loading="lazy">`).join("")}</span>
         <span class="ah-box-t"><span class="ah-k">Collection & albums</span><b>Collection</b><span class="ah-box-v">${have}<small>/${tot}</small></span></span></button>
@@ -4723,6 +4733,10 @@ function renderAccueil(){ const box=$("ac-body"); if(!box||!profile) return;
 function acClock(){ const t=$("ah-time"), d=$("ah-date"); if(!t) return; const n=new Date();
   t.textContent=n.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); d.textContent=n.toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"}).replace(/\./g,"").toUpperCase(); }
 /* le défilé : un joueur Prime ou GOAT à la fois, sa photo sur toute la hauteur, un nouveau toutes les 5 s */
+/* photos choisies à la main pour l'accueil (à la place de la photo de la carte) : [image, cadrage] */
+const AH_PHOTO={"J.CRUYFF 71/72":["img/cruyff-accueil.webp","50% 42%"],"J.CRUYFF 73/74":["img/cruyff-accueil.webp","50% 42%"]};
+/* la meilleure qualité disponible : Pinterest garde l'image d'origine (plus grande) à l'adresse /originals/ */
+const ahHi=u=>String(u||"").replace(/\/\/i\.pinimg\.com\/\d+x\//,"//i.pinimg.com/originals/");
 const ACS={list:[],i:0,last:0,pause:0};
 function acList(){ const L=allCards.filter(c=>(c.rarity==="prime"||c.rarity==="goat")&&c.image_url); if(L.length===ACS.list.length) return;
   ACS.list=L.sort(()=>Math.random()-.5); const g=ACS.list.findIndex(c=>c.rarity==="goat"); if(g>0) [ACS.list[0],ACS.list[g]]=[ACS.list[g],ACS.list[0]]; ACS.i=0; }
@@ -4730,7 +4744,7 @@ function acShow(d){ const st=$("ac-show"); if(!st) return; acList(); if(!ACS.lis
   if(d) ACS.i=(ACS.i+d+ACS.list.length)%ACS.list.length; const c=ACS.list[ACS.i], m=String(c.name).match(/(\d{2}\/\d{2}|\d{4})$/);
   st.style.setProperty("--ac-c",COLOR[c.rarity]); st.dataset.cid=c.id;
   const stage=st.querySelector(".ac-stage"); stage.querySelectorAll(".ac-cw").forEach(o=>{ o.classList.add("out"); setTimeout(()=>o.remove(),700); });
-  const w=document.createElement("div"); w.className="ac-cw"; w.innerHTML=`<img src="${esc(c.image_url)}" alt="${esc(sigName(c))}">`; stage.appendChild(w);
+  const w=document.createElement("div"); w.className="ac-cw"; const ph=AH_PHOTO[c.name], hi=ph?ph[0]:ahHi(c.image_url); w.innerHTML=`<img src="${esc(hi)}" alt="${esc(sigName(c))}"${ph&&ph[1]?` style="object-position:${ph[1]}"`:""}${hi!==c.image_url&&!ph?` onerror="this.onerror=null;this.src='${esc(c.image_url)}'"`:""}>`; stage.appendChild(w);
   const cap=st.querySelector(".ac-cap"); cap.innerHTML=`<span class="ah-rar">${RARITY[c.rarity]}</span><b>${esc(sigName(c))}</b><small>${[m?m[1]:"",c.club||""].filter(Boolean).map(esc).join(" · ")}${owned[c.id]?" · dans ta collection":""}</small>`;
   cap.classList.remove("in"); void cap.offsetWidth; cap.classList.add("in");
   const u=st.querySelector(".ac-bar u"); u.style.animation="none"; void u.offsetWidth; u.style.animation=""; }
